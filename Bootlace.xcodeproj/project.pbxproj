@@ -15,7 +15,6 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* SettingsViewController.m */; };
 		28F335F11007B36200424DE2 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* SettingsViewController.xib */; };
-		D720F9A51199FE9C00D98C26 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = D720F9A41199FE9C00D98C26 /* button_red.png */; };
 		D7A6E1D711A011D800061431 /* androidos.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A6E1D111A011D800061431 /* androidos.png */; };
 		D7A6E1D811A011D800061431 /* androidreboot.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A6E1D211A011D800061431 /* androidreboot.png */; };
 		D7A6E1D911A011D800061431 /* console.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A6E1D311A011D800061431 /* console.png */; };
@@ -26,6 +25,7 @@
 		D7A6E20B11A0131D00061431 /* commonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A6E20711A0131D00061431 /* commonFunctions.m */; };
 		D7A6E20C11A0131D00061431 /* nvramFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A6E20911A0131D00061431 /* nvramFunctions.m */; };
 		D7A6E20F11A0132C00061431 /* AdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A6E20E11A0132C00061431 /* AdvancedViewController.m */; };
+		D7A6E3BE11A03DC000061431 /* button_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A6E3BD11A03DC000061431 /* button_blue.png */; };
 		D7A96063119DE4A4003CAA5D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A96061119DE4A4003CAA5D /* RootViewController.m */; };
 		D7AB4ECF119DEB23009F0E77 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7AB4ECE119DEB23009F0E77 /* RootViewController.xib */; };
 		D7D2D49F119AF4F9000B4DA6 /* AdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D2D49D119AF4F9000B4DA6 /* AdvancedViewController.xib */; };
@@ -45,7 +45,6 @@
 		28F335F01007B36200424DE2 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Bootlace-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bootlace-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		D720F9A41199FE9C00D98C26 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
 		D7A6E1D111A011D800061431 /* androidos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = androidos.png; path = Resources/androidos.png; sourceTree = "<group>"; };
 		D7A6E1D211A011D800061431 /* androidreboot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = androidreboot.png; path = Resources/androidreboot.png; sourceTree = "<group>"; };
 		D7A6E1D311A011D800061431 /* console.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = console.png; path = Resources/console.png; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		D7A6E20911A0131D00061431 /* nvramFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = nvramFunctions.m; path = Classes/nvramFunctions.m; sourceTree = "<group>"; };
 		D7A6E20D11A0132C00061431 /* AdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedViewController.h; sourceTree = "<group>"; };
 		D7A6E20E11A0132C00061431 /* AdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedViewController.m; sourceTree = "<group>"; };
+		D7A6E3BD11A03DC000061431 /* button_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_blue.png; path = Resources/button_blue.png; sourceTree = "<group>"; };
 		D7A96060119DE4A4003CAA5D /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D7A96061119DE4A4003CAA5D /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		D7AB4ECE119DEB23009F0E77 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
@@ -128,6 +128,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7A6E3BD11A03DC000061431 /* button_blue.png */,
 				D7A6E1D111A011D800061431 /* androidos.png */,
 				D7A6E1D211A011D800061431 /* androidreboot.png */,
 				D7A6E1D311A011D800061431 /* console.png */,
@@ -136,7 +137,6 @@
 				D7A6E1D611A011D800061431 /* iphoneos.png */,
 				D7AB4ECE119DEB23009F0E77 /* RootViewController.xib */,
 				D7D2D49D119AF4F9000B4DA6 /* AdvancedViewController.xib */,
-				D720F9A41199FE9C00D98C26 /* button_red.png */,
 				28F335F01007B36200424DE2 /* SettingsViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Bootlace-Info.plist */,
@@ -218,7 +218,6 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				28F335F11007B36200424DE2 /* SettingsViewController.xib in Resources */,
-				D720F9A51199FE9C00D98C26 /* button_red.png in Resources */,
 				D7D2D49F119AF4F9000B4DA6 /* AdvancedViewController.xib in Resources */,
 				D7AB4ECF119DEB23009F0E77 /* RootViewController.xib in Resources */,
 				D7A6E1D711A011D800061431 /* androidos.png in Resources */,
@@ -227,6 +226,7 @@
 				D7A6E1DA11A011D800061431 /* consolereboot.png in Resources */,
 				D7A6E1DB11A011D800061431 /* Icon.png in Resources */,
 				D7A6E1DC11A011D800061431 /* iphoneos.png in Resources */,
+				D7A6E3BE11A03DC000061431 /* button_blue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

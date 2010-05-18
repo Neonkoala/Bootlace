@@ -6,8 +6,9 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import "commonData.h"
 #import <Foundation/Foundation.h>
-
+#import <Foundation/NSTask.h>
 
 @interface nvramFunctions : NSObject {
 
@@ -15,7 +16,7 @@
 
 - (int)hookNVRAM:(NSString *)filePath withMode:(int)rw;
 - (int)readNVRAM:(NSString *)filePath;
-- (int)writeNVRAM:(NSString *)filePath;
+- (int)writeNVRAM:(NSString *)filePath withMode:(int)mode;
 - (void)cleanNVRAM:(NSString *)filePath;
 
 @end

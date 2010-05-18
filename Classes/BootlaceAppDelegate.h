@@ -7,6 +7,7 @@
 //
 
 #import "commonData.h"
+#import "commonFunctions.h"
 #import <UIKit/UIKit.h>
 
 @interface BootlaceAppDelegate : NSObject <UIApplicationDelegate> {

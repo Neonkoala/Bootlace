@@ -15,37 +15,37 @@ static NSString *viewKey = @"viewKey";
 
 @implementation SettingsViewController
 
-@synthesize settingsArray, iphoneosImage, iphoneosLabel, androidImage, androidLabel, consoleImage, consoleLabel;
+@synthesize settingsArray, applyButton, iphoneosImage, iphoneosLabel, androidImage, androidLabel, consoleImage, consoleLabel;
 
 - (IBAction) tapIphoneos:(id)sender {
 	iphoneosImage.alpha = 1.0;
 	iphoneosLabel.alpha = 1.0;
-	androidImage.alpha = 0.3;
-	androidLabel.alpha = 0.3;
-	consoleImage.alpha = 0.3;
-	consoleLabel.alpha = 0.3;
+	androidImage.alpha = 0.4;
+	androidLabel.alpha = 0.4;
+	consoleImage.alpha = 0.4;
+	consoleLabel.alpha = 0.4;
 	
 	commonData *sharedData = [commonData sharedData];
 	sharedData.opibDefaultOS = @"0";
 }
 
 - (IBAction) tapAndroid:(id)sender {
-	iphoneosImage.alpha = 0.3;
-	iphoneosLabel.alpha = 0.3;
+	iphoneosImage.alpha = 0.4;
+	iphoneosLabel.alpha = 0.4;
 	androidImage.alpha = 1.0;
 	androidLabel.alpha = 1.0;
-	consoleImage.alpha = 0.3;
-	consoleLabel.alpha = 0.3;
+	consoleImage.alpha = 0.4;
+	consoleLabel.alpha = 0.4;
 	
 	commonData *sharedData = [commonData sharedData];
 	sharedData.opibDefaultOS = @"1";
 }
 
 - (IBAction) tapConsole:(id)sender {
-	iphoneosImage.alpha = 0.3;
-	iphoneosLabel.alpha = 0.3;
-	androidImage.alpha = 0.3;
-	androidLabel.alpha = 0.3;
+	iphoneosImage.alpha = 0.4;
+	iphoneosLabel.alpha = 0.4;
+	androidImage.alpha = 0.4;
+	androidLabel.alpha = 0.4;
 	consoleImage.alpha = 1.0;
 	consoleLabel.alpha = 1.0;
 	
@@ -62,16 +62,12 @@ static NSString *viewKey = @"viewKey";
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	commonData *sharedData = [commonData sharedData];
-	id commonInstance = [commonFunctions new];
+	self.title = @"Settings";
+	UIImage *buttonImage = [UIImage imageNamed:@"button_blue.png"];
+	UIImage *stretchableButtonImage = [buttonImage stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+	[applyButton setBackgroundImage:stretchableButtonImage forState:UIControlStateNormal];
 	
-	switch(sharedData.initStatus){
-		case 0:
-			break;
-		default:
-			[commonInstance sendTerminalError:@"Unknown error occurred. Aborting..."];
-			NSLog(@"Error: unknown initStatus encountered");
-	}
+	commonData *sharedData = [commonData sharedData];
 	
 	self.settingsArray = [NSArray arrayWithObjects:
 						   [NSDictionary dictionaryWithObjectsAndKeys:
@@ -138,11 +134,61 @@ static NSString *viewKey = @"viewKey";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+	commonData *sharedData = [commonData sharedData];
+	
+	sliderCtl.value = [sharedData.opibTimeout intValue] / 1000;	
+	labelWithVar.text = [NSString stringWithFormat:@"%d", [sharedData.opibTimeout intValue] / 1000];
+	labelWithVar.text = [labelWithVar.text stringByAppendingString:@" Seconds"];
+	
+	switch ([sharedData.opibDefaultOS intValue]) {
+		case 0:
+			iphoneosImage.alpha = 1.0;
+			iphoneosLabel.alpha = 1.0;
+			androidImage.alpha = 0.4;
+			androidLabel.alpha = 0.4;
+			consoleImage.alpha = 0.4;
+			consoleLabel.alpha = 0.4;
+			break;
+		case 1:
+			iphoneosImage.alpha = 0.4;
+			iphoneosLabel.alpha = 0.4;
+			androidImage.alpha = 1.0;
+			androidLabel.alpha = 1.0;
+			consoleImage.alpha = 0.4;
+			consoleLabel.alpha = 0.4;
+			break;
+		case 2:
+			iphoneosImage.alpha = 0.4;
+			iphoneosLabel.alpha = 0.4;
+			androidImage.alpha = 0.4;
+			androidLabel.alpha = 0.4;
+			consoleImage.alpha = 1.0;
+			consoleLabel.alpha = 1.0;
+			break;
+			
+		default:
+			iphoneosImage.alpha = 1.0;
+			iphoneosLabel.alpha = 1.0;
+			androidImage.alpha = 0.4;
+			androidLabel.alpha = 0.4;
+			consoleImage.alpha = 0.4;
+			consoleLabel.alpha = 0.4;
+			NSLog(@"Default OS setting invalid. Defaulting to iPhone OS.");
+	}
+	
+	if(([sharedData.opibTimeout intValue]/1000)==0){
+		switchCtl.on = NO;
+		sliderCtl.enabled = NO;
+	} else {
+		switchCtl.on = YES;
+		sliderCtl.enabled = YES;
+	}
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

@@ -52,6 +52,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	self.title = @"Advanced";
+	
 	commonData* sharedData = [commonData sharedData];
 	
 	openibootVersion.text = sharedData.opibVersion;

@@ -21,18 +21,20 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+	//First launch check
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
+	
     //init shared variables
 	commonData* sharedData = [commonData sharedData];
+	id commonInstance = [commonFunctions new];
 	
+	sharedData.firstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+
 	sharedData.workingPath = @"/var/mobile/Documents/NVRAM.plist";
 	sharedData.backupPath = @"/var/mobile/Documents/NVRAM.plist.backup";
 	
-	//Temp testing vars
-	sharedData.opibVersion = @"0.1.1";
-	sharedData.opibTimeout = @"5000";
-	sharedData.opibDefaultOS = @"0";
-	sharedData.initStatus = 0;
+	[commonInstance initNVRAM];
 	
 	[window addSubview:[navigationController view]];
     [window makeKeyAndVisible];
@@ -40,7 +42,10 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
+	id nvramInstance = [[nvramFunctions new] autorelease];
+	commonData* sharedData = [commonData sharedData];
+	[nvramInstance cleanNVRAM:sharedData.workingPath];
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
 }
 
 

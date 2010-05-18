@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="19"/>
+			<integer value="12"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -52,7 +52,7 @@
 								<reference key="NSSuperview" ref="942641284"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.40000000596046448</float>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<object class="NSFont" key="IBUIFont" id="352143300">
@@ -84,7 +84,7 @@
 								<reference key="NSSuperview" ref="942641284"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.40000000596046448</float>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="352143300"/>
@@ -106,7 +106,7 @@
 								<reference key="NSSuperview" ref="942641284"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.40000000596046448</float>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="352143300"/>
@@ -128,7 +128,7 @@
 								<reference key="NSSuperview" ref="942641284"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.40000000596046448</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="IBUIText">iPhone OS</string>
 								<object class="NSFont" key="IBUIFont" id="186485015">
@@ -152,7 +152,7 @@
 								<reference key="NSSuperview" ref="942641284"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.40000000596046448</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="IBUIText">Android</string>
 								<reference key="IBUIFont" ref="186485015"/>
@@ -169,7 +169,7 @@
 								<reference key="NSSuperview" ref="942641284"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<float key="IBUIAlpha">0.30000001192092896</float>
+								<float key="IBUIAlpha">0.40000000596046448</float>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="IBUIText">Console</string>
 								<reference key="IBUIFont" ref="186485015"/>
@@ -228,10 +228,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<reference key="NSSuperview" ref="135438268"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<string key="IBUIContentStretch">{{1.38778e-17, 0}, {1, 1}}</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="352143300"/>
-								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Apply</string>
 								<reference key="IBUIHighlightedTitleColor" ref="267181473"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -239,10 +239,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="848184936"/>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">button_red.png</string>
-								</object>
 							</object>
 						</object>
 						<string key="NSFrame">{{0, 358}, {324, 60}}</string>
@@ -379,6 +375,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">31</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">applyButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="920344108"/>
+					</object>
+					<int key="connectionID">32</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -522,7 +526,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">32</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -553,6 +557,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>androidImage</string>
 							<string>androidLabel</string>
+							<string>applyButton</string>
 							<string>consoleImage</string>
 							<string>consoleLabel</string>
 							<string>iphoneosImage</string>
@@ -562,6 +567,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>UILabel</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UIButton</string>

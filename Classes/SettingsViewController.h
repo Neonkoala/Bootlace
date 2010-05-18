@@ -13,6 +13,7 @@
 @interface SettingsViewController : UITableViewController {
 	NSArray *settingsArray;
 	
+	IBOutlet UIButton *applyButton;
 	IBOutlet UILabel *iphoneosLabel;
 	IBOutlet UIButton *iphoneosImage;
 	IBOutlet UILabel *androidLabel;
@@ -27,6 +28,7 @@
 }
 
 @property (nonatomic, retain) NSArray *settingsArray;
+@property (nonatomic, retain, readonly) UIButton *applyButton;
 @property (nonatomic, retain, readonly) UILabel *iphoneosLabel;
 @property (nonatomic, retain, readonly) UIButton *iphoneosImage;
 @property (nonatomic, retain, readonly) UILabel *androidLabel;

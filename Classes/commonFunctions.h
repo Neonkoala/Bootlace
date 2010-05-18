@@ -16,12 +16,14 @@
 
 }
 
+- (void)initNVRAM;
 - (int)rebootAndroid;
 - (int)rebootConsole;
 - (int)backupNVRAM;
 - (int)restoreNVRAM;
 - (int)resetNVRAM;
 - (int)applyNVRAM;
+- (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;
 - (void)sendTerminalError:(NSString *)alertMsg;
 - (void)sendConfirmation:(NSString *)alertMsg withTag:(int)tag;

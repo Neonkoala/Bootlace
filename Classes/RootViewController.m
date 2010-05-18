@@ -11,7 +11,7 @@
 
 @implementation RootViewController
 
-@synthesize aboutView, aboutButton, backButton, settingsButton;
+@synthesize aboutView, disabledView, aboutButton, backButton, settingsButton, androidRebootButton, consoleRebootButton, androidRebootLabel, consoleRebootLabel;
 
 - (IBAction)aboutTap:(id)sender  {
 	[UIView setAnimationDelegate:self];
@@ -34,9 +34,11 @@
 	if ([aboutView superview] == self.view) {
 		self.navigationItem.leftBarButtonItem = backButton;
 		self.navigationItem.rightBarButtonItem = nil;
+		self.title = @"About";
 	} else {
 		self.navigationItem.leftBarButtonItem = aboutButton;
 		self.navigationItem.rightBarButtonItem = settingsButton;
+		self.title = @"Bootlace";
 	}
 }
 
@@ -81,6 +83,47 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  - (void)viewDidLoad {
 	 [super viewDidLoad];
+	 
+	 commonData *sharedData = [commonData sharedData];
+	 id commonInstance = [commonFunctions new];
+	 
+	 switch(sharedData.initStatus) {
+		 case 0:
+			 if(sharedData.temposDisabled==1) {
+				 //Disabled tempos support
+				 androidRebootButton.enabled = NO;
+				 consoleRebootButton.enabled = NO;
+				 androidRebootLabel.alpha = 0.4;
+				 consoleRebootLabel.alpha = 0.4;
+				 [self.view addSubview:disabledView];				 
+			 }
+			 break;
+		 case 1:
+			 [commonInstance sendConfirmation:@"Some openiboot settings are missing.\r\nWould you like to generate them now?" withTag:8];
+			 break;
+		 case -1:
+			 [commonInstance sendTerminalError:@"NVRAM Backup failed.\r\nAborting..."];
+			 break;
+		 case -2:
+			 [commonInstance sendTerminalError:@"NVRAM Could not be read.\r\nAborting..."];
+			 break;
+		 case -3:
+			 [commonInstance sendTerminalError:@"NVRAM Could not be read.\r\nAborting..."];
+			 break;
+		 case -4:
+			 [commonInstance sendTerminalError:@"NVRAM configuration invalid.\r\nAborting..."];
+			 break;
+		 case -5:
+			 [commonInstance sendTerminalError:@"Openiboot is not installed or is incompatible.\r\nAborting..."];
+			 break;
+		 default:
+			 [commonInstance sendTerminalError:@"Unknown error occurred.\r\nAborting..."];
+	 }
+	 
+	 if(sharedData.firstLaunch) {
+		 [commonInstance firstLaunch];
+		 sharedData.firstLaunch = NO;
+	 }
  }
  
 
