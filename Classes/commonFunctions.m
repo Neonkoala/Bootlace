@@ -447,6 +447,58 @@
 				break;
 		}
 	}
+	if(buttonIndex==0 && alertView.tag == 8) {
+		id nvramInstance = [[nvramFunctions new] autorelease];
+		commonData* sharedData = [commonData sharedData];
+		
+		[nvramInstance cleanNVRAM:sharedData.workingPath];
+				
+		exit(0);
+    } else if(buttonIndex==1 && alertView.tag==8) {
+		id commonInstance = [commonFunctions new];
+		int success = [commonInstance resetNVRAM];
+		
+		switch (success) {
+			case 0:
+				[commonInstance sendSuccess:@"Openiboot settings successfully reset to defaults."];
+				break;
+			case -1:
+				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				break;
+			case -2:
+				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				break;
+			case -3:
+				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				break;
+			case -4:
+				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				break;
+			case -5:
+				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				break;
+			case -6:
+				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				break;
+			case -7:
+				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				break;
+			case -8:
+				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				break;
+			case -9:
+				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				break;
+			case -10:
+				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				break;
+			case -11:
+				[commonInstance sendTerminalError:@"Openiboot settings reset but an unknown error occurred."];
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 

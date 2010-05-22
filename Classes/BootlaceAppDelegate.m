@@ -29,10 +29,10 @@
 	commonData* sharedData = [commonData sharedData];
 	id commonInstance = [commonFunctions new];
 	
-	sharedData.firstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
 
-	sharedData.workingPath = @"/var/mobile/Documents/NVRAM.plist";
-	sharedData.backupPath = @"/var/mobile/Documents/NVRAM.plist.backup";
+	sharedData.workingPath = @"/var/mobile/NVRAM.plist";
+	sharedData.backupPath = @"/var/mobile/NVRAM.plist.backup";
 	
 	[commonInstance initNVRAM];
 	

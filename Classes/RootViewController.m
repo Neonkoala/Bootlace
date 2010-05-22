@@ -99,7 +99,7 @@
 			 }
 			 break;
 		 case 1:
-			 [commonInstance sendConfirmation:@"Some openiboot settings are missing.\r\nWould you like to generate them now?" withTag:8];
+			 [commonInstance sendConfirmation:@"Some required openiboot settings are missing.\r\nWould you like to generate them now?" withTag:8];
 			 break;
 		 case -1:
 			 [commonInstance sendTerminalError:@"NVRAM Backup failed.\r\nAborting..."];
@@ -120,9 +120,9 @@
 			 [commonInstance sendTerminalError:@"Unknown error occurred.\r\nAborting..."];
 	 }
 	 
-	 if(sharedData.firstLaunch) {
+	 if(sharedData.firstLaunchVal) {
 		 [commonInstance firstLaunch];
-		 sharedData.firstLaunch = NO;
+		 sharedData.firstLaunchVal = NO;
 	 }
  }
  

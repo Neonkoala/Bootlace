@@ -11,7 +11,7 @@
 
 @interface commonData : NSObject {
 	//Initialisation variables
-	BOOL firstLaunch;
+	BOOL firstLaunchVal;
 	int initStatus;
 	int temposDisabled;
 	NSString *workingPath;
@@ -24,7 +24,7 @@
 	NSString *opibTempOS;
 }
 
-@property (nonatomic, assign) BOOL firstLaunch;
+@property (nonatomic, assign) BOOL firstLaunchVal;
 @property (nonatomic, assign) int initStatus;
 @property (nonatomic, assign) int temposDisabled;
 @property (nonatomic, retain) NSString *workingPath;

@@ -28,6 +28,7 @@
 		D7A6E3BE11A03DC000061431 /* button_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A6E3BD11A03DC000061431 /* button_blue.png */; };
 		D7A96063119DE4A4003CAA5D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A96061119DE4A4003CAA5D /* RootViewController.m */; };
 		D7AB4ECF119DEB23009F0E77 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7AB4ECE119DEB23009F0E77 /* RootViewController.xib */; };
+		D7C7740B11A807A500FD2D05 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C7740A11A807A500FD2D05 /* about.png */; };
 		D7D2D49F119AF4F9000B4DA6 /* AdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D2D49D119AF4F9000B4DA6 /* AdvancedViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		D7A96060119DE4A4003CAA5D /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D7A96061119DE4A4003CAA5D /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		D7AB4ECE119DEB23009F0E77 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		D7C7740A11A807A500FD2D05 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about.png; path = Resources/about.png; sourceTree = "<group>"; };
 		D7D2D49D119AF4F9000B4DA6 /* AdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvancedViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7C7740A11A807A500FD2D05 /* about.png */,
 				D7A6E3BD11A03DC000061431 /* button_blue.png */,
 				D7A6E1D111A011D800061431 /* androidos.png */,
 				D7A6E1D211A011D800061431 /* androidreboot.png */,
@@ -227,6 +230,7 @@
 				D7A6E1DB11A011D800061431 /* Icon.png in Resources */,
 				D7A6E1DC11A011D800061431 /* iphoneos.png in Resources */,
 				D7A6E3BE11A03DC000061431 /* button_blue.png in Resources */,
+				D7C7740B11A807A500FD2D05 /* about.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

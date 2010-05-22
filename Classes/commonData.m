@@ -11,7 +11,7 @@
 
 @implementation commonData
 
-@synthesize firstLaunch, initStatus, workingPath, backupPath, temposDisabled, opibVersion, opibTimeout, opibDefaultOS, opibTempOS;
+@synthesize firstLaunchVal, initStatus, workingPath, backupPath, temposDisabled, opibVersion, opibTimeout, opibDefaultOS, opibTempOS;
 
 + (commonData *) sharedData {
 	static commonData *sharedData;
