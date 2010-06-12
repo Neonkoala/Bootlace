@@ -16,53 +16,53 @@
 	id nvramInstance = [nvramFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
-	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.backupPath];
+	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
 	
 	if(!backupExists) {
-		success = [nvramInstance hookNVRAM:sharedData.backupPath withMode:0];
+		success = [nvramInstance hookNVRAM:sharedData.opibBackupPath withMode:0];
 		if(success==-1) {
-			sharedData.initStatus = -1;
+			sharedData.opibInitStatus = -1;
 			return;
 		}
 	}
 	
-	BOOL tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.workingPath];
+	BOOL tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibWorkingPath];
 	
 	if(tempFileExists) {
-		[nvramInstance cleanNVRAM:sharedData.workingPath];
+		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.workingPath withMode:0];
+	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:0];
 	
-	tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.workingPath];
+	tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibWorkingPath];
 	
 	if(success==-1) {
-		sharedData.initStatus = -2;
+		sharedData.opibInitStatus = -2;
 		return;
 	} else if(!tempFileExists) {
-		sharedData.initStatus = -3;
+		sharedData.opibInitStatus = -3;
 		return;
 	}
 	
-	success = [nvramInstance readNVRAM:sharedData.workingPath];
+	success = [nvramInstance readNVRAM:sharedData.opibWorkingPath];
 	
 	switch (success) {
 		case 0:
 			break;
 		case -1:
-			sharedData.initStatus = -4;
+			sharedData.opibInitStatus = -4;
 			return;
 		case -2:
-			sharedData.initStatus = -4;
+			sharedData.opibInitStatus = -4;
 			return;
 		case -3:
-			sharedData.initStatus = -5;
+			sharedData.opibInitStatus = -5;
 			return;
 		case -4:
-			sharedData.initStatus = 1;
+			sharedData.opibInitStatus = 1;
 			break;
 		default:
-			sharedData.initStatus = -6;
+			sharedData.opibInitStatus = -6;
 			return;
 	}
 }
@@ -74,19 +74,19 @@
 	
 	sharedData.opibTempOS = @"1";
 	
-	success = [nvramInstance writeNVRAM:sharedData.workingPath withMode:1];
+	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success<0) {
 		return success;
 	}
 		
-	success = [nvramInstance hookNVRAM:sharedData.workingPath withMode:1];
+	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success==-1) {
 		return -5;
 	}
 	
-	[nvramInstance cleanNVRAM:sharedData.workingPath];
+	[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 	
 	return 0;
 }
@@ -98,19 +98,19 @@
 	
 	sharedData.opibTempOS = @"2";
 	
-	success = [nvramInstance writeNVRAM:sharedData.workingPath withMode:1];
+	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.workingPath withMode:1];
+	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success==-1) {
 		return -5;
 	}
 	
-	[nvramInstance cleanNVRAM:sharedData.workingPath];
+	[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 	
 	return 0;
 }
@@ -119,14 +119,14 @@
 	id nvramInstance = [nvramFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
-	if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.backupPath error:NULL]) {
+	if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.opibBackupPath error:NULL]) {
 		return -1;
 	}
 	
-	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.backupPath];
+	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
 	
 	if(!backupExists) {
-		int success = [nvramInstance hookNVRAM:sharedData.backupPath withMode:0];
+		int success = [nvramInstance hookNVRAM:sharedData.opibBackupPath withMode:0];
 		if(success==-1) {
 			return -2;
 		}
@@ -140,13 +140,13 @@
 	id commonInstance = [commonFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
-	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.backupPath];
+	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
 	
 	if(!backupExists) {
 		return -1;
 	}
 	
-	int success = [nvramInstance hookNVRAM:sharedData.backupPath withMode:1];
+	int success = [nvramInstance hookNVRAM:sharedData.opibBackupPath withMode:1];
 	
 	if(success==-1) {
 		return -2;
@@ -154,8 +154,8 @@
 	
 	[commonInstance initNVRAM];
 	
-	if(sharedData.initStatus<0){
-		return (sharedData.initStatus - 2);
+	if(sharedData.opibInitStatus<0){
+		return (sharedData.opibInitStatus - 2);
 	}
 	
 	return 0;
@@ -171,24 +171,24 @@
 	sharedData.opibTempOS = @"0";
 	sharedData.opibTimeout = @"10000";
 	
-	success = [nvramInstance writeNVRAM:sharedData.workingPath withMode:0];
+	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:0];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.workingPath withMode:1];
+	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success==-1) {
 		return -5;
 	}
 	
-	[nvramInstance cleanNVRAM:sharedData.workingPath];
+	[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 	
 	[commonInstance initNVRAM];
 	
-	if(sharedData.initStatus<0){
-		return (sharedData.initStatus - 5);
+	if(sharedData.opibInitStatus<0){
+		return (sharedData.opibInitStatus - 5);
 	}
 	
 	return 0;
@@ -201,13 +201,13 @@
 	
 	sharedData.opibTempOS = sharedData.opibDefaultOS;
 	
-	success = [nvramInstance writeNVRAM:sharedData.workingPath withMode:0];
+	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:0];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.workingPath withMode:1];
+	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success==-1) {
 		return -5;
@@ -215,6 +215,115 @@
 	
 	return 0;
 }
+
+- (int)getFile:(NSString *)fileURL toDestination:(NSString *)filePath {
+	
+	//Check destination folder exists, if not create it
+	
+	//Check destination URL exists, if not error
+	
+	//Download file
+	
+	return 0;
+}
+
+- (void)checkForUpdates {
+	int success;
+	commonData* sharedData = [commonData sharedData];
+	id commonInstance = [commonFunctions new];
+	
+	/*
+	//Check destination folder exists, if not create it
+	BOOL isDir;
+	
+	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+	NSString *workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:workingDirectory isDirectory:&isDir]) {
+		if(![[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory attributes:nil]) {
+			NSLog(@"Error: Create Bootlace working folder failed");
+		}
+	}
+	
+	//Setup NSURLDownload
+	
+	NSString *updatePlistTarget = [workingDirectory stringByAppendingPathComponent:@"update.plist"];
+	NSLog(@"%@", updatePlistTarget);
+	
+	NSURLRequest *updatePlistRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
+	NSURLConnection *updatePlistConnection = [[NSURLConnection alloc] initWithRequest:updatePlistRequest delegate:self];
+	
+	if (updatePlistConnection) {
+		
+		NSMutableData *receivedData;
+		
+		receivedData = [[NSMutableData data] retain];
+		
+		
+		NSLog(@"%@", updateDict);
+	} else {
+		NSLog(@"Download failed #1");
+	}
+	*/
+	
+	//Grab update plist	
+	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
+	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
+	sharedData.latestVerDict = [updateDict objectForKey:@"LatestVersion"];
+	sharedData.upgradeDict = [updateDict objectForKey:@"Upgrade"];
+		
+	//Call func to parse plist
+	success = [commonInstance parseUpdatePlist];
+	
+	if (success < 0) {
+		//Something broke
+	}
+	
+	sleep(2);
+}
+
+- (int)parseUpdatePlist {
+	commonData* sharedData = [commonData sharedData];
+	
+	//Check device match
+	NSMutableDictionary* platformDict = [sharedData.latestVerDict objectForKey:sharedData.platform];
+	if (platformDict==nil) {
+		return -1;
+	} else {
+		sharedData.updateVer = [platformDict objectForKey:@"iDroidVersion"];
+	}
+	
+	sharedData.updateAndroidVer = [platformDict objectForKey:@"AndroidVersion"];
+	sharedData.updateDate = [platformDict objectForKey:@"ReleaseDate"];
+	sharedData.updateURL = [platformDict objectForKey:@"URL"];
+	sharedData.updateMD5 = [platformDict objectForKey:@"MD5"];
+	sharedData.updateFiles = [platformDict objectForKey:@"Files"];
+	sharedData.updateDependencies = [platformDict objectForKey:@"Dependencies"];
+	
+	return 0;
+}
+
+- (void)getPlatform {
+	commonData* sharedData = [commonData sharedData];
+	
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = malloc(size);
+    sysctlbyname("hw.machine", machine, &size, NULL, 0);
+    NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
+	NSLog(@"Platform should appear below:");
+	NSLog(@"%@", platform);
+	sharedData.platform = platform;
+    free(machine);
+	
+	/**************************************************************************************
+	 **************************************************************************************
+	 **********   iPhone Simulator debug code, remove me!    *****************************/
+	
+	if ([sharedData.platform isEqualToString:@"x86_64"]) {
+		sharedData.platform = @"iPhone1,2";
+	}
+}	
 
 //Device detection function
 //
@@ -257,7 +366,7 @@
 		id nvramInstance = [[nvramFunctions new] autorelease];
 		commonData* sharedData = [commonData sharedData];
 		
-		[nvramInstance cleanNVRAM:sharedData.workingPath];
+		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 		
 		exit(0);
     }
@@ -451,7 +560,7 @@
 		id nvramInstance = [[nvramFunctions new] autorelease];
 		commonData* sharedData = [commonData sharedData];
 		
-		[nvramInstance cleanNVRAM:sharedData.workingPath];
+		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 				
 		exit(0);
     } else if(buttonIndex==1 && alertView.tag==8) {

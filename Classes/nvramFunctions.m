@@ -83,7 +83,7 @@
 	if([opibCompatibleVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
 		return -3;
 	} else if([opibTempOSVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
-		sharedData.temposDisabled = 1;
+		sharedData.opibTempOSDisabled = 1;
 	} else {
 		NSData *rawTempOS = [nvramDict objectForKey:@"opib-temp-os"];
 		sharedData.opibTempOS = [NSString stringWithCString:[rawTempOS bytes] encoding:NSUTF8StringEncoding];
