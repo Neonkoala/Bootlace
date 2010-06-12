@@ -279,7 +279,7 @@
 		//Something broke
 	}
 	
-	sleep(2);
+	sleep(1);
 }
 
 - (int)parseUpdatePlist {
@@ -300,6 +300,14 @@
 	sharedData.updateFiles = [platformDict objectForKey:@"Files"];
 	sharedData.updateDependencies = [platformDict objectForKey:@"Dependencies"];
 	
+	return 0;
+}
+
+- (void)checkInstalled {
+	
+}
+
+- (int)parseInstalledPlist {
 	return 0;
 }
 

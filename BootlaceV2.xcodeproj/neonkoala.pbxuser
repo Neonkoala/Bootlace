@@ -11,8 +11,8 @@
 	1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1255, 814}}";
-			sepNavSelRange = "{761, 0}";
-			sepNavVisRange = "{0, 1377}";
+			sepNavSelRange = "{937, 0}";
+			sepNavVisRange = "{0, 1633}";
 			sepNavWindowFrame = "{{129, 16}, {1314, 965}}";
 		};
 	};
@@ -910,6 +910,105 @@
 			D7D6C06A11C3F348001CE42C /* PBXTextBookmark */ = D7D6C06A11C3F348001CE42C /* PBXTextBookmark */;
 			D7D6C06B11C3F348001CE42C /* PBXTextBookmark */ = D7D6C06B11C3F348001CE42C /* PBXTextBookmark */;
 			D7D6C06C11C3F348001CE42C /* PlistBookmark */ = D7D6C06C11C3F348001CE42C /* PlistBookmark */;
+			D7D6C07011C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07011C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07111C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07111C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07211C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07211C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07311C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07311C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07411C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07411C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07511C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07511C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07611C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07611C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07711C3F76D001CE42C /* PBXTextBookmark */ = D7D6C07711C3F76D001CE42C /* PBXTextBookmark */;
+			D7D6C07811C3F76D001CE42C /* PlistBookmark */ = D7D6C07811C3F76D001CE42C /* PlistBookmark */;
+			D7D6C07F11C3F855001CE42C /* PBXTextBookmark */ = D7D6C07F11C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08011C3F855001CE42C /* PBXTextBookmark */ = D7D6C08011C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08111C3F855001CE42C /* PBXTextBookmark */ = D7D6C08111C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08211C3F855001CE42C /* PBXTextBookmark */ = D7D6C08211C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08311C3F855001CE42C /* PBXTextBookmark */ = D7D6C08311C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08411C3F855001CE42C /* PBXTextBookmark */ = D7D6C08411C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08511C3F855001CE42C /* PBXTextBookmark */ = D7D6C08511C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08611C3F855001CE42C /* PBXTextBookmark */ = D7D6C08611C3F855001CE42C /* PBXTextBookmark */;
+			D7D6C08711C3F855001CE42C /* PlistBookmark */ = D7D6C08711C3F855001CE42C /* PlistBookmark */;
+			D7D6C08B11C3F885001CE42C /* PBXTextBookmark */ = D7D6C08B11C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C08C11C3F885001CE42C /* PBXTextBookmark */ = D7D6C08C11C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C08D11C3F885001CE42C /* PBXTextBookmark */ = D7D6C08D11C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C08E11C3F885001CE42C /* PBXTextBookmark */ = D7D6C08E11C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C08F11C3F885001CE42C /* PBXTextBookmark */ = D7D6C08F11C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C09011C3F885001CE42C /* PBXTextBookmark */ = D7D6C09011C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C09111C3F885001CE42C /* PBXTextBookmark */ = D7D6C09111C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C09211C3F885001CE42C /* PBXTextBookmark */ = D7D6C09211C3F885001CE42C /* PBXTextBookmark */;
+			D7D6C09311C3F885001CE42C /* PlistBookmark */ = D7D6C09311C3F885001CE42C /* PlistBookmark */;
+			D7D6C09711C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09711C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09811C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09811C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09911C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09911C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09A11C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09A11C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09B11C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09B11C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09C11C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09C11C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09D11C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09D11C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09E11C3F8B8001CE42C /* PBXTextBookmark */ = D7D6C09E11C3F8B8001CE42C /* PBXTextBookmark */;
+			D7D6C09F11C3F8B8001CE42C /* PlistBookmark */ = D7D6C09F11C3F8B8001CE42C /* PlistBookmark */;
+			D7D6C0A311C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A311C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0A411C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A411C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0A511C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A511C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0A611C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A611C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0A711C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A711C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0A811C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A811C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0A911C3F904001CE42C /* PBXTextBookmark */ = D7D6C0A911C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0AA11C3F904001CE42C /* PBXTextBookmark */ = D7D6C0AA11C3F904001CE42C /* PBXTextBookmark */;
+			D7D6C0AB11C3F904001CE42C /* PlistBookmark */ = D7D6C0AB11C3F904001CE42C /* PlistBookmark */;
+			D7D6C0AF11C3F925001CE42C /* PBXTextBookmark */ = D7D6C0AF11C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B011C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B011C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B111C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B111C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B211C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B211C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B311C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B311C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B411C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B411C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B511C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B511C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B611C3F925001CE42C /* PBXTextBookmark */ = D7D6C0B611C3F925001CE42C /* PBXTextBookmark */;
+			D7D6C0B711C3F925001CE42C /* PlistBookmark */ = D7D6C0B711C3F925001CE42C /* PlistBookmark */;
+			D7D6C0BB11C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0BB11C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0BC11C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0BC11C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0BD11C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0BD11C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0BE11C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0BE11C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0BF11C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0BF11C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0C011C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0C011C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0C111C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0C111C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0C211C3F93D001CE42C /* PBXTextBookmark */ = D7D6C0C211C3F93D001CE42C /* PBXTextBookmark */;
+			D7D6C0C311C3F93D001CE42C /* PlistBookmark */ = D7D6C0C311C3F93D001CE42C /* PlistBookmark */;
+			D7D6C0C711C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0C711C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0C811C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0C811C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0C911C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0C911C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0CA11C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0CA11C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0CB11C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0CB11C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0CC11C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0CC11C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0CD11C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0CD11C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0CE11C3F95D001CE42C /* PBXTextBookmark */ = D7D6C0CE11C3F95D001CE42C /* PBXTextBookmark */;
+			D7D6C0CF11C3F95D001CE42C /* PlistBookmark */ = D7D6C0CF11C3F95D001CE42C /* PlistBookmark */;
+			D7D6C0D311C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D311C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0D411C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D411C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0D511C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D511C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0D611C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D611C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0D711C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D711C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0D811C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D811C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0D911C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0D911C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0DA11C3F9CB001CE42C /* PBXTextBookmark */ = D7D6C0DA11C3F9CB001CE42C /* PBXTextBookmark */;
+			D7D6C0DB11C3F9CB001CE42C /* PlistBookmark */ = D7D6C0DB11C3F9CB001CE42C /* PlistBookmark */;
+			D7D6C0DD11C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0DD11C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0DE11C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0DE11C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0DF11C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0DF11C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0E011C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0E011C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0E111C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0E111C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0E211C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0E211C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0E311C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0E311C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0E411C3FAF9001CE42C /* PBXTextBookmark */ = D7D6C0E411C3FAF9001CE42C /* PBXTextBookmark */;
+			D7D6C0E511C3FAF9001CE42C /* PlistBookmark */ = D7D6C0E511C3FAF9001CE42C /* PlistBookmark */;
+			D7D6C0E811C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0E811C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0E911C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0E911C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0EA11C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0EA11C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0EB11C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0EB11C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0EC11C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0EC11C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0ED11C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0ED11C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0EE11C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0EE11C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0EF11C3FB3C001CE42C /* PBXTextBookmark */ = D7D6C0EF11C3FB3C001CE42C /* PBXTextBookmark */;
+			D7D6C0F011C3FB3C001CE42C /* PlistBookmark */ = D7D6C0F011C3FB3C001CE42C /* PlistBookmark */;
 		};
 		sourceControlManager = D786907311BD1BF600642943 /* Source Control */;
 		userBuildSettings = {
@@ -1008,16 +1107,16 @@
 	D78690AE11BD234A00642943 /* DroidViewController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1188, 699}}";
-			sepNavSelRange = "{431, 0}";
-			sepNavVisRange = "{0, 860}";
+			sepNavSelRange = "{879, 0}";
+			sepNavVisRange = "{0, 886}";
 			sepNavWindowFrame = "{{129, 131}, {1247, 850}}";
 		};
 	};
 	D78690AF11BD234A00642943 /* DroidViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1188, 4433}}";
-			sepNavSelRange = "{3220, 0}";
-			sepNavVisRange = "{2624, 1671}";
+			sepNavIntBoundsRect = "{{0, 0}, {1188, 4875}}";
+			sepNavSelRange = "{2691, 0}";
+			sepNavVisRange = "{1861, 1707}";
 			sepNavWindowFrame = "{{152, 110}, {1247, 850}}";
 		};
 	};
@@ -1073,9 +1172,9 @@
 	};
 	D7B332AD11BE5FD2008978A1 /* commonData.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1255, 936}}";
-			sepNavSelRange = "{2072, 0}";
-			sepNavVisRange = "{138, 1966}";
+			sepNavIntBoundsRect = "{{0, 0}, {1255, 962}}";
+			sepNavSelRange = "{1027, 0}";
+			sepNavVisRange = "{138, 2023}";
 			sepNavWindowFrame = "{{81, 58}, {1314, 965}}";
 		};
 	};
@@ -1090,16 +1189,16 @@
 	D7B332AF11BE5FD2008978A1 /* commonFunctions.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1255, 814}}";
-			sepNavSelRange = "{628, 0}";
-			sepNavVisRange = "{0, 850}";
+			sepNavSelRange = "{680, 0}";
+			sepNavVisRange = "{0, 902}";
 			sepNavWindowFrame = "{{84, 58}, {1314, 965}}";
 		};
 	};
 	D7B332B011BE5FD2008978A1 /* commonFunctions.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1503, 8229}}";
-			sepNavSelRange = "{7421, 0}";
-			sepNavVisRange = "{5626, 1961}";
+			sepNavIntBoundsRect = "{{0, 0}, {1503, 8034}}";
+			sepNavSelRange = "{6793, 0}";
+			sepNavVisRange = "{6191, 739}";
 			sepNavWindowFrame = "{{83, 173}, {1247, 850}}";
 		};
 	};
@@ -1152,7 +1251,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 26";
 		rLen = 0;
-		rLoc = 981;
+		rLoc = 1068;
 		rType = 0;
 		vrLen = 978;
 		vrLoc = 0;
@@ -1162,7 +1261,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 18";
 		rLen = 0;
-		rLoc = 590;
+		rLoc = 608;
 		rType = 0;
 		vrLen = 566;
 		vrLoc = 0;
@@ -1284,7 +1383,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 32";
 		rLen = 0;
-		rLoc = 971;
+		rLoc = 919;
 		rType = 0;
 		vrLen = 1558;
 		vrLoc = 0;
@@ -1313,7 +1412,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 247";
 		rLen = 0;
-		rLoc = 9929;
+		rLoc = 11108;
 		rType = 0;
 		vrLen = 1068;
 		vrLoc = 1232;
@@ -1358,7 +1457,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 32";
 		rLen = 0;
-		rLoc = 971;
+		rLoc = 919;
 		rType = 0;
 		vrLen = 1485;
 		vrLoc = 432;
@@ -1409,7 +1508,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 32";
 		rLen = 0;
-		rLoc = 971;
+		rLoc = 919;
 		rType = 0;
 		vrLen = 1482;
 		vrLoc = 432;
@@ -1463,7 +1562,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 26";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 732;
 		vrLoc = 0;
@@ -1473,7 +1572,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 32";
 		rLen = 0;
-		rLoc = 971;
+		rLoc = 919;
 		rType = 0;
 		vrLen = 1401;
 		vrLoc = 432;
@@ -1513,7 +1612,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1523,7 +1622,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 32";
 		rLen = 0;
-		rLoc = 971;
+		rLoc = 919;
 		rType = 0;
 		vrLen = 1401;
 		vrLoc = 432;
@@ -1544,7 +1643,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 200;
+		rLoc = 229;
 		rType = 1;
 	};
 	D7D6BB8411C3A250001CE42C /* PBXTextBookmark */ = {
@@ -1552,7 +1651,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 133";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 640;
 		vrLoc = 2869;
@@ -1573,7 +1672,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 200;
+		rLoc = 229;
 		rType = 1;
 	};
 	D7D6BB8711C3A252001CE42C /* PBXTextBookmark */ = {
@@ -1581,7 +1680,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 133";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 1306;
 		vrLoc = 2639;
@@ -1601,7 +1700,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1611,7 +1710,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 32";
 		rLen = 0;
-		rLoc = 971;
+		rLoc = 919;
 		rType = 0;
 		vrLen = 1401;
 		vrLoc = 432;
@@ -1631,7 +1730,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 133";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 1306;
 		vrLoc = 2639;
@@ -1661,7 +1760,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 71";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1511;
 		vrLoc = 805;
@@ -1681,7 +1780,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1711,7 +1810,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 68";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1470;
 		vrLoc = 1451;
@@ -1731,7 +1830,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1761,7 +1860,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 69";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1355;
 		vrLoc = 1451;
@@ -1781,7 +1880,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1811,7 +1910,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 73";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1357;
 		vrLoc = 1451;
@@ -1831,7 +1930,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1871,7 +1970,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 73";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1511;
 		vrLoc = 740;
@@ -1881,7 +1980,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1911,7 +2010,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 83";
 		rLen = 0;
-		rLoc = 4203;
+		rLoc = 5382;
 		rType = 0;
 		vrLen = 1313;
 		vrLoc = 1614;
@@ -1931,7 +2030,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -1961,7 +2060,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 73";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1364;
 		vrLoc = 1104;
@@ -1981,7 +2080,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2011,7 +2110,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 47";
 		rLen = 0;
-		rLoc = 1357;
+		rLoc = 1305;
 		rType = 0;
 		vrLen = 1370;
 		vrLoc = 1059;
@@ -2031,7 +2130,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2061,7 +2160,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 7653;
+		rLoc = 8832;
 		rType = 0;
 		vrLen = 2221;
 		vrLoc = 4278;
@@ -2081,7 +2180,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2111,7 +2210,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 189";
 		rLen = 0;
-		rLoc = 7460;
+		rLoc = 8639;
 		rType = 0;
 		vrLen = 2222;
 		vrLoc = 4278;
@@ -2131,7 +2230,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2161,7 +2260,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 194";
 		rLen = 0;
-		rLoc = 7628;
+		rLoc = 8807;
 		rType = 0;
 		vrLen = 2133;
 		vrLoc = 4278;
@@ -2181,7 +2280,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2211,7 +2310,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 190";
 		rLen = 0;
-		rLoc = 7609;
+		rLoc = 8788;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2231,7 +2330,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2261,7 +2360,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 7609;
+		rLoc = 8788;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2281,7 +2380,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2311,7 +2410,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 192";
 		rLen = 0;
-		rLoc = 7648;
+		rLoc = 8827;
 		rType = 0;
 		vrLen = 2237;
 		vrLoc = 4278;
@@ -2331,7 +2430,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2361,7 +2460,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 7609;
+		rLoc = 8788;
 		rType = 0;
 		vrLen = 2239;
 		vrLoc = 4278;
@@ -2381,7 +2480,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2411,7 +2510,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 190";
 		rLen = 0;
-		rLoc = 7607;
+		rLoc = 8786;
 		rType = 0;
 		vrLen = 2234;
 		vrLoc = 4278;
@@ -2431,7 +2530,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2461,7 +2560,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 192";
 		rLen = 0;
-		rLoc = 7650;
+		rLoc = 8829;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2481,7 +2580,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2511,7 +2610,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 192";
 		rLen = 0;
-		rLoc = 7644;
+		rLoc = 8823;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2531,7 +2630,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2561,7 +2660,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 192";
 		rLen = 0;
-		rLoc = 7650;
+		rLoc = 8829;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2581,7 +2680,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2611,7 +2710,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 192";
 		rLen = 0;
-		rLoc = 7646;
+		rLoc = 8825;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2631,7 +2730,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2661,7 +2760,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 192";
 		rLen = 0;
-		rLoc = 7646;
+		rLoc = 8825;
 		rType = 0;
 		vrLen = 2235;
 		vrLoc = 4278;
@@ -2681,7 +2780,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2711,7 +2810,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 190";
 		rLen = 0;
-		rLoc = 7609;
+		rLoc = 8788;
 		rType = 0;
 		vrLen = 2216;
 		vrLoc = 4278;
@@ -2731,7 +2830,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2771,7 +2870,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 190";
 		rLen = 0;
-		rLoc = 7609;
+		rLoc = 8788;
 		rType = 0;
 		vrLen = 1370;
 		vrLoc = 1321;
@@ -2791,7 +2890,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2812,7 +2911,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 36;
+		rLoc = 32;
 		rType = 1;
 	};
 	D7D6BC4C11C3B759001CE42C /* PBXTextBookmark */ = {
@@ -2820,7 +2919,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 34";
 		rLen = 0;
-		rLoc = 879;
+		rLoc = 827;
 		rType = 0;
 		vrLen = 1287;
 		vrLoc = 257;
@@ -2860,7 +2959,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2870,7 +2969,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 38";
 		rLen = 0;
-		rLoc = 879;
+		rLoc = 827;
 		rType = 0;
 		vrLen = 1177;
 		vrLoc = 257;
@@ -2880,7 +2979,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 0;
@@ -2889,7 +2988,7 @@
 		isa = PBXTextBookmark;
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 28";
-		rLen = 44;
+		rLen = 0;
 		rLoc = 682;
 		rType = 0;
 		vrLen = 1538;
@@ -2910,7 +3009,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2920,7 +3019,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 37";
 		rLen = 0;
-		rLoc = 879;
+		rLoc = 827;
 		rType = 0;
 		vrLen = 1217;
 		vrLoc = 257;
@@ -2930,7 +3029,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 29";
 		rLen = 0;
-		rLoc = 730;
+		rLoc = 682;
 		rType = 0;
 		vrLen = 1539;
 		vrLoc = 453;
@@ -2940,7 +3039,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 0;
@@ -2960,7 +3059,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -2970,7 +3069,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 37";
 		rLen = 0;
-		rLoc = 879;
+		rLoc = 827;
 		rType = 0;
 		vrLen = 1217;
 		vrLoc = 257;
@@ -2980,7 +3079,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 77";
 		rLen = 0;
-		rLoc = 2170;
+		rLoc = 2118;
 		rType = 0;
 		vrLen = 1588;
 		vrLoc = 908;
@@ -2990,7 +3089,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3010,7 +3109,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3020,7 +3119,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 37";
 		rLen = 0;
-		rLoc = 879;
+		rLoc = 827;
 		rType = 0;
 		vrLen = 1217;
 		vrLoc = 257;
@@ -3030,7 +3129,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 75";
 		rLen = 0;
-		rLoc = 2111;
+		rLoc = 2059;
 		rType = 0;
 		vrLen = 1588;
 		vrLoc = 908;
@@ -3040,7 +3139,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3060,7 +3159,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3070,7 +3169,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 37";
 		rLen = 0;
-		rLoc = 879;
+		rLoc = 827;
 		rType = 0;
 		vrLen = 1217;
 		vrLoc = 257;
@@ -3100,7 +3199,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 75";
 		rLen = 0;
-		rLoc = 2115;
+		rLoc = 2063;
 		rType = 0;
 		vrLen = 1588;
 		vrLoc = 908;
@@ -3120,7 +3219,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3130,7 +3229,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3150,7 +3249,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 77";
 		rLen = 0;
-		rLoc = 2186;
+		rLoc = 2134;
 		rType = 0;
 		vrLen = 1600;
 		vrLoc = 908;
@@ -3170,7 +3269,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3180,7 +3279,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3200,7 +3299,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 82";
 		rLen = 0;
-		rLoc = 2222;
+		rLoc = 2170;
 		rType = 0;
 		vrLen = 1620;
 		vrLoc = 863;
@@ -3220,7 +3319,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3230,7 +3329,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3241,7 +3340,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 200;
+		rLoc = 229;
 		rType = 1;
 	};
 	D7D6BC9111C3BA52001CE42C /* PBXTextBookmark */ = {
@@ -3259,7 +3358,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 155";
 		rLen = 0;
-		rLoc = 5718;
+		rLoc = 6897;
 		rType = 0;
 		vrLen = 1450;
 		vrLoc = 3163;
@@ -3279,7 +3378,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3289,7 +3388,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3309,7 +3408,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 155";
 		rLen = 0;
-		rLoc = 5698;
+		rLoc = 6877;
 		rType = 0;
 		vrLen = 1460;
 		vrLoc = 3163;
@@ -3329,7 +3428,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3339,7 +3438,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3359,7 +3458,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 155";
 		rLen = 0;
-		rLoc = 5718;
+		rLoc = 6897;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 3163;
@@ -3379,7 +3478,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3389,7 +3488,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3409,7 +3508,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 164";
 		rLen = 0;
-		rLoc = 5936;
+		rLoc = 7115;
 		rType = 0;
 		vrLen = 2002;
 		vrLoc = 4118;
@@ -3429,7 +3528,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3439,7 +3538,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3459,7 +3558,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 164";
 		rLen = 0;
-		rLoc = 5935;
+		rLoc = 7114;
 		rType = 0;
 		vrLen = 2001;
 		vrLoc = 4118;
@@ -3479,7 +3578,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3489,7 +3588,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3509,7 +3608,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 166";
 		rLen = 0;
-		rLoc = 6082;
+		rLoc = 7261;
 		rType = 0;
 		vrLen = 2051;
 		vrLoc = 4118;
@@ -3529,7 +3628,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3539,7 +3638,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3559,7 +3658,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 166";
 		rLen = 0;
-		rLoc = 6082;
+		rLoc = 7261;
 		rType = 0;
 		vrLen = 2061;
 		vrLoc = 4118;
@@ -3579,7 +3678,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3589,7 +3688,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3609,7 +3708,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 50";
 		rLen = 0;
-		rLoc = 1328;
+		rLoc = 1276;
 		rType = 0;
 		vrLen = 1696;
 		vrLoc = 722;
@@ -3629,7 +3728,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3639,7 +3738,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3659,7 +3758,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 165";
 		rLen = 0;
-		rLoc = 5993;
+		rLoc = 7172;
 		rType = 0;
 		vrLen = 1623;
 		vrLoc = 3461;
@@ -3679,7 +3778,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3689,7 +3788,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3709,7 +3808,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 155";
 		rLen = 0;
-		rLoc = 5718;
+		rLoc = 6897;
 		rType = 0;
 		vrLen = 1417;
 		vrLoc = 3092;
@@ -3729,7 +3828,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3739,7 +3838,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3759,7 +3858,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 165";
 		rLen = 0;
-		rLoc = 6039;
+		rLoc = 7218;
 		rType = 0;
 		vrLen = 1593;
 		vrLoc = 3273;
@@ -3779,7 +3878,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3789,7 +3888,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3809,7 +3908,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 165";
 		rLen = 0;
-		rLoc = 6039;
+		rLoc = 7218;
 		rType = 0;
 		vrLen = 1810;
 		vrLoc = 3571;
@@ -3829,7 +3928,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3839,7 +3938,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3859,7 +3958,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 155";
 		rLen = 0;
-		rLoc = 5718;
+		rLoc = 6897;
 		rType = 0;
 		vrLen = 1800;
 		vrLoc = 3571;
@@ -3879,7 +3978,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3889,7 +3988,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3909,7 +4008,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 165";
 		rLen = 0;
-		rLoc = 6039;
+		rLoc = 7218;
 		rType = 0;
 		vrLen = 1810;
 		vrLoc = 3571;
@@ -3929,7 +4028,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -3939,7 +4038,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 803;
 		vrLoc = 0;
@@ -3959,7 +4058,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 81";
 		rLen = 0;
-		rLoc = 2204;
+		rLoc = 2152;
 		rType = 0;
 		vrLen = 1624;
 		vrLoc = 1209;
@@ -3989,7 +4088,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -4009,7 +4108,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 88";
 		rLen = 0;
-		rLoc = 2491;
+		rLoc = 2439;
 		rType = 0;
 		vrLen = 1481;
 		vrLoc = 1576;
@@ -4039,7 +4138,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 26";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -4059,7 +4158,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 92";
 		rLen = 18;
-		rLoc = 2559;
+		rLoc = 2507;
 		rType = 0;
 		vrLen = 1428;
 		vrLoc = 1741;
@@ -4069,7 +4168,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4109,7 +4208,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 60";
 		rLen = 0;
-		rLoc = 1540;
+		rLoc = 1488;
 		rType = 0;
 		vrLen = 1712;
 		vrLoc = 1209;
@@ -4119,7 +4218,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4159,7 +4258,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 101";
 		rLen = 0;
-		rLoc = 2816;
+		rLoc = 2762;
 		rType = 0;
 		vrLen = 1300;
 		vrLoc = 2569;
@@ -4169,7 +4268,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4209,7 +4308,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 122";
 		rLen = 0;
-		rLoc = 4039;
+		rLoc = 3973;
 		rType = 0;
 		vrLen = 1248;
 		vrLoc = 2569;
@@ -4219,7 +4318,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4259,7 +4358,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 122";
 		rLen = 0;
-		rLoc = 4039;
+		rLoc = 3973;
 		rType = 0;
 		vrLen = 1325;
 		vrLoc = 2569;
@@ -4269,7 +4368,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4309,7 +4408,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 85";
 		rLen = 0;
-		rLoc = 2555;
+		rLoc = 2503;
 		rType = 0;
 		vrLen = 1583;
 		vrLoc = 2086;
@@ -4319,7 +4418,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4369,7 +4468,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1388;
 		vrLoc = 2501;
@@ -4379,7 +4478,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4419,7 +4518,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4429,7 +4528,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4469,7 +4568,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1388;
 		vrLoc = 2501;
@@ -4479,7 +4578,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4519,7 +4618,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4529,7 +4628,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4579,7 +4678,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4589,7 +4688,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4629,7 +4728,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4639,7 +4738,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4679,7 +4778,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4689,7 +4788,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4729,7 +4828,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4739,7 +4838,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4779,7 +4878,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4789,7 +4888,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4829,7 +4928,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4839,7 +4938,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4879,7 +4978,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1388;
 		vrLoc = 2501;
@@ -4889,7 +4988,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4929,7 +5028,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1388;
 		vrLoc = 2501;
@@ -4939,7 +5038,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -4979,7 +5078,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -4989,7 +5088,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5009,7 +5108,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 303";
 		rLen = 0;
-		rLoc = 8259;
+		rLoc = 8332;
 		rType = 0;
 		vrLen = 1138;
 		vrLoc = 6088;
@@ -5029,7 +5128,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5039,7 +5138,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5079,7 +5178,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5089,7 +5188,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5129,7 +5228,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5139,7 +5238,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5179,7 +5278,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5189,7 +5288,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5229,7 +5328,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5239,7 +5338,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5279,7 +5378,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5289,7 +5388,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5300,7 +5399,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 200;
+		rLoc = 229;
 		rType = 1;
 	};
 	D7D6BDD611C3CFEE001CE42C /* PBXTextBookmark */ = {
@@ -5308,7 +5407,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 601;
 		vrLoc = 4442;
@@ -5348,7 +5447,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5358,7 +5457,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5378,7 +5477,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5388,7 +5487,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 292";
 		rLen = 0;
-		rLoc = 7439;
+		rLoc = 7512;
 		rType = 0;
 		vrLen = 1290;
 		vrLoc = 5384;
@@ -5398,7 +5497,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5408,7 +5507,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5438,7 +5537,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5448,7 +5547,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5458,7 +5557,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5488,7 +5587,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5498,7 +5597,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5508,7 +5607,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5538,7 +5637,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5548,7 +5647,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5558,7 +5657,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5588,7 +5687,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5598,7 +5697,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5608,7 +5707,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5638,7 +5737,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5648,7 +5747,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5658,7 +5757,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5688,7 +5787,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5698,7 +5797,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5708,7 +5807,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5738,7 +5837,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5748,7 +5847,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5758,7 +5857,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5788,7 +5887,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5798,7 +5897,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5808,7 +5907,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5838,7 +5937,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5848,7 +5947,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5858,7 +5957,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5888,7 +5987,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5898,7 +5997,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5908,7 +6007,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5958,7 +6057,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -5968,7 +6067,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -5978,7 +6077,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -5988,7 +6087,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 601;
 		vrLoc = 4442;
@@ -6018,7 +6117,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -6028,7 +6127,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6038,7 +6137,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6048,7 +6147,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 601;
 		vrLoc = 4442;
@@ -6078,7 +6177,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -6088,7 +6187,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6098,7 +6197,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6128,7 +6227,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -6138,7 +6237,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6148,7 +6247,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6193,7 +6292,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 35";
 		rLen = 0;
-		rLoc = 843;
+		rLoc = 895;
 		rType = 0;
 		vrLen = 936;
 		vrLoc = 0;
@@ -6203,7 +6302,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6213,7 +6312,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6233,7 +6332,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 291";
 		rLen = 0;
-		rLoc = 7439;
+		rLoc = 7512;
 		rType = 0;
 		vrLen = 1670;
 		vrLoc = 5933;
@@ -6243,7 +6342,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 28";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 829;
 		vrLoc = 0;
@@ -6264,7 +6363,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6274,7 +6373,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6304,7 +6403,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 291";
 		rLen = 0;
-		rLoc = 7439;
+		rLoc = 7512;
 		rType = 0;
 		vrLen = 1670;
 		vrLoc = 5933;
@@ -6325,7 +6424,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6335,7 +6434,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6346,7 +6445,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 613;
+		rLoc = 621;
 		rType = 1;
 	};
 	D7D6BE8111C3DA6C001CE42C /* PBXTextBookmark */ = {
@@ -6364,7 +6463,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6374,7 +6473,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 280";
 		rLen = 0;
-		rLoc = 7439;
+		rLoc = 7512;
 		rType = 0;
 		vrLen = 1783;
 		vrLoc = 5602;
@@ -6395,7 +6494,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6405,7 +6504,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6435,7 +6534,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6445,7 +6544,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6466,7 +6565,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6496,7 +6595,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6506,7 +6605,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6527,7 +6626,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6557,7 +6656,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6567,7 +6666,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6588,7 +6687,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 3287;
 		rType = 0;
 		vrLen = 1345;
 		vrLoc = 2501;
@@ -6608,7 +6707,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 121";
 		rLen = 0;
-		rLoc = 3794;
+		rLoc = 3728;
 		rType = 0;
 		vrLen = 1587;
 		vrLoc = 2208;
@@ -6628,7 +6727,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6638,7 +6737,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6669,7 +6768,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 121";
 		rLen = 0;
-		rLoc = 3794;
+		rLoc = 3728;
 		rType = 0;
 		vrLen = 1582;
 		vrLoc = 2208;
@@ -6689,7 +6788,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6699,7 +6798,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6730,7 +6829,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 120";
 		rLen = 0;
-		rLoc = 3569;
+		rLoc = 3515;
 		rType = 0;
 		vrLen = 1687;
 		vrLoc = 2086;
@@ -6750,7 +6849,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6760,7 +6859,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6791,7 +6890,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 74";
 		rLen = 0;
-		rLoc = 2150;
+		rLoc = 2098;
 		rType = 0;
 		vrLen = 1790;
 		vrLoc = 1636;
@@ -6811,7 +6910,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6821,7 +6920,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6852,7 +6951,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 124";
 		rLen = 0;
-		rLoc = 3798;
+		rLoc = 3732;
 		rType = 0;
 		vrLen = 1467;
 		vrLoc = 2574;
@@ -6872,7 +6971,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6882,7 +6981,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6913,7 +7012,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 74";
 		rLen = 0;
-		rLoc = 2150;
+		rLoc = 2098;
 		rType = 0;
 		vrLen = 1743;
 		vrLoc = 1509;
@@ -6923,7 +7022,7 @@
 		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
 		name = "DroidViewController.h: 28";
 		rLen = 0;
-		rLoc = 853;
+		rLoc = 879;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 0;
@@ -6943,7 +7042,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -6974,7 +7073,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 120";
 		rLen = 0;
-		rLoc = 3581;
+		rLoc = 3527;
 		rType = 0;
 		vrLen = 1530;
 		vrLoc = 2581;
@@ -7004,7 +7103,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7035,7 +7134,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 120";
 		rLen = 0;
-		rLoc = 3570;
+		rLoc = 3516;
 		rType = 0;
 		vrLen = 1453;
 		vrLoc = 2581;
@@ -7065,7 +7164,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7096,7 +7195,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 71";
 		rLen = 0;
-		rLoc = 1960;
+		rLoc = 1908;
 		rType = 0;
 		vrLen = 1775;
 		vrLoc = 1452;
@@ -7126,7 +7225,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7157,7 +7256,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 124";
 		rLen = 0;
-		rLoc = 3798;
+		rLoc = 3732;
 		rType = 0;
 		vrLen = 1390;
 		vrLoc = 2712;
@@ -7187,7 +7286,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7218,7 +7317,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 122";
 		rLen = 0;
-		rLoc = 3676;
+		rLoc = 3610;
 		rType = 0;
 		vrLen = 1408;
 		vrLoc = 2712;
@@ -7248,7 +7347,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7279,7 +7378,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 122";
 		rLen = 0;
-		rLoc = 3701;
+		rLoc = 3635;
 		rType = 0;
 		vrLen = 1408;
 		vrLoc = 2712;
@@ -7309,7 +7408,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7340,7 +7439,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 128";
 		rLen = 0;
-		rLoc = 4039;
+		rLoc = 3973;
 		rType = 0;
 		vrLen = 1547;
 		vrLoc = 2712;
@@ -7370,7 +7469,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7401,7 +7500,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 95";
 		rLen = 0;
-		rLoc = 2782;
+		rLoc = 2728;
 		rType = 0;
 		vrLen = 1547;
 		vrLoc = 2712;
@@ -7431,7 +7530,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7462,7 +7561,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 126";
 		rLen = 0;
-		rLoc = 3889;
+		rLoc = 3823;
 		rType = 0;
 		vrLen = 1567;
 		vrLoc = 2712;
@@ -7492,7 +7591,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7523,7 +7622,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 121";
 		rLen = 0;
-		rLoc = 3631;
+		rLoc = 3565;
 		rType = 0;
 		vrLen = 1655;
 		vrLoc = 2556;
@@ -7553,7 +7652,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7584,7 +7683,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 121";
 		rLen = 0;
-		rLoc = 3631;
+		rLoc = 3565;
 		rType = 0;
 		vrLen = 1851;
 		vrLoc = 1959;
@@ -7614,7 +7713,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7655,7 +7754,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -7675,7 +7774,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7716,7 +7815,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -7736,7 +7835,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7777,7 +7876,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -7797,7 +7896,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7842,7 +7941,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -7852,7 +7951,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 352";
 		rLen = 0;
-		rLoc = 10082;
+		rLoc = 10155;
 		rType = 0;
 		vrLen = 2114;
 		vrLoc = 7173;
@@ -7862,7 +7961,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -7882,7 +7981,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 30";
 		rLen = 0;
-		rLoc = 603;
+		rLoc = 583;
 		rType = 0;
 		vrLen = 872;
 		vrLoc = 0;
@@ -7913,7 +8012,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 285";
 		rLen = 0;
-		rLoc = 7439;
+		rLoc = 7512;
 		rType = 0;
 		vrLen = 1902;
 		vrLoc = 6133;
@@ -7923,7 +8022,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -7933,7 +8032,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -7974,7 +8073,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 293";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1904;
 		vrLoc = 6133;
@@ -7984,7 +8083,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -7994,7 +8093,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8035,7 +8134,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 292";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1903;
 		vrLoc = 6133;
@@ -8045,7 +8144,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8055,7 +8154,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8096,7 +8195,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 293";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1898;
 		vrLoc = 6133;
@@ -8106,7 +8205,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8116,7 +8215,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8147,7 +8246,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 191";
 		rLen = 0;
-		rLoc = 5689;
+		rLoc = 6868;
 		rType = 0;
 		vrLen = 592;
 		vrLoc = 4417;
@@ -8186,7 +8285,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 294";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1926;
 		vrLoc = 6133;
@@ -8196,7 +8295,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8206,7 +8305,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8247,7 +8346,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 294";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1933;
 		vrLoc = 6133;
@@ -8257,7 +8356,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8267,7 +8366,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8308,7 +8407,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 294";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1935;
 		vrLoc = 6133;
@@ -8318,7 +8417,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8328,7 +8427,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8369,7 +8468,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 293";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1958;
 		vrLoc = 6133;
@@ -8379,7 +8478,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8389,7 +8488,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8430,7 +8529,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 292";
 		rLen = 0;
-		rLoc = 8257;
+		rLoc = 8330;
 		rType = 0;
 		vrLen = 1965;
 		vrLoc = 6133;
@@ -8440,7 +8539,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8450,7 +8549,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8495,7 +8594,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 295";
 		rLen = 0;
-		rLoc = 7870;
+		rLoc = 7943;
 		rType = 0;
 		vrLen = 1994;
 		vrLoc = 6133;
@@ -8515,7 +8614,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8525,7 +8624,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8566,7 +8665,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 295";
 		rLen = 0;
-		rLoc = 7870;
+		rLoc = 7943;
 		rType = 0;
 		vrLen = 2024;
 		vrLoc = 6133;
@@ -8586,7 +8685,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8596,7 +8695,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8637,7 +8736,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 295";
 		rLen = 0;
-		rLoc = 7827;
+		rLoc = 7900;
 		rType = 0;
 		vrLen = 1681;
 		vrLoc = 6051;
@@ -8657,7 +8756,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8667,7 +8766,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8708,7 +8807,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 295";
 		rLen = 0;
-		rLoc = 7812;
+		rLoc = 7885;
 		rType = 0;
 		vrLen = 1684;
 		vrLoc = 6048;
@@ -8728,7 +8827,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8738,7 +8837,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8779,7 +8878,7 @@
 		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
 		name = "commonFunctions.m: 305";
 		rLen = 0;
-		rLoc = 8254;
+		rLoc = 8327;
 		rType = 0;
 		vrLen = 1641;
 		vrLoc = 6048;
@@ -8799,7 +8898,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8809,7 +8908,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 103";
 		rLen = 0;
-		rLoc = 3051;
+		rLoc = 2997;
 		rType = 0;
 		vrLen = 1830;
 		vrLoc = 2225;
@@ -8860,7 +8959,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 112";
 		rLen = 0;
-		rLoc = 3355;
+		rLoc = 3301;
 		rType = 0;
 		vrLen = 1680;
 		vrLoc = 2624;
@@ -8880,7 +8979,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -8934,7 +9033,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 30";
 		rLen = 0;
-		rLoc = 659;
+		rLoc = 688;
 		rType = 0;
 		vrLen = 1386;
 		vrLoc = 0;
@@ -8944,7 +9043,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 14";
 		rLen = 0;
-		rLoc = 436;
+		rLoc = 454;
 		rType = 0;
 		vrLen = 637;
 		vrLoc = 0;
@@ -8954,7 +9053,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 127";
 		rLen = 0;
-		rLoc = 3949;
+		rLoc = 3883;
 		rType = 0;
 		vrLen = 1664;
 		vrLoc = 2624;
@@ -8984,7 +9083,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -9044,7 +9143,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 67";
 		rLen = 0;
-		rLoc = 2072;
+		rLoc = 2159;
 		rType = 0;
 		vrLen = 1966;
 		vrLoc = 138;
@@ -9054,7 +9153,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 14";
 		rLen = 0;
-		rLoc = 524;
+		rLoc = 542;
 		rType = 0;
 		vrLen = 750;
 		vrLoc = 0;
@@ -9064,7 +9163,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 31";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 850;
 		vrLoc = 0;
@@ -9074,7 +9173,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 127";
 		rLen = 0;
-		rLoc = 3949;
+		rLoc = 3883;
 		rType = 0;
 		vrLen = 1664;
 		vrLoc = 2624;
@@ -9084,7 +9183,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -9125,7 +9224,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 108";
 		rLen = 0;
-		rLoc = 3220;
+		rLoc = 3166;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 2624;
@@ -9145,7 +9244,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 67";
 		rLen = 0;
-		rLoc = 2072;
+		rLoc = 2159;
 		rType = 0;
 		vrLen = 1966;
 		vrLoc = 138;
@@ -9155,7 +9254,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 14";
 		rLen = 0;
-		rLoc = 524;
+		rLoc = 542;
 		rType = 0;
 		vrLen = 750;
 		vrLoc = 0;
@@ -9165,7 +9264,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 31";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 850;
 		vrLoc = 0;
@@ -9175,7 +9274,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -9226,7 +9325,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 108";
 		rLen = 0;
-		rLoc = 3220;
+		rLoc = 3166;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 2624;
@@ -9236,7 +9335,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 67";
 		rLen = 0;
-		rLoc = 2072;
+		rLoc = 2159;
 		rType = 0;
 		vrLen = 1966;
 		vrLoc = 138;
@@ -9246,7 +9345,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 14";
 		rLen = 0;
-		rLoc = 524;
+		rLoc = 542;
 		rType = 0;
 		vrLen = 750;
 		vrLoc = 0;
@@ -9256,7 +9355,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 31";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 850;
 		vrLoc = 0;
@@ -9266,7 +9365,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -9317,7 +9416,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 108";
 		rLen = 0;
-		rLoc = 3220;
+		rLoc = 3166;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 2624;
@@ -9327,7 +9426,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 67";
 		rLen = 0;
-		rLoc = 2072;
+		rLoc = 2159;
 		rType = 0;
 		vrLen = 1966;
 		vrLoc = 138;
@@ -9337,7 +9436,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 14";
 		rLen = 0;
-		rLoc = 524;
+		rLoc = 542;
 		rType = 0;
 		vrLen = 750;
 		vrLoc = 0;
@@ -9347,7 +9446,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 31";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 850;
 		vrLoc = 0;
@@ -9357,7 +9456,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -9408,7 +9507,7 @@
 		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
 		name = "DroidViewController.m: 108";
 		rLen = 0;
-		rLoc = 3220;
+		rLoc = 3166;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 2624;
@@ -9418,7 +9517,7 @@
 		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
 		name = "commonData.h: 67";
 		rLen = 0;
-		rLoc = 2072;
+		rLoc = 2159;
 		rType = 0;
 		vrLen = 1966;
 		vrLoc = 138;
@@ -9428,7 +9527,7 @@
 		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
 		name = "commonData.m: 14";
 		rLen = 0;
-		rLoc = 524;
+		rLoc = 542;
 		rType = 0;
 		vrLen = 750;
 		vrLoc = 0;
@@ -9438,7 +9537,7 @@
 		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
 		name = "commonFunctions.h: 31";
 		rLen = 0;
-		rLoc = 628;
+		rLoc = 680;
 		rType = 0;
 		vrLen = 850;
 		vrLoc = 0;
@@ -9448,7 +9547,7 @@
 		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
 		name = "BootlaceAppDelegate.m: 27";
 		rLen = 0;
-		rLoc = 761;
+		rLoc = 1297;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -9464,6 +9563,1007 @@
 		vrLoc = 0;
 	};
 	D7D6C06C11C3F348001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C07011C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C07111C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 136";
+		rLen = 0;
+		rLoc = 4667;
+		rType = 0;
+		vrLen = 1684;
+		vrLoc = 2721;
+	};
+	D7D6C07211C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 28";
+		rLen = 0;
+		rLoc = 808;
+		rType = 0;
+		vrLen = 860;
+		vrLoc = 0;
+	};
+	D7D6C07311C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 279";
+		rLen = 0;
+		rLoc = 6672;
+		rType = 0;
+		vrLen = 2050;
+		vrLoc = 6111;
+	};
+	D7D6C07411C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C07511C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C07611C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C07711C3F76D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C07811C3F76D001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C07F11C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C08011C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 155";
+		rLen = 0;
+		rLoc = 5216;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 3545;
+	};
+	D7D6C08111C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C08211C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 279";
+		rLen = 0;
+		rLoc = 6672;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 4305;
+	};
+	D7D6C08311C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C08411C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C08511C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C08611C3F855001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C08711C3F855001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C08B11C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C08C11C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 117";
+		rLen = 0;
+		rLoc = 3563;
+		rType = 0;
+		vrLen = 1977;
+		vrLoc = 3098;
+	};
+	D7D6C08D11C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C08E11C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 279";
+		rLen = 0;
+		rLoc = 6672;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 4305;
+	};
+	D7D6C08F11C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C09011C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C09111C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C09211C3F885001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C09311C3F885001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C09711C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C09811C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 142";
+		rLen = 0;
+		rLoc = 4721;
+		rType = 0;
+		vrLen = 1970;
+		vrLoc = 3347;
+	};
+	D7D6C09911C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C09A11C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 279";
+		rLen = 0;
+		rLoc = 6672;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 4305;
+	};
+	D7D6C09B11C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C09C11C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C09D11C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C09E11C3F8B8001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C09F11C3F8B8001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0A311C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0A411C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 129";
+		rLen = 0;
+		rLoc = 4090;
+		rType = 0;
+		vrLen = 1967;
+		vrLoc = 2858;
+	};
+	D7D6C0A511C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0A611C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 279";
+		rLen = 0;
+		rLoc = 6672;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 4305;
+	};
+	D7D6C0A711C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C0A811C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0A911C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C0AA11C3F904001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C0AB11C3F904001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0AF11C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0B011C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 149";
+		rLen = 0;
+		rLoc = 4806;
+		rType = 0;
+		vrLen = 1872;
+		vrLoc = 3516;
+	};
+	D7D6C0B111C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0B211C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 279";
+		rLen = 0;
+		rLoc = 6672;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 4305;
+	};
+	D7D6C0B311C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C0B411C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0B511C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C0B611C3F925001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C0B711C3F925001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0BB11C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0BC11C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 282";
+		rLen = 0;
+		rLoc = 6679;
+		rType = 0;
+		vrLen = 1963;
+		vrLoc = 5660;
+	};
+	D7D6C0BD11C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 149";
+		rLen = 0;
+		rLoc = 4806;
+		rType = 0;
+		vrLen = 1872;
+		vrLoc = 3516;
+	};
+	D7D6C0BE11C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0BF11C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C0C011C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0C111C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C0C211C3F93D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C0C311C3F93D001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0C711C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0C811C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 282";
+		rLen = 0;
+		rLoc = 6686;
+		rType = 0;
+		vrLen = 1961;
+		vrLoc = 5660;
+	};
+	D7D6C0C911C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 149";
+		rLen = 0;
+		rLoc = 4806;
+		rType = 0;
+		vrLen = 1872;
+		vrLoc = 3516;
+	};
+	D7D6C0CA11C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0CB11C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C0CC11C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0CD11C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 31";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	D7D6C0CE11C3F95D001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C0CF11C3F95D001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0D311C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0D411C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 89";
+		rLen = 0;
+		rLoc = 2691;
+		rType = 0;
+		vrLen = 1889;
+		vrLoc = 2504;
+	};
+	D7D6C0D511C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 32";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 879;
+		vrLoc = 0;
+	};
+	D7D6C0D611C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 306";
+		rLen = 26;
+		rLoc = 7471;
+		rType = 0;
+		vrLen = 2054;
+		vrLoc = 6631;
+	};
+	D7D6C0D711C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0D811C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 67";
+		rLen = 0;
+		rLoc = 2159;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 138;
+	};
+	D7D6C0D911C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0DA11C3F9CB001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 27";
+		rLen = 0;
+		rLoc = 1297;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 0;
+	};
+	D7D6C0DB11C3F9CB001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0DD11C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0DE11C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 16";
+		rLen = 0;
+		rLoc = 309;
+		rType = 0;
+		vrLen = 1994;
+		vrLoc = 138;
+	};
+	D7D6C0DF11C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 31";
+		rLen = 0;
+		rLoc = 937;
+		rType = 0;
+		vrLen = 1633;
+		vrLoc = 0;
+	};
+	D7D6C0E011C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 307";
+		rLen = 0;
+		rLoc = 7467;
+		rType = 0;
+		vrLen = 1779;
+		vrLoc = 6184;
+	};
+	D7D6C0E111C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 33";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 902;
+		vrLoc = 0;
+	};
+	D7D6C0E211C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 89";
+		rLen = 0;
+		rLoc = 2691;
+		rType = 0;
+		vrLen = 1707;
+		vrLoc = 1861;
+	};
+	D7D6C0E311C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0E411C3FAF9001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0E511C3FAF9001CE42C /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/neonkoala/Documents/BootlaceV2/bootlaceupdate.plist;
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	D7D6C0E811C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* BootlaceAppDelegate.h */;
+		name = "BootlaceAppDelegate.h: 11";
+		rLen = 0;
+		rLoc = 222;
+		rType = 0;
+		vrLen = 527;
+		vrLoc = 0;
+	};
+	D7D6C0E911C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 45";
+		rLen = 0;
+		rLoc = 1027;
+		rType = 0;
+		vrLen = 2023;
+		vrLoc = 138;
+	};
+	D7D6C0EA11C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* BootlaceAppDelegate.m */;
+		name = "BootlaceAppDelegate.m: 31";
+		rLen = 0;
+		rLoc = 937;
+		rType = 0;
+		vrLen = 1633;
+		vrLoc = 0;
+	};
+	D7D6C0EB11C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 307";
+		rLen = 0;
+		rLoc = 7467;
+		rType = 0;
+		vrLen = 1779;
+		vrLoc = 6184;
+	};
+	D7D6C0EC11C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 33";
+		rLen = 0;
+		rLoc = 680;
+		rType = 0;
+		vrLen = 902;
+		vrLoc = 0;
+	};
+	D7D6C0ED11C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 89";
+		rLen = 0;
+		rLoc = 2691;
+		rType = 0;
+		vrLen = 1707;
+		vrLoc = 1861;
+	};
+	D7D6C0EE11C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 31";
+		rLen = 0;
+		rLoc = 879;
+		rType = 0;
+		vrLen = 886;
+		vrLoc = 0;
+	};
+	D7D6C0EF11C3FB3C001CE42C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AE11BE5FD2008978A1 /* commonData.m */;
+		name = "commonData.m: 14";
+		rLen = 0;
+		rLoc = 542;
+		rType = 0;
+		vrLen = 750;
+		vrLoc = 0;
+	};
+	D7D6C0F011C3FB3C001CE42C /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */;
 		fallbackIsa = PBXBookmark;

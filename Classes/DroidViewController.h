@@ -28,5 +28,6 @@
 - (IBAction)checkForUpdatesManual:(id)sender;
 - (void)initInstallData;
 - (void)callUpdate;
+- (void)callUpdateManual;
 
 @end

@@ -13,6 +13,7 @@
 	//Initialisation variables
 	BOOL firstLaunchVal;
 	NSString *platform;
+	NSString *workingDirectory;
 	
 	int opibInitStatus;
 	int opibTempOSDisabled;
@@ -41,6 +42,7 @@
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
 @property (nonatomic, assign) NSString *platform;
+@property (nonatomic, assign) NSString *workingDirectory;
 
 @property (nonatomic, assign) int opibInitStatus;
 @property (nonatomic, assign) int opibTempOSDisabled;

@@ -25,10 +25,6 @@ static NSString *valKey = @"valKey";
  }
  */
 
-- (IBAction)checkForUpdatesManual:(id)sender {
-	
-}
-
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -90,7 +86,7 @@ static NSString *valKey = @"valKey";
 	commonData* sharedData = [commonData sharedData];
 	
 	[commonInstance checkForUpdates];
-	//[commonInstance parseInstalled];
+	[commonInstance checkInstalled];
 	
 	sharedData.installedVer = @"0.2";
 	sharedData.installedAndroidVer = @"1.6";
@@ -118,7 +114,7 @@ static NSString *valKey = @"valKey";
 	
 	//if statement to check latest version
 	[cfuSpinner stopAnimating];
-	[cfuSpinner removeFromSuperview];
+	[cfuSpinner release];
 	
 	if([sharedData.updateVer isEqualToString: sharedData.installedVer]) {
 		[latestVersionButton setTitle:@"Latest Version Installed" forState:UIControlStateNormal];
@@ -128,6 +124,39 @@ static NSString *valKey = @"valKey";
 		[latestVersionButton setTitle:updateButtonLabel forState:UIControlStateNormal];
 	}
 }
+
+- (IBAction)checkForUpdatesManual:(id)sender {
+	[latestVersionButton setTitle:@"" forState:UIControlStateNormal];
+	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[cfuSpinner setCenter:CGPointMake(140, 18)];
+	[cfuSpinner startAnimating];
+	[latestVersionButton addSubview:cfuSpinner];
+	
+	NSOperationQueue *viewInitQueue = [NSOperationQueue new];
+	NSInvocationOperation *getUpdate = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callUpdateManual) object:nil];
+	
+	[viewInitQueue addOperation:getUpdate];
+    [getUpdate release];
+}
+
+- (void)callUpdateManual {
+	id commonInstance = [commonFunctions new];
+	commonData* sharedData = [commonData sharedData];
+	
+	[commonInstance checkForUpdates];
+	
+	[cfuSpinner stopAnimating];
+	[cfuSpinner release];
+	
+	if([sharedData.updateVer isEqualToString: sharedData.installedVer]) {
+		[latestVersionButton setTitle:@"Latest Version Installed" forState:UIControlStateNormal];
+	} else {
+		NSString *updateButtonLabel = @"New version available: ";
+		updateButtonLabel = [updateButtonLabel stringByAppendingString:sharedData.updateVer];
+		[latestVersionButton setTitle:updateButtonLabel forState:UIControlStateNormal];
+	}
+}
+	
 
 /*
  - (void)viewWillAppear:(BOOL)animated {

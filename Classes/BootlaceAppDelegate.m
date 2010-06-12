@@ -26,6 +26,16 @@
 	//Check the platform
 	[commonInstance getPlatform];
 	
+	//Check and setup working directory
+	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+	sharedData.workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.workingDirectory isDirectory:&isDir]) {
+		if(![[NSFileManager defaultManager] createDirectoryAtPath:sharedData.workingDirectory attributes:nil]) {
+			NSLog(@"Error: Create Bootlace working folder failed");
+		}
+	}
+	
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
 }

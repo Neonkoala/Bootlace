@@ -27,8 +27,10 @@
 - (int)applyNVRAM;
 - (int)getFile:(NSString *)fileURL toDestination:(NSString *)filePath;
 - (void)checkForUpdates;
-- (void)getPlatform;
 - (int)parseUpdatePlist;
+- (void)checkInstalled;
+- (int)parseInstalledPlist;
+- (void)getPlatform;
 - (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;
 - (void)sendTerminalError:(NSString *)alertMsg;

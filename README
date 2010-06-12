@@ -1,0 +1,26 @@
+Bootlace
+by Nick Dawson (Neonkoala)
+
+V1.1
+
+Credits: planetbeing, poorlad, marky and apocolipse.
+
+WARNING: You're on the *testing* branch! This means it doesn't work, or at least not in a way you expect it to.
+
+Testing status: I may update this peridoically. Currently GUI is functional, nothing else is. iDroid install function is current focus for development.
+
+Requirements
+
+This app requires a SPECIFIC version of oepniboot to be installed to allow configuration and quickbooting. I am maintaining a compatible version here on github until changes are merged.
+
+http://github.com/Neonkoala/iphonelinux
+
+Other requirements:
+* iOS 3.0 -> 3.1.3
+* An internet connection for iDroid install/upgrade features
+* iPhone 2G or 3G
+* Bravery - my code is hardly the best :P
+
+Usage
+
+See http://www.idroidproject.org/wiki/Bootlace
