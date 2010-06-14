@@ -11,7 +11,7 @@
 
 @implementation commonData
 
-@synthesize firstLaunchVal, platform, workingDirectory, opibInitStatus, opibWorkingPath, opibBackupPath, opibTempOSDisabled, opibVersion, opibTimeout, opibDefaultOS, opibTempOS, installedVer, installedAndroidVer, installedDate, latestVerDict, upgradeDict, updateVer, updateAndroidVer, updateDate, updateURL, updateMD5, updateFiles, updateDependencies;
+@synthesize firstLaunchVal, platform, workingDirectory, opibInitStatus, opibWorkingPath, opibBackupPath, opibTempOSDisabled, opibVersion, opibTimeout, opibDefaultOS, opibTempOS, installedDict, installed, installedVer, installedAndroidVer, installedDate, latestVerDict, upgradeDict, updateVer, updateAndroidVer, updateDate, updateURL, updateMD5, updateFiles, updateDependencies, idroidPackagePath;
 
 + (commonData *) sharedData {
 	static commonData *sharedData;

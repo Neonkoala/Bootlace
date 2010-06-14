@@ -8,15 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonDigest.h>
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #import "commonData.h"
 #import "nvramFunctions.h"
+#import "getFile.h"
 
 
 @interface commonFunctions : NSObject {
-
+	getFile *getFileInstance;
 }
+
+@property (nonatomic, retain) getFile *getFileInstance;
 
 - (void)initNVRAM;
 - (int)rebootAndroid;
@@ -30,7 +34,11 @@
 - (int)parseUpdatePlist;
 - (void)checkInstalled;
 - (int)parseInstalledPlist;
+- (void)idroidInstall;
+- (void)idroidRemove;
+- (void)getFileReady:(getFile *)file;
 - (void)getPlatform;
+- (NSString*)fileMD5:(NSString *)path;
 - (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;
 - (void)sendTerminalError:(NSString *)alertMsg;

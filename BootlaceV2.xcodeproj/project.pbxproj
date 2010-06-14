@@ -37,6 +37,14 @@
 		D7B3339411BE7473008978A1 /* idroidbg.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B3339311BE7473008978A1 /* idroidbg.png */; };
 		D7B3354411BE85E5008978A1 /* idroidbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B3354311BE85E5008978A1 /* idroidbutton.png */; };
 		D7C5E5A711C27BEB00D24192 /* bootlaceupdate.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */; };
+		D7C6234811C65F790049C24B /* getFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C6234711C65F790049C24B /* getFile.m */; };
+		D7C62A9211C6B1BA0049C24B /* bzip2Lib.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C62A9111C6B1BA0049C24B /* bzip2Lib.m */; };
+		D7C62AC711C6B3E10049C24B /* bzlib_private.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C62AC411C6B3E10049C24B /* bzlib_private.h */; };
+		D7C62AC811C6B3E10049C24B /* bzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = D7C62AC511C6B3E10049C24B /* bzlib.c */; };
+		D7C62AC911C6B3E10049C24B /* bzlib.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C62AC611C6B3E10049C24B /* bzlib.h */; };
+		D7C62AD011C6B4850049C24B /* libbz2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C62AAC11C6B2D40049C24B /* libbz2.a */; };
+		D7D0B37111C50561000FCBD4 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B36F11C50561000FCBD4 /* install.png */; };
+		D7D0B37211C50561000FCBD4 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B37011C50561000FCBD4 /* remove.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +89,22 @@
 		D7B3339311BE7473008978A1 /* idroidbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = idroidbg.png; path = Resources/idroidbg.png; sourceTree = "<group>"; };
 		D7B3354311BE85E5008978A1 /* idroidbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = idroidbutton.png; path = Resources/idroidbutton.png; sourceTree = "<group>"; };
 		D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootlaceupdate.plist; sourceTree = SOURCE_ROOT; };
+		D7C6234611C65F790049C24B /* getFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getFile.h; sourceTree = "<group>"; };
+		D7C6234711C65F790049C24B /* getFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getFile.m; sourceTree = "<group>"; };
+		D7C62A9111C6B1BA0049C24B /* bzip2Lib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bzip2Lib.m; sourceTree = "<group>"; };
+		D7C62AAC11C6B2D40049C24B /* libbz2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbz2.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7C62AC411C6B3E10049C24B /* bzlib_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib_private.h; path = Libraries/bzlib_private.h; sourceTree = "<group>"; };
+		D7C62AC511C6B3E10049C24B /* bzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bzlib.c; path = Libraries/bzlib.c; sourceTree = "<group>"; };
+		D7C62AC611C6B3E10049C24B /* bzlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib.h; path = Libraries/bzlib.h; sourceTree = "<group>"; };
+		D7D0B16511C4ED4F000FCBD4 /* Availability2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Availability2.h; path = Headers/Availability2.h; sourceTree = "<group>"; };
+		D7D0B16711C4ED4F000FCBD4 /* GSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEvent.h; sourceTree = "<group>"; };
+		D7D0B16811C4ED4F000FCBD4 /* GSHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSHeartbeat.h; sourceTree = "<group>"; };
+		D7D0B16911C4ED4F000FCBD4 /* UIGlassButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIGlassButton.h; path = Headers/UIGlassButton.h; sourceTree = "<group>"; };
+		D7D0B16A11C4ED4F000FCBD4 /* UIKit-Structs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIKit-Structs.h"; path = "Headers/UIKit-Structs.h"; sourceTree = "<group>"; };
+		D7D0B16C11C4ED4F000FCBD4 /* WKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTypes.h; sourceTree = "<group>"; };
+		D7D0B16D11C4ED4F000FCBD4 /* WKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUtilities.h; sourceTree = "<group>"; };
+		D7D0B36F11C50561000FCBD4 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = install.png; path = Resources/install.png; sourceTree = "<group>"; };
+		D7D0B37011C50561000FCBD4 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove.png; path = Resources/remove.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +115,14 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
+				D7C62AD011C6B4850049C24B /* libbz2.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7C62AAA11C6B2D40049C24B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +132,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D7C62A9111C6B1BA0049C24B /* bzip2Lib.m */,
 				D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */,
 				D7B332AD11BE5FD2008978A1 /* commonData.h */,
 				D7B332AE11BE5FD2008978A1 /* commonData.m */,
@@ -117,6 +150,8 @@
 				D786909911BD1E8E00642943 /* SettingsViewController.m */,
 				D78690CF11BD282200642943 /* BootViewController.h */,
 				D78690D011BD282200642943 /* BootViewController.m */,
+				D7C6234611C65F790049C24B /* getFile.h */,
+				D7C6234711C65F790049C24B /* getFile.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -125,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* BootlaceV2.app */,
+				D7C62AAC11C6B2D40049C24B /* libbz2.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +168,10 @@
 		29B97314FDCFA39411CA2CEA /* BootlaceV2 */ = {
 			isa = PBXGroup;
 			children = (
+				D7C62AC411C6B3E10049C24B /* bzlib_private.h */,
+				D7C62AC511C6B3E10049C24B /* bzlib.c */,
+				D7C62AC611C6B3E10049C24B /* bzlib.h */,
+				D7D0B16411C4ED40000FCBD4 /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -153,6 +193,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7D0B36F11C50561000FCBD4 /* install.png */,
+				D7D0B37011C50561000FCBD4 /* remove.png */,
 				D7B3354311BE85E5008978A1 /* idroidbutton.png */,
 				D7B3339311BE7473008978A1 /* idroidbg.png */,
 				D7B3335411BE6964008978A1 /* Default.png */,
@@ -185,7 +227,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D7D0B16411C4ED40000FCBD4 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D7D0B16511C4ED4F000FCBD4 /* Availability2.h */,
+				D7D0B16611C4ED4F000FCBD4 /* GraphicsServices */,
+				D7D0B16911C4ED4F000FCBD4 /* UIGlassButton.h */,
+				D7D0B16A11C4ED4F000FCBD4 /* UIKit-Structs.h */,
+				D7D0B16B11C4ED4F000FCBD4 /* WebCore */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		D7D0B16611C4ED4F000FCBD4 /* GraphicsServices */ = {
+			isa = PBXGroup;
+			children = (
+				D7D0B16711C4ED4F000FCBD4 /* GSEvent.h */,
+				D7D0B16811C4ED4F000FCBD4 /* GSHeartbeat.h */,
+			);
+			name = GraphicsServices;
+			path = Headers/GraphicsServices;
+			sourceTree = "<group>";
+		};
+		D7D0B16B11C4ED4F000FCBD4 /* WebCore */ = {
+			isa = PBXGroup;
+			children = (
+				D7D0B16C11C4ED4F000FCBD4 /* WKTypes.h */,
+				D7D0B16D11C4ED4F000FCBD4 /* WKUtilities.h */,
+			);
+			name = WebCore;
+			path = Headers/WebCore;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D7C62AA811C6B2D40049C24B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C62AC711C6B3E10049C24B /* bzlib_private.h in Headers */,
+				D7C62AC911C6B3E10049C24B /* bzlib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* BootlaceV2 */ = {
@@ -205,6 +291,23 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* BootlaceV2.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D7C62AAB11C6B2D40049C24B /* bz2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7C62ABF11C6B2D80049C24B /* Build configuration list for PBXNativeTarget "bz2" */;
+			buildPhases = (
+				D7C62AA811C6B2D40049C24B /* Headers */,
+				D7C62AA911C6B2D40049C24B /* Sources */,
+				D7C62AAA11C6B2D40049C24B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bz2;
+			productName = bz2;
+			productReference = D7C62AAC11C6B2D40049C24B /* libbz2.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,6 +324,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* BootlaceV2 */,
+				D7C62AAB11C6B2D40049C24B /* bz2 */,
 			);
 		};
 /* End PBXProject section */
@@ -248,6 +352,8 @@
 				D7B3339411BE7473008978A1 /* idroidbg.png in Resources */,
 				D7B3354411BE85E5008978A1 /* idroidbutton.png in Resources */,
 				D7C5E5A711C27BEB00D24192 /* bootlaceupdate.plist in Resources */,
+				D7D0B37111C50561000FCBD4 /* install.png in Resources */,
+				D7D0B37211C50561000FCBD4 /* remove.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +373,16 @@
 				D7B332B311BE5FD2008978A1 /* commonData.m in Sources */,
 				D7B332B411BE5FD2008978A1 /* commonFunctions.m in Sources */,
 				D7B332B511BE5FD2008978A1 /* nvramFunctions.m in Sources */,
+				D7C6234811C65F790049C24B /* getFile.m in Sources */,
+				D7C62A9211C6B1BA0049C24B /* bzip2Lib.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7C62AA911C6B2D40049C24B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C62AC811C6B3E10049C24B /* bzlib.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,11 +394,20 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/PrivateFrameworks\"",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BootlaceV2_Prefix.pch;
 				INFOPLIST_FILE = "Bootlace-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+				);
 				PRODUCT_NAME = BootlaceV2;
 			};
 			name = Debug;
@@ -292,9 +417,18 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/PrivateFrameworks\"",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BootlaceV2_Prefix.pch;
 				INFOPLIST_FILE = "Bootlace-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+				);
 				PRODUCT_NAME = BootlaceV2;
 			};
 			name = Release;
@@ -304,9 +438,15 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
+				FRAMEWORK_SEARCH_PATHS = "/User/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/**";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/User/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/**";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
@@ -318,12 +458,43 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
+				FRAMEWORK_SEARCH_PATHS = "/User/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/**";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/User/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/**";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
+			};
+			name = Release;
+		};
+		D7C62AAD11C6B2D50049C24B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PREBINDING = NO;
+				PRODUCT_NAME = bz2;
+			};
+			name = Debug;
+		};
+		D7C62AAE11C6B2D50049C24B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = bz2;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -344,6 +515,15 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7C62ABF11C6B2D80049C24B /* Build configuration list for PBXNativeTarget "bz2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7C62AAD11C6B2D50049C24B /* Debug */,
+				D7C62AAE11C6B2D50049C24B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

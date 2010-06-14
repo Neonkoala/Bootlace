@@ -17,7 +17,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	commonData* sharedData = [commonData sharedData];
-	id commonInstance = [commonFunctions new];
+	id commonInstance = [[commonFunctions new] autorelease];
 	
 	//First launch check
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
@@ -29,6 +29,8 @@
 	//Check and setup working directory
 	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
 	sharedData.workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
+	
+	BOOL isDir;
 	
 	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.workingDirectory isDirectory:&isDir]) {
 		if(![[NSFileManager defaultManager] createDirectoryAtPath:sharedData.workingDirectory attributes:nil]) {

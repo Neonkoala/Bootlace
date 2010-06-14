@@ -24,6 +24,9 @@
 	NSString *opibDefaultOS;
 	NSString *opibTempOS;
 	
+	NSMutableDictionary *installedDict;
+	
+	BOOL installed;
 	NSString *installedVer;
 	NSString *installedAndroidVer;
 	NSString *installedDate;
@@ -38,11 +41,13 @@
 	NSString *updateMD5;
 	NSMutableDictionary *updateFiles;
 	NSMutableDictionary *updateDependencies;
+	
+	NSString *idroidPackagePath;
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
-@property (nonatomic, assign) NSString *platform;
-@property (nonatomic, assign) NSString *workingDirectory;
+@property (nonatomic, retain) NSString *platform;
+@property (nonatomic, retain) NSString *workingDirectory;
 
 @property (nonatomic, assign) int opibInitStatus;
 @property (nonatomic, assign) int opibTempOSDisabled;
@@ -53,6 +58,9 @@
 @property (nonatomic, retain) NSString *opibDefaultOS;
 @property (nonatomic, retain) NSString *opibTempOS;
 
+@property (nonatomic, retain) NSMutableDictionary *installedDict;
+
+@property (nonatomic, assign) BOOL installed;
 @property (nonatomic, retain) NSString *installedVer;
 @property (nonatomic, retain) NSString *installedAndroidVer;
 @property (nonatomic, retain) NSString *installedDate;
@@ -67,6 +75,8 @@
 @property (nonatomic, retain) NSString *updateMD5;
 @property (nonatomic, retain) NSMutableDictionary *updateFiles;
 @property (nonatomic, retain) NSMutableDictionary *updateDependencies;
+
+@property (nonatomic, retain) NSString *idroidPackagePath;
 
 + (commonData *) sharedData;
 

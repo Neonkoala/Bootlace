@@ -11,6 +11,8 @@
 
 @implementation commonFunctions
 
+@synthesize getFileInstance;
+
 - (void)initNVRAM {
 	int success;
 	id nvramInstance = [nvramFunctions new];
@@ -216,21 +218,43 @@
 	return 0;
 }
 
-- (int)getFile:(NSString *)fileURL toDestination:(NSString *)filePath {
+- (int)getFile:(NSString *)fileURL toDestination:(NSString *)dirPath {
 	
-	//Check destination folder exists, if not create it
+	
+	
+	/*BOOL isDir;
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir]) {
+		if(![[NSFileManager defaultManager] createDirectoryAtPath:dirPath attributes:nil]) {
+			NSLog(@"Error: Create destination folder for getFile failed");
+		}
+	}
 	
 	//Check destination URL exists, if not error
 	
-	//Download file
+	NSURLRequest *fileRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fileURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
 	
+	NSURLConnection *getFileConnection = [[NSURLConnection alloc] initWithRequest:fileRequest delegate:self];
+	
+	if (getFileConnection) {
+		
+		// Create the NSMutableData to hold the received data.
+		
+		// receivedData is an instance variable declared elsewhere.
+		
+		receivedData = [[NSMutableData data] retain];
+	} else {
+		// Inform the user that the connection failed.
+	}
+	
+	//Write File to Disk
+	*/
 	return 0;
 }
 
 - (void)checkForUpdates {
 	int success;
 	commonData* sharedData = [commonData sharedData];
-	id commonInstance = [commonFunctions new];
 	
 	/*
 	//Check destination folder exists, if not create it
@@ -273,13 +297,11 @@
 	sharedData.upgradeDict = [updateDict objectForKey:@"Upgrade"];
 		
 	//Call func to parse plist
-	success = [commonInstance parseUpdatePlist];
+	success = [self parseUpdatePlist];
 	
 	if (success < 0) {
 		//Something broke
 	}
-	
-	sleep(1);
 }
 
 - (int)parseUpdatePlist {
@@ -304,11 +326,90 @@
 }
 
 - (void)checkInstalled {
+	int success;
+	commonData* sharedData = [commonData sharedData];
 	
+	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
+	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:installedPlistPath];
+	
+	NSLog(@"%d", fileExists);
+	
+	if(!fileExists) { 
+		sharedData.installed = NO;
+	} else {
+		sharedData.installed = YES;
+		success = [self parseInstalledPlist];
+		
+		if(success<0) {
+			//Error out here
+		}
+	}
 }
 
 - (int)parseInstalledPlist {
+	commonData* sharedData = [commonData sharedData];
+	
+	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
+	sharedData.installedDict = [NSMutableDictionary dictionaryWithContentsOfFile:installedPlistPath];
+	
+	
+	
 	return 0;
+}
+
+- (void)idroidInstall {
+	commonData* sharedData = [commonData sharedData];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	//Download from URL
+	//getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
+	getFileInstance = [[getFile alloc] initWithUrl:@"http://idroid.neonkoala.co.uk/release/firmware/sd8686.bin" directory:sharedData.workingDirectory];
+	
+	// Start downloading the image with self as delegate receiver
+	[getFileInstance getFileDownload:self];
+	
+	BOOL keepAlive = YES;
+	
+	do {        
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+        //Check NSURLConnection for activity
+        if (getFileInstance.getFileWorking == NO) {
+            keepAlive = NO;
+        }
+    } while (keepAlive);
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		
+	//Check MD5
+	NSString *md5 = [self fileMD5:sharedData.idroidPackagePath];
+	
+	if([md5 isEqualToString:@"NOFILE"]) {
+		//Error handling
+		NSLog(@"iDroid package isn't there, must be pikeys.");
+	} else if(![md5 isEqualToString:sharedData.updateMD5]) {
+		//Error handling
+		NSLog(@"iDroid package MD5 doesn't match.");
+	}
+	
+	//Extract files to correct locations
+		//Use a loop here
+	
+	//Check dependencies
+		//Special multitouch routine
+		//Check any remote dependencies (sd8686 for e.g.)
+	
+	
+	sleep(2);
+}
+
+- (void)idroidRemove {
+	
+}
+
+- (void)getFileReady:(getFile *)file {
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.idroidPackagePath = file.getFilePath;
 }
 
 - (void)getPlatform {
@@ -331,7 +432,39 @@
 	if ([sharedData.platform isEqualToString:@"x86_64"]) {
 		sharedData.platform = @"iPhone1,2";
 	}
-}	
+}
+
+
+- (NSString *)fileMD5:(NSString *)path {
+	NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:path];
+	if(handle==nil) {
+		return @"NOFILE";
+	}
+		
+	CC_MD5_CTX md5;
+	CC_MD5_Init(&md5);
+	
+	BOOL done = NO;
+	while(!done)
+	{
+		NSData* fileData = [handle readDataOfLength: 1048576];
+		CC_MD5_Update(&md5, [fileData bytes], [fileData length]);
+		if( [fileData length] == 0 ) done = YES;
+	}
+	unsigned char digest[CC_MD5_DIGEST_LENGTH];
+	CC_MD5_Final(digest, &md5);
+	NSString* s = [NSString stringWithFormat: @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+				   digest[0], digest[1], 
+				   digest[2], digest[3],
+				   digest[4], digest[5],
+				   digest[6], digest[7],
+				   digest[8], digest[9],
+				   digest[10], digest[11],
+				   digest[12], digest[13],
+				   digest[14], digest[15]];
+	return s;
+}
+
 
 //Device detection function
 //
