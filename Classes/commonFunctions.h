@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#import <sys/types.h>
+#import <sys/sysctl.h>
 #import "commonData.h"
 #import "nvramFunctions.h"
 #import "getFile.h"
+#import "NSBz2.h"
 
 
 @interface commonFunctions : NSObject {

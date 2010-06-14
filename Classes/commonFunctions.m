@@ -359,11 +359,11 @@
 
 - (void)idroidInstall {
 	commonData* sharedData = [commonData sharedData];
-	
+	/*
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	//Download from URL
-	//getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
-	getFileInstance = [[getFile alloc] initWithUrl:@"http://idroid.neonkoala.co.uk/release/firmware/sd8686.bin" directory:sharedData.workingDirectory];
+	getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
+	//getFileInstance = [[getFile alloc] initWithUrl:@"http://idroid.neonkoala.co.uk/release/firmware/sd8686.bin" directory:sharedData.workingDirectory];
 	
 	// Start downloading the image with self as delegate receiver
 	[getFileInstance getFileDownload:self];
@@ -379,7 +379,8 @@
     } while (keepAlive);
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		
+	*/
+	sharedData.idroidPackagePath = [sharedData.workingDirectory stringByAppendingPathComponent:@"idroid-release-0.2-3g.tar.bz2"];
 	//Check MD5
 	NSString *md5 = [self fileMD5:sharedData.idroidPackagePath];
 	
@@ -391,7 +392,14 @@
 		NSLog(@"iDroid package MD5 doesn't match.");
 	}
 	
-	//Extract files to correct locations
+	//Extract BZ2
+	NSData *temp = [NSData dataWithContentsOfFile:sharedData.idroidPackagePath];
+	NSData *decompressed = [temp bunzip2];
+	
+	NSString *newPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"blarg.tar"];
+	[decompressed writeToFile:newPath atomically:YES];
+	 
+	 //Extract files to correct locations
 		//Use a loop here
 	
 	//Check dependencies
@@ -464,7 +472,6 @@
 				   digest[14], digest[15]];
 	return s;
 }
-
 
 //Device detection function
 //

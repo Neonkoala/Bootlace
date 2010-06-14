@@ -38,11 +38,11 @@
 		D7B3354411BE85E5008978A1 /* idroidbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B3354311BE85E5008978A1 /* idroidbutton.png */; };
 		D7C5E5A711C27BEB00D24192 /* bootlaceupdate.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */; };
 		D7C6234811C65F790049C24B /* getFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C6234711C65F790049C24B /* getFile.m */; };
-		D7C62A9211C6B1BA0049C24B /* bzip2Lib.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C62A9111C6B1BA0049C24B /* bzip2Lib.m */; };
-		D7C62AC711C6B3E10049C24B /* bzlib_private.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C62AC411C6B3E10049C24B /* bzlib_private.h */; };
-		D7C62AC811C6B3E10049C24B /* bzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = D7C62AC511C6B3E10049C24B /* bzlib.c */; };
-		D7C62AC911C6B3E10049C24B /* bzlib.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C62AC611C6B3E10049C24B /* bzlib.h */; };
-		D7C62AD011C6B4850049C24B /* libbz2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C62AAC11C6B2D40049C24B /* libbz2.a */; };
+		D7C62C7011C6BFC70049C24B /* NSBz2.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C62C6F11C6BFC70049C24B /* NSBz2.m */; };
+		D7C62C8411C6C0AE0049C24B /* bzlib_private.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C62C8111C6C0AE0049C24B /* bzlib_private.h */; };
+		D7C62C8511C6C0AE0049C24B /* bzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = D7C62C8211C6C0AE0049C24B /* bzlib.c */; };
+		D7C62C8611C6C0AE0049C24B /* bzlib.h in Headers */ = {isa = PBXBuildFile; fileRef = D7C62C8311C6C0AE0049C24B /* bzlib.h */; };
+		D7C62C9B11C6C0F90049C24B /* libbz2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C62C7E11C6C09A0049C24B /* libbz2.a */; };
 		D7D0B37111C50561000FCBD4 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B36F11C50561000FCBD4 /* install.png */; };
 		D7D0B37211C50561000FCBD4 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B37011C50561000FCBD4 /* remove.png */; };
 /* End PBXBuildFile section */
@@ -91,11 +91,12 @@
 		D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootlaceupdate.plist; sourceTree = SOURCE_ROOT; };
 		D7C6234611C65F790049C24B /* getFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getFile.h; sourceTree = "<group>"; };
 		D7C6234711C65F790049C24B /* getFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getFile.m; sourceTree = "<group>"; };
-		D7C62A9111C6B1BA0049C24B /* bzip2Lib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bzip2Lib.m; sourceTree = "<group>"; };
-		D7C62AAC11C6B2D40049C24B /* libbz2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbz2.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7C62AC411C6B3E10049C24B /* bzlib_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib_private.h; path = Libraries/bzlib_private.h; sourceTree = "<group>"; };
-		D7C62AC511C6B3E10049C24B /* bzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bzlib.c; path = Libraries/bzlib.c; sourceTree = "<group>"; };
-		D7C62AC611C6B3E10049C24B /* bzlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib.h; path = Libraries/bzlib.h; sourceTree = "<group>"; };
+		D7C62C6E11C6BFC70049C24B /* NSBz2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBz2.h; sourceTree = "<group>"; };
+		D7C62C6F11C6BFC70049C24B /* NSBz2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBz2.m; sourceTree = "<group>"; };
+		D7C62C7E11C6C09A0049C24B /* libbz2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbz2.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7C62C8111C6C0AE0049C24B /* bzlib_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib_private.h; path = Libraries/bzlib_private.h; sourceTree = "<group>"; };
+		D7C62C8211C6C0AE0049C24B /* bzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bzlib.c; path = Libraries/bzlib.c; sourceTree = "<group>"; };
+		D7C62C8311C6C0AE0049C24B /* bzlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib.h; path = Libraries/bzlib.h; sourceTree = "<group>"; };
 		D7D0B16511C4ED4F000FCBD4 /* Availability2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Availability2.h; path = Headers/Availability2.h; sourceTree = "<group>"; };
 		D7D0B16711C4ED4F000FCBD4 /* GSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEvent.h; sourceTree = "<group>"; };
 		D7D0B16811C4ED4F000FCBD4 /* GSHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSHeartbeat.h; sourceTree = "<group>"; };
@@ -115,11 +116,11 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
-				D7C62AD011C6B4850049C24B /* libbz2.a in Frameworks */,
+				D7C62C9B11C6C0F90049C24B /* libbz2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D7C62AAA11C6B2D40049C24B /* Frameworks */ = {
+		D7C62C7C11C6C09A0049C24B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -132,7 +133,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D7C62A9111C6B1BA0049C24B /* bzip2Lib.m */,
+				D7C62C6E11C6BFC70049C24B /* NSBz2.h */,
+				D7C62C6F11C6BFC70049C24B /* NSBz2.m */,
 				D7C5E5A611C27BEB00D24192 /* bootlaceupdate.plist */,
 				D7B332AD11BE5FD2008978A1 /* commonData.h */,
 				D7B332AE11BE5FD2008978A1 /* commonData.m */,
@@ -160,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* BootlaceV2.app */,
-				D7C62AAC11C6B2D40049C24B /* libbz2.a */,
+				D7C62C7E11C6C09A0049C24B /* libbz2.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,9 +170,9 @@
 		29B97314FDCFA39411CA2CEA /* BootlaceV2 */ = {
 			isa = PBXGroup;
 			children = (
-				D7C62AC411C6B3E10049C24B /* bzlib_private.h */,
-				D7C62AC511C6B3E10049C24B /* bzlib.c */,
-				D7C62AC611C6B3E10049C24B /* bzlib.h */,
+				D7C62C8111C6C0AE0049C24B /* bzlib_private.h */,
+				D7C62C8211C6C0AE0049C24B /* bzlib.c */,
+				D7C62C8311C6C0AE0049C24B /* bzlib.h */,
 				D7D0B16411C4ED40000FCBD4 /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -262,12 +264,12 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D7C62AA811C6B2D40049C24B /* Headers */ = {
+		D7C62C7A11C6C09A0049C24B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7C62AC711C6B3E10049C24B /* bzlib_private.h in Headers */,
-				D7C62AC911C6B3E10049C24B /* bzlib.h in Headers */,
+				D7C62C8411C6C0AE0049C24B /* bzlib_private.h in Headers */,
+				D7C62C8611C6C0AE0049C24B /* bzlib.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,13 +293,13 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* BootlaceV2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D7C62AAB11C6B2D40049C24B /* bz2 */ = {
+		D7C62C7D11C6C09A0049C24B /* bz2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D7C62ABF11C6B2D80049C24B /* Build configuration list for PBXNativeTarget "bz2" */;
+			buildConfigurationList = D7C62C8711C6C0AF0049C24B /* Build configuration list for PBXNativeTarget "bz2" */;
 			buildPhases = (
-				D7C62AA811C6B2D40049C24B /* Headers */,
-				D7C62AA911C6B2D40049C24B /* Sources */,
-				D7C62AAA11C6B2D40049C24B /* Frameworks */,
+				D7C62C7A11C6C09A0049C24B /* Headers */,
+				D7C62C7B11C6C09A0049C24B /* Sources */,
+				D7C62C7C11C6C09A0049C24B /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,7 +307,7 @@
 			);
 			name = bz2;
 			productName = bz2;
-			productReference = D7C62AAC11C6B2D40049C24B /* libbz2.a */;
+			productReference = D7C62C7E11C6C09A0049C24B /* libbz2.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -324,7 +326,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* BootlaceV2 */,
-				D7C62AAB11C6B2D40049C24B /* bz2 */,
+				D7C62C7D11C6C09A0049C24B /* bz2 */,
 			);
 		};
 /* End PBXProject section */
@@ -374,15 +376,15 @@
 				D7B332B411BE5FD2008978A1 /* commonFunctions.m in Sources */,
 				D7B332B511BE5FD2008978A1 /* nvramFunctions.m in Sources */,
 				D7C6234811C65F790049C24B /* getFile.m in Sources */,
-				D7C62A9211C6B1BA0049C24B /* bzip2Lib.m in Sources */,
+				D7C62C7011C6BFC70049C24B /* NSBz2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D7C62AA911C6B2D40049C24B /* Sources */ = {
+		D7C62C7B11C6C09A0049C24B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7C62AC811C6B3E10049C24B /* bzlib.c in Sources */,
+				D7C62C8511C6C0AE0049C24B /* bzlib.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +475,7 @@
 			};
 			name = Release;
 		};
-		D7C62AAD11C6B2D50049C24B /* Debug */ = {
+		D7C62C7F11C6C09B0049C24B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -485,7 +487,7 @@
 			};
 			name = Debug;
 		};
-		D7C62AAE11C6B2D50049C24B /* Release */ = {
+		D7C62C8011C6C09B0049C24B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -519,11 +521,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D7C62ABF11C6B2D80049C24B /* Build configuration list for PBXNativeTarget "bz2" */ = {
+		D7C62C8711C6C0AF0049C24B /* Build configuration list for PBXNativeTarget "bz2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D7C62AAD11C6B2D50049C24B /* Debug */,
-				D7C62AAE11C6B2D50049C24B /* Release */,
+				D7C62C7F11C6C09B0049C24B /* Debug */,
+				D7C62C8011C6C09B0049C24B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

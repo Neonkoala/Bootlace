@@ -59,15 +59,15 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[getFileRequestData appendData:data];
+	
 	if([getFileRequestData length] > 2621440) {
 		NSFileHandle *fh = [NSFileHandle fileHandleForUpdatingAtPath:self.getFilePath];
 		[fh seekToEndOfFile];
 		[fh writeData:self.getFileRequestData];
 		[fh closeFile];
 			
-		[getFileRequestData setData:data];
-	} else {
-		[getFileRequestData appendData:data];
+		[getFileRequestData setLength:0];
 	}
 }
 
