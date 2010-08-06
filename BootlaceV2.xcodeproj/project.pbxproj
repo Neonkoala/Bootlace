@@ -91,13 +91,6 @@
 		D7C8059811C6EFF7006620C6 /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
 		D7C8059911C6EFF7006620C6 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		D7C8059A11C6EFF7006620C6 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
-		D7D0B16511C4ED4F000FCBD4 /* Availability2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Availability2.h; path = Headers/Availability2.h; sourceTree = "<group>"; };
-		D7D0B16711C4ED4F000FCBD4 /* GSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEvent.h; sourceTree = "<group>"; };
-		D7D0B16811C4ED4F000FCBD4 /* GSHeartbeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSHeartbeat.h; sourceTree = "<group>"; };
-		D7D0B16911C4ED4F000FCBD4 /* UIGlassButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIGlassButton.h; path = Headers/UIGlassButton.h; sourceTree = "<group>"; };
-		D7D0B16A11C4ED4F000FCBD4 /* UIKit-Structs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIKit-Structs.h"; path = "Headers/UIKit-Structs.h"; sourceTree = "<group>"; };
-		D7D0B16C11C4ED4F000FCBD4 /* WKTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTypes.h; sourceTree = "<group>"; };
-		D7D0B16D11C4ED4F000FCBD4 /* WKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKUtilities.h; sourceTree = "<group>"; };
 		D7D0B36F11C50561000FCBD4 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = install.png; path = Resources/install.png; sourceTree = "<group>"; };
 		D7D0B37011C50561000FCBD4 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove.png; path = Resources/remove.png; sourceTree = "<group>"; };
 		D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvancedViewController.xib; sourceTree = "<group>"; };
@@ -164,7 +157,6 @@
 		29B97314FDCFA39411CA2CEA /* BootlaceV2 */ = {
 			isa = PBXGroup;
 			children = (
-				D7D0B16411C4ED40000FCBD4 /* Headers */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -219,38 +211,6 @@
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D7D0B16411C4ED40000FCBD4 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				D7D0B16511C4ED4F000FCBD4 /* Availability2.h */,
-				D7D0B16611C4ED4F000FCBD4 /* GraphicsServices */,
-				D7D0B16911C4ED4F000FCBD4 /* UIGlassButton.h */,
-				D7D0B16A11C4ED4F000FCBD4 /* UIKit-Structs.h */,
-				D7D0B16B11C4ED4F000FCBD4 /* WebCore */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		D7D0B16611C4ED4F000FCBD4 /* GraphicsServices */ = {
-			isa = PBXGroup;
-			children = (
-				D7D0B16711C4ED4F000FCBD4 /* GSEvent.h */,
-				D7D0B16811C4ED4F000FCBD4 /* GSHeartbeat.h */,
-			);
-			name = GraphicsServices;
-			path = Headers/GraphicsServices;
-			sourceTree = "<group>";
-		};
-		D7D0B16B11C4ED4F000FCBD4 /* WebCore */ = {
-			isa = PBXGroup;
-			children = (
-				D7D0B16C11C4ED4F000FCBD4 /* WKTypes.h */,
-				D7D0B16D11C4ED4F000FCBD4 /* WKUtilities.h */,
-			);
-			name = WebCore;
-			path = Headers/WebCore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
