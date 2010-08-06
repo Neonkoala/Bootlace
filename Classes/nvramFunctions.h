@@ -8,15 +8,16 @@
 
 #import "commonData.h"
 #import <Foundation/Foundation.h>
-#import <Foundation/NSTask.h>
+#import <IOKit/IOKitLib.h>
 
 @interface nvramFunctions : NSObject {
 
 }
 
-- (int)hookNVRAM:(NSString *)filePath withMode:(int)rw;
-- (int)readNVRAM:(NSString *)filePath;
-- (int)writeNVRAM:(NSString *)filePath withMode:(int)mode;
+- (int)dumpNVRAM:(NSString *)filePath;
+- (int)updateNVRAM:(NSString *)filePath;
+- (int)parseNVRAM:(NSString *)filePath;
+- (int)generateNVRAM:(NSString *)filePath withMode:(int)mode;
 - (void)cleanNVRAM:(NSString *)filePath;
 
 @end

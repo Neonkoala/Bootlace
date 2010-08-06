@@ -24,25 +24,30 @@
 	NSString *opibDefaultOS;
 	NSString *opibTempOS;
 	
-	NSMutableDictionary *installedDict;
-	
 	BOOL installed;
 	NSString *installedVer;
 	NSString *installedAndroidVer;
-	NSString *installedDate;
+	NSDate *installedDate;
+	NSArray *installedFiles;
+	NSArray *installedDependencies;
 	
 	NSMutableDictionary *latestVerDict;
 	NSMutableDictionary *upgradeDict;
 	
+	BOOL updateAvailable;
+	int updateStage;
+	int updateFail;
+	int updateSize;
+	float updateProgress;
 	NSString *updateVer;
 	NSString *updateAndroidVer;
-	NSString *updateDate;
+	NSDate *updateDate;
 	NSString *updateURL;
-	NSString *updateMD5;
+	NSString *updateFirmwarePath;
+	NSString *updatePackagePath;
+	NSString *updateClean;
 	NSMutableDictionary *updateFiles;
 	NSMutableDictionary *updateDependencies;
-	
-	NSString *idroidPackagePath;
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
@@ -58,25 +63,30 @@
 @property (nonatomic, retain) NSString *opibDefaultOS;
 @property (nonatomic, retain) NSString *opibTempOS;
 
-@property (nonatomic, retain) NSMutableDictionary *installedDict;
-
 @property (nonatomic, assign) BOOL installed;
 @property (nonatomic, retain) NSString *installedVer;
 @property (nonatomic, retain) NSString *installedAndroidVer;
-@property (nonatomic, retain) NSString *installedDate;
+@property (nonatomic, retain) NSDate *installedDate;
+@property (nonatomic, retain) NSArray *installedFiles;
+@property (nonatomic, retain) NSArray *installedDependencies;
 
 @property (nonatomic, retain) NSMutableDictionary *latestVerDict;
 @property (nonatomic, retain) NSMutableDictionary *upgradeDict;
 
+@property (nonatomic, assign) BOOL updateAvailable;
+@property (nonatomic, assign) int updateStage;
+@property (nonatomic, assign) int updateFail;
+@property (nonatomic, assign) int updateSize;
+@property (nonatomic, assign) float updateProgress;
 @property (nonatomic, retain) NSString *updateVer;
 @property (nonatomic, retain) NSString *updateAndroidVer;
-@property (nonatomic, retain) NSString *updateDate;
+@property (nonatomic, retain) NSDate *updateDate;
 @property (nonatomic, retain) NSString *updateURL;
-@property (nonatomic, retain) NSString *updateMD5;
+@property (nonatomic, retain) NSString *updateFirmwarePath;
+@property (nonatomic, retain) NSString *updatePackagePath;
+@property (nonatomic, retain) NSString *updateClean;
 @property (nonatomic, retain) NSMutableDictionary *updateFiles;
 @property (nonatomic, retain) NSMutableDictionary *updateDependencies;
-
-@property (nonatomic, retain) NSString *idroidPackagePath;
 
 + (commonData *) sharedData;
 

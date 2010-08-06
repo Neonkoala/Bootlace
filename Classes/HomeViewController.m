@@ -11,15 +11,21 @@
 
 @implementation HomeViewController
 
-@synthesize homePage, homeAboutView, doneButton, aboutButton, refreshButton;
+@synthesize homePage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton;
 
-- (IBAction)refreshHome:(id)sender
-{
+- (IBAction)refreshHome:(id)sender {
 	[homePage reload];
 }
 
-- (void)flipAction:(id)sender
-{
+- (IBAction)stopLoading:(id)sender {
+	[homePage stopLoading];
+}
+
+- (IBAction)goBack:(id)sender {
+	[homePage goBack];
+}
+
+- (void)flipAction:(id)sender {
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
 	[UIView beginAnimations:nil context:nil];
@@ -66,7 +72,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	NSString *urlAddress = @"http://www.google.com";
+	commonData *sharedData = [commonData sharedData];
+	id commonInstance = [commonFunctions new];
+	
+	NSString *urlAddress = @"http://idroid.neonkoala.co.uk";
 	
 	//Create a URL object.
 	NSURL *url = [NSURL URLWithString:urlAddress];
@@ -75,8 +84,46 @@
 	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
 	
 	//Load the request in the UIWebView.
+	[homePage setDelegate:self];
 	[homePage loadRequest:requestObj];
+	
+	if(sharedData.firstLaunchVal) {
+		[commonInstance firstLaunch];
+		sharedData.firstLaunchVal = NO;
+	}
+	
+	if(![sharedData.platform isEqualToString:@"iPhone1,1"] && ![sharedData.platform isEqualToString:@"iPhone1,2"] && ![sharedData.platform isEqualToString:@"iPod1,1"]) {
+		[commonInstance sendTerminalError:@"Bootlace is not compatible with this device.\r\nAborting..."];
+	}
 }
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+	[self performSelectorOnMainThread:@selector(loadingWebView) withObject:nil waitUntilDone:NO];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self performSelectorOnMainThread:@selector(showWebView) withObject:nil waitUntilDone:NO]; 
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+	[self performSelectorOnMainThread:@selector(showWebView) withObject:nil waitUntilDone:NO];
+}
+
+- (void)loadingWebView {
+	self.navigationItem.rightBarButtonItem = stopButton;
+}
+
+- (void)showWebView {
+	[homePage setHidden:NO];
+	
+	self.navigationItem.rightBarButtonItem = refreshButton;
+	
+	if(homePage.canGoBack) {
+		self.navigationItem.leftBarButtonItem = backButton;
+	} else {
+		self.navigationItem.leftBarButtonItem = aboutButton;
+	}
+} 
 
 
 /*
@@ -93,6 +140,14 @@
 	
 	// Release any cached data, images, etc that aren't in use.
 }
+
+- (void)viewWillDisappear
+{
+    if ([homePage isLoading])
+        [homePage stopLoading];
+	[homePage release];
+}
+
 
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.

@@ -11,8 +11,6 @@
 
 @implementation commonFunctions
 
-@synthesize getFileInstance;
-
 - (void)initNVRAM {
 	int success;
 	id nvramInstance = [nvramFunctions new];
@@ -21,7 +19,7 @@
 	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
 	
 	if(!backupExists) {
-		success = [nvramInstance hookNVRAM:sharedData.opibBackupPath withMode:0];
+		success = [nvramInstance dumpNVRAM:sharedData.opibBackupPath];
 		if(success==-1) {
 			sharedData.opibInitStatus = -1;
 			return;
@@ -34,7 +32,7 @@
 		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:0];
+	success = [nvramInstance dumpNVRAM:sharedData.opibWorkingPath];
 	
 	tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibWorkingPath];
 	
@@ -46,7 +44,7 @@
 		return;
 	}
 	
-	success = [nvramInstance readNVRAM:sharedData.opibWorkingPath];
+	success = [nvramInstance parseNVRAM:sharedData.opibWorkingPath];
 	
 	switch (success) {
 		case 0:
@@ -67,6 +65,8 @@
 			sharedData.opibInitStatus = -6;
 			return;
 	}
+	
+	sharedData.opibInitStatus = 0;
 }
 
 - (int)rebootAndroid {
@@ -76,13 +76,13 @@
 	
 	sharedData.opibTempOS = @"1";
 	
-	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success<0) {
 		return success;
 	}
 		
-	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
 	
 	if(success==-1) {
 		return -5;
@@ -100,13 +100,13 @@
 	
 	sharedData.opibTempOS = @"2";
 	
-	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:1];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
 	
 	if(success==-1) {
 		return -5;
@@ -128,7 +128,7 @@
 	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
 	
 	if(!backupExists) {
-		int success = [nvramInstance hookNVRAM:sharedData.opibBackupPath withMode:0];
+		int success = [nvramInstance dumpNVRAM:sharedData.opibBackupPath];
 		if(success==-1) {
 			return -2;
 		}
@@ -148,7 +148,7 @@
 		return -1;
 	}
 	
-	int success = [nvramInstance hookNVRAM:sharedData.opibBackupPath withMode:1];
+	int success = [nvramInstance updateNVRAM:sharedData.opibBackupPath];
 	
 	if(success==-1) {
 		return -2;
@@ -173,13 +173,13 @@
 	sharedData.opibTempOS = @"0";
 	sharedData.opibTimeout = @"10000";
 	
-	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:0];
+	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:0];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
 	
 	if(success==-1) {
 		return -5;
@@ -203,221 +203,19 @@
 	
 	sharedData.opibTempOS = sharedData.opibDefaultOS;
 	
-	success = [nvramInstance writeNVRAM:sharedData.opibWorkingPath withMode:0];
+	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:0];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance hookNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
 	
 	if(success==-1) {
 		return -5;
 	}
 	
 	return 0;
-}
-
-- (int)getFile:(NSString *)fileURL toDestination:(NSString *)dirPath {
-	
-	
-	
-	/*BOOL isDir;
-	
-	if(![[NSFileManager defaultManager] fileExistsAtPath:dirPath isDirectory:&isDir]) {
-		if(![[NSFileManager defaultManager] createDirectoryAtPath:dirPath attributes:nil]) {
-			NSLog(@"Error: Create destination folder for getFile failed");
-		}
-	}
-	
-	//Check destination URL exists, if not error
-	
-	NSURLRequest *fileRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fileURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
-	
-	NSURLConnection *getFileConnection = [[NSURLConnection alloc] initWithRequest:fileRequest delegate:self];
-	
-	if (getFileConnection) {
-		
-		// Create the NSMutableData to hold the received data.
-		
-		// receivedData is an instance variable declared elsewhere.
-		
-		receivedData = [[NSMutableData data] retain];
-	} else {
-		// Inform the user that the connection failed.
-	}
-	
-	//Write File to Disk
-	*/
-	return 0;
-}
-
-- (void)checkForUpdates {
-	int success;
-	commonData* sharedData = [commonData sharedData];
-	
-	/*
-	//Check destination folder exists, if not create it
-	BOOL isDir;
-	
-	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
-	NSString *workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
-	
-	if(![[NSFileManager defaultManager] fileExistsAtPath:workingDirectory isDirectory:&isDir]) {
-		if(![[NSFileManager defaultManager] createDirectoryAtPath:workingDirectory attributes:nil]) {
-			NSLog(@"Error: Create Bootlace working folder failed");
-		}
-	}
-	
-	//Setup NSURLDownload
-	
-	NSString *updatePlistTarget = [workingDirectory stringByAppendingPathComponent:@"update.plist"];
-	NSLog(@"%@", updatePlistTarget);
-	
-	NSURLRequest *updatePlistRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
-	NSURLConnection *updatePlistConnection = [[NSURLConnection alloc] initWithRequest:updatePlistRequest delegate:self];
-	
-	if (updatePlistConnection) {
-		
-		NSMutableData *receivedData;
-		
-		receivedData = [[NSMutableData data] retain];
-		
-		
-		NSLog(@"%@", updateDict);
-	} else {
-		NSLog(@"Download failed #1");
-	}
-	*/
-	
-	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
-	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
-	sharedData.latestVerDict = [updateDict objectForKey:@"LatestVersion"];
-	sharedData.upgradeDict = [updateDict objectForKey:@"Upgrade"];
-		
-	//Call func to parse plist
-	success = [self parseUpdatePlist];
-	
-	if (success < 0) {
-		//Something broke
-	}
-}
-
-- (int)parseUpdatePlist {
-	commonData* sharedData = [commonData sharedData];
-	
-	//Check device match
-	NSMutableDictionary* platformDict = [sharedData.latestVerDict objectForKey:sharedData.platform];
-	if (platformDict==nil) {
-		return -1;
-	} else {
-		sharedData.updateVer = [platformDict objectForKey:@"iDroidVersion"];
-	}
-	
-	sharedData.updateAndroidVer = [platformDict objectForKey:@"AndroidVersion"];
-	sharedData.updateDate = [platformDict objectForKey:@"ReleaseDate"];
-	sharedData.updateURL = [platformDict objectForKey:@"URL"];
-	sharedData.updateMD5 = [platformDict objectForKey:@"MD5"];
-	sharedData.updateFiles = [platformDict objectForKey:@"Files"];
-	sharedData.updateDependencies = [platformDict objectForKey:@"Dependencies"];
-	
-	return 0;
-}
-
-- (void)checkInstalled {
-	int success;
-	commonData* sharedData = [commonData sharedData];
-	
-	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
-	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:installedPlistPath];
-	
-	NSLog(@"%d", fileExists);
-	
-	if(!fileExists) { 
-		sharedData.installed = NO;
-	} else {
-		sharedData.installed = YES;
-		success = [self parseInstalledPlist];
-		
-		if(success<0) {
-			//Error out here
-		}
-	}
-}
-
-- (int)parseInstalledPlist {
-	commonData* sharedData = [commonData sharedData];
-	
-	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
-	sharedData.installedDict = [NSMutableDictionary dictionaryWithContentsOfFile:installedPlistPath];
-	
-	
-	
-	return 0;
-}
-
-- (void)idroidInstall {
-	commonData* sharedData = [commonData sharedData];
-	/*
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	//Download from URL
-	getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
-	//getFileInstance = [[getFile alloc] initWithUrl:@"http://idroid.neonkoala.co.uk/release/firmware/sd8686.bin" directory:sharedData.workingDirectory];
-	
-	// Start downloading the image with self as delegate receiver
-	[getFileInstance getFileDownload:self];
-	
-	BOOL keepAlive = YES;
-	
-	do {        
-        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-        //Check NSURLConnection for activity
-        if (getFileInstance.getFileWorking == NO) {
-            keepAlive = NO;
-        }
-    } while (keepAlive);
-	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	*/
-	sharedData.idroidPackagePath = [sharedData.workingDirectory stringByAppendingPathComponent:@"idroid-release-0.2-3g.tar.bz2"];
-	//Check MD5
-	NSString *md5 = [self fileMD5:sharedData.idroidPackagePath];
-	
-	if([md5 isEqualToString:@"NOFILE"]) {
-		//Error handling
-		NSLog(@"iDroid package isn't there, must be pikeys.");
-	} else if(![md5 isEqualToString:sharedData.updateMD5]) {
-		//Error handling
-		NSLog(@"iDroid package MD5 doesn't match.");
-	}
-	
-	//Extract BZ2
-	NSData *temp = [NSData dataWithContentsOfFile:sharedData.idroidPackagePath];
-	NSData *decompressed = [temp bunzip2];
-	
-	NSString *newPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"blarg.tar"];
-	[decompressed writeToFile:newPath atomically:YES];
-	 
-	 //Extract files to correct locations
-		//Use a loop here
-	
-	//Check dependencies
-		//Special multitouch routine
-		//Check any remote dependencies (sd8686 for e.g.)
-	
-	
-	sleep(2);
-}
-
-- (void)idroidRemove {
-	
-}
-
-- (void)getFileReady:(getFile *)file {
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.idroidPackagePath = file.getFilePath;
 }
 
 - (void)getPlatform {
@@ -428,8 +226,6 @@
     char *machine = malloc(size);
     sysctlbyname("hw.machine", machine, &size, NULL, 0);
     NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
-	NSLog(@"Platform should appear below:");
-	NSLog(@"%@", platform);
 	sharedData.platform = platform;
     free(machine);
 	
@@ -440,37 +236,8 @@
 	if ([sharedData.platform isEqualToString:@"x86_64"]) {
 		sharedData.platform = @"iPhone1,2";
 	}
-}
-
-
-- (NSString *)fileMD5:(NSString *)path {
-	NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:path];
-	if(handle==nil) {
-		return @"NOFILE";
-	}
-		
-	CC_MD5_CTX md5;
-	CC_MD5_Init(&md5);
 	
-	BOOL done = NO;
-	while(!done)
-	{
-		NSData* fileData = [handle readDataOfLength: 1048576];
-		CC_MD5_Update(&md5, [fileData bytes], [fileData length]);
-		if( [fileData length] == 0 ) done = YES;
-	}
-	unsigned char digest[CC_MD5_DIGEST_LENGTH];
-	CC_MD5_Final(digest, &md5);
-	NSString* s = [NSString stringWithFormat: @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
-				   digest[0], digest[1], 
-				   digest[2], digest[3],
-				   digest[4], digest[5],
-				   digest[6], digest[7],
-				   digest[8], digest[9],
-				   digest[10], digest[11],
-				   digest[12], digest[13],
-				   digest[14], digest[15]];
-	return s;
+	/*************************************************************************************/
 }
 
 //Device detection function
@@ -478,8 +245,10 @@
 //
 - (void)firstLaunch {
 	UIAlertView *launchAlert;
-	launchAlert = [[[UIAlertView alloc] initWithTitle:@"Welcome" message:@"Welcome to Bootlace.\r\n\r\nThis first screen will reboot your device into the selected OS.\r\n\r\nTap settings for altering openiboots permanent behaviour." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+	launchAlert = [[[UIAlertView alloc] initWithTitle:@"Welcome" message:@"Welcome to Bootlace.\r\n\r\nThe iDroid tab will allow you to install iDroid on your device.\r\n\r\nQuickBoot allows you to reboot your device into the selected OS.\r\n\r\nTap settings for altering openiBoot's permanent behaviour." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
 	[launchAlert show];
+	
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
 }
 
 - (void)sendError:(NSString *)alertMsg {
@@ -671,34 +440,6 @@
 				break;
 			case -11:
 				[commonInstance sendTerminalError:@"Openiboot settings reset but an unknown error occurred."];
-				break;
-			default:
-				break;
-		}
-	}
-	//Confirm settings apply then apply
-	if(buttonIndex==1 && alertView.tag==7){
-		id commonInstance = [commonFunctions new];
-		int success = [commonInstance applyNVRAM];
-		
-		switch (success) {
-			case 0:
-				[commonInstance sendSuccess:@"Openiboot settings successfully applied."];
-				break;
-			case -1:
-				[commonInstance sendError:@"Your openiboot settings could not be applied. NVRAM dump does not exist."];
-				break;
-			case -2:
-				[commonInstance sendError:@"Your openiboot settings could not be applied. Data is invalid."];
-				break;
-			case -3:
-				[commonInstance sendError:@"Your openiboot settings could not be applied. Could not remove old NVRAM dump."];
-				break;
-			case -4:
-				[commonInstance sendError:@"Your openiboot settings could not be applied. New settings could not be written to file."];
-				break;
-			case -5:
-				[commonInstance sendError:@"Your openiboot settings could not be applied. New settings could not be written to NVRAM."];
 				break;
 			default:
 				break;

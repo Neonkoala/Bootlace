@@ -10,7 +10,7 @@
 
 @implementation BootViewController
 
-@synthesize quickBootAboutView, doneButton, flipButton;
+@synthesize quickBootAboutView, quickBootDisabledView, doneButton, flipButton, androidRebootButton, consoleRebootButton, androidRebootLabel, consoleRebootLabel;
 
 
 - (void)flipAction:(id)sender
@@ -38,6 +38,28 @@
 		self.navigationItem.rightBarButtonItem = flipButton;
 }
 
+- (IBAction)rebootToAndroid:(id)sender {
+	id commonInstance;
+	commonInstance = [commonFunctions new];
+	
+	[commonInstance sendConfirmation:@"This will reboot your device into Android immediately.\r\nAre you sure?" withTag:2];
+}
+
+- (IBAction)rebootToConsole:(id)sender {
+	id commonInstance;
+	commonInstance = [commonFunctions new];
+	
+	[commonInstance sendConfirmation:@"This will reboot your device into the console immediately.\r\nAre you sure?" withTag:3];
+}
+
+- (void)disableQuickboot {
+	androidRebootButton.enabled = NO;
+	consoleRebootButton.enabled = NO;
+	androidRebootLabel.alpha = 0.4;
+	consoleRebootLabel.alpha = 0.4;
+	[self.view addSubview:quickBootDisabledView];
+}
+
 /*
  // The designated initializer. Override to perform setup that is required before the view is loaded.
  - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -59,11 +81,49 @@
  - (void)viewDidLoad {
 	 [super viewDidLoad];
 	 
+	 commonData *sharedData = [commonData sharedData];
+	 id commonInstance = [commonFunctions new];
+	 
 	 // add our custom flip button as the nav bar's custom right view
 	 UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	 [infoButton addTarget:self action:@selector(flipAction:) forControlEvents:UIControlEventTouchUpInside];
 	 flipButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
 	 self.navigationItem.rightBarButtonItem = flipButton;
+	 
+	 switch(sharedData.opibInitStatus) {
+		 case 0:
+			 if(sharedData.opibTempOSDisabled==1) {
+				 [self disableQuickboot];
+			 }
+			 break;
+		 case 1:
+			 [commonInstance sendConfirmation:@"Some required openiboot settings are missing.\r\nWould you like to generate them now?" withTag:8];
+			 [self disableQuickboot];
+			 break;
+		 case -1:
+			 [commonInstance sendError:@"NVRAM Backup failed."];
+			 [self disableQuickboot];
+			 break;
+		 case -2:
+			 [commonInstance sendError:@"NVRAM Could not be read."];
+			 [self disableQuickboot];
+			 break;
+		 case -3:
+			 [commonInstance sendError:@"NVRAM Could not be read."];
+			 [self disableQuickboot];
+			 break;
+		 case -4:
+			 [commonInstance sendError:@"NVRAM configuration invalid."];
+			 [self disableQuickboot];
+			 break;
+		 case -5:
+			 [commonInstance sendError:@"Openiboot is not installed or is incompatible."];
+			 [self disableQuickboot];
+			 break;
+		 default:
+			 [commonInstance sendError:@"Unknown error occurred."];
+			 [self disableQuickboot];
+	 }
  }
 
 

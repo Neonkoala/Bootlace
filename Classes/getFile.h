@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "installClass.h"
+#import "commonData.h"
 
+@class commonFunctions;
 
 @interface getFile : NSObject {
 	@private id currentDelegate;
@@ -18,6 +21,10 @@
 	@public NSString *getFileURL;
 	@public NSString *getFileDir;
 	bool getFileWorking;
+	
+	int dataGot;
+	int dataTotal;
+	float progress;
 }
 
 @property (nonatomic, retain) NSMutableData *getFileRequestData;
@@ -27,16 +34,13 @@
 @property (nonatomic, retain) NSString *getFilePath;
 @property (nonatomic, retain) NSURLConnection *getFileConnection;
 @property (nonatomic, assign) bool getFileWorking;
+@property (nonatomic, assign) int dataGot;
+@property (nonatomic, assign) int dataTotal;
+@property (nonatomic, assign) float progress;
 
 - (void)setDelegate:(id)new_delegate;
 - (id)initWithUrl:(NSString *)fileURL directory:(NSString *)dirPath;
 - (void)getFileDownload:(id)delegate;
 - (void)getFileAbort;
-
-@end
-
-
-@interface NSObject (getFileDelegate)
-- (void)getFileReady:(getFile *)file;
 
 @end

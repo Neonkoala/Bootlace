@@ -13,14 +13,27 @@
 
 @interface BootViewController : UIViewController {
 	UIView *quickBootAboutView;
+	UIView *quickBootDisabledView;
 	UIBarButtonItem *doneButton;
 	UIBarButtonItem *flipButton;
+	UIButton *androidRebootButton;
+	UIButton *consoleRebootButton;
+	UILabel *consoleRebootLabel;
+	UILabel *androidRebootLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *quickBootAboutView;
+@property (nonatomic, retain) IBOutlet UIView *quickBootDisabledView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property (nonatomic, retain) UIBarButtonItem *flipButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *flipButton;
+@property (nonatomic, retain) IBOutlet UIButton *androidRebootButton;
+@property (nonatomic, retain) IBOutlet UIButton *consoleRebootButton;
+@property (nonatomic, retain) IBOutlet UILabel *consoleRebootLabel;
+@property (nonatomic, retain) IBOutlet UILabel *androidRebootLabel;
 
 - (void)flipAction:(id)sender;
+- (IBAction)rebootToAndroid:(id)sender;
+- (IBAction)rebootToConsole:(id)sender;
+- (void)disableQuickboot;
 
 @end

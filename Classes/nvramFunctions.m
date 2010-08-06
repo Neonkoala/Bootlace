@@ -11,45 +11,81 @@
 
 @implementation nvramFunctions
 
-- (int)hookNVRAM:(NSString *)filePath withMode:(int)rw {
-	NSTask *hookNVRAM = [[NSTask alloc] init];
-	[hookNVRAM setLaunchPath: @"/usr/sbin/nvram"];													//Set binary path
+- (int)dumpNVRAM:(NSString *)filePath {
+	kern_return_t   kr;
+	io_iterator_t   io_objects;
+	io_service_t    io_service;
 	
-	NSArray *hookArgs;
+	//CFMutableDictionaryRef child_props;
+	CFMutableDictionaryRef service_properties;
 	
-	if(rw==0){
-		hookArgs = [NSArray arrayWithObjects: @"-x", @"-p", nil];
-	} else if(rw==1) {
-		hookArgs = [NSArray arrayWithObjects: @"-x", @"-f", filePath, nil];
-	}
+	kr = IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceMatching("IODTNVRAM"), &io_objects);
 	
-	[hookNVRAM setArguments: hookArgs];																//Set array of args
-	
-	NSPipe *hookNVRAMpipe = [NSPipe pipe];															//Deal with output
-	[hookNVRAM setStandardOutput: hookNVRAMpipe];
-	NSFileHandle *hookNVRAMfile = [hookNVRAMpipe fileHandleForReading];								//Dumpfile for output
-	
-	[hookNVRAM launch];																				//GO!
-	[hookNVRAM waitUntilExit];
-	int status = [hookNVRAM terminationStatus];														//Check termination
-	
-	NSData *hookNVRAMdata = [hookNVRAMfile readDataToEndOfFile];
-
-	NSString *string = [[NSString alloc] initWithData: hookNVRAMdata encoding: NSUTF8StringEncoding];
-	
-	if(rw==0){
-		NSError *error = [[NSError alloc] init];													//Dump output to file
-		[string writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-	}
-	
-	if (status==0) {																				//Check termination status of 'nvram'
-		return 0;
-	} else {
+	if(kr != KERN_SUCCESS)
 		return -1;
+	
+	while((io_service= IOIteratorNext(io_objects)))
+	{
+		kr = IORegistryEntryCreateCFProperties(io_service, &service_properties, kCFAllocatorDefault, kNilOptions);
+		if(kr == KERN_SUCCESS)
+		{
+			NSDictionary *nvramDict = (NSDictionary *)service_properties;
+			NSLog(@"%@", nvramDict);
+
+			if(![nvramDict writeToFile:filePath atomically:YES]) {
+				return -2;
+			}
+			
+			CFRelease(service_properties);
+		}
+		
+		IOObjectRelease(io_service);
 	}
+	
+	IOObjectRelease(io_objects);
+	
+	return 0;
 }
 
-- (int)readNVRAM:(NSString *)filePath {
+- (int)updateNVRAM:(NSString *)filePath {
+	kern_return_t   kr;
+	io_iterator_t   io_objects;
+	io_service_t    io_service;
+	
+	//CFMutableDictionaryRef child_props;
+	CFMutableDictionaryRef service_properties;
+	
+	kr = IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceMatching("IODTNVRAM"), &io_objects);
+	
+	if(kr != KERN_SUCCESS)
+		return -1;
+	
+	while((io_service= IOIteratorNext(io_objects)))
+	{
+		kr = IORegistryEntryCreateCFProperties(io_service, &service_properties, kCFAllocatorDefault, kNilOptions);
+		if(kr == KERN_SUCCESS)
+		{
+			NSMutableDictionary *nvramDict = (NSMutableDictionary *)service_properties;
+			NSLog(@"%@", nvramDict);
+			
+			NSDictionary *updateDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+			
+			[nvramDict setDictionary:updateDict];
+			
+			IORegistryEntrySetCFProperties(io_service, service_properties);
+			
+			CFRelease(service_properties);
+		}
+		
+		IOObjectRelease(io_service);
+	}
+	
+	IOObjectRelease(io_objects);
+	
+	return 0;
+}
+
+- (int)parseNVRAM:(NSString *)filePath {
 	NSString *opibCompatibleVersion = @"0.1";
 	NSString *opibTempOSVersion = @"0.1.1";
 	commonData* sharedData = [commonData sharedData];
@@ -92,7 +128,7 @@
 	return 0;
 }
 
-- (int)writeNVRAM:(NSString *)filePath withMode:(int)mode {
+- (int)generateNVRAM:(NSString *)filePath withMode:(int)mode {
 	commonData* sharedData = [commonData sharedData];
 	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
 	

@@ -11,7 +11,7 @@
 
 @implementation getFile
 
-@synthesize getFileURL, getFileDir, getFileConnection, getFileRequestData, getFileWorking, getFileSuggestedName, getFilePath;
+@synthesize getFileURL, getFileDir, getFileConnection, getFileRequestData, getFileWorking, getFileSuggestedName, getFilePath, dataTotal, dataGot, progress;
 
 - (id)initWithUrl:(NSString *)fileURL directory:(NSString *)dirPath {
 	self = [super init];
@@ -51,14 +51,30 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [getFileRequestData setLength:0];
+	commonData* sharedData = [commonData sharedData];
 	
-	getFileSuggestedName = [response suggestedFilename];
-	self.getFilePath = [getFileDir stringByAppendingPathComponent:getFileSuggestedName];
-	[getFileRequestData writeToFile:self.getFilePath atomically:YES];
+	if ([response respondsToSelector:@selector(statusCode)]) {
+		int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+		if (statusCode >= 400) {
+			if(sharedData.updateStage == 1) {
+				sharedData.updateFail = 1;
+			} else {
+				sharedData.updateFail = 6;
+			}
+		} else {
+			[getFileRequestData setLength:0];
+			
+			getFileSuggestedName = [response suggestedFilename];
+			self.getFilePath = [getFileDir stringByAppendingPathComponent:getFileSuggestedName];
+			[getFileRequestData writeToFile:self.getFilePath atomically:YES];
+	
+			dataTotal = [response expectedContentLength];
+		}
+	}
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	id installInstance = [installClass new];
 	[getFileRequestData appendData:data];
 	
 	if([getFileRequestData length] > 2621440) {
@@ -69,13 +85,23 @@
 			
 		[getFileRequestData setLength:0];
 	}
+	
+	dataGot += [data length];
+	progress = (float) dataGot / dataTotal;
+	progress = progress*0.3;
+	
+	NSNumber *prog = [NSNumber numberWithFloat:progress];
+	
+	[installInstance performSelectorOnMainThread:@selector(updateProgress:) withObject:prog waitUntilDone:YES];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [getFileRequestData release];
+	commonData* sharedData = [commonData sharedData];
 	
     NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	getFileWorking = NO;
+	sharedData.updateFail = 1;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -89,12 +115,6 @@
 		[fh closeFile];
 		
 		[getFileRequestData release];
-		
-		if ([currentDelegate respondsToSelector:@selector(getFileReady:)])
-		{
-			// Call the delegate method and pass ourselves along.
-			[currentDelegate getFileReady:self];
-		}
 		
 		getFileWorking = NO;
 	}	

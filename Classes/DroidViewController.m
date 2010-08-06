@@ -10,7 +10,7 @@
 
 @implementation DroidViewController
 
-@synthesize tableView, tableRows, viewInitQueue, cfuSpinner, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
+@synthesize tableView, tableRows, viewInitQueue, cfuSpinner, installProgress, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
 
 /*
  - (id)initWithStyle:(UITableViewStyle)style {
@@ -26,7 +26,7 @@
 	
 	Class $UIGlassButton = objc_getClass("UIGlassButton");
 	
-	id commonInstance = [commonFunctions new];
+	id installInstance = [installClass new];
 	commonData* sharedData = [commonData sharedData];
 	
 	//Setup table and contents	
@@ -49,7 +49,7 @@
 	installIdroidButton = [[$UIGlassButton alloc] initWithFrame:CGRectMake(90, 242, 220, 50)];
 	[installIdroidButton setTitle:@"Install" forState:UIControlStateNormal];
 	installIdroidButton.tintColor = [UIColor colorWithRed:0.024 green:0.197 blue:0.419 alpha:1.000];
-	[installIdroidButton addTarget:self action:@selector(installIdroid:) forControlEvents:UIControlEventTouchUpInside];
+	[installIdroidButton addTarget:self action:@selector(installPress:) forControlEvents:UIControlEventTouchUpInside];
 	[installIdroidButton setEnabled:NO];
 	[self.view addSubview:installIdroidButton];
 	
@@ -57,19 +57,23 @@
 	removeIdroidButton = [[$UIGlassButton alloc] initWithFrame:CGRectMake(90, 305, 220, 50)];
 	[removeIdroidButton setTitle:@"Remove" forState:UIControlStateNormal];
 	removeIdroidButton.tintColor = [UIColor colorWithRed:0.556 green:0.000 blue:0.000 alpha:1.000];
-	[removeIdroidButton addTarget:self action:@selector(removeIdroid:) forControlEvents:UIControlEventTouchUpInside];
+	[removeIdroidButton addTarget:self action:@selector(removePress:) forControlEvents:UIControlEventTouchUpInside];
 	[removeIdroidButton setHidden:YES];
 	[self.view addSubview:removeIdroidButton];
 	
-	[commonInstance checkInstalled];
+	[installInstance checkInstalled];
 	
 	tableRows = [[NSMutableArray alloc] init];
 	
 	if(sharedData.installed) {
+		NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+		[dateFormat setDateFormat:@"dd-MM-yyyy"];
+		NSString *dateString = [dateFormat stringFromDate:sharedData.installedDate];
+		
 		NSDictionary *installedSection = [NSDictionary dictionaryWithObject:[NSMutableArray arrayWithObjects:
 																			 [NSMutableArray arrayWithObjects:@"iDroid Version:", sharedData.installedVer, nil],
 																			 [NSMutableArray arrayWithObjects:@"Android Version:", sharedData.installedAndroidVer, nil],
-																			 [NSMutableArray arrayWithObjects:@"Date Installed:", sharedData.installedDate, nil],
+																			 [NSMutableArray arrayWithObjects:@"Date Installed:", dateString, nil],
 																			 nil]
 																	 forKey:@"Installed"];
 		[tableRows addObject:installedSection];
@@ -104,28 +108,18 @@
 }
 
 - (void)callUpdate {
-	id commonInstance = [commonFunctions new];
+	id installInstance = [installClass new];
 	
-	[commonInstance checkForUpdates];
+	[installInstance checkForUpdates];
 	
 	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:YES];
 }
 
 - (void)callInstall {
-	id commonInstance = [commonFunctions new];
-	//***********************************************
-	commonData* sharedData = [commonData sharedData];
-	//***********************************************
+	id installInstance = [installClass new];
 	
-	[commonInstance idroidInstall];
-	
-	//**************************************
-	sharedData.installed = YES;
-	sharedData.installedVer = @"0.2";
-	sharedData.installedAndroidVer = @"1.6";
-	sharedData.installedDate = @"20/05/10";
-	//**************************************
-	
+	[installInstance idroidInstall];
+
 	[self performSelectorOnMainThread:@selector(refreshStatus) withObject:nil waitUntilDone:YES];
 	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:YES];
 }
@@ -135,15 +129,9 @@
 }
 
 - (void)callRemove {
-	id commonInstance = [commonFunctions new];
-	commonData* sharedData = [commonData sharedData];
+	id installInstance = [installClass new];
 	
-	[commonInstance idroidRemove];
-	
-	sharedData.installed = NO;
-	sharedData.installedVer = nil;
-	sharedData.installedAndroidVer = nil;
-	sharedData.installedDate = nil;
+	[installInstance idroidRemove];
 	
 	[self performSelectorOnMainThread:@selector(refreshStatus) withObject:nil waitUntilDone:YES];
 	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:NO];
@@ -152,13 +140,15 @@
 - (void)refreshStatus {
 	commonData* sharedData = [commonData sharedData];
 	
-	NSLog(@"%d", sharedData.installed);
-	
 	if(sharedData.installed) {
+		NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+		[dateFormat setDateFormat:@"dd-MM-yyyy"];
+		NSString *dateString = [dateFormat stringFromDate:sharedData.installedDate];
+
 		NSDictionary *installedSection = [NSDictionary dictionaryWithObject:[NSMutableArray arrayWithObjects:
 																			 [NSMutableArray arrayWithObjects:@"iDroid Version:", sharedData.installedVer, nil],
 																			 [NSMutableArray arrayWithObjects:@"Android Version:", sharedData.installedAndroidVer, nil],
-																			 [NSMutableArray arrayWithObjects:@"Date Installed:", sharedData.installedDate, nil],
+																			 [NSMutableArray arrayWithObjects:@"Date Installed:", dateString, nil],
 																			 nil]
 																	 forKey:@"Installed"];
 		[tableRows replaceObjectAtIndex:0 withObject:installedSection];
@@ -181,7 +171,7 @@
 		
 		//Setup buttons
 		[installIdroidButton setTitle:@"Install" forState:UIControlStateNormal];
-		[installIdroidButton addTarget:self action:@selector(installIdroid:) forControlEvents:UIControlEventTouchUpInside];
+		[installIdroidButton addTarget:self action:@selector(installPress:) forControlEvents:UIControlEventTouchUpInside];
 		[installIdroidButton setEnabled:YES];
 		[installIdroidImage setEnabled:YES];
 		[removeIdroidButton setHidden:YES];
@@ -198,7 +188,11 @@
 	[cfuSpinner stopAnimating];
 	[cfuSpinner release];
 	
-	if([sharedData.updateVer isEqualToString: sharedData.installedVer]) {
+	if(!sharedData.updateAvailable) {
+		[latestVersionButton setTitle:@"iDroid unavailable for this device" forState:UIControlStateNormal];
+		[installIdroidButton setEnabled:NO];
+		[installIdroidImage setEnabled:NO];
+	} else if([sharedData.updateVer isEqualToString: sharedData.installedVer]) {
 		[latestVersionButton setTitle:@"Latest Version Installed" forState:UIControlStateNormal];
 		[installIdroidButton setEnabled:NO];
 		[installIdroidImage setEnabled:NO];
@@ -230,34 +224,34 @@
     [getUpdate release];
 }
 
-- (IBAction)installIdroid:(id)sender {
-	[latestVersionButton setTitle:@"" forState:UIControlStateNormal];
-	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	[cfuSpinner setCenter:CGPointMake(140, 18)];
-	[cfuSpinner startAnimating];
-	[latestVersionButton addSubview:cfuSpinner];
-	
-	NSDictionary *installedSection = [NSDictionary dictionaryWithObject:[NSMutableArray arrayWithObjects:
-																		 [NSMutableArray arrayWithObjects:@"iDroid Version:", @"loading", nil],
-																		 [NSMutableArray arrayWithObjects:@"Android Version:", @"loading", nil],
-																		 [NSMutableArray arrayWithObjects:@"Date Installed:", @"loading", nil],
-																		 nil]
-																 forKey:@"Installed"];
-	[tableRows replaceObjectAtIndex:0 withObject:installedSection];
-	
-	[self.tableView reloadData];
-	
-	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callInstall) object:nil];
-	
-	[viewInitQueue addOperation:getInstall];
-    [getInstall release];
+- (IBAction)installPress:(id)sender {
+	if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/android.img.gz"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/zImage"]) {
+		UIActionSheet *confirmInstall = [[UIActionSheet alloc] initWithTitle:@"Warning: this will destroy and overwrite any existing iDroid install." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
+		confirmInstall.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		confirmInstall.tag = 10;
+		[confirmInstall showInView:self.view];
+		[confirmInstall release];
+	} else {
+		[self installIdroid];
+	}
+}
+
+- (IBAction)removePress:(id)sender {
+	UIActionSheet *confirmRemove = [[UIActionSheet alloc] initWithTitle:@"Are you sure you wish to remove iDroid?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove" otherButtonTitles:nil];
+	confirmRemove.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	confirmRemove.tag = 20;
+	[confirmRemove showInView:self.view];
+	[confirmRemove release];
 }
 
 - (IBAction)upgradeIdroid:(id)sender {
 	//This will be implemented in V1.1.1 or later due to upgrade procedure being unknown currently
 }
 
-- (IBAction)removeIdroid:(id)sender {
+- (void)installIdroid {
+	commonData* sharedData = [commonData sharedData];
+	id commonInstance = [commonFunctions new];
+	
 	[latestVersionButton setTitle:@"" forState:UIControlStateNormal];
 	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[cfuSpinner setCenter:CGPointMake(140, 18)];
@@ -274,10 +268,142 @@
 	
 	[self.tableView reloadData];
 	
+	UIAlertView *installView;
+	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\n\rDownloading iDroid" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	[installView show];
+	
+	UIActivityIndicatorView *installSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[installSpinner setCenter:CGPointMake(140, 63)];
+	[installSpinner startAnimating];
+	[installView addSubview:installSpinner];
+	
+	installProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(30, 130, 225, 90)];
+    [installView addSubview:installProgress];
+    [installProgress setProgressViewStyle: UIProgressViewStyleBar];
+	
+	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callInstall) object:nil];
+	
+	[viewInitQueue addOperation:getInstall];
+    [getInstall release];
+	
+	BOOL keepAlive = YES;
+	
+	do {        
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+        installProgress.progress = sharedData.updateProgress;
+		if (sharedData.updateProgress == 1) {
+			keepAlive = NO;
+		}
+		switch (sharedData.updateStage) {
+			case 2:
+				installView.message = @"\n\rDecompressing Files";
+				break;
+			case 3:
+				installView.message = @"\n\rExtracting Files";
+				break;
+			case 4:
+				installView.message = @"\n\rResolving Dependencies";
+				break;
+			default:
+				break;
+		}
+		switch (sharedData.updateFail) {
+			case 0:
+				break;
+			case 1:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\niDroid could not be downloaded."];
+				keepAlive = NO;
+				break;
+			case 2:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nFile decompression failed."];
+				keepAlive = NO;
+				break;
+			case 3:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nArchive extraction failed."];
+				keepAlive = NO;
+				break;
+			case 4:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nFiles could not be moved."];
+				keepAlive = NO;
+				break;
+			case 5:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nMultitouch firmware could not be acquired."];
+				keepAlive = NO;
+				break;
+			case 6:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nWiFi firmware could not be retrieved."];
+				keepAlive = NO;
+				break;
+			case 7:
+				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nInstallation manifest could not be generated."];
+				keepAlive = NO;
+				break;
+			default:
+				break;
+		}
+    } while (keepAlive);
+
+	[installView dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+- (void)removeIdroid {
+	commonData* sharedData = [commonData sharedData];
+	
+	[latestVersionButton setTitle:@"" forState:UIControlStateNormal];
+	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[cfuSpinner setCenter:CGPointMake(140, 18)];
+	[cfuSpinner startAnimating];
+	[latestVersionButton addSubview:cfuSpinner];
+	
+	NSDictionary *installedSection = [NSDictionary dictionaryWithObject:[NSMutableArray arrayWithObjects:
+																		 [NSMutableArray arrayWithObjects:@"iDroid Version:", @"loading", nil],
+																		 [NSMutableArray arrayWithObjects:@"Android Version:", @"loading", nil],
+																		 [NSMutableArray arrayWithObjects:@"Date Installed:", @"loading", nil],
+																		 nil]
+																 forKey:@"Installed"];
+	[tableRows replaceObjectAtIndex:0 withObject:installedSection];
+	
+	[self.tableView reloadData];
+	
+	UIAlertView *removeView;
+	removeView = [[[UIAlertView alloc] initWithTitle:@"Removing..." message:@"\n\rUninstalling iDroid" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	[removeView show];
+	
+	UIActivityIndicatorView *removeSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[removeSpinner setCenter:CGPointMake(140, 63)];
+	[removeSpinner startAnimating];
+	[removeView addSubview:removeSpinner];
+	
 	NSInvocationOperation *getRemove = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callRemove) object:nil];
 	
 	[viewInitQueue addOperation:getRemove];
     [getRemove release];
+	
+	do {        
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+	} while (sharedData.installed);
+	
+	[removeView dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch (actionSheet.tag) {
+		case 10:
+			[self performSelectorOnMainThread:@selector(installIdroid) withObject:nil waitUntilDone:NO];
+			break;
+		case 20:
+			[self performSelectorOnMainThread:@selector(removeIdroid) withObject:nil waitUntilDone:NO];
+			break;
+		default:
+			break;
+	}
 }
 
 /*

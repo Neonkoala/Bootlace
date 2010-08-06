@@ -33,10 +33,16 @@
 	BOOL isDir;
 	
 	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.workingDirectory isDirectory:&isDir]) {
-		if(![[NSFileManager defaultManager] createDirectoryAtPath:sharedData.workingDirectory attributes:nil]) {
+		if(![[NSFileManager defaultManager] createDirectoryAtPath:sharedData.workingDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
 			NSLog(@"Error: Create Bootlace working folder failed");
 		}
 	}
+	
+	//Dump nvram stuffs
+	sharedData.opibWorkingPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist"];
+	sharedData.opibBackupPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist.backup"];
+
+	[commonInstance initNVRAM];
 	
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
