@@ -87,8 +87,9 @@
 	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr2"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]];
-		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_cal.bin"]];
-		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_proxcal.bin"]];
+	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr2"]) {
+		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"]];
+		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"]];
 	}
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
@@ -266,7 +267,6 @@
 	commonData* sharedData = [commonData sharedData];
 	if(sharedData.updateStage < 4) {
 		sharedData.updateProgress = [progress floatValue];
-		NSLog(@"Progress: %f", [progress floatValue]);
 	}
 }
 
@@ -283,7 +283,7 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
+	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {

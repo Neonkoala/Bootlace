@@ -16,10 +16,8 @@
 			<string>2.2</string>
 			<key>ReleaseDate</key>
 			<date>2010-08-04T19:00:00Z</date>
-			<key>RealURL</key>
-			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0.1-MoJo-2G.tar.gz</string>
 			<key>URL</key>
-			<string>http://192.168.0.14/~neonkoala/iDroid-1.0.1-MoJo-2G.tar.gz</string>
+			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0.1-MoJo-2G.tar.gz</string>
 			<key>Size</key>
 			<string>159723520</string>
 			<key>Clean</key>

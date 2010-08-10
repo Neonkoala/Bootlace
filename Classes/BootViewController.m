@@ -10,7 +10,7 @@
 
 @implementation BootViewController
 
-@synthesize quickBootAboutView, quickBootDisabledView, doneButton, flipButton, androidRebootButton, consoleRebootButton, androidRebootLabel, consoleRebootLabel;
+@synthesize quickBootAboutView, quickBootDisabledView, quickBootWebView, doneButton, flipButton, androidRebootButton, consoleRebootButton, androidRebootLabel, consoleRebootLabel;
 
 
 - (void)flipAction:(id)sender
@@ -121,6 +121,9 @@
 			 [commonInstance sendError:@"Unknown error occurred."];
 			 [self disableQuickboot];
 	 }
+	 
+	 [quickBootWebView setBackgroundColor:[UIColor clearColor]];
+	 [quickBootWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"]isDirectory:NO]]];
  }
 
 

@@ -14,6 +14,7 @@
 @interface BootViewController : UIViewController {
 	UIView *quickBootAboutView;
 	UIView *quickBootDisabledView;
+	UIWebView *quickBootWebView;
 	UIBarButtonItem *doneButton;
 	UIBarButtonItem *flipButton;
 	UIButton *androidRebootButton;
@@ -24,6 +25,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *quickBootAboutView;
 @property (nonatomic, retain) IBOutlet UIView *quickBootDisabledView;
+@property (nonatomic, retain) IBOutlet UIWebView *quickBootWebView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *flipButton;
 @property (nonatomic, retain) IBOutlet UIButton *androidRebootButton;
