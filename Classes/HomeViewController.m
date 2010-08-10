@@ -92,7 +92,7 @@
 		sharedData.firstLaunchVal = NO;
 	}
 	
-	if(![sharedData.platform isEqualToString:@"iPhone1,1"] && ![sharedData.platform isEqualToString:@"iPhone1,2"] && ![sharedData.platform isEqualToString:@"iPod1,1"]) {
+	if(![sharedData.platform isEqualToString:@"iPhone1,1"] && ![sharedData.platform isEqualToString:@"iPhone1,2"]/* && ![sharedData.platform isEqualToString:@"iPod1,1"]*/) {
 		[commonInstance sendTerminalError:@"Bootlace is not compatible with this device.\r\nAborting..."];
 	}
 }

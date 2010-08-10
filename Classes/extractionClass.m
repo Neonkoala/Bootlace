@@ -61,6 +61,7 @@
 
 - (int)extractTar:(NSString *)sourcePath toDest:(NSString *)destDir {
 	id installInstance = [installClass new];
+	commonData *sharedData = [commonData sharedData];
 	int done = 0;
 		
 	NSString *destPath;
@@ -95,6 +96,9 @@
 
 			while (true) {
 				size = archive_read_data(tar, buffer, length);
+				done += size;
+				float progress = (((float) done/sharedData.updateSize)*0.3)+0.6;
+				[installInstance updateProgress:[NSNumber numberWithFloat:progress]];
 				if (size > 0) {
 					fwrite(buffer, size, 1, dest);
 				} else if (size == 0) {
@@ -106,9 +110,6 @@
 			}
 			fclose(dest);
 		}
-		done += 1;
-		float progress = ((float)done*(0.3/13))+0.6;
-		[installInstance updateProgress:[NSNumber numberWithFloat:progress]];
 	}
 	result = archive_read_finish(tar);
 	if (result != ARCHIVE_OK) {

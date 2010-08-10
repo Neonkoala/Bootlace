@@ -92,9 +92,6 @@
 	 
 	 switch(sharedData.opibInitStatus) {
 		 case 0:
-			 if(sharedData.opibTempOSDisabled==1) {
-				 [self disableQuickboot];
-			 }
 			 break;
 		 case 1:
 			 [commonInstance sendConfirmation:@"Some required openiboot settings are missing.\r\nWould you like to generate them now?" withTag:8];

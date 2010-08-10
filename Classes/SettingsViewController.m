@@ -119,23 +119,25 @@
 			[commonInstance sendSuccess:@"Openiboot settings successfully applied."];
 			break;
 		case -1:
-			[commonInstance sendError:@"Your openiboot settings could not be applied. NVRAM dump does not exist."];
+			[commonInstance sendError:@"Your openiboot settings could not be applied.\r\nNVRAM could not be accessed."];
 			break;
 		case -2:
-			[commonInstance sendError:@"Your openiboot settings could not be applied. Data is invalid."];
-			break;
-		case -3:
-			[commonInstance sendError:@"Your openiboot settings could not be applied. Could not remove old NVRAM dump."];
-			break;
-		case -4:
-			[commonInstance sendError:@"Your openiboot settings could not be applied. New settings could not be written to file."];
-			break;
-		case -5:
-			[commonInstance sendError:@"Your openiboot settings could not be applied. New settings could not be written to NVRAM."];
+			[commonInstance sendError:@"Your openiboot settings could not be applied.\r\nNVRAM configuration invalid."];
 			break;
 		default:
 			break;
 	}
+}
+
+- (void)disableOpibSettings {
+	applyButton.enabled = NO;
+	iphoneosImage.enabled = NO;
+	androidImage.enabled = NO;
+	consoleImage.enabled = NO;
+	iphoneosLabel.alpha = 0.4;
+	switchCtl.enabled = NO;
+	sliderCtl.enabled = NO;
+	linkButton.enabled = NO;
 }
 
 - (IBAction) tapIphoneos:(id)sender {
@@ -177,6 +179,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	id commonInstance = [commonFunctions new];
 	
 	self.navigationItem.rightBarButtonItem = applyButton;
 	
@@ -223,22 +227,113 @@
 			iphoneosLabel.alpha = 1.0;
 			NSLog(@"Default OS setting invalid. Defaulting to iPhone OS.");
 	}
-	
+	NSLog(@"%@", sharedData.opibTimeout);
 	if(([sharedData.opibTimeout intValue]/1000)==0){
 		switchCtl.on = NO;
 		sliderCtl.enabled = NO;
 	} else {
 		switchCtl.on = YES;
 		sliderCtl.enabled = YES;
-	}	
+	}
+	
+	switch(sharedData.opibInitStatus) {
+		case 0:
+			break;
+		case 1:
+			[commonInstance sendConfirmation:@"Some required openiboot settings are missing.\r\nWould you like to generate them now?" withTag:8];
+			[self disableOpibSettings];
+			break;
+		case -1:
+			[commonInstance sendError:@"NVRAM backup failed.\r\nNVRAM could not be accessed."];
+			[self disableOpibSettings];
+			break;
+		case -2:
+			[commonInstance sendError:@"NVRAM backup failed.\r\nBackup could not be saved to disk."];
+			[self disableOpibSettings];
+			break;
+		case -3:
+			[commonInstance sendError:@"NVRAM could not be accessed."];
+			[self disableOpibSettings];
+			break;
+		case -4:
+			[commonInstance sendError:@"NVRAM configuration invalid."];
+			[self disableOpibSettings];
+			break;
+		case -5:
+			[commonInstance sendError:@"OpeniBoot is not installed or is incompatible."];
+			[self disableOpibSettings];
+			break;
+		default:
+			[commonInstance sendError:@"Unknown error occurred."];
+			[self disableOpibSettings];
+	}
 }
 
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
+	commonData *sharedData = [commonData sharedData];
+	
+	if(sharedData.opibInitStatus==0) {
+		applyButton.enabled = YES;
+		iphoneosImage.enabled = YES;
+		androidImage.enabled = YES;
+		consoleImage.enabled = YES;
+		switchCtl.enabled = YES;
+		sliderCtl.enabled = YES;
+		linkButton.enabled = YES;
+	
+		sliderCtl.value = [sharedData.opibTimeout intValue] / 1000;	
+		labelWithVar.text = [NSString stringWithFormat:@"%d", [sharedData.opibTimeout intValue] / 1000];
+		labelWithVar.text = [labelWithVar.text stringByAppendingString:@" Seconds"];
+	
+		switch ([sharedData.opibDefaultOS intValue]) {
+			case 0:
+				iphoneosImage.alpha = 1.0;
+				iphoneosLabel.alpha = 1.0;
+				androidImage.alpha = 0.4;
+				androidLabel.alpha = 0.4;
+				consoleImage.alpha = 0.4;
+				consoleLabel.alpha = 0.4;
+				break;
+			case 1:
+				iphoneosImage.alpha = 0.4;
+				iphoneosLabel.alpha = 0.4;
+				androidImage.alpha = 1.0;
+				androidLabel.alpha = 1.0;
+				consoleImage.alpha = 0.4;
+				consoleLabel.alpha = 0.4;
+				break;
+			case 2:
+				iphoneosImage.alpha = 0.4;
+				iphoneosLabel.alpha = 0.4;
+				androidImage.alpha = 0.4;
+				androidLabel.alpha = 0.4;
+				consoleImage.alpha = 1.0;
+				consoleLabel.alpha = 1.0;
+				break;
+				
+			default:
+				iphoneosImage.alpha = 1.0;
+				iphoneosLabel.alpha = 1.0;
+				androidImage.alpha = 0.4;
+				androidLabel.alpha = 0.4;
+				consoleImage.alpha = 0.4;
+				consoleLabel.alpha = 0.4;
+				NSLog(@"Default OS setting invalid. Defaulting to iPhone OS.");
+		}
+		
+		if(([sharedData.opibTimeout intValue]/1000)==0){
+			switchCtl.on = NO;
+			sliderCtl.enabled = NO;
+		} else {
+			switchCtl.on = YES;
+			sliderCtl.enabled = YES;
+		}
+	}
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

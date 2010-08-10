@@ -283,7 +283,7 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
+	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {
@@ -355,14 +355,22 @@
 }
 
 - (int)dumpMultitouch {
-	int success;
 	commonData* sharedData = [commonData sharedData];
 	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr2"]) {	
 		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]]) {
 			NSLog(@"Dumping zephyr2 multitouch.");
 		
-			NSDictionary *mtprops = [NSDictionary dictionaryWithContentsOfFile:@"/private/var/stash/share/firmware/multitouch/iPhone.mtprops"];
+			NSString *match = @"share*";
+			NSString *stashPath = @"/private/var/stash";
+			
+			NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/private/var/stash" error:nil];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+			NSArray *results = [dirContents filteredArrayUsingPredicate:predicate];
+			
+			stashPath = [stashPath stringByAppendingPathComponent:[results objectAtIndex:0]];
+			NSDictionary *mtprops = [NSDictionary dictionaryWithContentsOfFile:[stashPath stringByAppendingPathComponent:@"firmware/multitouch/iPhone.mtprops"]];
+			
 			NSDictionary *z2dict = [mtprops objectForKey:@"Z2F52,1"];
 			NSData *z2bin = [z2dict objectForKey:@"Constructed Firmware"];
 		
@@ -370,54 +378,38 @@
 				return -1;
 			}
 		}
-		//Get calibration data from ioreg
-		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_cal.bin"]] || ![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_proxcal.bin"]]) {
-			success = [self dumpIOReg];
-			if(success < 0) {
+	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr"]) {
+		NSString *match = @"share*";
+		NSString *stashPath = @"/private/var/stash";
+		
+		NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/private/var/stash" error:nil];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+		NSArray *results = [dirContents filteredArrayUsingPredicate:predicate];
+		
+		stashPath = [stashPath stringByAppendingPathComponent:[results objectAtIndex:0]];
+		NSDictionary *mtprops = [NSDictionary dictionaryWithContentsOfFile:[stashPath stringByAppendingPathComponent:@"firmware/multitouch/iPhone.mtprops"]];
+		
+		NSDictionary *z1dict = [mtprops objectForKey:@"Z1F50,1"];
+		
+		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"]]) {
+			NSLog(@"Dumping zephyr main multitouch.");
+			
+			NSData *z1main = [z1dict objectForKey:@"Firmware"];
+			
+			if(![z1main writeToFile:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"] atomically:YES]) {
 				return -2;
 			}
 		}
+		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"]]) {
+			NSLog(@"Dumping zephyr aspeed multitouch.");
+			
+			NSData *z1aspeed = [z1dict objectForKey:@"A-Speed Firmware"];
+			
+			if(![z1aspeed writeToFile:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"] atomically:YES]) {
+				return -3;
+			}
+		}			
 	}
-	
-	return 0;
-}
-
-- (int)dumpIOReg {
-	commonData* sharedData = [commonData sharedData];
-	
-	kern_return_t   kr;
-	io_iterator_t   io_objects;
-	io_service_t    io_service;
-	
-	//CFMutableDictionaryRef child_props;
-	CFMutableDictionaryRef service_properties;
-	
-	kr = IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceNameMatching("AppleMultitouchZ2SPI"), &io_objects);
-	
-	if(kr != KERN_SUCCESS)
-		return -1;
-	
-	while((io_service= IOIteratorNext(io_objects)))
-	{
-		kr = IORegistryEntryCreateCFProperties(io_service, &service_properties, kCFAllocatorDefault, kNilOptions);
-		if(kr == KERN_SUCCESS)
-		{
-			NSDictionary * m = (NSDictionary *)service_properties;
-			NSLog(@"%@", m);
-			
-			NSData *zCal = [m objectForKey:@"Calibration Data"];
-			[zCal writeToFile:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_cal.bin"] atomically:YES];
-			
-			NSData *zProxCal = [m objectForKey:@"Prox Calibration Data"];
-			[zProxCal writeToFile:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_proxcal.bin"] atomically:YES];
-			
-			CFRelease(service_properties);
-		}
-		
-		IOObjectRelease(io_service);
-	}
-	
-	IOObjectRelease(io_objects);
 	
 	return 0;
 }

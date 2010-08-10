@@ -39,7 +39,6 @@
 	}
 	
 	//Dump nvram stuffs
-	sharedData.opibWorkingPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist"];
 	sharedData.opibBackupPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist.backup"];
 
 	[commonInstance initNVRAM];
@@ -60,7 +59,6 @@
 - (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed {
 }
 */
-
 
 - (void)dealloc {
     [tabBarController release];

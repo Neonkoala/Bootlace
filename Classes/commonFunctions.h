@@ -27,8 +27,8 @@
 - (void)initNVRAM;
 - (int)rebootAndroid;
 - (int)rebootConsole;
-- (int)backupNVRAM;
-- (int)restoreNVRAM;
+- (int)callBackupNVRAM;
+- (int)callRestoreNVRAM;
 - (int)resetNVRAM;
 - (int)applyNVRAM;
 - (void)getPlatform;

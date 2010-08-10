@@ -16,41 +16,34 @@
 	id nvramInstance = [nvramFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
-	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
-	
-	if(!backupExists) {
-		success = [nvramInstance dumpNVRAM:sharedData.opibBackupPath];
-		if(success==-1) {
-			sharedData.opibInitStatus = -1;
-			return;
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
+		success = [nvramInstance backupNVRAM];
+		
+		switch (success) {
+			case 0:
+				break;
+			case 1:
+				sharedData.opibInitStatus = -1;
+				break;
+			case 2:
+				sharedData.opibInitStatus = -6;
+				break;
+			case 3:
+				sharedData.opibInitStatus = -2;
+				break;
+			default:
+				sharedData.opibInitStatus = -6;
+				break;
 		}
 	}
 	
-	BOOL tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibWorkingPath];
-	
-	if(tempFileExists) {
-		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
-	}
-	
-	success = [nvramInstance dumpNVRAM:sharedData.opibWorkingPath];
-	
-	tempFileExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibWorkingPath];
-	
-	if(success==-1) {
-		sharedData.opibInitStatus = -2;
-		return;
-	} else if(!tempFileExists) {
-		sharedData.opibInitStatus = -3;
-		return;
-	}
-	
-	success = [nvramInstance parseNVRAM:sharedData.opibWorkingPath];
+	success = [nvramInstance dumpNVRAM];
 	
 	switch (success) {
 		case 0:
 			break;
 		case -1:
-			sharedData.opibInitStatus = -4;
+			sharedData.opibInitStatus = -3;
 			return;
 		case -2:
 			sharedData.opibInitStatus = -4;
@@ -75,22 +68,10 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	sharedData.opibTempOS = @"1";
-	
-	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:1];
-	
-	if(success<0) {
-		return success;
-	}
 		
-	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
+	success = [nvramInstance updateNVRAM:1];
 	
-	if(success==-1) {
-		return -5;
-	}
-	
-	[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
-	
-	return 0;
+	return success;
 }
 
 - (int)rebootConsole {
@@ -100,58 +81,30 @@
 	
 	sharedData.opibTempOS = @"2";
 	
-	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:1];
+	success = [nvramInstance updateNVRAM:1];
 	
-	if(success<0) {
-		return success;
-	}
-	
-	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
-	
-	if(success==-1) {
-		return -5;
-	}
-	
-	[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
-	
-	return 0;
+	return success;
 }
 
-- (int)backupNVRAM {
+- (int)callBackupNVRAM {
+	int success;
 	id nvramInstance = [nvramFunctions new];
-	commonData* sharedData = [commonData sharedData];
 	
-	if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.opibBackupPath error:NULL]) {
-		return -1;
-	}
+	success = [nvramInstance backupNVRAM];
 	
-	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
-	
-	if(!backupExists) {
-		int success = [nvramInstance dumpNVRAM:sharedData.opibBackupPath];
-		if(success==-1) {
-			return -2;
-		}
-	}
-	
-	return 0;
+	return success;
 }
 
-- (int)restoreNVRAM {
+- (int)callRestoreNVRAM {
+	int success;
 	id nvramInstance = [nvramFunctions new];
 	id commonInstance = [commonFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
-	BOOL backupExists = [[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath];
+	success = [nvramInstance restoreNVRAM];
 	
-	if(!backupExists) {
-		return -1;
-	}
-	
-	int success = [nvramInstance updateNVRAM:sharedData.opibBackupPath];
-	
-	if(success==-1) {
-		return -2;
+	if(success<0) {
+		return success;
 	}
 	
 	[commonInstance initNVRAM];
@@ -173,24 +126,22 @@
 	sharedData.opibTempOS = @"0";
 	sharedData.opibTimeout = @"10000";
 	
-	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:0];
+	success = [nvramInstance updateNVRAM:0];
 	
 	if(success<0) {
 		return success;
 	}
 	
-	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
-	
-	if(success==-1) {
-		return -5;
+	if([[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
+		if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.opibBackupPath error:nil]) {
+			return -3;
+		}
 	}
-	
-	[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
 	
 	[commonInstance initNVRAM];
 	
 	if(sharedData.opibInitStatus<0){
-		return (sharedData.opibInitStatus - 5);
+		return (sharedData.opibInitStatus - 3);
 	}
 	
 	return 0;
@@ -203,19 +154,9 @@
 	
 	sharedData.opibTempOS = sharedData.opibDefaultOS;
 	
-	success = [nvramInstance generateNVRAM:sharedData.opibWorkingPath withMode:0];
+	success = [nvramInstance updateNVRAM:0];
 	
-	if(success<0) {
-		return success;
-	}
-	
-	success = [nvramInstance updateNVRAM:sharedData.opibWorkingPath];
-	
-	if(success==-1) {
-		return -5;
-	}
-	
-	return 0;
+	return success;
 }
 
 - (void)getPlatform {
@@ -229,14 +170,10 @@
 	sharedData.platform = platform;
     free(machine);
 	
-	/**************************************************************************************
-	 **************************************************************************************
-	 **********   iPhone Simulator debug code, remove me!    *****************************/
-	
+	/**********   iPhone Simulator debug code, remove me!    *****************************/
 	if ([sharedData.platform isEqualToString:@"x86_64"]) {
-		sharedData.platform = @"iPhone1,2";
+		sharedData.platform = @"iPhone1,1";
 	}
-	
 	/*************************************************************************************/
 }
 
@@ -280,11 +217,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	//Fatal error terminate app
     if(alertView.tag == 1) {
-		id nvramInstance = [[nvramFunctions new] autorelease];
-		commonData* sharedData = [commonData sharedData];
-		
-		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
-		
 		exit(0);
     }
 	//Confirm reboot, call android setter
@@ -297,19 +229,10 @@
 				reboot(0);
 				break;
 			case -1:
-				[commonInstance sendError:@"NVRAM configuration dump does not exist. Try restarting the app.\r\nReboot failed."];
+				[commonInstance sendError:@"NVRAM could not be accessed.\r\nReboot failed."];
 				break;
 			case -2:
-				[commonInstance sendError:@"Attempted to write invalid data.\r\nReboot failed."];
-				break;
-			case -3:
-				[commonInstance sendError:@"Could not remove old NVRAM configuration dump.\r\nReboot failed."];
-				break;
-			case -4:
-				[commonInstance sendError:@"Could not write NVRAM configuration to file.\r\nReboot failed."];
-				break;
-			case -5:
-				[commonInstance sendError:@"Could not update NVRAM configuration.\r\nReboot failed."];
+				[commonInstance sendError:@"Attempted to write invalid data to NVRAM.\r\nReboot failed."];
 				break;
 			default:
 				break;
@@ -325,19 +248,10 @@
 				reboot(0);
 				break;
 			case -1:
-				[commonInstance sendError:@"NVRAM configuration dump does not exist. Try restarting the app.\r\nReboot failed."];
+				[commonInstance sendError:@"NVRAM could not be accessed.\r\nReboot failed."];
 				break;
 			case -2:
-				[commonInstance sendError:@"Attempted to write invalid data.\r\nReboot failed."];
-				break;
-			case -3:
-				[commonInstance sendError:@"Could not remove old NVRAM configuration dump.\r\nReboot failed."];
-				break;
-			case -4:
-				[commonInstance sendError:@"Could not write NVRAM configuration to file.\r\nReboot failed."];
-				break;
-			case -5:
-				[commonInstance sendError:@"Could not update NVRAM configuration.\r\nReboot failed."];
+				[commonInstance sendError:@"Attempted to write invalid data to NVRAM.\r\nReboot failed."];
 				break;
 			default:
 				break;
@@ -346,17 +260,20 @@
 	//Confirm backup, create it
 	if(buttonIndex==1 && alertView.tag==4){
 		id commonInstance = [commonFunctions new];
-		int success = [commonInstance backupNVRAM];
+		int success = [commonInstance callBackupNVRAM];
 		
 		switch (success) {
 			case 0:
 				[commonInstance sendSuccess:@"NVRAM configuration successfully backed up."];
 				break;
 			case -1:
-				[commonInstance sendError:@"Old NVRAM backup could not be removed."];
+				[commonInstance sendError:@"Backup failed.\r\nNVRAM could not be accessed."];
 				break;
 			case -2:
-				[commonInstance sendError:@"NVRAM configuration could not be backed up."];
+				[commonInstance sendError:@"Backup failed.\r\nExisting backup could not be removed."];
+				break;
+			case -3:
+				[commonInstance sendError:@"Backup failed.\r\nBackup could not be saved."];
 				break;
 			default:
 				break;
@@ -365,17 +282,17 @@
 	//Confirm restore, restore it
 	if(buttonIndex==1 && alertView.tag==5){
 		id commonInstance = [commonFunctions new];
-		int success = [commonInstance restoreNVRAM];
+		int success = [commonInstance callRestoreNVRAM];
 		
 		switch (success) {
 			case 0:
 				[commonInstance sendSuccess:@"NVRAM configuration successfully restored."];
 				break;
 			case -1:
-				[commonInstance sendError:@"Restore failed. Backup does not exist."];
+				[commonInstance sendError:@"Restore failed.\r\nNVRAM could not be accessed."];
 				break;
 			case -2:
-				[commonInstance sendError:@"Backup could not be restored."];
+				[commonInstance sendError:@"Restore failed.\r\nNVRAM backup could not be read."];
 				break;
 			case -3:
 				[commonInstance sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
@@ -406,51 +323,40 @@
 		
 		switch (success) {
 			case 0:
-				[commonInstance sendSuccess:@"Openiboot settings successfully reset to defaults."];
+				[commonInstance sendSuccess:@"OpeniBoot settings successfully reset to defaults."];
 				break;
 			case -1:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendError:@"OpeniBoot settings could not be reset.\r\nNVRAM could not be accessed."];
 				break;
 			case -2:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendError:@"OpeniBoot settings could not be reset.\r\nInvalid NVRAM configuration."];
 				break;
 			case -3:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
-				break;
+				[commonInstance sendError:@"OpeniBoot settings could not be reset.\r\nExisting NVRAM backup could not be removed."];
+				break;	
 			case -4:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -5:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -6:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -7:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -8:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -9:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -10:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -11:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but an unknown error occurred."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but an unknown error occurred."];
 				break;
 			default:
 				break;
 		}
 	}
 	if(buttonIndex==0 && alertView.tag == 8) {
-		id nvramInstance = [[nvramFunctions new] autorelease];
-		commonData* sharedData = [commonData sharedData];
-		
-		[nvramInstance cleanNVRAM:sharedData.opibWorkingPath];
-				
 		exit(0);
     } else if(buttonIndex==1 && alertView.tag==8) {
 		id commonInstance = [commonFunctions new];
@@ -458,40 +364,34 @@
 		
 		switch (success) {
 			case 0:
-				[commonInstance sendSuccess:@"Openiboot settings successfully reset to defaults."];
+				[commonInstance sendSuccess:@"OpeniBoot settings successfully reset to defaults."];
 				break;
 			case -1:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendError:@"OpeniBoot settings could not be reset.\r\nNVRAM could not be accessed."];
 				break;
 			case -2:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendError:@"OpeniBoot settings could not be reset.\r\nInvalid NVRAM configuration."];
 				break;
 			case -3:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
-				break;
+				[commonInstance sendError:@"OpeniBoot settings could not be reset.\r\nExisting NVRAM backup could not be removed."];
+				break;	
 			case -4:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -5:
-				[commonInstance sendError:@"Openiboot settings could not be reset."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -6:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -7:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -8:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
 				break;
 			case -9:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -10:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -11:
-				[commonInstance sendTerminalError:@"Openiboot settings reset but an unknown error occurred."];
+				[commonInstance sendTerminalError:@"OpeniBoot settings reset but an unknown error occurred."];
 				break;
 			default:
 				break;

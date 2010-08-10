@@ -12,6 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		D73B1E68120DEEBA00B3D9FF /* libarchive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D73B1E67120DEEBA00B3D9FF /* libarchive.a */; };
 		D786909B11BD1E8E00642943 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D786909911BD1E8E00642943 /* SettingsViewController.m */; };
 		D78690B211BD234A00642943 /* DroidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78690AF11BD234A00642943 /* DroidViewController.m */; };
 		D78690B311BD234A00642943 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78690B111BD234A00642943 /* HomeViewController.m */; };
@@ -55,6 +56,7 @@
 		28A0AB4B0D9B1048005BE974 /* BootlaceV2_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootlaceV2_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Bootlace-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bootlace-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D73B1E67120DEEBA00B3D9FF /* libarchive.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libarchive.a; path = ../../Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/lib/libarchive.a; sourceTree = SOURCE_ROOT; };
 		D786909811BD1E8E00642943 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		D786909911BD1E8E00642943 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		D78690AE11BD234A00642943 /* DroidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroidViewController.h; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
+				D73B1E68120DEEBA00B3D9FF /* libarchive.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +151,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				D73B1E67120DEEBA00B3D9FF /* libarchive.a */,
 				D798EA3711F7807400F8EA1D /* libarchive.a */,
 				1D6058910D05DD3D006BFB54 /* BootlaceV2.app */,
 			);
@@ -325,6 +329,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lIOKit",
@@ -352,6 +357,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../../Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lIOKit",
@@ -370,13 +376,15 @@
 				CODE_SIGN_IDENTITY = "Don't Code Sign";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
+					"Headers/**",
 					"$(HOME)/$(SDK_DIR)/include/**",
+					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"Headers/**",
 					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
 					"$(HOME)/$(SDK_DIR)/include/**",
 				);
@@ -384,14 +392,15 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"-larchive",
 					"-ObjC",
+					"-larchive",
 					"-lz",
 				);
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphonesimulator3.1.2;
+				USER_HEADER_SEARCH_PATHS = "/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/**";
 			};
 			name = Debug;
 		};
@@ -402,13 +411,15 @@
 				CODE_SIGN_IDENTITY = "Don't Code Sign";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				FRAMEWORK_SEARCH_PATHS = (
-					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
+					"Headers/**",
 					"$(HOME)/$(SDK_DIR)/include/**",
+					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"Headers/**",
 					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
 					"$(HOME)/$(SDK_DIR)/include/**",
 				);
@@ -416,14 +427,15 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"-larchive",
 					"-ObjC",
+					"-larchive",
 					"-lz",
 				);
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphonesimulator3.1.2;
+				USER_HEADER_SEARCH_PATHS = "/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/**";
 			};
 			name = Release;
 		};

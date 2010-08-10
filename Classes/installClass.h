@@ -32,7 +32,6 @@
 - (void)updateProgress:(NSNumber *)progress;
 - (int)relocateFiles;
 - (int)dumpMultitouch;
-- (int)dumpIOReg;
 - (int)dumpWiFi;
 
 @end

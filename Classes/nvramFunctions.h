@@ -14,10 +14,9 @@
 
 }
 
-- (int)dumpNVRAM:(NSString *)filePath;
-- (int)updateNVRAM:(NSString *)filePath;
-- (int)parseNVRAM:(NSString *)filePath;
-- (int)generateNVRAM:(NSString *)filePath withMode:(int)mode;
-- (void)cleanNVRAM:(NSString *)filePath;
+- (int)dumpNVRAM;
+- (int)updateNVRAM:(int)mode;
+- (int)backupNVRAM;
+- (int)restoreNVRAM;
 
 @end

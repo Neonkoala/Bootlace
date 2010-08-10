@@ -16,8 +16,7 @@
 	NSString *workingDirectory;
 	
 	int opibInitStatus;
-	int opibTempOSDisabled;
-	NSString *opibWorkingPath;
+	NSMutableDictionary *opibDict;
 	NSString *opibBackupPath;
 	NSString *opibVersion;
 	NSString *opibTimeout;
@@ -55,8 +54,7 @@
 @property (nonatomic, retain) NSString *workingDirectory;
 
 @property (nonatomic, assign) int opibInitStatus;
-@property (nonatomic, assign) int opibTempOSDisabled;
-@property (nonatomic, retain) NSString *opibWorkingPath;
+@property (nonatomic, retain) NSMutableDictionary *opibDict;
 @property (nonatomic, retain) NSString *opibBackupPath;
 @property (nonatomic, retain) NSString *opibVersion;
 @property (nonatomic, retain) NSString *opibTimeout;

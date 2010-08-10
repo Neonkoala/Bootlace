@@ -6,11 +6,11 @@ INSTALLFOLDER=$(PROJECTNAME).app
 
 IPHONE_IP=192.168.0.9
 
-SDKVER=4.0
-SDK=/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(SDKVER).sdk
+SDKVER=3.1.2
+SDK=/SDK/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(SDKVER).sdk
 
-CC=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin10-gcc-4.2.1
-CPP=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin10-g++-4.2.1
+CC=/SDK/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin9-gcc-4.2.1
+CPP=/SDK/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin9-g++-4.2.1
 LD=$(CC)
 
 LDFLAGS += -framework CoreFoundation 
@@ -36,17 +36,18 @@ LDFLAGS += -L"$(SDK)/usr/lib"
 LDFLAGS += -F"$(SDK)/System/Library/Frameworks"
 LDFLAGS += -F"$(SDK)/System/Library/PrivateFrameworks"
 
-CFLAGS += -I"/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/gcc/arm-apple-darwin10/4.2.1/include/"
+CFLAGS += -I"/SDK/Platforms/iPhoneOS.platform/Developer/usr/lib/gcc/arm-apple-darwin9/4.2.1/include/"
 CFLAGS += -I"$(SDK)/usr/include"
-CFLAGS += -I"/Developer/Platforms/iPhoneOS.platform/Developer/usr/include/"
-CFLAGS += -I/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$(SDKVER).sdk/usr/include
+CFLAGS += -I"/SDK/Platforms/iPhoneOS.platform/Developer/usr/include/"
+CFLAGS += -I/SDK/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator$(SDKVER).sdk/usr/include
 CFLAGS += -I/Users/neonkoala/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(SDKVER).sdk/include
 LDFLAGS += -lz
-LDFLAGS += -larchive
+LDFLAGS += /Users/neonkoala/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.2.sdk/lib/libarchive.a
+//LDFLAGS += -larchive
 LDFLAGS += -lIOKit
 CFLAGS += -IHeaders
 CFLAGS += -DDEBUG -std=c99
-CFLAGS += -Diphoneos_version_min=4.0
+CFLAGS += -Diphoneos_version_min=3.1.2
 CFLAGS += -F"$(SDK)/System/Library/Frameworks"
 CFLAGS += -F"$(SDK)/System/Library/PrivateFrameworks"
 CFLAGS += -I"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362"
@@ -89,7 +90,7 @@ dist:	$(PROJECTNAME) $(NIBS)
 	cp Bootlace_ $(BUILDDIR)/$(APPFOLDER)/Bootlace_
 	@echo "APPL????" > $(BUILDDIR)/$(APPFOLDER)/PkgInfo
 	mv $(NIBS) $(BUILDDIR)/$(APPFOLDER)
-	export CODESIGN_ALLOCATE=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate;
+	export CODESIGN_ALLOCATE=/SDK/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate;
 	./ldid_intel -S $(PROJECTNAME)
 	mv $(PROJECTNAME) $(BUILDDIR)/$(APPFOLDER)
 

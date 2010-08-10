@@ -51,6 +51,7 @@
 - (void)switchAction:(id)sender;
 - (void)sliderAction:(id)sender;
 - (void)applyAction:(id)sender;
+- (void)disableOpibSettings;
 - (IBAction)tapIphoneos:(id)sender;
 - (IBAction)tapAndroid:(id)sender;
 - (IBAction)tapConsole:(id)sender;
