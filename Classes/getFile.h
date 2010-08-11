@@ -3,7 +3,7 @@
 //  BootlaceV2
 //
 //  Created by Neonkoala on 14/06/2010.
-//  Copyright 2010 Neonkoala.co.uk. All rights reserved.
+//  Copyright 2010 Nick Dawson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

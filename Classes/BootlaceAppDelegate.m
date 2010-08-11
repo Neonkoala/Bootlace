@@ -3,7 +3,7 @@
 //  Bootlace
 //
 //  Created by Neonkoala on 07/06/2010.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright Nick Dawson 2010. All rights reserved.
 //
 
 #import "BootlaceAppDelegate.h"

@@ -3,7 +3,7 @@
 //  Bootlace
 //
 //  Created by Neonkoala on 12/05/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Nick Dawson. All rights reserved.
 //
 
 #import "commonFunctions.h"
@@ -172,7 +172,7 @@
 	
 	/**********   iPhone Simulator debug code, remove me!    *****************************/
 	if ([sharedData.platform isEqualToString:@"x86_64"]) {
-		sharedData.platform = @"iPhone1,1";
+		sharedData.platform = @"iPhone1,2";
 	}
 	/*************************************************************************************/
 }

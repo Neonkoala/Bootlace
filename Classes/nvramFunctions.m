@@ -3,7 +3,7 @@
 //  Bootlace
 //
 //  Created by Neonkoala on 15/05/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Nick Dawson. All rights reserved.
 //
 
 #import "nvramFunctions.h"
