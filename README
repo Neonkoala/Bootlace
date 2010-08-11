@@ -5,20 +5,16 @@ V2.0
 
 Credits: planetbeing, poorlad, marky and apocolipse.
 
-WARNING: You're on the *testing* branch! This means it doesn't work, or at least not in a way you expect it to.
-
-Testing status: I may update this peridoically. Currently everything is working but install craps out for some users at the dumping multitouch stage.
+Status: Stable
 
 Requirements
 
-This app requires a SPECIFIC version of oepniboot to be installed to allow configuration and quickbooting. I am maintaining a compatible version here on github until changes are merged.
-
-http://github.com/Neonkoala/iphonelinux
+This app requires OpeniBoot 0.1.1
 
 Other requirements:
-* iOS 4.0 -> 4.0.1
+* iOS 3.1.2 -> 4.0.1
 * An internet connection for iDroid install/upgrade features
-* iPhone 3G
+* iPhone 3G, 2G or iPod Touch 1G
 * Bravery - my code is hardly the best :P
 
 Usage
