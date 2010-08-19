@@ -12,6 +12,8 @@
 @interface commonData : NSObject {
 	//Initialisation variables
 	BOOL firstLaunchVal;
+	BOOL logEnabled;
+	NSString *logfile;
 	NSString *platform;
 	NSString *workingDirectory;
 	
@@ -50,6 +52,8 @@
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
+@property (nonatomic, assign) BOOL logEnabled;
+@property (nonatomic, retain) NSString *logfile;
 @property (nonatomic, retain) NSString *platform;
 @property (nonatomic, retain) NSString *workingDirectory;
 

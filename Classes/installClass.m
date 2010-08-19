@@ -14,10 +14,13 @@
 - (int)parseUpdatePlist {
 	commonData* sharedData = [commonData sharedData];
 	
+	[commonInstance log2file:@"Parsing update.plist..."];
+	
 	//Check device match
 	NSMutableDictionary* platformDict = [sharedData.latestVerDict objectForKey:sharedData.platform];
 	if (platformDict==nil) {
 		sharedData.updateAvailable = NO;
+		[commonInstance log2file:@"No platform match, iDroid isn't available for this device?"];
 		return -1;
 	} 
 	
@@ -33,13 +36,13 @@
 	
 	sharedData.updateFirmwarePath = [sharedData.updateDependencies objectForKey:@"Directory"];
 	
-	NSLog(@"%@", sharedData.updateFiles);
-	
 	return 0;
 }
 
 - (int)parseInstalledPlist {
 	commonData* sharedData = [commonData sharedData];
+	
+	[commonInstance log2file:@"Parsing installed.plist..."];
 	
 	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
 	NSDictionary *installedDict = [NSDictionary dictionaryWithContentsOfFile:installedPlistPath];
@@ -50,6 +53,12 @@
 	sharedData.installedFiles = [installedDict objectForKey:@"Files"];
 	sharedData.installedDependencies = [installedDict objectForKey:@"Dependencies"];
 	
+	if(sharedData.installedVer==nil || sharedData.installedAndroidVer==nil || sharedData.installedDate==nil || sharedData.installedFiles==nil || sharedData.installedDependencies==nil) {
+		[commonInstance log2file:@"Installed.plist invalid, missing data values."];
+		
+		return -1;
+	}
+	
 	return 0;
 }
 
@@ -59,6 +68,8 @@
 	NSMutableArray *installedDependencies;
 	NSMutableDictionary *installedPlist = [NSMutableDictionary dictionaryWithCapacity:5];
 	
+	[commonInstance log2file:@"Generating installed.plist..."];
+	
 	count = [sharedData.updateFiles count];
 	NSMutableArray *installedFiles = [NSMutableArray arrayWithCapacity:count];
 	
@@ -67,6 +78,8 @@
 		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
 		
 		[installedFiles addObject:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
+		
+		[commonInstance log2file:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
 	}
 	
 	if([sharedData.updateDependencies objectForKey:@"WiFi"]) {
@@ -85,11 +98,15 @@
 		installedDependencies = [NSMutableArray arrayWithCapacity:3];
 	}
 	
-	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr2"]) {
+	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"] || [[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]];
-	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr2"]) {
+		
+		[commonInstance log2file:@"Zephyr2 multitouch loaction added."];
+	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z1F50,1"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"]];
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"]];
+		
+		[commonInstance log2file:@"Zephyr1 multitouch loaction added."];
 	}
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
@@ -98,7 +115,12 @@
 	[installedPlist setObject:installedFiles forKey:@"Files"];
 	[installedPlist setObject:installedDependencies forKey:@"Dependencies"];
 	
-	[installedPlist writeToFile:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] atomically:YES];
+	if(![installedPlist writeToFile:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] atomically:YES]) {
+		[commonInstance log2file:@"Failed to write installed.plist."];
+		return -1;
+	}
+	
+	[commonInstance log2file:@"Installed.plist successfully generated."];
 	
 	return 0;
 }
@@ -318,6 +340,9 @@
 		success = [self parseInstalledPlist];
 		
 		if(success<0) {
+			sharedData.installed = NO;
+			[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] error:nil];
+			
 			NSLog(@"Installed plist could not be parsed");
 		}
 	}
@@ -357,7 +382,7 @@
 - (int)dumpMultitouch {
 	commonData* sharedData = [commonData sharedData];
 	
-	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr2"]) {	
+	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"]) {	
 		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]]) {
 			NSLog(@"Dumping zephyr2 multitouch.");
 		
@@ -378,7 +403,7 @@
 				return -1;
 			}
 		}
-	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"zephyr"]) {
+	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z1F50,1"]) {
 		NSString *match = @"share*";
 		NSString *stashPath = @"/private/var/stash";
 		
@@ -409,6 +434,27 @@
 				return -3;
 			}
 		}			
+	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
+		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]]) {
+			NSLog(@"Dumping zephyr2 multitouch.");
+			
+			NSString *match = @"share*";
+			NSString *stashPath = @"/private/var/stash";
+			
+			NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/private/var/stash" error:nil];
+			NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+			NSArray *results = [dirContents filteredArrayUsingPredicate:predicate];
+			
+			stashPath = [stashPath stringByAppendingPathComponent:[results objectAtIndex:0]];
+			NSDictionary *mtprops = [NSDictionary dictionaryWithContentsOfFile:[stashPath stringByAppendingPathComponent:@"firmware/multitouch/iPod.mtprops"]];
+			
+			NSDictionary *z2dict = [mtprops objectForKey:@"Z2F51,1"];
+			NSData *z2bin = [z2dict objectForKey:@"Constructed Firmware"];
+			
+			if(![z2bin writeToFile:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"] atomically:YES]) {
+				return -1;
+			}
+		}
 	}
 	
 	return 0;

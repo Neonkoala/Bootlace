@@ -12,6 +12,7 @@
 #import <IOKit/IOKitLib.h>
 #import <IOKit/IOKitKeys.h>
 #import "commonData.h"
+#import "commonFunctions.h"
 #import "getFile.h"
 #import "extractionClass.h"
 
@@ -19,6 +20,7 @@
 
 @interface installClass : NSObject {
 	getFile *getFileInstance;
+	commonFunctions *commonInstance;
 }
 
 - (int)parseUpdatePlist;

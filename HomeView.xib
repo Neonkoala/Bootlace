@@ -230,7 +230,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">Version 2.0</string>
+						<string key="IBUIText">Version 2.0.1</string>
 						<reference key="IBUIFont" ref="411964383"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>

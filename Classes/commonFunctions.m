@@ -16,46 +16,63 @@
 	id nvramInstance = [nvramFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
+	[self log2file:@"Beginning NVRAM initialisation sequence..."];
+	[self log2file:@"Checking for backup..."];
+	
 	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
+		[self log2file:@"Backup not found. Generating..."];
 		success = [nvramInstance backupNVRAM];
 		
 		switch (success) {
 			case 0:
+				[self log2file:@"Backup successfully generated."];
 				break;
-			case 1:
+			case -1:
 				sharedData.opibInitStatus = -1;
+				[self log2file:@"backupNVRAM failed with return code -1. NVRAM could not be accessed."];
 				break;
-			case 2:
+			case -2:
 				sharedData.opibInitStatus = -6;
+				[self log2file:@"backupNVRAM failed with return code -2. Failed to remove old backup."];
 				break;
-			case 3:
+			case -3:
 				sharedData.opibInitStatus = -2;
+				[self log2file:@"backupNVRAM failed with return code -3. Backup could not be written to disk."];
 				break;
 			default:
 				sharedData.opibInitStatus = -6;
+				[self log2file:@"backupNVRAM failed with an unknown return code."];
 				break;
 		}
 	}
+	
+	[self log2file:@"Dumping NVRAM configuration into memory..."];
 	
 	success = [nvramInstance dumpNVRAM];
 	
 	switch (success) {
 		case 0:
+			[self log2file:@"dumpNVRAM successful."];
 			break;
 		case -1:
 			sharedData.opibInitStatus = -3;
+			[self log2file:@"dumpNVRAM failed with return code -1. Could not access NVRAM."];
 			return;
 		case -2:
 			sharedData.opibInitStatus = -4;
+			[self log2file:@"dumpNVRAM failed with return code -2. No UUID found, assuming dump is invalid."];
 			return;
 		case -3:
 			sharedData.opibInitStatus = -5;
+			[self log2file:@"dumpNVRAM failed with return code -3. OpeniBoot does not appear to be installed or an incompatible version is installed."];
 			return;
 		case -4:
 			sharedData.opibInitStatus = 1;
+			[self log2file:@"dumpNVRAM failed with return code -4 OpeniBoot installed and compatible but some values are missing."];
 			break;
 		default:
 			sharedData.opibInitStatus = -6;
+			[self log2file:@"dumpNVRAM failed with an unknow return code."];
 			return;
 	}
 	
@@ -67,9 +84,14 @@
 	id nvramInstance = [nvramFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
+	[self log2file:@"Setting NVRAM to QuickBoot Android..."];
+	
 	sharedData.opibTempOS = @"1";
 		
 	success = [nvramInstance updateNVRAM:1];
+	
+	[self log2file:@"Update NVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", success]];
 	
 	return success;
 }
@@ -79,9 +101,14 @@
 	id nvramInstance = [nvramFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
+	[self log2file:@"Setting NVRAM to QuickBoot Console..."];
+	
 	sharedData.opibTempOS = @"2";
 	
 	success = [nvramInstance updateNVRAM:1];
+	
+	[self log2file:@"Update NVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", success]];
 	
 	return success;
 }
@@ -100,14 +127,20 @@
 	id nvramInstance = [nvramFunctions new];
 	id commonInstance = [commonFunctions new];
 	commonData* sharedData = [commonData sharedData];
-	
+	[self log2file:@"Restoring NVRAM..."];
 	success = [nvramInstance restoreNVRAM];
+	
+	[self log2file:@"restoreNVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", success]];
 	
 	if(success<0) {
 		return success;
 	}
-	
+	[self log2file:@"Re-initializing NVRAM configuration..."];
 	[commonInstance initNVRAM];
+	
+	[self log2file:@"initNVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", sharedData.opibInitStatus]];
 	
 	if(sharedData.opibInitStatus<0){
 		return (sharedData.opibInitStatus - 2);
@@ -122,11 +155,16 @@
 	id commonInstance = [commonFunctions new];
 	commonData* sharedData = [commonData sharedData];
 	
+	[self log2file:@"Resetting NVRAM..."];
+	
 	sharedData.opibDefaultOS = @"0";
 	sharedData.opibTempOS = @"0";
 	sharedData.opibTimeout = @"10000";
 	
 	success = [nvramInstance updateNVRAM:0];
+	
+	[self log2file:@"updateNVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", success]];
 	
 	if(success<0) {
 		return success;
@@ -134,11 +172,15 @@
 	
 	if([[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
 		if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.opibBackupPath error:nil]) {
+			[self log2file:@"Failed to remove backup."];
 			return -3;
 		}
 	}
 	
 	[commonInstance initNVRAM];
+	
+	[self log2file:@"initNVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", sharedData.opibInitStatus]];
 	
 	if(sharedData.opibInitStatus<0){
 		return (sharedData.opibInitStatus - 3);
@@ -153,8 +195,11 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	sharedData.opibTempOS = sharedData.opibDefaultOS;
-	
+	[self log2file:@"Applying NVRAM settings..."];
 	success = [nvramInstance updateNVRAM:0];
+	
+	[self log2file:@"updateNVRAM returned:"];
+	[self log2file:[NSString stringWithFormat: @"%d", success]];
 	
 	return success;
 }
@@ -177,9 +222,23 @@
 	/*************************************************************************************/
 }
 
-//Device detection function
-//
-//
+- (void)log2file:(NSString *)line {
+	commonData* sharedData = [commonData sharedData];
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"[HH:mm:ss] "];
+	NSString *logline = [formatter stringFromDate:[NSDate date]];
+
+	logline = [logline stringByAppendingString:line];
+	logline = [logline stringByAppendingString:@"\n"];
+	
+	if(sharedData.logEnabled) {
+		NSFileHandle *logHandle = [NSFileHandle fileHandleForWritingAtPath:sharedData.logfile];
+		[logHandle seekToEndOfFile];
+		[logHandle writeData:[logline dataUsingEncoding:NSUTF8StringEncoding]];
+	}
+}
+
 - (void)firstLaunch {
 	UIAlertView *launchAlert;
 	launchAlert = [[[UIAlertView alloc] initWithTitle:@"Welcome" message:@"Welcome to Bootlace.\r\n\r\nThe iDroid tab will allow you to install iDroid on your device.\r\n\r\nQuickBoot allows you to reboot your device into the selected OS.\r\n\r\nTap settings for altering openiBoot's permanent behaviour." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];

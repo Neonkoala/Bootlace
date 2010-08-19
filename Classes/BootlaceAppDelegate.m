@@ -19,13 +19,6 @@
 	commonData* sharedData = [commonData sharedData];
 	id commonInstance = [[commonFunctions new] autorelease];
 	
-	//First launch check
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
-	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
-	
-	//Check the platform
-	[commonInstance getPlatform];
-	
 	//Check and setup working directory
 	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
 	sharedData.workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
@@ -37,6 +30,22 @@
 			NSLog(@"Error: Create Bootlace working folder failed");
 		}
 	}
+	
+	//Setup Debug logging
+	sharedData.logEnabled = YES;
+	sharedData.logfile = [sharedData.workingDirectory stringByAppendingPathComponent:@"bootlace.log"];
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:sharedData.logfile]) {
+		[[NSFileManager defaultManager] removeItemAtPath:sharedData.logfile error:nil];
+	}
+	[[NSFileManager defaultManager] createFileAtPath:sharedData.logfile contents:nil attributes:nil];
+	
+	//First launch check
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
+	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+	
+	//Check the platform
+	[commonInstance getPlatform];
 	
 	//Dump nvram stuffs
 	sharedData.opibBackupPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist.backup"];
