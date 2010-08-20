@@ -12,6 +12,7 @@
 @implementation AdvancedViewController
 
 @synthesize openibootVersion;
+@synthesize resetButton;
 
 - (IBAction) backupSettings:(id)sender {
 	id commonInstance = [commonFunctions new];
@@ -57,6 +58,9 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	openibootVersion.text = sharedData.opibVersion;
+	
+	[resetButton setTitle:@"Reset" forState:UIControlStateNormal];
+	resetButton.tintColor = [UIColor colorWithRed:0.556 green:0.000 blue:0.000 alpha:1.000];
 }
 
 
