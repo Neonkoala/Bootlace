@@ -52,6 +52,13 @@
 
 	[commonInstance initNVRAM];
 	
+	// Output current configuration
+	DLog(@"Configuration");
+	DLog(@"==========================================");
+	DLog(@"console logfile = /var/tmp/Bootlace.log");
+	DLog(@"logfile = %@", sharedData.logfile);
+	DLog(@"==========================================");
+	
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
 }

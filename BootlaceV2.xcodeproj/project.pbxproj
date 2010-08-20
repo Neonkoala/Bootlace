@@ -389,6 +389,7 @@
 					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
