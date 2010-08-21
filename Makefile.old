@@ -1,0 +1,137 @@
+# Makefile for iPhone Application for Xcode gcc compiler (SDK Headers)
+
+#############################################################################
+# SETTINGS
+#############################################################################
+
+# Project Settings
+PROJECT_NAME=Bootlace
+APP_FOLDER=$(PROJECT_NAME).app
+INSTALL_FOLDER=$(PROJECT_NAME).app
+
+# Your iPhone's IP address (in order to copy over the app)
+IPHONE_IP=192.168.1.69
+
+# SDK Settings
+SDK_PREFIX_PATH=/Developer
+SDK_VER=3.1.2
+DARWIN_VER=10
+SDK=$(SDK_PREFIX_PATH)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(SDK_VER).sdk
+IPHONEOS_PLATFORM=$(SDK_PREFIX_PATH)/Platforms/iPhoneOS.platform
+
+# Depency Settings
+ARCHIVE_HEADERS=/Users/kevin/Documents/Archive
+ARCHIVE_STATIC_LIB=/Users/kevin/Documents/Archive/libarchive.a
+KENNYTM_PRIVATE_FRAMEWORKS=/Users/kevin/Downloads/kennytm-iphone-private-frameworks-6ce3362
+
+
+
+#############################################################################
+# DO NOT EDIT BELOW UNLESS NECESSARY
+#############################################################################
+
+
+CC=$(IPHONEOS_PLATFORM)/Developer/usr/bin/arm-apple-darwin$(DARWIN_VER)-gcc-4.2.1
+CPP=$(IPHONEOS_PLATFORM)/Developer/usr/bin/arm-apple-darwin$(DARWIN_VER)-g++-4.2.1
+LD=$(CC)
+
+LDFLAGS += -framework CoreFoundation 
+LDFLAGS += -framework Foundation 
+LDFLAGS += -framework UIKit 
+LDFLAGS += -framework CoreGraphics
+LDFLAGS += -framework AddressBookUI
+LDFLAGS += -framework AddressBook
+LDFLAGS += -framework QuartzCore
+LDFLAGS += -framework GraphicsServices
+//LDFLAGS += -framework CoreSurface
+//LDFLAGS += -framework CoreAudio
+//LDFLAGS += -framework Celestial
+//LDFLAGS += -framework AudioToolbox
+LDFLAGS += -framework WebCore
+//LDFLAGS += -framework WebKit
+//LDFLAGS += -framework SystemConfiguration
+//LDFLAGS += -framework CFNetwork
+//LDFLAGS += -framework MediaPlayer
+//LDFLAGS += -framework OpenGLES
+//LDFLAGS += -framework OpenAL
+LDFLAGS += -L"$(SDK)/usr/lib"
+LDFLAGS += -F"$(SDK)/System/Library/Frameworks"
+LDFLAGS += -F"$(SDK)/System/Library/PrivateFrameworks"
+
+CFLAGS += -I"$(IPHONEOS_PLATFORM)/Developer/usr/lib/gcc/arm-apple-darwin$(DARWIN_VER)/4.2.1/include/"
+CFLAGS += -I"$(SDK)/usr/include"
+CFLAGS += -I"$(IPHONEOS_PLATFORM)/Developer/usr/include/"
+CFLAGS += -I"$(ARCHIVE_HEADERS)"
+LDFLAGS += -lz
+LDFLAGS += -l$(ARCHIVE_STATIC_LIB)
+//LDFLAGS += -larchive
+LDFLAGS += -lIOKit
+CFLAGS += -IHeaders
+CFLAGS += -DDEBUG -std=c99
+CFLAGS += -Diphoneos_version_min=$(SDK_VER)
+CFLAGS += -F"$(SDK)/System/Library/Frameworks"
+CFLAGS += -F"$(SDK)/System/Library/PrivateFrameworks"
+CFLAGS += -I"$(KENNYTM_PRIVATE_FRAMEWORKS)"
+
+CPPFLAGS=$CFLAGS
+
+BUILDDIR=./build/$(SDK_VER)
+SRCDIR=./Classes
+RESDIR=./Resources
+OBJS=$(patsubst %.m,%.o,$(wildcard $(SRCDIR)/*.m))
+OBJS+=$(patsubst %.c,%.o,$(wildcard $(SRCDIR)/*.c))
+OBJS+=$(patsubst %.cpp,%.o,$(wildcard $(SRCDIR)/*.cpp))
+OBJS+=$(patsubst %.m,%.o,$(wildcard *.m))
+PCH=$(wildcard *.pch)
+RESOURCES=$(wildcard $(RESDIR)/*)
+NIBS=$(patsubst %.xib,%.nib,$(wildcard *.xib))
+
+all:	$(PROJECT_NAME)
+
+$(PROJECT_NAME):	$(OBJS)
+	$(LD) $(LDFLAGS) -o $@ $^ 
+
+%.o:	%.m
+	$(CC) -c $(CFLAGS) $< -o $@
+
+%.o:	%.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+%.o:	%.cpp
+	$(CPP) -c $(CPPFLAGS) $< -o $@
+
+%.nib:	%.xib
+	ibtool $< --compile $@
+
+dist:	$(PROJECT_NAME) $(NIBS)
+	rm -rf $(BUILDDIR)
+	mkdir -p $(BUILDDIR)/$(APP_FOLDER)
+	cp -r $(RESOURCES) $(BUILDDIR)/$(APP_FOLDER)
+	cp Info.plist $(BUILDDIR)/$(APP_FOLDER)/Info.plist
+	cp Bootlace_ $(BUILDDIR)/$(APP_FOLDER)/Bootlace_
+	@echo "APPL????" > $(BUILDDIR)/$(APP_FOLDER)/PkgInfo
+	mv $(NIBS) $(BUILDDIR)/$(APP_FOLDER)
+	export CODESIGN_ALLOCATE=$(IPHONEOS_PLATFORM)/Developer/usr/bin/codesign_allocate;
+	./ldid_intel -S $(PROJECT_NAME)
+	mv $(PROJECT_NAME) $(BUILDDIR)/$(APP_FOLDER)
+
+install: dist
+	@echo "Going to install application onto remote iPhone via SSH and SCP (setup SSH keys if you have not)"
+	scp -r $(BUILDDIR)/$(APP_FOLDER) root@$(IPHONE_IP):/Applications/$(INSTALL_FOLDER)
+	@echo "Application $(INSTALL_FOLDER) installed, telling iPhone to respring..."
+	ssh root@$(IPHONE_IP) 'respring'
+	ssh root@$(IPHONE_IP) 'chmod +s /Applications/$(INSTALL_FOLDER)/Bootlace'
+
+uninstall:
+	ssh root@$(IPHONE_IP) 'rm -fr /Applications/$(INSTALL_FOLDER); respring'
+	@echo "Application $(INSTALL_FOLDER) uninstalled, telling iPhone to respring..."
+	ssh root@$(IPHONE_IP) 'respring'
+
+install_respring:
+	scp respring_arm root@$(IPHONE_IP):/usr/bin/respring
+
+clean:
+	@rm -f $(SRCDIR)/*.o *.o
+	@rm -rf $(BUILDDIR)
+	@rm -f $(PROJECT_NAME)
+

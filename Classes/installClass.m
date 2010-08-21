@@ -14,12 +14,15 @@
 @synthesize commonInstance, extractionInstance;
 
 - (int)parseUpdatePlist {
+	DLog(@"Parsing Update Plist");
+
 	commonData* sharedData = [commonData sharedData];
 	
 	//Check device match
 	NSMutableDictionary* platformDict = [sharedData.latestVerDict objectForKey:sharedData.platform];
 	if (platformDict==nil) {
 		sharedData.updateAvailable = NO;
+		DLog(@"  - No platform match! iDroid isn't available for this device.");
 		return -1;
 	} 
 	
@@ -39,6 +42,8 @@
 }
 
 - (int)parseInstalledPlist {
+	DLog(@"Parsing Installed Plist");
+
 	commonData* sharedData = [commonData sharedData];
 	
 	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
@@ -51,6 +56,7 @@
 	sharedData.installedDependencies = [installedDict objectForKey:@"Dependencies"];
 	
 	if(sharedData.installedVer==nil || sharedData.installedAndroidVer==nil || sharedData.installedDate==nil || sharedData.installedFiles==nil || sharedData.installedDependencies==nil) {
+		DLog(@"Plist is invalid, missing data values.");
 		return -1;
 	}
 	
@@ -58,6 +64,8 @@
 }
 
 - (int)generateInstalledPlist {
+	DLog(@"Generating Installed Plist");
+
 	int i, count;
 	commonData* sharedData = [commonData sharedData];
 	NSMutableArray *installedDependencies;
@@ -91,9 +99,13 @@
 	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"] || [[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]];
+
+		DLog(@"Zephyr2 multitouch location added.");
 	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z1F50,1"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"]];
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"]];
+		
+		DLog(@"Zephyr1 multitouch location added.");
 	}
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
@@ -103,9 +115,12 @@
 	[installedPlist setObject:installedDependencies forKey:@"Dependencies"];
 	
 	if(![installedPlist writeToFile:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] atomically:YES]) {
+		DLog(@"Failed to write Installed Plist");
 		return -1;
 	}
 	
+	DLog(@"Installed Plist generated successfully.");
+
 	return 0;
 }
 
@@ -119,6 +134,8 @@
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
+	DLog(@"DEBUG: updateURL = %@", sharedData.updateURL);
+	DLog(@"DEBUG: workingDirectory = %@", sharedData.workingDirectory);
 	
 	[getFileInstance getFileDownload:self];
 	
@@ -154,7 +171,7 @@
 	success = [extractionInstance inflateGzip:sharedData.updatePackagePath toDest:tarDest];
 	
 	if(success < 0) {
-		NSLog(@"GZip extraction returned: %d", success);
+		ALog(@"GZip extraction returned: %d", success);
 		sharedData.updateFail = 2;
 		[self cleanUp];
 		return;
@@ -166,7 +183,7 @@
 	success = [extractionInstance extractTar:tarDest toDest:sharedData.workingDirectory];
 	
 	if(success < 0) {
-		NSLog(@"Tar extraction returned: %d", success);
+		ALog(@"Tar extraction returned: %d", success);
 		sharedData.updateFail = 3;
 		[self cleanUp];
 		return;
@@ -178,7 +195,7 @@
 	success = [self relocateFiles];
 	
 	if(success < 0) {
-		NSLog(@"File relocation returned: %d", success);
+		ALog(@"File relocation returned: %d", success);
 		sharedData.updateFail = 4;
 		[self cleanUp];
 		return;
@@ -200,7 +217,7 @@
 		success = [self dumpMultitouch];
 		
 		if(success < 0) {
-			NSLog(@"Dumping of multitouch firmware returned: %d", success);
+			ALog(@"Dumping of multitouch firmware returned: %d", success);
 			sharedData.updateFail = 5;
 			[self cleanUp];
 			return;
@@ -213,7 +230,7 @@
 		success = [self dumpWiFi];
 		
 		if(success < 0) {
-			NSLog(@"WiFi firmware retrieval returned: %d", success);
+			ALog(@"WiFi firmware retrieval returned: %d", success);
 			sharedData.updateFail = 6;
 			[self cleanUp];
 			return;
@@ -229,7 +246,7 @@
 	success = [self generateInstalledPlist];
 	
 	if(success < 0) {
-		NSLog(@"Installed plist generation returned: %d", success);
+		ALog(@"Installed plist generation returned: %d", success);
 		sharedData.updateFail = 7;
 		[self cleanUp];
 		return;
@@ -241,6 +258,8 @@
 }
 
 - (void)idroidRemove {
+	DLog(@"Removing iDroid");
+
 	int i, count;
 	commonData* sharedData = [commonData sharedData];
 	
@@ -277,6 +296,8 @@
 }
 
 - (void)cleanUp {
+	DLog(@"Cleaning up");
+
 	commonData* sharedData = [commonData sharedData];
 	
 	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:sharedData.updateClean] error:nil];
@@ -315,7 +336,7 @@
 	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
 	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:installedPlistPath];
 	
-	NSLog(@"%d", fileExists);
+	DLog(@"%d", fileExists);
 	
 	if(!fileExists) { 
 		sharedData.installed = NO;
@@ -327,7 +348,7 @@
 			sharedData.installed = NO;
 			[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] error:nil];
 			
-			NSLog(@"Installed plist could not be parsed");
+			ALog(@"Installed plist could not be parsed");
 		}
 	}
 }
@@ -366,7 +387,7 @@
 	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"]) {	
 		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]]) {
-			NSLog(@"Dumping zephyr2 multitouch.");
+			DLog(@"Dumping zephyr2 multitouch.");
 		
 			NSString *match = @"share*";
 			NSString *stashPath = @"/private/var/stash";
@@ -399,7 +420,7 @@
 		NSDictionary *z1dict = [mtprops objectForKey:@"Z1F50,1"];
 		
 		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"]]) {
-			NSLog(@"Dumping zephyr main multitouch.");
+			DLog(@"Dumping zephyr main multitouch.");
 			
 			NSData *z1main = [z1dict objectForKey:@"Firmware"];
 			
@@ -408,7 +429,7 @@
 			}
 		}
 		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"]]) {
-			NSLog(@"Dumping zephyr aspeed multitouch.");
+			DLog(@"Dumping zephyr aspeed multitouch.");
 			
 			NSData *z1aspeed = [z1dict objectForKey:@"A-Speed Firmware"];
 			
@@ -418,7 +439,7 @@
 		}			
 	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
 		if(![[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]]) {
-			NSLog(@"Dumping zephyr2 multitouch.");
+			DLog(@"Dumping zephyr2 multitouch.");
 			
 			NSString *match = @"share*";
 			NSString *stashPath = @"/private/var/stash";
@@ -446,8 +467,9 @@
 	commonData* sharedData = [commonData sharedData];
 	NSDictionary *wifiDict = [sharedData.updateDependencies objectForKey:@"WiFi"];
 	int i;
-	
 	int count = [wifiDict count];
+	
+	DLog(@"File items: %d", count);
 	
 	for (i=0; i<count; i++) {
 		NSString *key = [NSString stringWithFormat:@"%d", i];

@@ -15,11 +15,13 @@
 	commonFunctions *commonInstance;
 	
 	UILabel *openibootVersion;
+	UIGlassButton *resetButton;
 }
 
 @property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) IBOutlet UILabel *openibootVersion;
+@property (nonatomic, retain) IBOutlet UIGlassButton *resetButton;
 
 - (IBAction) backupSettings:(id)sender;
 - (IBAction) restoreSettings:(id)sender;

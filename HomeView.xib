@@ -192,14 +192,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">• apocolipse fo OpeniBoot modifications</string>
+						<string key="IBUIText">• apocolipse for OpeniBoot modifications</string>
 						<reference key="IBUIFont" ref="2911910"/>
 						<reference key="IBUITextColor" ref="739809134"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
-					<object class="IBUILabel" id="995822696">
+					<object class="IBUILabel" id="802274715">
 						<reference key="NSNextResponder" ref="354909170"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 315}, {280, 20}}</string>
@@ -207,7 +207,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">• knight</string>
+						<string key="IBUIText">• Kevin Elliott for Bootlace contributions</string>
 						<reference key="IBUIFont" ref="2911910"/>
 						<reference key="IBUITextColor" ref="739809134"/>
 						<nil key="IBUIHighlightedColor"/>
@@ -438,7 +438,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="745129183"/>
 							<reference ref="494049737"/>
 							<reference ref="1000045344"/>
-							<reference ref="995822696"/>
+							<reference ref="802274715"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">aboutView</string>
@@ -515,7 +515,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">45</int>
-						<reference key="object" ref="995822696"/>
+						<reference key="object" ref="802274715"/>
 						<reference key="parent" ref="354909170"/>
 					</object>
 				</object>

@@ -17,6 +17,15 @@ Other requirements:
 * iPhone 3G, 2G or iPod Touch 1G
 * Bravery - my code is hardly the best :P
 
+To Compile
+
+  $ ./generate.sh
+  $ make clean && make
+
+To Install To Device
+
+  $ make install
+
 Usage
 
 See http://www.idroidproject.org/wiki/Bootlace
