@@ -11,16 +11,15 @@
 
 @implementation installClass
 
+@synthesize commonInstance, extractionInstance;
+
 - (int)parseUpdatePlist {
 	commonData* sharedData = [commonData sharedData];
-	
-	[commonInstance log2file:@"Parsing update.plist..."];
 	
 	//Check device match
 	NSMutableDictionary* platformDict = [sharedData.latestVerDict objectForKey:sharedData.platform];
 	if (platformDict==nil) {
 		sharedData.updateAvailable = NO;
-		[commonInstance log2file:@"No platform match, iDroid isn't available for this device?"];
 		return -1;
 	} 
 	
@@ -42,8 +41,6 @@
 - (int)parseInstalledPlist {
 	commonData* sharedData = [commonData sharedData];
 	
-	[commonInstance log2file:@"Parsing installed.plist..."];
-	
 	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
 	NSDictionary *installedDict = [NSDictionary dictionaryWithContentsOfFile:installedPlistPath];
 	
@@ -54,8 +51,6 @@
 	sharedData.installedDependencies = [installedDict objectForKey:@"Dependencies"];
 	
 	if(sharedData.installedVer==nil || sharedData.installedAndroidVer==nil || sharedData.installedDate==nil || sharedData.installedFiles==nil || sharedData.installedDependencies==nil) {
-		[commonInstance log2file:@"Installed.plist invalid, missing data values."];
-		
 		return -1;
 	}
 	
@@ -68,8 +63,6 @@
 	NSMutableArray *installedDependencies;
 	NSMutableDictionary *installedPlist = [NSMutableDictionary dictionaryWithCapacity:5];
 	
-	[commonInstance log2file:@"Generating installed.plist..."];
-	
 	count = [sharedData.updateFiles count];
 	NSMutableArray *installedFiles = [NSMutableArray arrayWithCapacity:count];
 	
@@ -78,8 +71,6 @@
 		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
 		
 		[installedFiles addObject:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
-		
-		[commonInstance log2file:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
 	}
 	
 	if([sharedData.updateDependencies objectForKey:@"WiFi"]) {
@@ -100,13 +91,9 @@
 	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"] || [[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]];
-		
-		[commonInstance log2file:@"Zephyr2 multitouch loaction added."];
 	} else if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z1F50,1"]) {
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_main.bin"]];
 		[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr_aspeed.bin"]];
-		
-		[commonInstance log2file:@"Zephyr1 multitouch loaction added."];
 	}
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
@@ -116,18 +103,15 @@
 	[installedPlist setObject:installedDependencies forKey:@"Dependencies"];
 	
 	if(![installedPlist writeToFile:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] atomically:YES]) {
-		[commonInstance log2file:@"Failed to write installed.plist."];
 		return -1;
 	}
-	
-	[commonInstance log2file:@"Installed.plist successfully generated."];
 	
 	return 0;
 }
 
 - (void)idroidInstall {
 	commonData* sharedData = [commonData sharedData];
-	id extractionInstance = [extractionClass new];
+	extractionInstance = [[extractionClass alloc] init];
 	int success;
 	
 	sharedData.updateFail = 0;
@@ -355,8 +339,6 @@
 	
 	count = [sharedData.updateFiles count];
 	
-	NSLog(@"File items: %d", i);
-	
 	for (i=0; i<count; i++) {
 		NSString *key = [NSString stringWithFormat:@"%d", i];
 		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
@@ -466,8 +448,6 @@
 	int i;
 	
 	int count = [wifiDict count];
-	
-	NSLog(@"File items: %d", i);
 	
 	for (i=0; i<count; i++) {
 		NSString *key = [NSString stringWithFormat:@"%d", i];

@@ -21,8 +21,10 @@
 
 
 @interface commonFunctions : NSObject {
-	
+	nvramFunctions *nvramInstance;
 }
+
+@property (nonatomic, retain) nvramFunctions *nvramInstance;
 
 - (void)initNVRAM;
 - (int)rebootAndroid;
@@ -33,7 +35,6 @@
 - (int)applyNVRAM;
 - (void)getPlatform;
 - (void)firstLaunch;
-- (void)log2file:(NSString *)line;
 - (void)sendError:(NSString *)alertMsg;
 - (void)sendTerminalError:(NSString *)alertMsg;
 - (void)sendConfirmation:(NSString *)alertMsg withTag:(int)tag;

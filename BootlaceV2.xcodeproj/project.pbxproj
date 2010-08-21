@@ -40,7 +40,7 @@
 		D7C8059D11C6EFF7006620C6 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059811C6EFF7006620C6 /* HomeView.xib */; };
 		D7C8059E11C6EFF7006620C6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059911C6EFF7006620C6 /* MainWindow.xib */; };
 		D7C8059F11C6EFF7006620C6 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059A11C6EFF7006620C6 /* SettingsView.xib */; };
-		D7CE586512120A39005E3A8D /* bootlace_57.png in Resources */ = {isa = PBXBuildFile; fileRef = D7CE586412120A39005E3A8D /* bootlace_57.png */; };
+		D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */ = {isa = PBXBuildFile; fileRef = D7CDFE38121FF4AC008B07A6 /* bootlace.png */; };
 		D7D0B37111C50561000FCBD4 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B36F11C50561000FCBD4 /* install.png */; };
 		D7D0B37211C50561000FCBD4 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B37011C50561000FCBD4 /* remove.png */; };
 		D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */; };
@@ -96,7 +96,7 @@
 		D7C8059811C6EFF7006620C6 /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
 		D7C8059911C6EFF7006620C6 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		D7C8059A11C6EFF7006620C6 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
-		D7CE586412120A39005E3A8D /* bootlace_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bootlace_57.png; path = Resources/bootlace_57.png; sourceTree = "<group>"; };
+		D7CDFE38121FF4AC008B07A6 /* bootlace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bootlace.png; path = Resources/bootlace.png; sourceTree = "<group>"; };
 		D7D0B36F11C50561000FCBD4 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = install.png; path = Resources/install.png; sourceTree = "<group>"; };
 		D7D0B37011C50561000FCBD4 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove.png; path = Resources/remove.png; sourceTree = "<group>"; };
 		D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvancedViewController.xib; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D7CE586412120A39005E3A8D /* bootlace_57.png */,
+				D7CDFE38121FF4AC008B07A6 /* bootlace.png */,
 				D7936B961211F7C900D3CE6A /* index.html */,
 				D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */,
 				D7C8059611C6EFF7006620C6 /* BootView.xib */,
@@ -289,7 +289,7 @@
 				D7C8059F11C6EFF7006620C6 /* SettingsView.xib in Resources */,
 				D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */,
 				D7936B971211F7C900D3CE6A /* index.html in Resources */,
-				D7CE586512120A39005E3A8D /* bootlace_57.png in Resources */,
+				D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

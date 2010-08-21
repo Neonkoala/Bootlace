@@ -17,11 +17,16 @@
 #import "extractionClass.h"
 
 @class getFile;
+@class extractionClass;
 
 @interface installClass : NSObject {
 	getFile *getFileInstance;
 	commonFunctions *commonInstance;
+	extractionClass *extractionInstance;
 }
+
+@property (nonatomic, retain) commonFunctions *commonInstance;
+@property (nonatomic, retain) extractionClass *extractionInstance;
 
 - (int)parseUpdatePlist;
 - (int)parseInstalledPlist;

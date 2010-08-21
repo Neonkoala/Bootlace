@@ -10,7 +10,7 @@
 
 @implementation BootViewController
 
-@synthesize quickBootAboutView, quickBootDisabledView, quickBootWebView, doneButton, flipButton, androidRebootButton, consoleRebootButton, androidRebootLabel, consoleRebootLabel;
+@synthesize commonInstance, quickBootAboutView, quickBootDisabledView, quickBootWebView, doneButton, flipButton, androidRebootButton, consoleRebootButton, androidRebootLabel, consoleRebootLabel;
 
 
 - (void)flipAction:(id)sender
@@ -39,15 +39,13 @@
 }
 
 - (IBAction)rebootToAndroid:(id)sender {
-	id commonInstance;
-	commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	[commonInstance sendConfirmation:@"This will reboot your device into Android immediately.\r\nAre you sure?" withTag:2];
 }
 
 - (IBAction)rebootToConsole:(id)sender {
-	id commonInstance;
-	commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	[commonInstance sendConfirmation:@"This will reboot your device into the console immediately.\r\nAre you sure?" withTag:3];
 }
@@ -82,7 +80,7 @@
 	 [super viewDidLoad];
 	 
 	 commonData *sharedData = [commonData sharedData];
-	 id commonInstance = [commonFunctions new];
+	 commonInstance = [[commonFunctions alloc] init];
 	 
 	 // add our custom flip button as the nav bar's custom right view
 	 UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];

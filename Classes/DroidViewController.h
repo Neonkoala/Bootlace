@@ -14,8 +14,13 @@
 #import "commonFunctions.h"
 #import "installClass.h"
 
+@class installClass;
+@class commonFunctions;
 
 @interface DroidViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>  {
+	installClass *installInstance;
+	commonFunctions *commonInstance;
+	
 	UITableView *tableView;
 	NSMutableArray *tableRows;
 	NSOperationQueue *viewInitQueue;
@@ -27,6 +32,9 @@
 	UIButton *installIdroidImage;
 	UIButton *removeIdroidImage;
 }
+
+@property (nonatomic, retain) installClass *installInstance;
+@property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *tableRows;

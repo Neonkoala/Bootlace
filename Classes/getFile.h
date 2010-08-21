@@ -11,8 +11,11 @@
 #import "commonData.h"
 
 @class commonFunctions;
+@class installClass;
 
 @interface getFile : NSObject {
+	installClass *installInstance;
+	
 	@private id currentDelegate;
 	@private NSMutableData *getFileRequestData;
 	@private NSURLConnection *getFileConnection;
@@ -26,6 +29,8 @@
 	int dataTotal;
 	float progress;
 }
+
+@property (nonatomic, retain) installClass *installInstance;
 
 @property (nonatomic, retain) NSMutableData *getFileRequestData;
 @property (nonatomic, retain) NSString* getFileURL;

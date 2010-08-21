@@ -11,7 +11,7 @@
 
 @implementation HomeViewController
 
-@synthesize homePage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton;
+@synthesize commonInstance, homePage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton;
 
 - (IBAction)refreshHome:(id)sender {
 	[homePage reload];
@@ -73,7 +73,7 @@
     [super viewDidLoad];
 	
 	commonData *sharedData = [commonData sharedData];
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	NSString *urlAddress = @"http://idroid.neonkoala.co.uk";
 	

@@ -11,7 +11,7 @@
 
 @implementation getFile
 
-@synthesize getFileURL, getFileDir, getFileConnection, getFileRequestData, getFileWorking, getFileSuggestedName, getFilePath, dataTotal, dataGot, progress;
+@synthesize installInstance, getFileURL, getFileDir, getFileConnection, getFileRequestData, getFileWorking, getFileSuggestedName, getFilePath, dataTotal, dataGot, progress;
 
 - (id)initWithUrl:(NSString *)fileURL directory:(NSString *)dirPath {
 	self = [super init];
@@ -74,7 +74,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	[getFileRequestData appendData:data];
 	
 	if([getFileRequestData length] > 2621440) {

@@ -13,6 +13,8 @@
 
 
 @interface SettingsViewController : UITableViewController {
+	commonFunctions *commonInstance;
+	
 	NSMutableArray *tableRows;
 	
 	UIBarButtonItem *applyButton;
@@ -30,6 +32,8 @@
 	UIButton *linkButton;
 	UIView *osPicker;
 }
+
+@property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) NSMutableArray *tableRows;
 

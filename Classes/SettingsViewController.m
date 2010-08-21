@@ -11,7 +11,7 @@
 
 @implementation SettingsViewController
 
-@synthesize tableRows, applyButton, osPicker, androidImage, androidLabel, consoleImage, consoleLabel, iphoneosImage, iphoneosLabel;
+@synthesize commonInstance, tableRows, applyButton, osPicker, androidImage, androidLabel, consoleImage, consoleLabel, iphoneosImage, iphoneosLabel;
 
 //Switch toggle function
 - (UISwitch *)switchCtl
@@ -111,7 +111,7 @@
 
 //Apply Action
 - (void)applyAction:(id)sender {
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	int success = [commonInstance applyNVRAM];
 	
 	switch (success) {
@@ -180,7 +180,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions init] alloc];
 	
 	self.navigationItem.rightBarButtonItem = applyButton;
 	

@@ -10,8 +10,10 @@
 
 @implementation extractionClass
 
+@synthesize installInstance;
+
 - (int)inflateGzip:(NSString *)sourcePath toDest:(NSString *)destPath {
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	commonData *sharedData = [commonData sharedData];
 	int dataRead = 0;
 	
@@ -60,7 +62,7 @@
 }
 
 - (int)extractTar:(NSString *)sourcePath toDest:(NSString *)destDir {
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	commonData *sharedData = [commonData sharedData];
 	int done = 0;
 		

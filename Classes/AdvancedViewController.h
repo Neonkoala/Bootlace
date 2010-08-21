@@ -12,9 +12,12 @@
 
 
 @interface AdvancedViewController : UIViewController {
-	UILabel *openibootVersion;
+	commonFunctions *commonInstance;
 	
+	UILabel *openibootVersion;
 }
+
+@property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) IBOutlet UILabel *openibootVersion;
 

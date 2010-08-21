@@ -13,9 +13,13 @@
 #import <archive_entry.h>
 #import "installClass.h"
 
-@interface extractionClass : NSObject {
+@class installClass;
 
+@interface extractionClass : NSObject {
+	installClass *installInstance;
 }
+
+@property (nonatomic, retain) installClass *installInstance;
 
 - (int)inflateGzip:(NSString *)sourcePath toDest:(NSString *)destPath;
 - (int)extractTar:(NSString *)sourcePath toDest:(NSString *)destPath;

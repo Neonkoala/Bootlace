@@ -10,7 +10,7 @@
 
 @implementation DroidViewController
 
-@synthesize tableView, tableRows, viewInitQueue, cfuSpinner, installProgress, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
+@synthesize installInstance, commonInstance, tableView, tableRows, viewInitQueue, cfuSpinner, installProgress, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
 
 /*
  - (id)initWithStyle:(UITableViewStyle)style {
@@ -26,7 +26,7 @@
 	
 	Class $UIGlassButton = objc_getClass("UIGlassButton");
 	
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	commonData* sharedData = [commonData sharedData];
 	
 	//Setup table and contents	
@@ -108,7 +108,7 @@
 }
 
 - (void)callUpdate {
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	
 	[installInstance checkForUpdates];
 	
@@ -116,7 +116,7 @@
 }
 
 - (void)callInstall {
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	
 	[installInstance idroidInstall];
 
@@ -129,7 +129,7 @@
 }
 
 - (void)callRemove {
-	id installInstance = [installClass new];
+	installInstance = [[installClass alloc] init];
 	
 	[installInstance idroidRemove];
 	
@@ -250,7 +250,7 @@
 
 - (void)installIdroid {
 	commonData* sharedData = [commonData sharedData];
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	[latestVersionButton setTitle:@"" forState:UIControlStateNormal];
 	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -276,6 +276,7 @@
 	[installSpinner setCenter:CGPointMake(140, 63)];
 	[installSpinner startAnimating];
 	[installView addSubview:installSpinner];
+	[installSpinner release];
 	
 	installProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(30, 130, 225, 90)];
     [installView addSubview:installProgress];
@@ -380,6 +381,7 @@
 	[removeSpinner setCenter:CGPointMake(140, 63)];
 	[removeSpinner startAnimating];
 	[removeView addSubview:removeSpinner];
+	[removeSpinner release];
 	
 	NSInvocationOperation *getRemove = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callRemove) object:nil];
 	
@@ -534,6 +536,7 @@
 		[spinner setCenter:CGPointMake(277, 22)];
 		[spinner startAnimating];
 		[cell.contentView addSubview:spinner];
+		[spinner release];
 	} else {
 		UILabel *varLabel;
 		CGRect frame = CGRectMake(190.0, 8.0, 94.0, 29.0);
@@ -544,6 +547,7 @@
 		varLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
 	
 		[cell.contentView addSubview:varLabel];
+		[varLabel release];
     }
 	
 	return cell;

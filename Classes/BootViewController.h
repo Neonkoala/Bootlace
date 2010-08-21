@@ -12,6 +12,8 @@
 
 
 @interface BootViewController : UIViewController {
+	commonFunctions *commonInstance;
+	
 	UIView *quickBootAboutView;
 	UIView *quickBootDisabledView;
 	UIWebView *quickBootWebView;
@@ -22,6 +24,8 @@
 	UILabel *consoleRebootLabel;
 	UILabel *androidRebootLabel;
 }
+
+@property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) IBOutlet UIView *quickBootAboutView;
 @property (nonatomic, retain) IBOutlet UIView *quickBootDisabledView;

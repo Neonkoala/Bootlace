@@ -12,6 +12,8 @@
 
 
 @interface HomeViewController : UIViewController <UIWebViewDelegate> {
+	commonFunctions *commonInstance;
+	
 	UIWebView *homePage;
 	UIView *homeAboutView;
 	UIBarButtonItem *doneButton;
@@ -20,6 +22,8 @@
 	UIBarButtonItem *stopButton;
 	UIBarButtonItem *backButton;
 }
+
+@property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) IBOutlet UIWebView *homePage;
 @property (nonatomic, retain) IBOutlet UIView *homeAboutView;

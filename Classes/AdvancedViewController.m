@@ -11,22 +11,22 @@
 
 @implementation AdvancedViewController
 
-@synthesize openibootVersion;
+@synthesize commonInstance, openibootVersion;
 
 - (IBAction) backupSettings:(id)sender {
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	[commonInstance sendConfirmation:@"This will backup your NVRAM and overwrite any existing backup.\r\nContinue?" withTag:4];
 }
 
 - (IBAction) restoreSettings:(id)sender {
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	[commonInstance sendConfirmation:@"This will restore your NVRAM backup and overwrite any existing settings.\r\nContinue?" withTag:5];
 }
 
 - (IBAction) resetSettings:(id)sender {
-	id commonInstance = [commonFunctions new];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	[commonInstance sendConfirmation:@"This will reset your openiboot settings to their defaults and overwrite any existing settings.\r\nContinue?" withTag:6];
 }
