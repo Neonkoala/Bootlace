@@ -18,6 +18,8 @@
 			<date>2010-08-12T19:00:00Z</date>
 			<key>URL</key>
 			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-IPT1G.tar.gz</string>
+			<key>MD5</key>
+			<string>a42a949f1d6865a57039706583fd1d61</string>
 			<key>Size</key>
 			<integer>159662080</integer>
 			<key>Clean</key>
@@ -85,7 +87,9 @@
 			<key>ReleaseDate</key>
 			<date>2010-08-04T19:00:00Z</date>
 			<key>URL</key>
-			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0.1-MoJo-2G.tar.gz</string>
+			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0.1/iDroid-1.0.1-MoJo-2G.tar.gz</string>
+			<key>MD5</key>
+			<string>c04f60fc1e5cd3c50ee8e5dcecfc4790</string>
 			<key>Size</key>
 			<string>159723520</string>
 			<key>Clean</key>
@@ -152,8 +156,12 @@
 			<string>2.2</string>
 			<key>ReleaseDate</key>
 			<date>2010-08-04T19:00:00Z</date>
-			<key>URL</key>
+			<key>URLreal</key>
 			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-3G.tar.gz</string>
+			<key>URL</key>
+			<string>http://192.168.0.13/~neonkoala/iDroid-1.0-MoJo-3G.tar.gz</string>
+			<key>MD5</key>
+			<string>ad0e72cbcdbc57ff170d02319e986992</string>
 			<key>Size</key>
 			<integer>158750720</integer>
 			<key>Clean</key>

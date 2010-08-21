@@ -33,8 +33,8 @@
 		int read = gzread(source, buffer, length);
 		
 		dataRead += length;
-		float progress = (((float) dataRead/sharedData.updateSize)*0.3)+0.3;
-		[installInstance updateProgress:[NSNumber numberWithFloat:progress]];
+		float progress = (float) dataRead/sharedData.updateSize;
+		[installInstance updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
 		
 		if (read > 0)
 		{
@@ -99,8 +99,8 @@
 			while (true) {
 				size = archive_read_data(tar, buffer, length);
 				done += size;
-				float progress = (((float) done/sharedData.updateSize)*0.3)+0.6;
-				[installInstance updateProgress:[NSNumber numberWithFloat:progress]];
+				float progress = (float) done/sharedData.updateSize;
+				[installInstance updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
 				if (size > 0) {
 					fwrite(buffer, size, 1, dest);
 				} else if (size == 0) {

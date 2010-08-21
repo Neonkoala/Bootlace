@@ -25,7 +25,9 @@
 	NSMutableArray *tableRows;
 	NSOperationQueue *viewInitQueue;
 	UIActivityIndicatorView *cfuSpinner;
-	UIProgressView *installProgress;
+	UIProgressView *installOverallProgress;
+	UIProgressView *installCurrentProgress;
+	UILabel *installStageLabel;
 	UIButton *latestVersionButton;
 	UIGlassButton *installIdroidButton;
 	UIGlassButton *removeIdroidButton;
@@ -40,7 +42,9 @@
 @property (nonatomic, retain) NSMutableArray *tableRows;
 @property (nonatomic, retain) NSOperationQueue *viewInitQueue;
 @property (nonatomic, retain) UIActivityIndicatorView *cfuSpinner;
-@property (nonatomic, retain) UIProgressView *installProgress;
+@property (nonatomic, retain) UIProgressView *installOverallProgress;
+@property (nonatomic, retain) UIProgressView *installCurrentProgress;
+@property (nonatomic, retain) UILabel *installStageLabel;
 @property (nonatomic, retain) UIGlassButton *installIdroidButton;
 @property (nonatomic, retain) UIGlassButton *removeIdroidButton;
 @property (nonatomic, retain) IBOutlet UIButton *latestVersionButton;

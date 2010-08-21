@@ -10,7 +10,7 @@
 
 @implementation DroidViewController
 
-@synthesize installInstance, commonInstance, tableView, tableRows, viewInitQueue, cfuSpinner, installProgress, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
+@synthesize installInstance, commonInstance, tableView, tableRows, viewInitQueue, cfuSpinner, installOverallProgress, installCurrentProgress, installStageLabel, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
 
 /*
  - (id)initWithStyle:(UITableViewStyle)style {
@@ -269,18 +269,29 @@
 	[self.tableView reloadData];
 	
 	UIAlertView *installView;
-	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\n\rDownloading iDroid" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\r\n\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
 	[installView show];
 	
 	UIActivityIndicatorView *installSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	[installSpinner setCenter:CGPointMake(140, 63)];
+	[installSpinner setCenter:CGPointMake(140, 62)];
 	[installSpinner startAnimating];
 	[installView addSubview:installSpinner];
 	[installSpinner release];
 	
-	installProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(30, 130, 225, 90)];
-    [installView addSubview:installProgress];
-    [installProgress setProgressViewStyle: UIProgressViewStyleBar];
+	installOverallProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(67, 88, 150, 20)];
+    [installView addSubview:installOverallProgress];
+    [installOverallProgress setProgressViewStyle: UIProgressViewStyleBar];
+	
+	installStageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 280, 40)];
+	installStageLabel.text = @"Downloading iDroid";
+	installStageLabel.textColor = [UIColor whiteColor];
+	installStageLabel.textAlignment = UITextAlignmentCenter;
+	installStageLabel.backgroundColor = [UIColor clearColor];
+	[installView addSubview:installStageLabel];
+	
+	installCurrentProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(22, 143, 240, 20)];
+    [installView addSubview:installCurrentProgress];
+    [installCurrentProgress setProgressViewStyle: UIProgressViewStyleBar];
 	
 	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callInstall) object:nil];
 	
@@ -291,19 +302,23 @@
 	
 	do {        
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-        installProgress.progress = sharedData.updateProgress;
-		if (sharedData.updateProgress == 1) {
+        installOverallProgress.progress = sharedData.updateOverallProgress;
+		installCurrentProgress.progress = sharedData.updateCurrentProgress;
+		if (sharedData.updateOverallProgress == 1) {
 			keepAlive = NO;
 		}
 		switch (sharedData.updateStage) {
 			case 2:
-				installView.message = @"\n\rDecompressing Files";
+				installStageLabel.text = @"Verifying iDroid";
 				break;
 			case 3:
-				installView.message = @"\n\rExtracting Files";
+				installStageLabel.text = @"Decompressing Files";
 				break;
 			case 4:
-				installView.message = @"\n\rResolving Dependencies";
+				installStageLabel.text = @"Extracting Files";
+				break;
+			case 5:
+				installStageLabel.text = @"Resolving Dependencies";
 				break;
 			default:
 				break;

@@ -51,7 +51,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	commonData* sharedData = [commonData sharedData];
+	commonData* sharedData = [commonData sharedData];	
 	
 	if ([response respondsToSelector:@selector(statusCode)]) {
 		int statusCode = [((NSHTTPURLResponse *)response) statusCode];
@@ -61,6 +61,8 @@
 			} else {
 				sharedData.updateFail = 6;
 			}
+			[getFileConnection cancel];  // stop connecting; no more delegate messages
+			DLog(@"NSURLConnection errored with %d", statusCode);
 		} else {
 			[getFileRequestData setLength:0];
 			
@@ -88,11 +90,8 @@
 	
 	dataGot += [data length];
 	progress = (float) dataGot / dataTotal;
-	progress = progress*0.3;
 	
-	NSNumber *prog = [NSNumber numberWithFloat:progress];
-	
-	[installInstance performSelectorOnMainThread:@selector(updateProgress:) withObject:prog waitUntilDone:YES];
+	[installInstance updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

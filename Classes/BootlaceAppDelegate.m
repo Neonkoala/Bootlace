@@ -31,15 +31,6 @@
 		}
 	}
 	
-	//Setup Debug logging
-	sharedData.logEnabled = YES;
-	sharedData.logfile = [sharedData.workingDirectory stringByAppendingPathComponent:@"bootlace.log"];
-	
-	if([[NSFileManager defaultManager] fileExistsAtPath:sharedData.logfile]) {
-		[[NSFileManager defaultManager] removeItemAtPath:sharedData.logfile error:nil];
-	}
-	[[NSFileManager defaultManager] createFileAtPath:sharedData.logfile contents:nil attributes:nil];
-	
 	//First launch check
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
 	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
@@ -56,7 +47,6 @@
 	DLog(@"Configuration");
 	DLog(@"==========================================");
 	DLog(@"console logfile = /var/tmp/Bootlace.log");
-	DLog(@"logfile = %@", sharedData.logfile);
 	DLog(@"==========================================");
 	
     // Add the tab bar controller's current view as a subview of the window

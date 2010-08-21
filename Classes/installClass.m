@@ -31,6 +31,7 @@
 	sharedData.updateAndroidVer = [platformDict objectForKey:@"AndroidVersion"];
 	sharedData.updateDate = [platformDict objectForKey:@"ReleaseDate"];
 	sharedData.updateURL = [platformDict objectForKey:@"URL"];
+	sharedData.updateMD5 = [platformDict objectForKey:@"MD5"];
 	sharedData.updateSize = [[platformDict objectForKey:@"Size"] intValue];
 	sharedData.updateFiles = [platformDict objectForKey:@"Files"];
 	sharedData.updateDependencies = [platformDict objectForKey:@"Dependencies"];
@@ -130,7 +131,9 @@
 	int success;
 	
 	sharedData.updateFail = 0;
-	sharedData.updateStage = 1;
+	sharedData.updateStage = 0;
+	
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
@@ -147,18 +150,31 @@
         if (getFileInstance.getFileWorking == NO) {
             keepAlive = NO;
         }
+		if(sharedData.updateFail == 1) {
+			DLog(@"DEBUG: Failed to get iDroid package. Cleaning up.");
+			[self cleanUp];
+			return;
+		}
     } while (keepAlive);
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
-	if(sharedData.updateFail == 1) {
+	sharedData.updatePackagePath = getFileInstance.getFilePath;
+	
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+	
+	//Calculate file MD5
+	NSString *md5hash = [self fileMD5:sharedData.updatePackagePath];
+	DLog(@"MD5 Hash: %@", md5hash);
+	
+	if(![sharedData.updateMD5 isEqualToString:md5hash]) {
+		DLog(@"MD5 hash does not match, assuming download is corrupt.");
+		sharedData.updateFail = 0;
 		[self cleanUp];
 		return;
 	}
 	
-	sharedData.updatePackagePath = getFileInstance.getFilePath;
-	
-	sharedData.updateStage = 2;
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
 	//Extract file
 	NSString *tarDest = [sharedData.workingDirectory stringByAppendingPathComponent:@"idroid.tar"];
@@ -177,8 +193,7 @@
 		return;
 	}
 	
-	sharedData.updateProgress = 0.6;
-	sharedData.updateStage = 3;
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
 	success = [extractionInstance extractTar:tarDest toDest:sharedData.workingDirectory];
 	
@@ -190,7 +205,7 @@
 	}
 	
 	//Extract files to correct locations
-	sharedData.updateProgress = 0.9;
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
 	success = [self relocateFiles];
 	
@@ -204,8 +219,7 @@
 	//Check dependencies
 	//Special multitouch routine
 	
-	sharedData.updateProgress = 0.92;
-	sharedData.updateStage = 4;
+	[self updateProgress:[NSNumber numberWithFloat:0.25] nextStage:NO];
 	
 	//Check if exists
 	
@@ -224,7 +238,7 @@
 		}
 	}
 	
-	sharedData.updateProgress = 0.95;
+	[self updateProgress:[NSNumber numberWithFloat:0.5] nextStage:NO];
 	
 	if([sharedData.updateDependencies objectForKey:@"WiFi"]) {
 		success = [self dumpWiFi];
@@ -237,7 +251,13 @@
 		}
 	}
 	
-	sharedData.updateProgress = 0.98;
+	[self updateProgress:[NSNumber numberWithFloat:0.75] nextStage:NO];
+	
+	//Check if SD card folder exists
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:@"/private/var/sdcard"]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:@"/private/var/sdcard" withIntermediateDirectories:NO attributes:nil error:nil];
+	}
 	
 	//Clean up
 	[self cleanUp];
@@ -254,7 +274,7 @@
 	
 	[self checkInstalled];
 	
-	sharedData.updateProgress = 1;
+	[self updateProgress:[NSNumber numberWithFloat:1] nextStage:YES];
 }
 
 - (void)idroidRemove {
@@ -283,16 +303,22 @@
 	sharedData.installedFiles = nil;
 	sharedData.installedDependencies = nil;
 	sharedData.installed = NO;
-	
-	sharedData.updateProgress = 0;
-	sharedData.updateStage = 0;
 }
 
-- (void)updateProgress:(NSNumber *)progress {
+- (void)updateProgress:(NSNumber *)progress nextStage:(BOOL)next {
 	commonData* sharedData = [commonData sharedData];
-	if(sharedData.updateStage < 4) {
-		sharedData.updateProgress = [progress floatValue];
+	
+	if(next) {
+		sharedData.updateStage++;
+		sharedData.updateCurrentProgress = 0;
+		DLog(@"Current stage: %d", sharedData.updateStage);
 	}
+	
+	sharedData.updateOverallProgress = ([progress floatValue]/5)+((sharedData.updateStage-1)*0.2);
+	sharedData.updateCurrentProgress = [progress floatValue];
+	
+	DLog(@"Overall Progress: %f", sharedData.updateOverallProgress);
+	DLog(@"Current Progress: %f", sharedData.updateCurrentProgress);
 }
 
 - (void)cleanUp {
@@ -302,7 +328,15 @@
 	
 	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:sharedData.updateClean] error:nil];
 	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:@"idroid.tar"] error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:sharedData.updatePackagePath error:nil];
+	if(sharedData.updatePackagePath) {
+		[[NSFileManager defaultManager] removeItemAtPath:sharedData.updatePackagePath error:nil];
+	}
+	
+	sharedData.updateOverallProgress = 0;
+	sharedData.updateCurrentProgress = 0;
+	sharedData.updateStage = 0;
+	
+	DLog(@"Cleanup complete.");
 }
 
 - (void)checkForUpdates {
@@ -310,7 +344,7 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
+	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {
@@ -501,6 +535,43 @@
 	return 0;
 }
 
+- (NSString *)fileMD5:(NSString *)path {
+	int read = 0;	
+	NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+	int fileSize = [attr fileSize];
 
+	NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:path];
+	if(handle==nil) {
+		return @"NOFILE";
+	}
+	
+	CC_MD5_CTX md5;
+	CC_MD5_Init(&md5);
+	
+	BOOL done = NO;
+	while(!done)
+	{
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; //Create our own autorelease pool as the system is too slow to drain otherwise
+		NSData *fileData = [handle readDataOfLength: 1048576];
+		CC_MD5_Update(&md5, [fileData bytes], [fileData length]);
+		if( [fileData length] == 0 ) done = YES;
+		read += [fileData length];
+		float progress = (float) read/fileSize;
+		[self updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
+		[pool drain]; //Drain it or we'll run out of memory
+	}
+	unsigned char digest[CC_MD5_DIGEST_LENGTH];
+	CC_MD5_Final(digest, &md5);
+	NSString* s = [NSString stringWithFormat: @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+				   digest[0], digest[1],
+				   digest[2], digest[3],
+				   digest[4], digest[5],
+				   digest[6], digest[7],
+				   digest[8], digest[9],
+				   digest[10], digest[11],
+				   digest[12], digest[13],
+				   digest[14], digest[15]];
+	return s;
+}
 
 @end

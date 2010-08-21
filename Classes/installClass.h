@@ -36,9 +36,10 @@
 - (void)cleanUp;
 - (void)checkForUpdates;
 - (void)checkInstalled;
-- (void)updateProgress:(NSNumber *)progress;
+- (void)updateProgress:(NSNumber *)progress nextStage:(BOOL)next;
 - (int)relocateFiles;
 - (int)dumpMultitouch;
 - (int)dumpWiFi;
+- (NSString *)fileMD5:(NSString *)path;
 
 @end

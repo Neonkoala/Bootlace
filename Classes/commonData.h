@@ -12,8 +12,6 @@
 @interface commonData : NSObject {
 	//Initialisation variables
 	BOOL firstLaunchVal;
-	BOOL logEnabled;
-	NSString *logfile;
 	NSString *platform;
 	NSString *workingDirectory;
 	
@@ -39,11 +37,13 @@
 	int updateStage;
 	int updateFail;
 	int updateSize;
-	float updateProgress;
+	float updateOverallProgress;
+	float updateCurrentProgress;
 	NSString *updateVer;
 	NSString *updateAndroidVer;
 	NSDate *updateDate;
 	NSString *updateURL;
+	NSString *updateMD5;
 	NSString *updateFirmwarePath;
 	NSString *updatePackagePath;
 	NSString *updateClean;
@@ -52,8 +52,6 @@
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
-@property (nonatomic, assign) BOOL logEnabled;
-@property (nonatomic, retain) NSString *logfile;
 @property (nonatomic, retain) NSString *platform;
 @property (nonatomic, retain) NSString *workingDirectory;
 
@@ -79,11 +77,13 @@
 @property (nonatomic, assign) int updateStage;
 @property (nonatomic, assign) int updateFail;
 @property (nonatomic, assign) int updateSize;
-@property (nonatomic, assign) float updateProgress;
+@property (nonatomic, assign) float updateOverallProgress;
+@property (nonatomic, assign) float updateCurrentProgress;
 @property (nonatomic, retain) NSString *updateVer;
 @property (nonatomic, retain) NSString *updateAndroidVer;
 @property (nonatomic, retain) NSDate *updateDate;
 @property (nonatomic, retain) NSString *updateURL;
+@property (nonatomic, retain) NSString *updateMD5;
 @property (nonatomic, retain) NSString *updateFirmwarePath;
 @property (nonatomic, retain) NSString *updatePackagePath;
 @property (nonatomic, retain) NSString *updateClean;
