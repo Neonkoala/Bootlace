@@ -10,7 +10,7 @@
 
 @implementation DroidViewController
 
-@synthesize installInstance, commonInstance, tableView, tableRows, viewInitQueue, cfuSpinner, installOverallProgress, installCurrentProgress, installStageLabel, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
+@synthesize installInstance, commonInstance, flipButton, tableView, tableRows, viewInitQueue, cfuSpinner, installOverallProgress, installCurrentProgress, installStageLabel, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
 
 /*
  - (id)initWithStyle:(UITableViewStyle)style {
@@ -61,6 +61,15 @@
 	[removeIdroidButton setHidden:YES];
 	[self.view addSubview:removeIdroidButton];
 	
+	//Advanced Button
+	
+	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[infoButton addTarget:self action:@selector(loadAdvanced:) forControlEvents:UIControlEventTouchUpInside];
+	flipButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	self.navigationItem.rightBarButtonItem = flipButton;
+	
+	//Setup
+	
 	[installInstance checkInstalled];
 	
 	tableRows = [[NSMutableArray alloc] init];
@@ -105,6 +114,13 @@
 	
 	[viewInitQueue addOperation:getUpdate];
     [getUpdate release];
+}
+
+- (void)loadAdvanced:(id)sender
+{
+	DroidAdvancedViewController *droidAdvancedView = [[DroidAdvancedViewController alloc] initWithNibName:@"DroidAdvancedViewController" bundle:nil];
+	[self.navigationController pushViewController:droidAdvancedView animated:YES];
+	[droidAdvancedView release];
 }
 
 - (void)callUpdate {
@@ -229,7 +245,7 @@
 		UIActionSheet *confirmInstall = [[UIActionSheet alloc] initWithTitle:@"Warning: this will destroy and overwrite any existing iDroid install." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
 		confirmInstall.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 		confirmInstall.tag = 10;
-		[confirmInstall showInView:self.view];
+		[confirmInstall showInView:self.tabBarController.view];
 		[confirmInstall release];
 	} else {
 		[self installIdroid];
@@ -240,7 +256,7 @@
 	UIActionSheet *confirmRemove = [[UIActionSheet alloc] initWithTitle:@"Are you sure you wish to remove iDroid?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove" otherButtonTitles:nil];
 	confirmRemove.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	confirmRemove.tag = 20;
-	[confirmRemove showInView:self.view];
+	[confirmRemove showInView:self.tabBarController.view];
 	[confirmRemove release];
 }
 
@@ -413,10 +429,14 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	switch (actionSheet.tag) {
 		case 10:
-			[self performSelectorOnMainThread:@selector(installIdroid) withObject:nil waitUntilDone:NO];
+			if(buttonIndex==0) {
+				[self performSelectorOnMainThread:@selector(installIdroid) withObject:nil waitUntilDone:NO];
+			}
 			break;
 		case 20:
-			[self performSelectorOnMainThread:@selector(removeIdroid) withObject:nil waitUntilDone:NO];
+			if(buttonIndex==0) {
+				[self performSelectorOnMainThread:@selector(removeIdroid) withObject:nil waitUntilDone:NO];
+			}
 			break;
 		default:
 			break;

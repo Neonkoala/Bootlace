@@ -527,10 +527,7 @@
 		} while (keepAlive);
 		
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		
-		
 	}
-	
 	
 	return 0;
 }

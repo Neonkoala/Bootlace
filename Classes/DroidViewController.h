@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 #import <UIKit/UIGlassButton.h>
+#import "DroidAdvancedViewController.h"
 #import "commonData.h"
 #import "commonFunctions.h"
 #import "installClass.h"
@@ -21,6 +22,7 @@
 	installClass *installInstance;
 	commonFunctions *commonInstance;
 	
+	UIBarButtonItem *flipButton;
 	UITableView *tableView;
 	NSMutableArray *tableRows;
 	NSOperationQueue *viewInitQueue;
@@ -38,6 +40,7 @@
 @property (nonatomic, retain) installClass *installInstance;
 @property (nonatomic, retain) commonFunctions *commonInstance;
 
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *flipButton;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *tableRows;
 @property (nonatomic, retain) NSOperationQueue *viewInitQueue;
@@ -55,6 +58,7 @@
 - (IBAction)upgradeIdroid:(id)sender;
 - (IBAction)installPress:(id)sender;
 - (IBAction)removePress:(id)sender;
+- (void)loadAdvanced:(id)sender;
 - (void)installIdroid;
 - (void)removeIdroid;
 - (void)callUpdate;

@@ -34,6 +34,8 @@
 		D7B3335511BE6964008978A1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B3335411BE6964008978A1 /* Default.png */; };
 		D7B3339411BE7473008978A1 /* idroidbg.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B3339311BE7473008978A1 /* idroidbg.png */; };
 		D7B3354411BE85E5008978A1 /* idroidbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B3354311BE85E5008978A1 /* idroidbutton.png */; };
+		D7BFB8491222E5C900409E65 /* DroidAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */; };
+		D7BFB9B21222FC8500409E65 /* DroidAdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */; };
 		D7C6234811C65F790049C24B /* getFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C6234711C65F790049C24B /* getFile.m */; };
 		D7C8059B11C6EFF7006620C6 /* BootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059611C6EFF7006620C6 /* BootView.xib */; };
 		D7C8059C11C6EFF7006620C6 /* DroidView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059711C6EFF7006620C6 /* DroidView.xib */; };
@@ -89,6 +91,9 @@
 		D7B3335411BE6964008978A1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		D7B3339311BE7473008978A1 /* idroidbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = idroidbg.png; path = Resources/idroidbg.png; sourceTree = "<group>"; };
 		D7B3354311BE85E5008978A1 /* idroidbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = idroidbutton.png; path = Resources/idroidbutton.png; sourceTree = "<group>"; };
+		D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroidAdvancedViewController.h; sourceTree = "<group>"; };
+		D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroidAdvancedViewController.m; sourceTree = "<group>"; };
+		D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DroidAdvancedViewController.xib; sourceTree = "<group>"; };
 		D7C6234611C65F790049C24B /* getFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getFile.h; sourceTree = "<group>"; };
 		D7C6234711C65F790049C24B /* getFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getFile.m; sourceTree = "<group>"; };
 		D7C8059611C6EFF7006620C6 /* BootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BootView.xib; sourceTree = "<group>"; };
@@ -124,6 +129,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */,
+				D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */,
 				D7E14E301206F9A300156F7E /* AdvancedViewController.h */,
 				D7E14E311206F9A300156F7E /* AdvancedViewController.m */,
 				D7A8358B11FD965F009C8D6D /* installClass.h */,
@@ -186,6 +193,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */,
 				D7CDFE38121FF4AC008B07A6 /* bootlace.png */,
 				D7936B961211F7C900D3CE6A /* index.html */,
 				D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */,
@@ -290,6 +298,7 @@
 				D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */,
 				D7936B971211F7C900D3CE6A /* index.html in Resources */,
 				D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */,
+				D7BFB9B21222FC8500409E65 /* DroidAdvancedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +322,7 @@
 				D7E44B0811C7D7770000594A /* extractionClass.m in Sources */,
 				D7A8358D11FD965F009C8D6D /* installClass.m in Sources */,
 				D7E14E321206F9A300156F7E /* AdvancedViewController.m in Sources */,
+				D7BFB8491222E5C900409E65 /* DroidAdvancedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
