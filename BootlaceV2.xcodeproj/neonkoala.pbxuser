@@ -928,6 +928,92 @@
 			D7BFBBE912231DBE00409E65 /* PBXTextBookmark */ = D7BFBBE912231DBE00409E65 /* PBXTextBookmark */;
 			D7BFBBEA12231DBE00409E65 /* PBXTextBookmark */ = D7BFBBEA12231DBE00409E65 /* PBXTextBookmark */;
 			D7BFBBEB12231DBE00409E65 /* PBXTextBookmark */ = D7BFBBEB12231DBE00409E65 /* PBXTextBookmark */;
+			D7BFBBF012231EB900409E65 /* PBXTextBookmark */ = D7BFBBF012231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF112231EB900409E65 /* PBXTextBookmark */ = D7BFBBF112231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF212231EB900409E65 /* PBXTextBookmark */ = D7BFBBF212231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF312231EB900409E65 /* PBXTextBookmark */ = D7BFBBF312231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF412231EB900409E65 /* PBXTextBookmark */ = D7BFBBF412231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF512231EB900409E65 /* PBXTextBookmark */ = D7BFBBF512231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF612231EB900409E65 /* PBXTextBookmark */ = D7BFBBF612231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF712231EB900409E65 /* PBXTextBookmark */ = D7BFBBF712231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF812231EB900409E65 /* PBXTextBookmark */ = D7BFBBF812231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBF912231EB900409E65 /* PBXTextBookmark */ = D7BFBBF912231EB900409E65 /* PBXTextBookmark */;
+			D7BFBBFA12231F5100409E65 /* PBXBookmark */ = D7BFBBFA12231F5100409E65 /* PBXBookmark */;
+			D7BFBBFD12231FE100409E65 /* PBXTextBookmark */ = D7BFBBFD12231FE100409E65 /* PBXTextBookmark */;
+			D7BFBBFE12231FE100409E65 /* PBXTextBookmark */ = D7BFBBFE12231FE100409E65 /* PBXTextBookmark */;
+			D7BFBBFF12231FE100409E65 /* PBXBookmark */ = D7BFBBFF12231FE100409E65 /* PBXBookmark */;
+			D7BFBC0012231FE100409E65 /* PBXTextBookmark */ = D7BFBC0012231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0312231FE100409E65 /* PBXTextBookmark */ = D7BFBC0312231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0412231FE100409E65 /* PBXTextBookmark */ = D7BFBC0412231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0512231FE100409E65 /* PBXTextBookmark */ = D7BFBC0512231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0612231FE100409E65 /* PBXTextBookmark */ = D7BFBC0612231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0712231FE100409E65 /* PBXTextBookmark */ = D7BFBC0712231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0812231FE100409E65 /* PBXTextBookmark */ = D7BFBC0812231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0912231FE100409E65 /* PBXTextBookmark */ = D7BFBC0912231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0A12231FE100409E65 /* PBXTextBookmark */ = D7BFBC0A12231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0B12231FE100409E65 /* PBXTextBookmark */ = D7BFBC0B12231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0C12231FE100409E65 /* PBXTextBookmark */ = D7BFBC0C12231FE100409E65 /* PBXTextBookmark */;
+			D7BFBC0F1223200D00409E65 /* PBXBookmark */ = D7BFBC0F1223200D00409E65 /* PBXBookmark */;
+			D7BFBC121223202C00409E65 /* PBXTextBookmark */ = D7BFBC121223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC151223202C00409E65 /* PBXTextBookmark */ = D7BFBC151223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC161223202C00409E65 /* PBXTextBookmark */ = D7BFBC161223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC171223202C00409E65 /* PBXTextBookmark */ = D7BFBC171223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC181223202C00409E65 /* PBXTextBookmark */ = D7BFBC181223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC191223202C00409E65 /* PBXTextBookmark */ = D7BFBC191223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC1A1223202C00409E65 /* PBXTextBookmark */ = D7BFBC1A1223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC1B1223202C00409E65 /* PBXTextBookmark */ = D7BFBC1B1223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC1C1223202C00409E65 /* PBXTextBookmark */ = D7BFBC1C1223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC1D1223202C00409E65 /* PBXTextBookmark */ = D7BFBC1D1223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC1E1223202C00409E65 /* PBXTextBookmark */ = D7BFBC1E1223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC1F1223202C00409E65 /* PBXTextBookmark */ = D7BFBC1F1223202C00409E65 /* PBXTextBookmark */;
+			D7BFBC211223204800409E65 /* PBXTextBookmark */ = D7BFBC211223204800409E65 /* PBXTextBookmark */;
+			D7BFBC221223204800409E65 /* PBXTextBookmark */ = D7BFBC221223204800409E65 /* PBXTextBookmark */;
+			D7BFBC231223204800409E65 /* PBXTextBookmark */ = D7BFBC231223204800409E65 /* PBXTextBookmark */;
+			D7BFBC241223204800409E65 /* PBXTextBookmark */ = D7BFBC241223204800409E65 /* PBXTextBookmark */;
+			D7BFBC251223204800409E65 /* PBXTextBookmark */ = D7BFBC251223204800409E65 /* PBXTextBookmark */;
+			D7BFBC261223204800409E65 /* PBXTextBookmark */ = D7BFBC261223204800409E65 /* PBXTextBookmark */;
+			D7BFBC271223204800409E65 /* PBXTextBookmark */ = D7BFBC271223204800409E65 /* PBXTextBookmark */;
+			D7BFBC281223204800409E65 /* PBXTextBookmark */ = D7BFBC281223204800409E65 /* PBXTextBookmark */;
+			D7BFBC291223204800409E65 /* PBXTextBookmark */ = D7BFBC291223204800409E65 /* PBXTextBookmark */;
+			D7BFBC2A1223204800409E65 /* PBXTextBookmark */ = D7BFBC2A1223204800409E65 /* PBXTextBookmark */;
+			D7BFBC2B1223204800409E65 /* PBXTextBookmark */ = D7BFBC2B1223204800409E65 /* PBXTextBookmark */;
+			D7BFBC2C1223204800409E65 /* PBXTextBookmark */ = D7BFBC2C1223204800409E65 /* PBXTextBookmark */;
+			D7BFBC301223208A00409E65 /* PBXTextBookmark */ = D7BFBC301223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC311223208A00409E65 /* PBXTextBookmark */ = D7BFBC311223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC321223208A00409E65 /* PBXTextBookmark */ = D7BFBC321223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC331223208A00409E65 /* PBXTextBookmark */ = D7BFBC331223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC341223208A00409E65 /* PBXTextBookmark */ = D7BFBC341223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC351223208A00409E65 /* PBXTextBookmark */ = D7BFBC351223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC361223208A00409E65 /* PBXTextBookmark */ = D7BFBC361223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC371223208A00409E65 /* PBXTextBookmark */ = D7BFBC371223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC381223208A00409E65 /* PBXTextBookmark */ = D7BFBC381223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC391223208A00409E65 /* PBXTextBookmark */ = D7BFBC391223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC3A1223208A00409E65 /* PBXTextBookmark */ = D7BFBC3A1223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC3B1223208A00409E65 /* PBXTextBookmark */ = D7BFBC3B1223208A00409E65 /* PBXTextBookmark */;
+			D7BFBC3F1223209D00409E65 /* PBXTextBookmark */ = D7BFBC3F1223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC401223209D00409E65 /* PBXTextBookmark */ = D7BFBC401223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC411223209D00409E65 /* PBXTextBookmark */ = D7BFBC411223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC421223209D00409E65 /* PBXTextBookmark */ = D7BFBC421223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC431223209D00409E65 /* PBXTextBookmark */ = D7BFBC431223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC441223209D00409E65 /* PBXTextBookmark */ = D7BFBC441223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC451223209D00409E65 /* PBXTextBookmark */ = D7BFBC451223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC461223209D00409E65 /* PBXTextBookmark */ = D7BFBC461223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC471223209D00409E65 /* PBXTextBookmark */ = D7BFBC471223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC481223209D00409E65 /* PBXTextBookmark */ = D7BFBC481223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC491223209D00409E65 /* PBXTextBookmark */ = D7BFBC491223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC4A1223209D00409E65 /* PBXTextBookmark */ = D7BFBC4A1223209D00409E65 /* PBXTextBookmark */;
+			D7BFBC4E122320CF00409E65 /* PBXTextBookmark */ = D7BFBC4E122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC4F122320CF00409E65 /* PBXTextBookmark */ = D7BFBC4F122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC50122320CF00409E65 /* PBXTextBookmark */ = D7BFBC50122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC51122320CF00409E65 /* PBXTextBookmark */ = D7BFBC51122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC52122320CF00409E65 /* PBXTextBookmark */ = D7BFBC52122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC53122320CF00409E65 /* PBXTextBookmark */ = D7BFBC53122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC54122320CF00409E65 /* PBXTextBookmark */ = D7BFBC54122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC55122320CF00409E65 /* PBXTextBookmark */ = D7BFBC55122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC56122320CF00409E65 /* PBXTextBookmark */ = D7BFBC56122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC57122320CF00409E65 /* PBXTextBookmark */ = D7BFBC57122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC58122320CF00409E65 /* PBXTextBookmark */ = D7BFBC58122320CF00409E65 /* PBXTextBookmark */;
+			D7BFBC59122320CF00409E65 /* PBXTextBookmark */ = D7BFBC59122320CF00409E65 /* PBXTextBookmark */;
 			D7C152FA121A9C5C005B2F61 = D7C152FA121A9C5C005B2F61 /* PlistBookmark */;
 			D7C1531A121AB5A0005B2F61 = D7C1531A121AB5A0005B2F61 /* PBXTextBookmark */;
 			D7C1531B121AB5A0005B2F61 = D7C1531B121AB5A0005B2F61 /* PBXTextBookmark */;
@@ -1077,9 +1163,9 @@
 	};
 	D786909911BD1E8E00642943 /* SettingsViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1188, 6461}}";
-			sepNavSelRange = "{3151, 262}";
-			sepNavVisRange = "{2230, 1723}";
+			sepNavIntBoundsRect = "{{0, 0}, {1188, 6552}}";
+			sepNavSelRange = "{4190, 0}";
+			sepNavVisRange = "{3676, 1379}";
 			sepNavWindowFrame = "{{396, 51}, {1247, 850}}";
 		};
 	};
@@ -1093,9 +1179,9 @@
 	};
 	D78690AF11BD234A00642943 /* DroidViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1762, 8125}}";
-			sepNavSelRange = "{11483, 31}";
-			sepNavVisRange = "{11077, 2591}";
+			sepNavIntBoundsRect = "{{0, 0}, {1923, 8125}}";
+			sepNavSelRange = "{12325, 0}";
+			sepNavVisRange = "{746, 2102}";
 			sepNavWindowFrame = "{{190, 104}, {1247, 850}}";
 		};
 	};
@@ -1259,7 +1345,7 @@
 	D7B332B011BE5FD2008978A1 /* commonFunctions.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2672, 5252}}";
-			sepNavSelRange = "{3567, 0}";
+			sepNavSelRange = "{3013, 0}";
 			sepNavVisRange = "{2461, 2005}";
 			sepNavWindowFrame = "{{146, 88}, {1392, 926}}";
 		};
@@ -2191,7 +2277,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -2339,7 +2425,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -2489,7 +2575,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -2629,7 +2715,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -2749,7 +2835,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -2843,7 +2929,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -2927,7 +3013,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1507;
 		vrLoc = 990;
@@ -2937,7 +3023,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3027,7 +3113,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 152;
-		rLoc = 1696;
+		rLoc = 2034;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3127,7 +3213,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 0;
-		rLoc = 1718;
+		rLoc = 2056;
 		rType = 0;
 		vrLen = 1507;
 		vrLoc = 990;
@@ -3217,7 +3303,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 0;
-		rLoc = 1718;
+		rLoc = 2056;
 		rType = 0;
 		vrLen = 1507;
 		vrLoc = 990;
@@ -3307,7 +3393,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 0;
-		rLoc = 1718;
+		rLoc = 2056;
 		rType = 0;
 		vrLen = 1507;
 		vrLoc = 990;
@@ -3397,7 +3483,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 0;
-		rLoc = 1718;
+		rLoc = 2056;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3487,7 +3573,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 0;
-		rLoc = 1718;
+		rLoc = 2056;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3557,7 +3643,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 61";
 		rLen = 0;
-		rLoc = 1718;
+		rLoc = 2056;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3695,7 +3781,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3805,7 +3891,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -3915,7 +4001,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1507;
 		vrLoc = 990;
@@ -4025,7 +4111,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1507;
 		vrLoc = 990;
@@ -4135,7 +4221,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4255,7 +4341,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4375,7 +4461,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4475,7 +4561,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4575,7 +4661,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4694,7 +4780,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4804,7 +4890,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -4914,7 +5000,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -5024,7 +5110,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -5134,7 +5220,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -5244,7 +5330,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -5354,7 +5440,7 @@
 		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
 		name = "AdvancedViewController.m: 53";
 		rLen = 0;
-		rLoc = 1559;
+		rLoc = 1588;
 		rType = 0;
 		vrLen = 1506;
 		vrLoc = 990;
@@ -9042,6 +9128,848 @@
 		vrLen = 1288;
 		vrLoc = 0;
 	};
+	D7BFBBF012231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 645;
+		vrLoc = 2426;
+	};
+	D7BFBBF112231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2055;
+		vrLoc = 2461;
+	};
+	D7BFBBF212231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1764;
+		vrLoc = 1821;
+	};
+	D7BFBBF312231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 3250;
+		vrLoc = 321;
+	};
+	D7BFBBF412231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1941;
+		vrLoc = 132;
+	};
+	D7BFBBF512231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBBF612231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1901;
+		vrLoc = 17706;
+	};
+	D7BFBBF712231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2058;
+		vrLoc = 3;
+	};
+	D7BFBBF812231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 269";
+		rLen = 31;
+		rLoc = 11483;
+		rType = 0;
+		vrLen = 2724;
+		vrLoc = 11077;
+	};
+	D7BFBBF912231EB900409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBBFA12231F5100409E65 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+	};
+	D7BFBBFD12231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 645;
+		vrLoc = 2426;
+	};
+	D7BFBBFE12231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 13";
+		rLen = 0;
+		rLoc = 219;
+		rType = 0;
+		vrLen = 356;
+		vrLoc = 41;
+	};
+	D7BFBBFF12231FE100409E65 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+	};
+	D7BFBC0012231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 457;
+		vrLoc = 1333;
+	};
+	D7BFBC0312231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 65";
+		rLen = 0;
+		rLoc = 2028;
+		rType = 0;
+		vrLen = 2047;
+		vrLoc = 626;
+	};
+	D7BFBC0412231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBC0512231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 284";
+		rLen = 0;
+		rLoc = 12325;
+		rType = 0;
+		vrLen = 2148;
+		vrLoc = 746;
+	};
+	D7BFBC0612231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2055;
+		vrLoc = 2461;
+	};
+	D7BFBC0712231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1764;
+		vrLoc = 1821;
+	};
+	D7BFBC0812231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 3250;
+		vrLoc = 321;
+	};
+	D7BFBC0912231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1941;
+		vrLoc = 132;
+	};
+	D7BFBC0A12231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBC0B12231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1901;
+		vrLoc = 17706;
+	};
+	D7BFBC0C12231FE100409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2058;
+		vrLoc = 3;
+	};
+	D7BFBC0F1223200D00409E65 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = D786909911BD1E8E00642943 /* SettingsViewController.m */;
+	};
+	D7BFBC121223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1333;
+	};
+	D7BFBC151223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D786909911BD1E8E00642943 /* SettingsViewController.m */;
+		name = "SettingsViewController.m: 140";
+		rLen = 0;
+		rLoc = 4190;
+		rType = 0;
+		vrLen = 1381;
+		vrLoc = 3676;
+	};
+	D7BFBC161223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 43";
+		rLen = 0;
+		rLoc = 1329;
+		rType = 0;
+		vrLen = 1986;
+		vrLoc = 626;
+	};
+	D7BFBC171223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBC181223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 284";
+		rLen = 0;
+		rLoc = 12325;
+		rType = 0;
+		vrLen = 2102;
+		vrLoc = 746;
+	};
+	D7BFBC191223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2461;
+	};
+	D7BFBC1A1223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 1821;
+	};
+	D7BFBC1B1223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 2879;
+		vrLoc = 321;
+	};
+	D7BFBC1C1223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1874;
+		vrLoc = 132;
+	};
+	D7BFBC1D1223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBC1E1223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1773;
+		vrLoc = 17706;
+	};
+	D7BFBC1F1223202C00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2012;
+		vrLoc = 3;
+	};
+	D7BFBC211223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1333;
+	};
+	D7BFBC221223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 67";
+		rLen = 0;
+		rLoc = 2064;
+		rType = 0;
+		vrLen = 1770;
+		vrLoc = 1015;
+	};
+	D7BFBC231223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D786909911BD1E8E00642943 /* SettingsViewController.m */;
+		name = "SettingsViewController.m: 140";
+		rLen = 0;
+		rLoc = 4190;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 3676;
+	};
+	D7BFBC241223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBC251223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 284";
+		rLen = 0;
+		rLoc = 12325;
+		rType = 0;
+		vrLen = 2102;
+		vrLoc = 746;
+	};
+	D7BFBC261223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2461;
+	};
+	D7BFBC271223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 1821;
+	};
+	D7BFBC281223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 2879;
+		vrLoc = 321;
+	};
+	D7BFBC291223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1874;
+		vrLoc = 132;
+	};
+	D7BFBC2A1223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBC2B1223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1773;
+		vrLoc = 17706;
+	};
+	D7BFBC2C1223204800409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2012;
+		vrLoc = 3;
+	};
+	D7BFBC301223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1333;
+	};
+	D7BFBC311223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 67";
+		rLen = 0;
+		rLoc = 2064;
+		rType = 0;
+		vrLen = 1770;
+		vrLoc = 1015;
+	};
+	D7BFBC321223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D786909911BD1E8E00642943 /* SettingsViewController.m */;
+		name = "SettingsViewController.m: 140";
+		rLen = 0;
+		rLoc = 4190;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 3676;
+	};
+	D7BFBC331223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBC341223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 284";
+		rLen = 0;
+		rLoc = 12325;
+		rType = 0;
+		vrLen = 2102;
+		vrLoc = 746;
+	};
+	D7BFBC351223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2461;
+	};
+	D7BFBC361223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 1821;
+	};
+	D7BFBC371223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 2879;
+		vrLoc = 321;
+	};
+	D7BFBC381223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1874;
+		vrLoc = 132;
+	};
+	D7BFBC391223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBC3A1223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1773;
+		vrLoc = 17706;
+	};
+	D7BFBC3B1223208A00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2012;
+		vrLoc = 3;
+	};
+	D7BFBC3F1223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1333;
+	};
+	D7BFBC401223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D786909911BD1E8E00642943 /* SettingsViewController.m */;
+		name = "SettingsViewController.m: 140";
+		rLen = 0;
+		rLoc = 4190;
+		rType = 0;
+		vrLen = 1381;
+		vrLoc = 3676;
+	};
+	D7BFBC411223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 67";
+		rLen = 0;
+		rLoc = 2064;
+		rType = 0;
+		vrLen = 1770;
+		vrLoc = 1015;
+	};
+	D7BFBC421223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBC431223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 284";
+		rLen = 0;
+		rLoc = 12325;
+		rType = 0;
+		vrLen = 2102;
+		vrLoc = 746;
+	};
+	D7BFBC441223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2461;
+	};
+	D7BFBC451223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 1821;
+	};
+	D7BFBC461223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 2879;
+		vrLoc = 321;
+	};
+	D7BFBC471223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1874;
+		vrLoc = 132;
+	};
+	D7BFBC481223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBC491223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1773;
+		vrLoc = 17706;
+	};
+	D7BFBC4A1223209D00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2012;
+		vrLoc = 3;
+	};
+	D7BFBC4E122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1333;
+	};
+	D7BFBC4F122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 67";
+		rLen = 0;
+		rLoc = 2064;
+		rType = 0;
+		vrLen = 1770;
+		vrLoc = 1015;
+	};
+	D7BFBC50122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D786909911BD1E8E00642943 /* SettingsViewController.m */;
+		name = "SettingsViewController.m: 140";
+		rLen = 0;
+		rLoc = 4190;
+		rType = 0;
+		vrLen = 1381;
+		vrLoc = 3676;
+	};
+	D7BFBC51122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D7BFBC52122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AF11BD234A00642943 /* DroidViewController.m */;
+		name = "DroidViewController.m: 284";
+		rLen = 0;
+		rLoc = 12325;
+		rType = 0;
+		vrLen = 2102;
+		vrLoc = 746;
+	};
+	D7BFBC53122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2461;
+	};
+	D7BFBC54122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690B111BD234A00642943 /* HomeViewController.m */;
+		name = "HomeViewController.m: 96";
+		rLen = 0;
+		rLoc = 2666;
+		rType = 0;
+		vrLen = 1758;
+		vrLoc = 1821;
+	};
+	D7BFBC55122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 2879;
+		vrLoc = 321;
+	};
+	D7BFBC56122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1874;
+		vrLoc = 132;
+	};
+	D7BFBC57122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D7BFBC58122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 530";
+		rLen = 0;
+		rLoc = 18716;
+		rType = 0;
+		vrLen = 1773;
+		vrLoc = 17706;
+	};
+	D7BFBC59122320CF00409E65 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2012;
+		vrLoc = 3;
+	};
 	D7C152FA121A9C5C005B2F61 /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* Bootlace-Info.plist */;
@@ -9118,9 +10046,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 51;
-		modificationTime = 304291259.897879;
+		modificationTime = 304292049.304577;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	D7C62BF111C6BC3A0049C24B /* bzip2Lib.m:61 */ = {
 		isa = PBXFileBreakpoint;
@@ -9135,9 +10063,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 61;
-		modificationTime = 304291259.897836;
+		modificationTime = 304292049.304623;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	D7C62BF311C6BC3C0049C24B /* bzip2Lib.m:64 */ = {
 		isa = PBXFileBreakpoint;
@@ -9152,9 +10080,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 64;
-		modificationTime = 304291259.897861;
+		modificationTime = 304292049.304635;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	D7C62BF511C6BC3E0049C24B /* bzip2Lib.m:79 */ = {
 		isa = PBXFileBreakpoint;
@@ -9169,9 +10097,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 79;
-		modificationTime = 304291259.897897;
+		modificationTime = 304292049.304649;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	D7C805A311C6F002006620C6 /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -9453,17 +10381,17 @@
 	};
 	D7E14E301206F9A300156F7E /* AdvancedViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {955, 403}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 341}";
+			sepNavIntBoundsRect = "{{0, 0}, {1273, 773}}";
+			sepNavSelRange = "{603, 0}";
+			sepNavVisRange = "{0, 895}";
 			sepNavWindowFrame = "{{150, 59}, {1332, 901}}";
 		};
 	};
 	D7E14E311206F9A300156F7E /* AdvancedViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1273, 1222}}";
-			sepNavSelRange = "{1559, 0}";
-			sepNavVisRange = "{990, 1506}";
+			sepNavIntBoundsRect = "{{0, 0}, {1273, 1261}}";
+			sepNavSelRange = "{2064, 0}";
+			sepNavVisRange = "{1015, 1770}";
 			sepNavWindowFrame = "{{127, 80}, {1332, 901}}";
 		};
 	};
