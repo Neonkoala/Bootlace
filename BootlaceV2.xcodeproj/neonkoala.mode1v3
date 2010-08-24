@@ -202,6 +202,46 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
+				<string>D7CDFF0612201510008B07A6</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>installClass.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>D7CDFF0712201510008B07A6</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>installClass.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>D7DCEBBD1223EE0A0032273A</string>
+						<key>history</key>
+						<array>
+							<string>D7BFBC63122322C000409E65</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1332, 804}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>168 130 1332 845 0 0 1680 1028 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
 				<string>D7BFBC0112231FE100409E65</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>AdvancedViewController.m</string>
@@ -216,10 +256,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC4F122320CF00409E65</string>
+						<string>D7DCEBBE1223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFBBFA12231F5100409E65</string>
+							<string>D7BFBC5C122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -242,46 +282,6 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>D7BFBC131223202C00409E65</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>SettingsViewController.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>D7BFBC141223202C00409E65</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>SettingsViewController.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>D7BFBC50122320CF00409E65</string>
-						<key>history</key>
-						<array>
-							<string>D7BFBC0F1223200D00409E65</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1247, 753}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>396 107 1247 794 0 0 1680 1028 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
 				<string>D7DEFFE4122060BF00FA5F8F</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>commonFunctions.h</string>
@@ -296,10 +296,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC51122320CF00409E65</string>
+						<string>D7DCEBBF1223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7DA7439122073BB00A27DC6</string>
+							<string>D7BFBC5D122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -336,10 +336,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC52122320CF00409E65</string>
+						<string>D7DCEBC01223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFB9191222F9DC00409E65</string>
+							<string>D7BFBC5E122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -376,10 +376,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC53122320CF00409E65</string>
+						<string>D7DCEBC11223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFBBE212231DBE00409E65</string>
+							<string>D7BFBC5F122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -402,46 +402,6 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>D7BFBBCF12231D9600409E65</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>HomeViewController.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>D7BFBBD012231D9600409E65</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>HomeViewController.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>D7BFBC54122320CF00409E65</string>
-						<key>history</key>
-						<array>
-							<string>D7BFBBCA12231D8C00409E65</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1247, 753}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>175 145 1247 794 0 0 1680 1028 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
 				<string>D7BFB9A31222FBBA00409E65</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>DroidAdvancedViewController.m</string>
@@ -456,10 +416,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC55122320CF00409E65</string>
+						<string>D7DCEBC21223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFBA471223092E00409E65</string>
+							<string>D7BFBC60122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -496,10 +456,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC56122320CF00409E65</string>
+						<string>D7DCEBC31223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFBBA512231CC400409E65</string>
+							<string>D7BFBC61122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -536,10 +496,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC57122320CF00409E65</string>
+						<string>D7DCEBC41223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFBB9912231C8300409E65</string>
+							<string>D7BFBC62122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -562,46 +522,6 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>D7CDFF0612201510008B07A6</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>installClass.m</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>D7CDFF0712201510008B07A6</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>installClass.m</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>D7BFBC58122320CF00409E65</string>
-						<key>history</key>
-						<array>
-							<string>D7DA7435122073BB00A27DC6</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1332, 804}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>168 130 1332 845 0 0 1680 1028 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
 				<string>D7BFB9211222FA2200409E65</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>DroidViewController.h</string>
@@ -616,10 +536,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D7BFBC59122320CF00409E65</string>
+						<string>D7DCEBC51223EE0A0032273A</string>
 						<key>history</key>
 						<array>
-							<string>D7BFB9181222F9D100409E65</string>
+							<string>D7BFBC64122322C000409E65</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -772,7 +692,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D7BFBC4E122320CF00409E65</string>
+										<string>D7DCEBBC1223EE0A0032273A</string>
 										<key>history</key>
 										<array>
 											<string>D78692A811BD590800642943</string>
@@ -811,7 +731,7 @@
 											<string>D7BFBBCD12231D9600409E65</string>
 											<string>D7BFBBFD12231FE100409E65</string>
 											<string>D7BFBBFE12231FE100409E65</string>
-											<string>D7BFBBFF12231FE100409E65</string>
+											<string>D7BFBC5B122322C000409E65</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -823,14 +743,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1016, 245}}</string>
+								<string>{{0, 0}, {1016, 230}}</string>
 								<key>RubberWindowFrame</key>
 								<string>289 149 1224 862 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>245pt</string>
+							<string>230pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -843,14 +763,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 250}, {1016, 571}}</string>
+								<string>{{0, 235}, {1016, 586}}</string>
 								<key>RubberWindowFrame</key>
 								<string>289 149 1224 862 0 0 1680 1028 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>571pt</string>
+							<string>586pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -869,9 +789,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>D7BFB7CB1222D02B00409E65</string>
+				<string>D7DCEB361223E9530032273A</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>D7BFB7CC1222D02B00409E65</string>
+				<string>D7DCEB371223E9530032273A</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -1009,24 +929,22 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>D7BFBC5A122320CF00409E65</string>
-		<string>D7BFB8011222DD0900409E65</string>
-		<string>D7BFB8021222DD0900409E65</string>
+		<string>D7DCEBC61223EE0A0032273A</string>
+		<string>D7DCEB491223E9530032273A</string>
+		<string>D7DCEB4A1223E9530032273A</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>D7BFB9211222FA2200409E65</string>
-		<string>D7CDFF0612201510008B07A6</string>
 		<string>D786907111BD1BF600642943</string>
+		<string>D7BFB9211222FA2200409E65</string>
 		<string>D7BFB8A31222E92C00409E65</string>
 		<string>D7BFBBAA12231D4900409E65</string>
 		<string>D7BFB9A31222FBBA00409E65</string>
-		<string>D7BFBBCF12231D9600409E65</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>D7BFBAA91223150800409E65</string>
 		<string>D7BFB91E1222FA2200409E65</string>
 		<string>D7DEFFE4122060BF00FA5F8F</string>
 		<string>/Users/neonkoala/Documents/BootlaceV2/BootlaceV2.xcodeproj</string>
-		<string>D7BFBC131223202C00409E65</string>
 		<string>D7BFBC0112231FE100409E65</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>D7CDFF0612201510008B07A6</string>
 	</array>
 	<key>WindowString</key>
 	<string>289 149 1224 862 0 0 1680 1028 </string>
@@ -1050,7 +968,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>DroidAdvancedViewController.h</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -1067,8 +985,6 @@
 							<string>355pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1108,7 +1024,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>D786907111BD1BF600642943</string>
-				<string>D7BFB7D31222D02B00409E65</string>
+				<string>D7DCEB411223E9530032273A</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -1121,7 +1037,7 @@
 			<key>WindowToolGUID</key>
 			<string>D786907111BD1BF600642943</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -1230,13 +1146,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>D7BFB7FA1222DD0900409E65</string>
+				<string>D7DCEB421223E9530032273A</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>D7BFB7FB1222DD0900409E65</string>
-				<string>D7BFB7FC1222DD0900409E65</string>
-				<string>D7BFB7FD1222DD0900409E65</string>
-				<string>D7BFB7FE1222DD0900409E65</string>
-				<string>D7BFB7FF1222DD0900409E65</string>
+				<string>D7DCEB431223E9530032273A</string>
+				<string>D7DCEB441223E9530032273A</string>
+				<string>D7DCEB451223E9530032273A</string>
+				<string>D7DCEB461223E9530032273A</string>
+				<string>D7DCEB471223E9530032273A</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1392,7 +1308,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>D7BFB8001222DD0900409E65</string>
+				<string>D7DCEB481223E9530032273A</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

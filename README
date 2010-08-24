@@ -1,18 +1,18 @@
 Bootlace
 by Nick Dawson (Neonkoala)
 
-V2.0
+V2.0.2
 
-Credits: planetbeing, poorlad, marky and apocolipse.
+Credits: planetbeing, poorlad, marky, apocolipse and Kevin Elliott.
 
-Status: Stable
+Status: Testing
 
 Requirements
 
 This app requires OpeniBoot 0.1.1
 
 Other requirements:
-* iOS 3.1.2 -> 4.0.1
+* iOS 3.1.2 -> 4.0.2
 * An internet connection for iDroid install/upgrade features
 * iPhone 3G, 2G or iPod Touch 1G
 * Bravery - my code is hardly the best :P
@@ -29,3 +29,9 @@ To Install To Device
 Usage
 
 See http://www.idroidproject.org/wiki/Bootlace
+
+License:
+
+Licensed under MPL-1.1 with a view to move to 2.0 when available.
+
+http://www.mozilla.org/MPL/MPL-1.1.txt

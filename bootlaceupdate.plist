@@ -156,10 +156,8 @@
 			<string>2.2</string>
 			<key>ReleaseDate</key>
 			<date>2010-08-04T19:00:00Z</date>
-			<key>URLreal</key>
-			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-3G.tar.gz</string>
 			<key>URL</key>
-			<string>http://192.168.0.13/~neonkoala/iDroid-1.0-MoJo-3G.tar.gz</string>
+			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-3G.tar.gz</string>
 			<key>MD5</key>
 			<string>ad0e72cbcdbc57ff170d02319e986992</string>
 			<key>Size</key>

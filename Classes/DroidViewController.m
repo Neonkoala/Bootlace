@@ -324,6 +324,9 @@
 			keepAlive = NO;
 		}
 		switch (sharedData.updateStage) {
+			case 1:
+				installStageLabel.text = @"Downloading iDroid";
+				break;
 			case 2:
 				installStageLabel.text = @"Verifying iDroid";
 				break;

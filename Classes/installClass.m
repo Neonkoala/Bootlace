@@ -135,46 +135,75 @@
 	
 	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
-	DLog(@"DEBUG: updateURL = %@", sharedData.updateURL);
-	DLog(@"DEBUG: workingDirectory = %@", sharedData.workingDirectory);
+	NSString *match = @"*tar.gz";
 	
-	[getFileInstance getFileDownload:self];
+	NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sharedData.workingDirectory error:nil];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+	NSArray *results = [dirContents filteredArrayUsingPredicate:predicate];
 	
-	BOOL keepAlive = YES;
+	if([results objectAtIndex:0]) {
+		DLog(@"Found downloaded package: %@ \r\nChecking MD5.", [results objectAtIndex:0]);
+		
+		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+		
+		NSString *pkg = [sharedData.workingDirectory stringByAppendingPathComponent:[results objectAtIndex:0]];
+		NSString *md5hash = [self fileMD5:pkg];
+		
+		DLog(@"Found package MD5: %@", md5hash);
+		
+		if([sharedData.updateMD5 isEqualToString:md5hash]) {
+			[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+			sharedData.updatePackagePath = pkg;
+		} else {
+			DLog(@"MD5 mismatch redownloading.");
+			[[NSFileManager defaultManager] removeItemAtPath:pkg error:nil];
+			
+			sharedData.updateStage = 1;
+		}
+	}
 	
-	do {        
-        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-        //Check NSURLConnection for activity
-        if (getFileInstance.getFileWorking == NO) {
-            keepAlive = NO;
-        }
-		if(sharedData.updateFail == 1) {
-			DLog(@"DEBUG: Failed to get iDroid package. Cleaning up.");
+	if(sharedData.updateStage == 1) {
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
+		DLog(@"DEBUG: updateURL = %@", sharedData.updateURL);
+		DLog(@"DEBUG: workingDirectory = %@", sharedData.workingDirectory);
+		
+		[getFileInstance getFileDownload:self];
+		
+		BOOL keepAlive = YES;
+		
+		do {        
+			CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+			//Check NSURLConnection for activity
+			if (getFileInstance.getFileWorking == NO) {
+				keepAlive = NO;
+			}
+			if(sharedData.updateFail == 1) {
+				DLog(@"DEBUG: Failed to get iDroid package. Cleaning up.");
+				[self cleanUp];
+				return;
+			}
+		} while (keepAlive);
+		
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		
+		sharedData.updatePackagePath = getFileInstance.getFilePath;
+		
+		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+		
+		//Calculate file MD5
+		NSString *md5hash = [self fileMD5:sharedData.updatePackagePath];
+		DLog(@"MD5 Hash: %@", md5hash);
+		
+		if(![sharedData.updateMD5 isEqualToString:md5hash]) {
+			DLog(@"MD5 hash does not match, assuming download is corrupt.");
+			sharedData.updateFail = 0;
 			[self cleanUp];
 			return;
 		}
-    } while (keepAlive);
-	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	
-	sharedData.updatePackagePath = getFileInstance.getFilePath;
-	
-	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
-	
-	//Calculate file MD5
-	NSString *md5hash = [self fileMD5:sharedData.updatePackagePath];
-	DLog(@"MD5 Hash: %@", md5hash);
-	
-	if(![sharedData.updateMD5 isEqualToString:md5hash]) {
-		DLog(@"MD5 hash does not match, assuming download is corrupt.");
-		sharedData.updateFail = 0;
-		[self cleanUp];
-		return;
+		
+		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	}
-	
-	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
 	//Extract file
 	NSString *tarDest = [sharedData.workingDirectory stringByAppendingPathComponent:@"idroid.tar"];
@@ -344,7 +373,7 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
+	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {
