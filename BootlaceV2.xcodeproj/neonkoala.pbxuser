@@ -156,6 +156,15 @@
 			D791EF58122FCA8E007943CD /* PBXTextBookmark */ = D791EF58122FCA8E007943CD /* PBXTextBookmark */;
 			D791EF59122FCA8E007943CD /* PBXTextBookmark */ = D791EF59122FCA8E007943CD /* PBXTextBookmark */;
 			D791EF5A122FCA8E007943CD /* PBXTextBookmark */ = D791EF5A122FCA8E007943CD /* PBXTextBookmark */;
+			D791EF5E122FCE02007943CD /* PBXTextBookmark */ = D791EF5E122FCE02007943CD /* PBXTextBookmark */;
+			D791EF5F122FCE02007943CD /* PBXTextBookmark */ = D791EF5F122FCE02007943CD /* PBXTextBookmark */;
+			D791EF60122FCE02007943CD /* PBXTextBookmark */ = D791EF60122FCE02007943CD /* PBXTextBookmark */;
+			D791EF61122FCE02007943CD /* PBXTextBookmark */ = D791EF61122FCE02007943CD /* PBXTextBookmark */;
+			D791EF62122FCE02007943CD /* PBXTextBookmark */ = D791EF62122FCE02007943CD /* PBXTextBookmark */;
+			D791EF63122FCE02007943CD /* PBXTextBookmark */ = D791EF63122FCE02007943CD /* PBXTextBookmark */;
+			D791EF64122FCE02007943CD /* PBXTextBookmark */ = D791EF64122FCE02007943CD /* PBXTextBookmark */;
+			D791EF65122FCE02007943CD /* PBXTextBookmark */ = D791EF65122FCE02007943CD /* PBXTextBookmark */;
+			D791EF66122FCE02007943CD /* PBXTextBookmark */ = D791EF66122FCE02007943CD /* PBXTextBookmark */;
 			D792BBBA11F9D01300E93354 = D792BBBA11F9D01300E93354 /* PBXTextBookmark */;
 			D793680D1211822700D3CE6A = D793680D1211822700D3CE6A /* PBXTextBookmark */;
 			D793680F1211822700D3CE6A = D793680F1211822700D3CE6A /* PBXTextBookmark */;
@@ -255,7 +264,7 @@
 		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
 		name = "installClass.m: 144";
 		rLen = 0;
-		rLoc = 5587;
+		rLoc = 5664;
 		rType = 0;
 		vrLen = 2133;
 		vrLoc = 4979;
@@ -416,7 +425,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1188, 884}}";
 			sepNavSelRange = "{638, 26}";
-			sepNavVisRange = "{3, 2058}";
+			sepNavVisRange = "{3, 2011}";
 			sepNavWindowFrame = "{{129, 131}, {1247, 850}}";
 		};
 	};
@@ -494,7 +503,7 @@
 		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
 		name = "installClass.m: 144";
 		rLen = 0;
-		rLoc = 5587;
+		rLoc = 5664;
 		rType = 0;
 		vrLen = 2059;
 		vrLoc = 4979;
@@ -557,6 +566,96 @@
 		rLoc = 638;
 		rType = 0;
 		vrLen = 2058;
+		vrLoc = 3;
+	};
+	D791EF5E122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 52";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 231;
+		vrLoc = 1442;
+	};
+	D791EF5F122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
+		name = "installClass.m: 306";
+		rLen = 0;
+		rLoc = 10403;
+		rType = 0;
+		vrLen = 1635;
+		vrLoc = 9514;
+	};
+	D791EF60122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */;
+		name = "AdvancedViewController.m: 16";
+		rLen = 0;
+		rLoc = 351;
+		rType = 0;
+		vrLen = 1673;
+		vrLoc = 0;
+	};
+	D791EF61122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AF11BE5FD2008978A1 /* commonFunctions.h */;
+		name = "commonFunctions.h: 26";
+		rLen = 0;
+		rLoc = 566;
+		rType = 0;
+		vrLen = 1288;
+		vrLoc = 0;
+	};
+	D791EF62122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */;
+		name = "commonFunctions.m: 156";
+		rLen = 0;
+		rLoc = 3013;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 2461;
+	};
+	D791EF63122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */;
+		name = "DroidAdvancedViewController.m: 44";
+		rLen = 0;
+		rLoc = 1592;
+		rType = 0;
+		vrLen = 2879;
+		vrLoc = 321;
+	};
+	D791EF64122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7B332AD11BE5FD2008978A1 /* commonData.h */;
+		name = "commonData.h: 50";
+		rLen = 0;
+		rLoc = 1084;
+		rType = 0;
+		vrLen = 1760;
+		vrLoc = 129;
+	};
+	D791EF65122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */;
+		name = "DroidAdvancedViewController.h: 15";
+		rLen = 0;
+		rLoc = 301;
+		rType = 0;
+		vrLen = 910;
+		vrLoc = 0;
+	};
+	D791EF66122FCE02007943CD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D78690AE11BD234A00642943 /* DroidViewController.h */;
+		name = "DroidViewController.h: 25";
+		rLen = 26;
+		rLoc = 638;
+		rType = 0;
+		vrLen = 2011;
 		vrLoc = 3;
 	};
 	D792BBBA11F9D01300E93354 /* PBXTextBookmark */ = {
@@ -624,9 +723,9 @@
 	};
 	D7A8358C11FD965F009C8D6D /* installClass.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1307, 7527}}";
-			sepNavSelRange = "{5587, 0}";
-			sepNavVisRange = "{4979, 2059}";
+			sepNavIntBoundsRect = "{{0, 0}, {1273, 8294}}";
+			sepNavSelRange = "{10403, 0}";
+			sepNavVisRange = "{9514, 1635}";
 			sepNavWindowFrame = "{{168, 74}, {1332, 901}}";
 		};
 	};
@@ -645,7 +744,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1255, 1365}}";
 			sepNavSelRange = "{1084, 0}";
-			sepNavVisRange = "{129, 1877}";
+			sepNavVisRange = "{129, 1760}";
 			sepNavWindowFrame = "{{240, 54}, {1314, 965}}";
 		};
 	};
@@ -659,7 +758,7 @@
 	};
 	D7B332AF11BE5FD2008978A1 /* commonFunctions.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1255, 837}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1255, 814}}";
 			sepNavSelRange = "{566, 0}";
 			sepNavVisRange = "{0, 1288}";
 			sepNavWindowFrame = "{{336, 50}, {1314, 965}}";
@@ -669,7 +768,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2672, 5408}}";
 			sepNavSelRange = "{3013, 0}";
-			sepNavVisRange = "{2461, 2055}";
+			sepNavVisRange = "{2461, 2005}";
 			sepNavWindowFrame = "{{146, 88}, {1392, 926}}";
 		};
 	};
@@ -739,7 +838,7 @@
 	};
 	D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1273, 773}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1273, 750}}";
 			sepNavSelRange = "{301, 0}";
 			sepNavVisRange = "{0, 910}";
 			sepNavWindowFrame = "{{81, 122}, {1332, 901}}";
@@ -749,7 +848,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1986, 1755}}";
 			sepNavSelRange = "{1592, 0}";
-			sepNavVisRange = "{321, 3250}";
+			sepNavVisRange = "{321, 2879}";
 			sepNavWindowFrame = "{{104, 101}, {1332, 901}}";
 		};
 	};
@@ -1079,7 +1178,7 @@
 		fRef = D7A8358C11FD965F009C8D6D /* installClass.m */;
 		name = "installClass.m: 551";
 		rLen = 0;
-		rLoc = 20979;
+		rLoc = 21138;
 		rType = 0;
 		vrLen = 0;
 		vrLoc = 0;
@@ -1135,8 +1234,8 @@
 	D7E14E311206F9A300156F7E /* AdvancedViewController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1273, 1300}}";
-			sepNavSelRange = "{762, 0}";
-			sepNavVisRange = "{1308, 1527}";
+			sepNavSelRange = "{351, 0}";
+			sepNavVisRange = "{0, 1673}";
 			sepNavWindowFrame = "{{127, 80}, {1332, 901}}";
 		};
 	};

@@ -133,6 +133,8 @@
 	sharedData.updateFail = 0;
 	sharedData.updateStage = 0;
 	
+	[UIApplication sharedApplication].idleTimerDisabled = YES; //Stop autlock
+	
 	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
 	NSString *match = @"*tar.gz";
@@ -300,6 +302,8 @@
 		[self cleanUp];
 		return;
 	}
+	
+	[UIApplication sharedApplication].idleTimerDisabled = NO; //Re-enable autolock
 	
 	[self checkInstalled];
 	
