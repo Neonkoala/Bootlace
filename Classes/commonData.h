@@ -12,6 +12,7 @@
 @interface commonData : NSObject {
 	//Initialisation variables
 	BOOL firstLaunchVal;
+	BOOL warningLive;
 	NSString *platform;
 	NSString *workingDirectory;
 	
@@ -52,6 +53,7 @@
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
+@property (nonatomic, assign) BOOL warningLive;
 @property (nonatomic, retain) NSString *platform;
 @property (nonatomic, retain) NSString *workingDirectory;
 

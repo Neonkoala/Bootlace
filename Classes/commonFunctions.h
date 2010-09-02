@@ -44,9 +44,11 @@
 - (int)callRestoreNVRAM;
 - (int)resetNVRAM;
 - (int)applyNVRAM;
+- (BOOL)checkMains;
 - (void)getPlatform;
 - (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;
+- (void)sendWarning:(NSString *)alertMsg;
 - (void)sendTerminalError:(NSString *)alertMsg;
 - (void)sendConfirmation:(NSString *)alertMsg withTag:(int)tag;
 - (void)sendSuccess:(NSString *)alertMsg;

@@ -158,6 +158,19 @@
 	return success;
 }
 
+- (BOOL)checkMains {
+	BOOL mains = NO;
+	
+	[[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+	
+	if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging) {
+		mains = YES;
+		DLog(@"Device is charging.");
+	}
+	
+	return mains;
+}
+
 - (void)getPlatform {
 	commonData* sharedData = [commonData sharedData];
 	
@@ -190,6 +203,17 @@
 	[errorAlert show];
 }
 
+- (void)sendWarning:(NSString *)alertMsg {
+	commonData* sharedData = [commonData sharedData];
+	
+	UIAlertView *warningAlert;
+	warningAlert = [[[UIAlertView alloc] initWithTitle:@"Warning" message:alertMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+	[warningAlert setTag:10];
+	[warningAlert show];
+	
+	sharedData.warningLive = YES;
+}
+
 - (void)sendTerminalError:(NSString *)alertMsg {
 	UIAlertView *errorAlert;
 	errorAlert = [[[UIAlertView alloc] initWithTitle:@"Error" message:alertMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
@@ -211,182 +235,214 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	//Fatal error terminate app
-    if(alertView.tag == 1) {
-		exit(0);
-    }
-	//Confirm reboot, call android setter
-	if(buttonIndex==1 && alertView.tag==2){
-		int success = [self rebootAndroid];
+	switch (alertView.tag) {
+		//Fatal error terminate app
+		case 1:
+			exit(0);
+			break;
 		
-		switch (success) {
-			case 0:
-				reboot(0);
-				break;
-			case -1:
-				[self sendError:@"NVRAM could not be accessed.\r\nReboot failed."];
-				break;
-			case -2:
-				[self sendError:@"Attempted to write invalid data to NVRAM.\r\nReboot failed."];
-				break;
-			default:
-				break;
-		}
-	}
-	//Confirm reboot, call console setter
-	if(buttonIndex==1 && alertView.tag==3){
-		int success = [self rebootConsole];
-		
-		switch (success) {
-			case 0:
-				reboot(0);
-				break;
-			case -1:
-				[self sendError:@"NVRAM could not be accessed.\r\nReboot failed."];
-				break;
-			case -2:
-				[self sendError:@"Attempted to write invalid data to NVRAM.\r\nReboot failed."];
-				break;
-			default:
-				break;
-		}
-	}
-	//Confirm backup, create it
-	if(buttonIndex==1 && alertView.tag==4){
-		int success = [self callBackupNVRAM];
-		
-		switch (success) {
-			case 0:
-				[self sendSuccess:@"NVRAM configuration successfully backed up."];
-				break;
-			case -1:
-				[self sendError:@"Backup failed.\r\nNVRAM could not be accessed."];
-				break;
-			case -2:
-				[self sendError:@"Backup failed.\r\nExisting backup could not be removed."];
-				break;
-			case -3:
-				[self sendError:@"Backup failed.\r\nBackup could not be saved."];
-				break;
-			default:
-				break;
-		}
-	}
-	//Confirm restore, restore it
-	if(buttonIndex==1 && alertView.tag==5){
-		int success = [self callRestoreNVRAM];
-		
-		switch (success) {
-			case 0:
-				[self sendSuccess:@"NVRAM configuration successfully restored."];
-				break;
-			case -1:
-				[self sendError:@"Restore failed.\r\nNVRAM could not be accessed."];
-				break;
-			case -2:
-				[self sendError:@"Restore failed.\r\nNVRAM backup could not be read."];
-				break;
-			case -3:
-				[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
-				break;
-			case -4:
-				[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
-				break;
-			case -5:
-				[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
-				break;
-			case -6:
-				[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
-				break;
-			case -7:
-				[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
-				break;
-			case -8:
-				[self sendTerminalError:@"NVRAM restored but an unknown error occurred."];
-				break;
-			default:
-				break;
-		}
-	}
-	//Confirm reset, apply
-	if(buttonIndex==1 && alertView.tag==6){
-		int success = [self resetNVRAM];
-		
-		switch (success) {
-			case 0:
-				[self sendSuccess:@"OpeniBoot settings successfully reset to defaults."];
-				break;
-			case -1:
-				[self sendError:@"OpeniBoot settings could not be reset.\r\nNVRAM could not be accessed."];
-				break;
-			case -2:
-				[self sendError:@"OpeniBoot settings could not be reset.\r\nInvalid NVRAM configuration."];
-				break;
-			case -3:
-				[self sendError:@"OpeniBoot settings could not be reset.\r\nExisting NVRAM backup could not be removed."];
-				break;	
-			case -4:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -5:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -6:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -7:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -8:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -9:
-				[self sendTerminalError:@"OpeniBoot settings reset but an unknown error occurred."];
-				break;
-			default:
-				break;
-		}
-	}
-	if(buttonIndex==0 && alertView.tag == 8) {
-		exit(0);
-    } else if(buttonIndex==1 && alertView.tag==8) {
-		int success = [self resetNVRAM];
-		
-		switch (success) {
-			case 0:
-				[self sendSuccess:@"OpeniBoot settings successfully reset to defaults."];
-				break;
-			case -1:
-				[self sendError:@"OpeniBoot settings could not be reset.\r\nNVRAM could not be accessed."];
-				break;
-			case -2:
-				[self sendError:@"OpeniBoot settings could not be reset.\r\nInvalid NVRAM configuration."];
-				break;
-			case -3:
-				[self sendError:@"OpeniBoot settings could not be reset.\r\nExisting NVRAM backup could not be removed."];
-				break;	
-			case -4:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -5:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -6:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -7:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -8:
-				[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
-				break;
-			case -9:
-				[self sendTerminalError:@"OpeniBoot settings reset but an unknown error occurred."];
-				break;
-			default:
-				break;
-		}
-	}
+		//Confirm reboot, call android setter
+		case 2:
+			if(buttonIndex==1) {
+				int success = [self rebootAndroid];
+				
+				switch (success) {
+					case 0:
+						reboot(0);
+						break;
+					case -1:
+						[self sendError:@"NVRAM could not be accessed.\r\nReboot failed."];
+						break;
+					case -2:
+						[self sendError:@"Attempted to write invalid data to NVRAM.\r\nReboot failed."];
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+			
+		//Confirm reboot, call console setter
+		case 3:
+			if(buttonIndex==1){
+				int success = [self rebootConsole];
+				
+				switch (success) {
+					case 0:
+						reboot(0);
+						break;
+					case -1:
+						[self sendError:@"NVRAM could not be accessed.\r\nReboot failed."];
+						break;
+					case -2:
+						[self sendError:@"Attempted to write invalid data to NVRAM.\r\nReboot failed."];
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+			
+		//Confirm backup, create it
+		case 4:
+			if(buttonIndex==1){
+				int success = [self callBackupNVRAM];
+				
+				switch (success) {
+					case 0:
+						[self sendSuccess:@"NVRAM configuration successfully backed up."];
+						break;
+					case -1:
+						[self sendError:@"Backup failed.\r\nNVRAM could not be accessed."];
+						break;
+					case -2:
+						[self sendError:@"Backup failed.\r\nExisting backup could not be removed."];
+						break;
+					case -3:
+						[self sendError:@"Backup failed.\r\nBackup could not be saved."];
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+			
+		//Confirm restore, restore it
+		case 5:
+			if(buttonIndex==1){
+				int success = [self callRestoreNVRAM];
+				
+				switch (success) {
+					case 0:
+						[self sendSuccess:@"NVRAM configuration successfully restored."];
+						break;
+					case -1:
+						[self sendError:@"Restore failed.\r\nNVRAM could not be accessed."];
+						break;
+					case -2:
+						[self sendError:@"Restore failed.\r\nNVRAM backup could not be read."];
+						break;
+					case -3:
+						[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
+						break;
+					case -4:
+						[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
+						break;
+					case -5:
+						[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
+						break;
+					case -6:
+						[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
+						break;
+					case -7:
+						[self sendTerminalError:@"NVRAM restored but reloading settings failed. Try relaunching the app."];
+						break;
+					case -8:
+						[self sendTerminalError:@"NVRAM restored but an unknown error occurred."];
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+			
+		//Confirm reset, apply
+		case 6:
+			if(buttonIndex==1){
+				int success = [self resetNVRAM];
+				
+				switch (success) {
+					case 0:
+						[self sendSuccess:@"OpeniBoot settings successfully reset to defaults."];
+						break;
+					case -1:
+						[self sendError:@"OpeniBoot settings could not be reset.\r\nNVRAM could not be accessed."];
+						break;
+					case -2:
+						[self sendError:@"OpeniBoot settings could not be reset.\r\nInvalid NVRAM configuration."];
+						break;
+					case -3:
+						[self sendError:@"OpeniBoot settings could not be reset.\r\nExisting NVRAM backup could not be removed."];
+						break;	
+					case -4:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -5:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -6:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -7:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -8:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -9:
+						[self sendTerminalError:@"OpeniBoot settings reset but an unknown error occurred."];
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+			
+		//Resetting Oib settings due to corruption
+		case 8:
+			if(buttonIndex==0) {
+				exit(0);
+			} else if(buttonIndex==1) {
+				int success = [self resetNVRAM];
+				
+				switch (success) {
+					case 0:
+						[self sendSuccess:@"OpeniBoot settings successfully reset to defaults."];
+						break;
+					case -1:
+						[self sendError:@"OpeniBoot settings could not be reset.\r\nNVRAM could not be accessed."];
+						break;
+					case -2:
+						[self sendError:@"OpeniBoot settings could not be reset.\r\nInvalid NVRAM configuration."];
+						break;
+					case -3:
+						[self sendError:@"OpeniBoot settings could not be reset.\r\nExisting NVRAM backup could not be removed."];
+						break;	
+					case -4:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -5:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -6:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -7:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -8:
+						[self sendTerminalError:@"OpeniBoot settings reset but reloading failed. Try relaunching the app."];
+						break;
+					case -9:
+						[self sendTerminalError:@"OpeniBoot settings reset but an unknown error occurred."];
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+			
+		//Warning, set trigger for loops
+		case 10:
+			if(buttonIndex==0) {
+				commonData* sharedData = [commonData sharedData];
+				sharedData.warningLive = NO;
+			}
+			
+			//Default
+		default:
+			DLog(@"Unknown UIAlertView tag: %d", alertView.tag);
+	}		
 }
 
 

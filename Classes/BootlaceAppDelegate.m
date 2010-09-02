@@ -35,6 +35,9 @@
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
 	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
 	
+	//Set this to false
+	sharedData.warningLive = NO;
+	
 	//Check the platform
 	[commonInstance getPlatform];
 	

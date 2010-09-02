@@ -241,6 +241,19 @@
 }
 
 - (IBAction)installPress:(id)sender {
+	commonInstance = [[commonFunctions alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	BOOL mains = [commonInstance checkMains];
+	
+	if(!mains) {
+		[commonInstance sendWarning:@"It is highly recommended you connect your device to the mains or your computer before continuing as the install process can take some time!"];
+		
+		do {        
+			CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+		} while (sharedData.warningLive);
+	}
+	
 	if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/android.img.gz"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/zImage"]) {
 		UIActionSheet *confirmInstall = [[UIActionSheet alloc] initWithTitle:@"Warning: this will destroy and overwrite any existing iDroid install." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
 		confirmInstall.actionSheetStyle = UIActionSheetStyleBlackOpaque;
