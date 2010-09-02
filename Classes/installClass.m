@@ -141,7 +141,7 @@
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
 	NSArray *results = [dirContents filteredArrayUsingPredicate:predicate];
 	
-	if([results objectAtIndex:0]) {
+	if([results count] > 0) {
 		DLog(@"Found downloaded package: %@ \r\nChecking MD5.", [results objectAtIndex:0]);
 		
 		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
@@ -345,9 +345,6 @@
 	
 	sharedData.updateOverallProgress = ([progress floatValue]/5)+((sharedData.updateStage-1)*0.2);
 	sharedData.updateCurrentProgress = [progress floatValue];
-	
-	DLog(@"Overall Progress: %f", sharedData.updateOverallProgress);
-	DLog(@"Current Progress: %f", sharedData.updateCurrentProgress);
 }
 
 - (void)cleanUp {
