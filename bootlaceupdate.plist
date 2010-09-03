@@ -5,79 +5,39 @@
 	<key>Date</key>
 	<date>2010-08-24T12:20:00Z</date>
 	<key>Upgrade</key>
-	<dict/>
+	<dict>
+		<key>PreviousVersion</key>
+		<dict>
+			<key>iPhone1,1</key>
+			<string>1.0.1</string>
+			<key>iPhone1,2</key>
+			<string>1.0</string>
+			<key>iPod1,1</key>
+			<string>1.0</string>
+		</dict>
+		<key>Delta</key>
+		<dict>
+			<key>iPhone1,1</key>
+			<dict/>
+			<key>iPhone1,2</key>
+			<dict>
+				<key>RemoveFiles</key>
+				<array/>
+				<key>MoveFiles</key>
+				<dict/>
+				<key>AddFiles</key>
+				<array/>
+				<key>PostInstall</key>
+				<string></string>
+			</dict>
+			<key>iPod1,1</key>
+			<dict/>
+		</dict>
+		<key>Combo</key>
+		<dict/>
+	</dict>
 	<key>LatestVersion</key>
 	<dict>
-		<key>iPod1,1</key>
-		<dict>
-			<key>iDroidVersion</key>
-			<string>1.0</string>
-			<key>AndroidVersion</key>
-			<string>2.2</string>
-			<key>ReleaseDate</key>
-			<date>2010-08-12T19:00:00Z</date>
-			<key>URL</key>
-			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-IPT1G.tar.gz</string>
-			<key>MD5</key>
-			<string>a42a949f1d6865a57039706583fd1d61</string>
-			<key>Size</key>
-			<integer>159662080</integer>
-			<key>Clean</key>
-			<string>iDroid-1.0-MoJo-IPT1G</string>
-			<key>Files</key>
-			<dict>
-				<key>0</key>
-				<array>
-					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
-					<string>/private/var</string>
-					<string>android.img.gz</string>
-				</array>
-				<key>1</key>
-				<array>
-					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
-					<string>/private/var</string>
-					<string>cache.img</string>
-				</array>
-				<key>2</key>
-				<array>
-					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
-					<string>/private/var</string>
-					<string>system.img</string>
-				</array>
-				<key>3</key>
-				<array>
-					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
-					<string>/private/var</string>
-					<string>userdata.img</string>
-				</array>
-				<key>4</key>
-				<array>
-					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
-					<string>/private/var</string>
-					<string>zImage</string>
-				</array>
-			</dict>
-			<key>Dependencies</key>
-			<dict>
-				<key>Directory</key>
-				<string>/private/var/firmware</string>
-				<key>Multitouch</key>
-				<string>Z2F51,1</string>
-				<key>WiFi</key>
-				<dict>
-					<key>0</key>
-					<array>
-						<string>sd8686.bin</string>
-						<string>http://idroid.neonkoala.co.uk/release/firmware/sd8686.bin</string>
-					</array>
-					<key>1</key>
-					<array>
-						<string>sd8686_helper.bin</string>
-						<string>http://idroid.neonkoala.co.uk/release/firmware/sd8686_helper.bin</string>
-					</array>
-				</dict>
-			</dict>
-		</dict>
 		<key>iPhone1,1</key>
 		<dict>
 			<key>iDroidVersion</key>
@@ -86,6 +46,8 @@
 			<string>2.2</string>
 			<key>ReleaseDate</key>
 			<date>2010-08-04T19:00:00Z</date>
+			<key>OpeniBootRequired</key>
+			<string>0.1.1</string>
 			<key>URL</key>
 			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0.1/iDroid-1.0.1-MoJo-2G.tar.gz</string>
 			<key>MD5</key>
@@ -151,11 +113,13 @@
 		<key>iPhone1,2</key>
 		<dict>
 			<key>iDroidVersion</key>
-			<string>1.0</string>
+			<string>1.0.2</string>
 			<key>AndroidVersion</key>
 			<string>2.2</string>
 			<key>ReleaseDate</key>
-			<date>2010-08-04T19:00:00Z</date>
+			<date>2010-09-04T19:00:00Z</date>
+			<key>OpeniBootRequired</key>
+			<string>0.1.2</string>
 			<key>URL</key>
 			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-3G.tar.gz</string>
 			<key>MD5</key>
@@ -203,6 +167,78 @@
 				<string>/private/var/firmware</string>
 				<key>Multitouch</key>
 				<string>Z2F52,1</string>
+				<key>WiFi</key>
+				<dict>
+					<key>0</key>
+					<array>
+						<string>sd8686.bin</string>
+						<string>http://idroid.neonkoala.co.uk/release/firmware/sd8686.bin</string>
+					</array>
+					<key>1</key>
+					<array>
+						<string>sd8686_helper.bin</string>
+						<string>http://idroid.neonkoala.co.uk/release/firmware/sd8686_helper.bin</string>
+					</array>
+				</dict>
+			</dict>
+		</dict>
+		<key>iPod1,1</key>
+		<dict>
+			<key>iDroidVersion</key>
+			<string>1.0</string>
+			<key>AndroidVersion</key>
+			<string>2.2</string>
+			<key>ReleaseDate</key>
+			<date>2010-08-12T19:00:00Z</date>
+			<key>OpeniBootRequired</key>
+			<string>0.1.1</string>
+			<key>URL</key>
+			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-IPT1G.tar.gz</string>
+			<key>MD5</key>
+			<string>a42a949f1d6865a57039706583fd1d61</string>
+			<key>Size</key>
+			<integer>159662080</integer>
+			<key>Clean</key>
+			<string>iDroid-1.0-MoJo-IPT1G</string>
+			<key>Files</key>
+			<dict>
+				<key>0</key>
+				<array>
+					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
+					<string>/private/var</string>
+					<string>android.img.gz</string>
+				</array>
+				<key>1</key>
+				<array>
+					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
+					<string>/private/var</string>
+					<string>cache.img</string>
+				</array>
+				<key>2</key>
+				<array>
+					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
+					<string>/private/var</string>
+					<string>system.img</string>
+				</array>
+				<key>3</key>
+				<array>
+					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
+					<string>/private/var</string>
+					<string>userdata.img</string>
+				</array>
+				<key>4</key>
+				<array>
+					<string>iDroid-1.0-MoJo-IPT1G/iDroid</string>
+					<string>/private/var</string>
+					<string>zImage</string>
+				</array>
+			</dict>
+			<key>Dependencies</key>
+			<dict>
+				<key>Directory</key>
+				<string>/private/var/firmware</string>
+				<key>Multitouch</key>
+				<string>Z2F51,1</string>
 				<key>WiFi</key>
 				<dict>
 					<key>0</key>

@@ -30,6 +30,9 @@
 	UIProgressView *installOverallProgress;
 	UIProgressView *installCurrentProgress;
 	UILabel *installStageLabel;
+	UIProgressView *upgradeOverallProgress;
+	UIProgressView *upgradeCurrentProgress;
+	UILabel *upgradeStageLabel;
 	UIButton *latestVersionButton;
 	UIGlassButton *installIdroidButton;
 	UIGlassButton *removeIdroidButton;
@@ -48,6 +51,9 @@
 @property (nonatomic, retain) UIProgressView *installOverallProgress;
 @property (nonatomic, retain) UIProgressView *installCurrentProgress;
 @property (nonatomic, retain) UILabel *installStageLabel;
+@property (nonatomic, retain) UIProgressView *upgradeOverallProgress;
+@property (nonatomic, retain) UIProgressView *upgradeCurrentProgress;
+@property (nonatomic, retain) UILabel *upgradeStageLabel;
 @property (nonatomic, retain) UIGlassButton *installIdroidButton;
 @property (nonatomic, retain) UIGlassButton *removeIdroidButton;
 @property (nonatomic, retain) IBOutlet UIButton *latestVersionButton;
@@ -55,11 +61,12 @@
 @property (nonatomic, retain) IBOutlet UIButton *removeIdroidImage;
 
 - (IBAction)checkForUpdatesManual:(id)sender;
-- (IBAction)upgradeIdroid:(id)sender;
 - (IBAction)installPress:(id)sender;
+- (IBAction)upgradePress:(id)sender;
 - (IBAction)removePress:(id)sender;
 - (void)loadAdvanced:(id)sender;
 - (void)installIdroid;
+- (void)upgradeIdroid;
 - (void)removeIdroid;
 - (void)callUpdate;
 - (void)callInstall;

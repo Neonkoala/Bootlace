@@ -30,6 +30,7 @@
 	sharedData.updateVer = [platformDict objectForKey:@"iDroidVersion"];
 	sharedData.updateAndroidVer = [platformDict objectForKey:@"AndroidVersion"];
 	sharedData.updateDate = [platformDict objectForKey:@"ReleaseDate"];
+	sharedData.updateOpibRequired = [platformDict objectForKey:@"OpeniBootRequired"];
 	sharedData.updateURL = [platformDict objectForKey:@"URL"];
 	sharedData.updateMD5 = [platformDict objectForKey:@"MD5"];
 	sharedData.updateSize = [[platformDict objectForKey:@"Size"] intValue];
@@ -53,6 +54,7 @@
 	sharedData.installedVer = [installedDict objectForKey:@"iDroidVersion"];
 	sharedData.installedAndroidVer = [installedDict objectForKey:@"AndroidVersion"];
 	sharedData.installedDate = [installedDict objectForKey:@"InstalledDate"];
+	sharedData.installedOpibRequired = [installedDict objectForKey:@"OpeniBootRequired"];
 	sharedData.installedFiles = [installedDict objectForKey:@"Files"];
 	sharedData.installedDependencies = [installedDict objectForKey:@"Dependencies"];
 	
@@ -374,7 +376,7 @@
 	commonData* sharedData = [commonData sharedData];
 	
 	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
+	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {

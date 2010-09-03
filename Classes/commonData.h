@@ -27,6 +27,7 @@
 	BOOL installed;
 	NSString *installedVer;
 	NSString *installedAndroidVer;
+	NSString *installedOpibRequired;
 	NSDate *installedDate;
 	NSArray *installedFiles;
 	NSArray *installedDependencies;
@@ -43,6 +44,7 @@
 	NSString *updateVer;
 	NSString *updateAndroidVer;
 	NSDate *updateDate;
+	NSString *updateOpibRequired;
 	NSString *updateURL;
 	NSString *updateMD5;
 	NSString *updateFirmwarePath;
@@ -68,6 +70,7 @@
 @property (nonatomic, assign) BOOL installed;
 @property (nonatomic, retain) NSString *installedVer;
 @property (nonatomic, retain) NSString *installedAndroidVer;
+@property (nonatomic, retain) NSString *installedOpibRequired;
 @property (nonatomic, retain) NSDate *installedDate;
 @property (nonatomic, retain) NSArray *installedFiles;
 @property (nonatomic, retain) NSArray *installedDependencies;
@@ -84,6 +87,7 @@
 @property (nonatomic, retain) NSString *updateVer;
 @property (nonatomic, retain) NSString *updateAndroidVer;
 @property (nonatomic, retain) NSDate *updateDate;
+@property (nonatomic, retain) NSString *updateOpibRequired;
 @property (nonatomic, retain) NSString *updateURL;
 @property (nonatomic, retain) NSString *updateMD5;
 @property (nonatomic, retain) NSString *updateFirmwarePath;

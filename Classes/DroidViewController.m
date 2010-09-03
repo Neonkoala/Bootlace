@@ -10,7 +10,7 @@
 
 @implementation DroidViewController
 
-@synthesize installInstance, commonInstance, flipButton, tableView, tableRows, viewInitQueue, cfuSpinner, installOverallProgress, installCurrentProgress, installStageLabel, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
+@synthesize installInstance, commonInstance, flipButton, tableView, tableRows, viewInitQueue, cfuSpinner, installOverallProgress, installCurrentProgress, installStageLabel, upgradeOverallProgress, upgradeCurrentProgress, upgradeStageLabel, latestVersionButton, installIdroidImage, removeIdroidImage, installIdroidButton, removeIdroidButton;
 
 /*
  - (id)initWithStyle:(UITableViewStyle)style {
@@ -89,6 +89,8 @@
 		
 		//Set button titles and unhide remove
 		[installIdroidButton setTitle:@"Upgrade" forState:UIControlStateNormal];
+		[installIdroidButton removeTarget:self action:@selector(installPress:) forControlEvents:UIControlEventTouchUpInside];
+		[installIdroidButton addTarget:self action:@selector(upgradePress:) forControlEvents:UIControlEventTouchUpInside];
 		[removeIdroidButton setHidden:NO];
 		[removeIdroidImage setHidden:NO];
 	} else {
@@ -171,7 +173,8 @@
 		
 		//Setup buttons
 		[installIdroidButton setTitle:@"Upgrade" forState:UIControlStateNormal];
-		[installIdroidButton addTarget:self action:@selector(upgradeIdroid:) forControlEvents:UIControlEventTouchUpInside];
+		[installIdroidButton removeTarget:self action:@selector(installPress:) forControlEvents:UIControlEventTouchUpInside];
+		[installIdroidButton addTarget:self action:@selector(upgradePress:) forControlEvents:UIControlEventTouchUpInside];
 		[installIdroidButton setEnabled:NO];
 		[installIdroidImage setEnabled:NO];
 		[removeIdroidButton setHidden:NO];
@@ -187,6 +190,7 @@
 		
 		//Setup buttons
 		[installIdroidButton setTitle:@"Install" forState:UIControlStateNormal];
+		[installIdroidButton removeTarget:self action:@selector(upgradePress:) forControlEvents:UIControlEventTouchUpInside];
 		[installIdroidButton addTarget:self action:@selector(installPress:) forControlEvents:UIControlEventTouchUpInside];
 		[installIdroidButton setEnabled:YES];
 		[installIdroidImage setEnabled:YES];
@@ -254,7 +258,7 @@
 		} while (sharedData.warningLive);
 	}
 	
-	if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/android.img.gz"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/zImage"]) {
+	if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/android.img.gz"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/zImage"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/idroid/android.img.gz"]) {
 		UIActionSheet *confirmInstall = [[UIActionSheet alloc] initWithTitle:@"Warning: this will destroy and overwrite any existing iDroid install." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
 		confirmInstall.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 		confirmInstall.tag = 10;
@@ -265,16 +269,28 @@
 	}
 }
 
+- (IBAction)upgradePress:(id)sender {
+	commonData* sharedData = [commonData sharedData];
+	
+	//Check if a newer openiboot is needed
+	if([sharedData.updateOpibRequired compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {		
+		NSString *warnTitle = [NSString stringWithFormat:@"Warning: the version of iDroid you are upgrading to requires OpeniBoot %@ but you currently have version %@ installed. Do you wish to continue?", sharedData.updateOpibRequired, sharedData.opibVersion];
+		UIActionSheet *confirmUpgrade = [[UIActionSheet alloc] initWithTitle:warnTitle delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
+		confirmUpgrade.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		confirmUpgrade.tag = 30;
+		[confirmUpgrade showInView:self.tabBarController.view];
+		[confirmUpgrade release];
+	} else {
+		[self upgradeIdroid];
+	}
+}
+
 - (IBAction)removePress:(id)sender {
 	UIActionSheet *confirmRemove = [[UIActionSheet alloc] initWithTitle:@"Are you sure you wish to remove iDroid?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove" otherButtonTitles:nil];
 	confirmRemove.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	confirmRemove.tag = 20;
 	[confirmRemove showInView:self.tabBarController.view];
 	[confirmRemove release];
-}
-
-- (IBAction)upgradeIdroid:(id)sender {
-	//This will be implemented in V1.1.1 or later due to upgrade procedure being unknown currently
 }
 
 - (void)installIdroid {
@@ -401,6 +417,52 @@
 	[installView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
+- (void)upgradeIdroid {
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	
+	[latestVersionButton setTitle:@"" forState:UIControlStateNormal];
+	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[cfuSpinner setCenter:CGPointMake(140, 18)];
+	[cfuSpinner startAnimating];
+	[latestVersionButton addSubview:cfuSpinner];
+	
+	NSDictionary *installedSection = [NSDictionary dictionaryWithObject:[NSMutableArray arrayWithObjects:
+																		 [NSMutableArray arrayWithObjects:@"iDroid Version:", @"loading", nil],
+																		 [NSMutableArray arrayWithObjects:@"Android Version:", @"loading", nil],
+																		 [NSMutableArray arrayWithObjects:@"Date Installed:", @"loading", nil],
+																		 nil]
+																 forKey:@"Installed"];
+	[tableRows replaceObjectAtIndex:0 withObject:installedSection];
+	
+	[self.tableView reloadData];
+	
+	UIAlertView *upgradeView;
+	upgradeView = [[[UIAlertView alloc] initWithTitle:@"Upgrading..." message:@"\r\n\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	[upgradeView show];
+	
+	UIActivityIndicatorView *upgradeSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[upgradeSpinner setCenter:CGPointMake(140, 62)];
+	[upgradeSpinner startAnimating];
+	[upgradeView addSubview:upgradeSpinner];
+	[upgradeSpinner release];
+	
+	upgradeOverallProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(67, 88, 150, 20)];
+    [upgradeView addSubview:upgradeOverallProgress];
+    [upgradeOverallProgress setProgressViewStyle: UIProgressViewStyleBar];
+	
+	upgradeStageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 280, 40)];
+	upgradeStageLabel.text = @"Downloading iDroid";
+	upgradeStageLabel.textColor = [UIColor whiteColor];
+	upgradeStageLabel.textAlignment = UITextAlignmentCenter;
+	upgradeStageLabel.backgroundColor = [UIColor clearColor];
+	[upgradeView addSubview:upgradeStageLabel];
+	
+	upgradeCurrentProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(22, 143, 240, 20)];
+    [upgradeView addSubview:upgradeCurrentProgress];
+    [upgradeCurrentProgress setProgressViewStyle: UIProgressViewStyleBar];
+}
+
 - (void)removeIdroid {
 	commonData* sharedData = [commonData sharedData];
 	
@@ -454,6 +516,10 @@
 				[self performSelectorOnMainThread:@selector(removeIdroid) withObject:nil waitUntilDone:NO];
 			}
 			break;
+		case 30:
+			if(buttonIndex==0) {
+				[self performSelectorOnMainThread:@selector(upgradeIdroid) withObject:nil waitUntilDone:NO];
+			}
 		default:
 			break;
 	}
