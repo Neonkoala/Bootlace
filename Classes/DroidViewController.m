@@ -143,7 +143,12 @@
 }
 
 - (void)callUpgrade {
-	//This will be implemented in V1.1.1 or later due to upgrade procedure being unknown currently
+	installInstance = [[installClass alloc] init];
+	
+	[installInstance idroidUpgrade];
+	
+	[self performSelectorOnMainThread:@selector(refreshStatus) withObject:nil waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:YES];
 }
 
 - (void)callRemove {
@@ -203,31 +208,47 @@
 
 - (void)refreshUpdate {
 	commonData* sharedData = [commonData sharedData];
+	NSString *updateButtonLabel;
 	
 	//if statement to check latest version
 	[cfuSpinner stopAnimating];
 	[cfuSpinner release];
 	
-	if(!sharedData.updateAvailable) {
-		[latestVersionButton setTitle:@"iDroid unavailable for this device" forState:UIControlStateNormal];
-		[installIdroidButton setEnabled:NO];
-		[installIdroidImage setEnabled:NO];
-	} else if([sharedData.updateVer isEqualToString: sharedData.installedVer]) {
-		[latestVersionButton setTitle:@"Latest Version Installed" forState:UIControlStateNormal];
-		[installIdroidButton setEnabled:NO];
-		[installIdroidImage setEnabled:NO];
-	} else if(!sharedData.installed) {
-		NSString *updateButtonLabel = @"Version available to install: ";
-		updateButtonLabel = [updateButtonLabel stringByAppendingString:sharedData.updateVer];
-		[latestVersionButton setTitle:updateButtonLabel forState:UIControlStateNormal];
-		[installIdroidButton setEnabled:YES];
-		[installIdroidImage setEnabled:YES];
-	} else {
-		NSString *updateButtonLabel = @"New version available: ";
-		updateButtonLabel = [updateButtonLabel stringByAppendingString:sharedData.updateVer];
-		[latestVersionButton setTitle:updateButtonLabel forState:UIControlStateNormal];
-		[installIdroidButton setEnabled:YES];
-		[installIdroidImage setEnabled:YES];
+	switch (sharedData.updateCanBeInstalled) {
+		case 1:
+			updateButtonLabel = @"Version available to install: ";
+			updateButtonLabel = [updateButtonLabel stringByAppendingString:sharedData.updateVer];
+			[latestVersionButton setTitle:updateButtonLabel forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:YES];
+			[installIdroidImage setEnabled:YES];
+			break;
+		case 2:
+			updateButtonLabel = @"New version available: ";
+			updateButtonLabel = [updateButtonLabel stringByAppendingString:sharedData.updateVer];
+			[latestVersionButton setTitle:updateButtonLabel forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:YES];
+			[installIdroidImage setEnabled:YES];
+			break;
+		case -1:
+			[latestVersionButton setTitle:@"iDroid unavailable for this device" forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:NO];
+			[installIdroidImage setEnabled:NO];
+			break;
+		case -2:
+			[latestVersionButton setTitle:@"Unable to check for updates" forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:NO];
+			[installIdroidImage setEnabled:NO];
+			break;
+		case -3:
+			[latestVersionButton setTitle:@"iDroid cannot be upgraded" forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:NO];
+			[installIdroidImage setEnabled:NO];
+			break;
+		default:
+			[latestVersionButton setTitle:@"Unable to check for updates" forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:NO];
+			[installIdroidImage setEnabled:NO];
+			break;
 	}
 }
 
@@ -461,6 +482,49 @@
 	upgradeCurrentProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(22, 143, 240, 20)];
     [upgradeView addSubview:upgradeCurrentProgress];
     [upgradeCurrentProgress setProgressViewStyle: UIProgressViewStyleBar];
+	
+	NSInvocationOperation *getUpgrade = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(callUpgrade) object:nil];
+	
+	[viewInitQueue addOperation:getUpgrade];
+    [getUpgrade release];
+	
+	BOOL keepAlive = YES;
+	
+	do {        
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+        upgradeOverallProgress.progress = sharedData.updateOverallProgress;
+		upgradeCurrentProgress.progress = sharedData.updateCurrentProgress;
+		if (sharedData.updateOverallProgress == 1) {
+			keepAlive = NO;
+		}
+		switch (sharedData.updateStage) {
+			case 1:
+				upgradeStageLabel.text = @"Downloading update";
+				break;
+			case 2:
+				upgradeStageLabel.text = @"Verifying update";
+				break;
+			case 3:
+				upgradeStageLabel.text = @"Decompressing update";
+				break;
+			case 4:
+				upgradeStageLabel.text = @"Extracting update";
+				break;
+			case 5:
+				upgradeStageLabel.text = @"Updating files";
+				break;
+			default:
+				break;
+		}
+		switch (sharedData.updateFail) {
+			case 0:
+				break;
+			default:
+				break;
+		}
+    } while (keepAlive);
+	
+	[upgradeView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 - (void)removeIdroid {

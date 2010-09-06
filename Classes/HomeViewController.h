@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UIKit/UIApplication2.h>
 #import "commonData.h"
 #import "commonFunctions.h"
 
@@ -33,6 +34,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backButton;
 
+- (void)checkUpdates;
 - (void)flipAction:(id)sender;
 - (IBAction)refreshHome:(id)sender;
 - (IBAction)stopLoading:(id)sender;

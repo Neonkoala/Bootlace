@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UIKit/UIApplication2.h>
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <IOKit/IOKitLib.h>
@@ -28,10 +29,12 @@
 @property (nonatomic, retain) commonFunctions *commonInstance;
 @property (nonatomic, retain) extractionClass *extractionInstance;
 
-- (int)parseUpdatePlist;
+- (int)parseLatestVersionPlist;
 - (int)parseInstalledPlist;
+- (int)parseUpgradePlist;
 - (int)generateInstalledPlist;
 - (void)idroidInstall;
+- (void)idroidUpgrade;
 - (void)idroidRemove;
 - (void)cleanUp;
 - (void)checkForUpdates;

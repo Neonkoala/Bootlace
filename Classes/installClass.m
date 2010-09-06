@@ -13,20 +13,20 @@
 
 @synthesize commonInstance, extractionInstance;
 
-- (int)parseUpdatePlist {
-	DLog(@"Parsing Update Plist");
+- (int)parseLatestVersionPlist {
+	DLog(@"Parsing latest version Plist");
 
 	commonData* sharedData = [commonData sharedData];
 	
 	//Check device match
 	NSMutableDictionary* platformDict = [sharedData.latestVerDict objectForKey:sharedData.platform];
 	if (platformDict==nil) {
-		sharedData.updateAvailable = NO;
+		sharedData.updateCanBeInstalled = -1;
 		DLog(@"  - No platform match! iDroid isn't available for this device.");
 		return -1;
 	} 
 	
-	sharedData.updateAvailable = YES;
+	sharedData.updateCanBeInstalled = 1;
 	sharedData.updateVer = [platformDict objectForKey:@"iDroidVersion"];
 	sharedData.updateAndroidVer = [platformDict objectForKey:@"AndroidVersion"];
 	sharedData.updateDate = [platformDict objectForKey:@"ReleaseDate"];
@@ -39,6 +39,29 @@
 	sharedData.updateClean = [platformDict objectForKey:@"Clean"];
 	
 	sharedData.updateFirmwarePath = [sharedData.updateDependencies objectForKey:@"Directory"];
+	
+	DLog(@"Latest version plist parsed");
+	
+	return 0;
+}
+
+- (int)parseUpgradePlist {
+	DLog(@"Parsing upgrade plist");
+	
+	commonData* sharedData = [commonData sharedData];
+	
+	NSMutableDictionary* deltaDict = [sharedData.upgradeDict objectForKey:@"Delta"];
+	NSMutableDictionary* comboDict = [sharedData.upgradeDict objectForKey:@"Combo"];
+	
+	if (platformDict==nil || comboDict==nil) {
+		DLog(@"  - No platform match! iDroid upgrade path isn't available for this device.");
+		
+		return -1;
+	}
+	
+	//Parse Delta
+	
+	//Parse Combo
 	
 	return 0;
 }
@@ -312,6 +335,12 @@
 	[self updateProgress:[NSNumber numberWithFloat:1] nextStage:YES];
 }
 
+- (void)idroidUpgrade {
+	DLog(@"Upgrading iDroid");
+	
+	
+}
+
 - (void)idroidRemove {
 	DLog(@"Removing iDroid");
 
@@ -375,12 +404,17 @@
 	int success;
 	commonData* sharedData = [commonData sharedData];
 	
+	sharedData.updateCanBeInstalled = 0;
+	
+	DLog(@"Checking for updates");
+	
 	//Grab update plist	
 	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {
-		sharedData.updateAvailable = NO;
+		sharedData.updateCanBeInstalled = -2;
+		DLog(@"Could not retrieve update plist - server problem?");
 		return;
 	}
 	
@@ -388,10 +422,42 @@
 	sharedData.upgradeDict = [updateDict objectForKey:@"Upgrade"];
 	
 	//Call func to parse plist
-	success = [self parseUpdatePlist];
+	success = [self parseLatestVersionPlist];
 	
-	if (success < 0) {
-		NSLog(@"Update plist could not be parsed");
+	if(success < 0) {
+		DLog(@"Update plist could not be parsed");
+	}
+	
+	if(sharedData.updateCanBeInstalled==1 && sharedData.installed) {
+		sharedData.upgradeUseDelta = NO;
+		
+		if([sharedData.updateVer compare:sharedData.installedVer options:NSNumericSearch] == NSOrderedDescending) {
+			DLog(@"Update %@ is newer than installed version %@", sharedData.updateVer, sharedData.installedVer);
+			
+			[self parseUpgradePlist];
+			
+			if([sharedData.upgradeDeltaReqVer isEqualToString:sharedData.installedVer]) {
+				DLog(@"Delta upgrade available for %@", sharedData.upgradeDeltaReqVer);
+				
+				sharedData.updateCanBeInstalled = 2;
+				sharedData.upgradeUseDelta = YES;
+				
+				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+			} else if([sharedData.upgradeDeltaReqVer compare:sharedData.installedVer options:NSNumericSearch] == NSOrderedAscending) {
+				DLog(@"Combo upgrade available for %@ and later", sharedData.upgradeComboReqVer);
+				
+				sharedData.updateCanBeInstalled = 2;
+				sharedData.upgradeUseDelta = NO;
+				
+				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+			} else {
+				DLog(@"No valid upgrade path available. This is some seriously old sh*t.");
+				
+				sharedData.updateCanBeInstalled = -3;
+				
+				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+			}
+		}
 	}
 }
 
@@ -464,6 +530,8 @@
 			
 			stashPath = [stashPath stringByAppendingPathComponent:[results objectAtIndex:0]];
 			NSDictionary *mtprops = [NSDictionary dictionaryWithContentsOfFile:[stashPath stringByAppendingPathComponent:@"firmware/multitouch/iPhone.mtprops"]];
+			
+			DLog(@"Stash path: %@", stashPath);
 			
 			NSDictionary *z2dict = [mtprops objectForKey:@"Z2F52,1"];
 			NSData *z2bin = [z2dict objectForKey:@"Constructed Firmware"];

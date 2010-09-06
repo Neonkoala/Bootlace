@@ -51,6 +51,34 @@
 	}
 }
 
+- (void)checkUpdates {
+	commonData *sharedData = [commonData sharedData];
+	
+	NSURL *versionURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceversion.plist"];
+	NSMutableDictionary *versionDict = [NSMutableDictionary dictionaryWithContentsOfURL:versionURL];
+	
+	NSString *latestVersion = [versionDict objectForKey:@"Version"];
+	
+	if(latestVersion==nil) {
+		[[UIApplication sharedApplication] setApplicationBadgeString:@""];
+		return;
+	} else if([latestVersion compare:sharedData.bootlaceVersion options:NSNumericSearch] == NSOrderedDescending) {
+		DLog(@"Update available for Bootlace: %@", latestVersion);
+		
+		[[UIApplication sharedApplication] setApplicationBadgeString:@"!"];
+		
+		NSString *updateTitle = [NSString stringWithFormat:@"Version %@ Available", latestVersion];
+		
+		UIAlertView *updateAlert;
+		updateAlert = [[[UIAlertView alloc] initWithTitle:updateTitle message:@"An update to Bootlace is available.\r\n\r\nIt is highly recommended you use Cydia to install it immediately." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+		[updateAlert show];
+	} else {
+		DLog(@"No updates available for Bootlace currently.");
+		
+		[[UIApplication sharedApplication] setApplicationBadgeString:@""];
+	}
+}
+
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -95,6 +123,13 @@
 	if(![sharedData.platform isEqualToString:@"iPhone1,1"] && ![sharedData.platform isEqualToString:@"iPhone1,2"] && ![sharedData.platform isEqualToString:@"iPod1,1"]) {
 		[commonInstance sendTerminalError:@"Bootlace is not compatible with this device.\r\nAborting..."];
 	}
+	
+	NSOperationQueue *viewInitQueue = [NSOperationQueue new];
+	
+	NSInvocationOperation *checkNew = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(checkUpdates) object:nil];
+	
+	[viewInitQueue addOperation:checkNew];
+    [checkNew release];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {

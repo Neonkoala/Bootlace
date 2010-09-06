@@ -66,6 +66,10 @@
 	commonInstance = [[commonFunctions alloc] init];
 	installInstance = [[installClass alloc] init];
 	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.updateFirmwarePath]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:sharedData.updateFirmwarePath withIntermediateDirectories:YES attributes:nil error:nil];
+	}
+	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"] || [[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
 		if([[NSFileManager defaultManager] fileExistsAtPath:[sharedData.updateFirmwarePath stringByAppendingPathComponent:@"zephyr2.bin"]]) {
 			DLog(@"Removing existing zephyr2 firmware file");
@@ -100,8 +104,14 @@
 }
 
 - (void)getWifi {
+	commonData* sharedData = [commonData sharedData];
+	
 	commonInstance = [[commonFunctions alloc] init];
 	installInstance = [[installClass alloc] init];
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.updateFirmwarePath]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:sharedData.updateFirmwarePath withIntermediateDirectories:YES attributes:nil error:nil];
+	}
 	
 	int success = [installInstance dumpWiFi];
 	

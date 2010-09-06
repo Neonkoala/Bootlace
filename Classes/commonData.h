@@ -15,6 +15,7 @@
 	BOOL warningLive;
 	NSString *platform;
 	NSString *workingDirectory;
+	NSString *bootlaceVersion;
 	
 	int opibInitStatus;
 	NSMutableDictionary *opibDict;
@@ -35,7 +36,7 @@
 	NSMutableDictionary *latestVerDict;
 	NSMutableDictionary *upgradeDict;
 	
-	BOOL updateAvailable;
+	int updateCanBeInstalled;
 	int updateStage;
 	int updateFail;
 	int updateSize;
@@ -52,12 +53,17 @@
 	NSString *updateClean;
 	NSMutableDictionary *updateFiles;
 	NSMutableDictionary *updateDependencies;
+	
+	BOOL upgradeUseDelta;
+	NSString *upgradeDeltaReqVer;
+	NSString *upgradeComboReqVer;
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
 @property (nonatomic, assign) BOOL warningLive;
 @property (nonatomic, retain) NSString *platform;
 @property (nonatomic, retain) NSString *workingDirectory;
+@property (nonatomic, retain) NSString *bootlaceVersion;
 
 @property (nonatomic, assign) int opibInitStatus;
 @property (nonatomic, retain) NSMutableDictionary *opibDict;
@@ -78,7 +84,7 @@
 @property (nonatomic, retain) NSMutableDictionary *latestVerDict;
 @property (nonatomic, retain) NSMutableDictionary *upgradeDict;
 
-@property (nonatomic, assign) BOOL updateAvailable;
+@property (nonatomic, assign) int updateCanBeInstalled;
 @property (nonatomic, assign) int updateStage;
 @property (nonatomic, assign) int updateFail;
 @property (nonatomic, assign) int updateSize;
@@ -95,6 +101,10 @@
 @property (nonatomic, retain) NSString *updateClean;
 @property (nonatomic, retain) NSMutableDictionary *updateFiles;
 @property (nonatomic, retain) NSMutableDictionary *updateDependencies;
+
+@property (nonatomic, assign) BOOL upgradeUseDelta;
+@property (nonatomic, retain) NSString *upgradeDeltaReqVer;
+@property (nonatomic, retain) NSString *upgradeComboReqVer;
 
 + (commonData *) sharedData;
 

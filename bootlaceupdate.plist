@@ -6,21 +6,14 @@
 	<date>2010-08-24T12:20:00Z</date>
 	<key>Upgrade</key>
 	<dict>
-		<key>PreviousVersion</key>
-		<dict>
-			<key>iPhone1,1</key>
-			<string>1.0.1</string>
-			<key>iPhone1,2</key>
-			<string>1.0</string>
-			<key>iPod1,1</key>
-			<string>1.0</string>
-		</dict>
 		<key>Delta</key>
 		<dict>
 			<key>iPhone1,1</key>
 			<dict/>
 			<key>iPhone1,2</key>
 			<dict>
+				<key>RequiredVersion</key>
+				<string>1.0</string>
 				<key>RemoveFiles</key>
 				<array/>
 				<key>MoveFiles</key>
@@ -34,7 +27,21 @@
 			<dict/>
 		</dict>
 		<key>Combo</key>
-		<dict/>
+		<dict>
+			<key>iPhone1,2</key>
+			<dict>
+				<key>RequiredVersion</key>
+				<string>1.0</string>
+				<key>RemoveFiles</key>
+				<array/>
+				<key>MoveFiles</key>
+				<dict/>
+				<key>AddFiles</key>
+				<array/>
+				<key>PostInstall</key>
+				<string></string>
+			</dict>
+		</dict>
 	</dict>
 	<key>LatestVersion</key>
 	<dict>
@@ -120,6 +127,8 @@
 			<date>2010-09-04T19:00:00Z</date>
 			<key>OpeniBootRequired</key>
 			<string>0.1.2</string>
+			<key>BootlaceRequired</key>
+			<string>2.0.3</string>
 			<key>URL</key>
 			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-3G.tar.gz</string>
 			<key>MD5</key>
