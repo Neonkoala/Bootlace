@@ -68,7 +68,9 @@
 		return -2;
 	}
 	
+	sharedData.upgradeDeltaDestructive = [deltaPlatformDict objectForKey:@"Destructive"];
 	sharedData.upgradeDeltaReqVer = [deltaPlatformDict objectForKey:@"RequiredVersion"];
+	sharedData.upgradeDeltaCreateDirectories = [deltaPlatformDict objectForKey:@"CreateDirectories"];
 	sharedData.upgradeDeltaRemoveFiles = [deltaPlatformDict objectForKey:@"RemoveFiles"];
 	sharedData.upgradeDeltaMoveFiles = [deltaPlatformDict objectForKey:@"MoveFiles"];
 	sharedData.upgradeDeltaAddFiles = [deltaPlatformDict objectForKey:@"AddFiles"];
@@ -83,11 +85,15 @@
 		return -3;
 	}
 	
+	sharedData.upgradeComboDestructive = [comboPlatformDict objectForKey:@"Destructive"];
 	sharedData.upgradeComboReqVer = [comboPlatformDict objectForKey:@"RequiredVersion"];
+	sharedData.upgradeComboCreateDirectories = [comboPlatformDict objectForKey:@"CreateDirectories"];
 	sharedData.upgradeComboRemoveFiles = [deltaPlatformDict objectForKey:@"RemoveFiles"];
 	sharedData.upgradeComboMoveFiles = [deltaPlatformDict objectForKey:@"MoveFiles"];
 	sharedData.upgradeComboAddFiles = [deltaPlatformDict objectForKey:@"AddFiles"];
 	sharedData.upgradeComboPostInstall = [deltaPlatformDict objectForKey:@"PostInstall"];
+	
+	NSLog(@"Destructive? 1: %@ 2: %@", sharedData.upgradeDeltaDestructive, sharedData.upgradeComboDestructive);
 	
 	return 0;
 }
@@ -294,7 +300,7 @@
 	//Extract files to correct locations
 	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
-	success = [self relocateFiles];
+	success = [self addFiles];
 	
 	if(success < 0) {
 		ALog(@"File relocation returned: %d", success);
@@ -482,6 +488,37 @@
 		[self cleanUp];
 		return;
 	}
+	
+	//Check if we're gonna do this delta style
+	if(sharedData.upgradeUseDelta) {
+		success = [self createDirectories:sharedData.upgradeDeltaCreateDirectories];
+		
+		if(success < 0) {
+			ALog(@"Directory Creation returned: %d", success);
+			sharedData.updateFail = 4;
+			[self cleanUp];
+			return;
+		}
+		
+		
+		success = [self removeFiles:sharedData.upgradeDeltaRemoveFiles];
+		
+		if(success < 0) {
+			ALog(@"File removal returned: %d", success);
+			sharedData.updateFail = 5;
+			[self cleanUp];
+			return;
+		}
+		
+		success = [self moveFiles:sharedData.upgradeDeltaMoveFiles];
+		
+		if(success < 0) {
+			ALog(@"Moving files returned: %d", success);
+			sharedData.updateFail = 6;
+			[self cleanUp];
+			return;
+		}
+	}
 }
 
 - (void)idroidRemove {
@@ -591,20 +628,26 @@
 				sharedData.updateCanBeInstalled = 2;
 				sharedData.upgradeUseDelta = YES;
 				
-				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+				if(!sharedData.bootlaceUpgradeAvailable) {
+					[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+				}
 			} else if([sharedData.upgradeDeltaReqVer compare:sharedData.installedVer options:NSNumericSearch] == NSOrderedAscending) {
 				DLog(@"Combo upgrade available for %@ and later", sharedData.upgradeComboReqVer);
 				
 				sharedData.updateCanBeInstalled = 2;
 				sharedData.upgradeUseDelta = NO;
 				
-				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+				if(!sharedData.bootlaceUpgradeAvailable) {
+					[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+				}
 			} else {
 				DLog(@"No valid upgrade path available. This is some seriously old sh*t.");
 				
 				sharedData.updateCanBeInstalled = -3;
 				
-				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+				if(!sharedData.bootlaceUpgradeAvailable) {
+					[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
+				}
 			}
 		} else {
 			sharedData.updateCanBeInstalled = 0;
@@ -636,7 +679,26 @@
 	}
 }
 
-- (int)relocateFiles {
+- (int)createDirectories:(NSArray *)directoryList {
+	int i, count;
+	NSError *error;
+	
+	count = [directoryList count];
+	
+	for (i=0; i<count; i++) {
+		DLog(@"Creating directory at path: %@", [directoryList objectAtIndex:i]);
+		
+		if(![[NSFileManager defaultManager] createDirectoryAtPath:[directoryList objectAtIndex:i] withIntermediateDirectories:YES attributes:nil error:&error]) {
+			DLog(@"%@", [error localizedDescription]);
+			
+			return -1;
+		}
+	}
+	
+	return 0;
+}
+
+- (int)addFiles {
 	int i, count;
 	NSError *error;
 	commonData* sharedData = [commonData sharedData];
@@ -647,7 +709,7 @@
 		NSString *key = [NSString stringWithFormat:@"%d", i];
 		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
 		
-		NSString *sourcePath = [[sharedData.workingDirectory stringByAppendingPathComponent:[fileDetails objectAtIndex:0]] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];		
+		NSString *sourcePath = [[sharedData.workingDirectory stringByAppendingPathComponent:[fileDetails objectAtIndex:0]] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
 		NSString *destPath = [[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
 		
 		if([[NSFileManager defaultManager] fileExistsAtPath:destPath]) {
@@ -661,6 +723,58 @@
 			return -1;
 		}
 	}
+	
+	return 0;
+}
+
+- (int)moveFiles:(NSDictionary *)fileList {
+	int i, count;
+	NSError *error;
+	
+	count = [fileList count];
+	
+	for (i=0; i<count; i++) {
+		NSString *key = [NSString stringWithFormat:@"%d", i];
+		NSArray *fileDetails = [fileList objectForKey:key];
+		
+		NSString *sourcePath = [fileDetails objectAtIndex:0];		
+		NSString *destPath = [fileDetails objectAtIndex:1];
+		
+		if([[NSFileManager defaultManager] fileExistsAtPath:destPath]) {
+			if(![[NSFileManager defaultManager] removeItemAtPath:destPath error:&error]) {
+				NSLog(@"%@", [error localizedDescription]);
+			}
+		}
+		
+		if(![[NSFileManager defaultManager] moveItemAtPath:sourcePath toPath:destPath error:&error]) {
+			NSLog(@"%@", [error localizedDescription]);
+			return -1;
+		}
+	}
+	
+	return 0;
+}
+	
+- (int)removeFiles:(NSArray *)fileList {
+	int i, count;
+	NSError *error;
+	
+	count = [fileList count];
+	
+	for (i=0; i<count; i++) {
+		DLog(@"Removing item at path: %@", [fileList objectAtIndex:i]);
+		
+		if(![[NSFileManager defaultManager] removeItemAtPath:[fileList objectAtIndex:i] error:&error]) {
+			DLog(@"%@", [error localizedDescription]);
+			
+			return -1;
+		}
+	}
+	
+	return 0;
+}
+
+- (int)cherryPickFiles:(NSArray *)fileList {
 	
 	return 0;
 }

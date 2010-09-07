@@ -40,7 +40,11 @@
 - (void)checkForUpdates;
 - (void)checkInstalled;
 - (void)updateProgress:(NSNumber *)progress nextStage:(BOOL)next;
-- (int)relocateFiles;
+- (int)createDirectories:(NSArray *)directoryList;
+- (int)addFiles;
+- (int)moveFiles:(NSDictionary *)fileList;
+- (int)removeFiles:(NSArray *)fileList;
+- (int)cherryPickFiles:(NSArray *)fileList;
 - (int)dumpMultitouch;
 - (int)dumpWiFi;
 - (NSString *)fileMD5:(NSString *)path;

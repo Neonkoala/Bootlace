@@ -163,7 +163,7 @@
 	
 	[[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
 	
-	if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging) {
+	if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging || [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateFull) {
 		mains = YES;
 		DLog(@"Device is charging.");
 	}

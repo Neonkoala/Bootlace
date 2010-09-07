@@ -101,8 +101,6 @@
 																			 nil]
 																			forKey:@"Installed"];
 		[tableRows addObject:installedSection];
-		
-		[installIdroidButton addTarget:self action:@selector(upgradeIdroid:) forControlEvents:UIControlEventTouchUpInside];
 	}
 	
 	//Make update button spin like it's on LSD

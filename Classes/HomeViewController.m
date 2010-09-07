@@ -72,6 +72,8 @@
 	} else if([latestVersion compare:sharedData.bootlaceVersion options:NSNumericSearch] == NSOrderedDescending) {
 		DLog(@"Update available for Bootlace: %@", latestVersion);
 		
+		sharedData.bootlaceUpgradeAvailable = YES;
+		
 		[[UIApplication sharedApplication] setApplicationBadgeString:@"!"];
 		
 		NSString *updateTitle = [NSString stringWithFormat:@"Version %@ Available", latestVersion];

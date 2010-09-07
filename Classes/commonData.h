@@ -13,6 +13,7 @@
 	//Initialisation variables
 	BOOL firstLaunchVal;
 	BOOL debugMode;
+	BOOL bootlaceUpgradeAvailable;
 	BOOL warningLive;
 	NSString *platform;
 	NSString *workingDirectory;
@@ -62,13 +63,17 @@
 	
 	BOOL upgradeUseDelta;
 	
+	NSNumber *upgradeDeltaDestructive;
 	NSString *upgradeDeltaReqVer;
+	NSArray *upgradeDeltaCreateDirectories;
 	NSArray *upgradeDeltaRemoveFiles;
 	NSDictionary *upgradeDeltaMoveFiles;
 	NSArray *upgradeDeltaAddFiles;
 	NSString *upgradeDeltaPostInstall;
 	
+	NSNumber *upgradeComboDestructive;
 	NSString *upgradeComboReqVer;
+	NSArray *upgradeComboCreateDirectories;
 	NSArray *upgradeComboRemoveFiles;
 	NSDictionary *upgradeComboMoveFiles;
 	NSArray *upgradeComboAddFiles;
@@ -77,6 +82,7 @@
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
 @property (nonatomic, assign) BOOL debugMode;
+@property (nonatomic, assign) BOOL bootlaceUpgradeAvailable;
 @property (nonatomic, assign) BOOL warningLive;
 @property (nonatomic, retain) NSString *platform;
 @property (nonatomic, retain) NSString *workingDirectory;
@@ -126,13 +132,17 @@
 
 @property (nonatomic, assign) BOOL upgradeUseDelta;
 
+@property (nonatomic, retain) NSNumber *upgradeDeltaDestructive;
 @property (nonatomic, retain) NSString *upgradeDeltaReqVer;
+@property (nonatomic, retain) NSArray *upgradeDeltaCreateDirectories;
 @property (nonatomic, retain) NSArray *upgradeDeltaRemoveFiles;
 @property (nonatomic, retain) NSDictionary *upgradeDeltaMoveFiles;
 @property (nonatomic, retain) NSArray *upgradeDeltaAddFiles;
 @property (nonatomic, retain) NSString *upgradeDeltaPostInstall;
 
+@property (nonatomic, retain) NSNumber *upgradeComboDestructive;
 @property (nonatomic, retain) NSString *upgradeComboReqVer;
+@property (nonatomic, retain) NSArray *upgradeComboCreateDirectories;
 @property (nonatomic, retain) NSArray *upgradeComboRemoveFiles;
 @property (nonatomic, retain) NSDictionary *upgradeComboMoveFiles;
 @property (nonatomic, retain) NSArray *upgradeComboAddFiles;
