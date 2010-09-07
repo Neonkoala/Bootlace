@@ -31,9 +31,14 @@
 		}
 	}
 	
-	//First launch check
+	//Read settings
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
 	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+	sharedData.debugMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"debugMode"];
+	
+	if(sharedData.debugMode) {
+		DLog(@"Running in debug mode, using alternative servers");
+	}
 	
 	//Setup variables
 	sharedData.warningLive = NO;

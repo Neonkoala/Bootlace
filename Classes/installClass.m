@@ -53,13 +53,22 @@
 	NSMutableDictionary* deltaDict = [sharedData.upgradeDict objectForKey:@"Delta"];
 	NSMutableDictionary* comboDict = [sharedData.upgradeDict objectForKey:@"Combo"];
 	
-	if (platformDict==nil || comboDict==nil) {
-		DLog(@"  - No platform match! iDroid upgrade path isn't available for this device.");
+	if (deltaDict==nil || comboDict==nil) {
+		DLog(@"  - No delta/combo match!");
 		
 		return -1;
 	}
 	
 	//Parse Delta
+	NSMutableDictionary *deltaPlatformDict = [deltaDict objectForKey:sharedData.platform];
+	
+	if (deltaPlatformDict==nil) {
+		DLog(@"  - No platform delta match! Upgrade path unavailable for this device.");
+		
+		return -2;
+	}
+	
+	
 	
 	//Parse Combo
 	

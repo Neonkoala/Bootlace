@@ -11,7 +11,7 @@
 
 @implementation commonData
 
-@synthesize firstLaunchVal, warningLive, platform, workingDirectory, bootlaceVersion, opibInitStatus, opibDict, opibBackupPath, opibVersion, opibTimeout, opibDefaultOS, opibTempOS, installed, installedVer, installedAndroidVer, installedOpibRequired, installedDate, installedFiles, installedDependencies, latestVerDict, upgradeDict, updateCanBeInstalled, updateStage, updateFail, updateSize, updateOverallProgress, updateCurrentProgress, updateVer, updateAndroidVer, updateDate, updateOpibRequired, updateURL, updateMD5, updateFirmwarePath, updatePackagePath, updateClean, updateFiles, updateDependencies, upgradeUseDelta, upgradeDeltaReqVer, upgradeComboReqVer;
+@synthesize firstLaunchVal, debugMode, warningLive, platform, workingDirectory, bootlaceVersion, opibInitStatus, opibDict, opibBackupPath, opibVersion, opibTimeout, opibDefaultOS, opibTempOS, installed, installedVer, installedAndroidVer, installedOpibRequired, installedDate, installedFiles, installedDependencies, latestVerDict, upgradeDict, updateCanBeInstalled, updateStage, updateFail, updateSize, updateOverallProgress, updateCurrentProgress, updateVer, updateAndroidVer, updateDate, updateOpibRequired, updateURL, updateMD5, updateFirmwarePath, updatePackagePath, updateClean, updateFiles, updateDependencies, upgradeUseDelta, upgradeDeltaReqVer, upgradeComboReqVer;
 
 + (commonData *) sharedData {
 	static commonData *sharedData;
