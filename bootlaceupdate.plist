@@ -273,8 +273,10 @@
 			<string>0.1.2</string>
 			<key>BootlaceRequired</key>
 			<string>2.0.3</string>
-			<key>URL</key>
+			<key>URLReal</key>
 			<string>http://idroid.neonkoala.co.uk/release/idroid/1.0/iDroid-1.0-MoJo-3G.tar.gz</string>
+			<key>URL</key>
+			<string>http://192.168.0.14/~neonkoala/iDroid-1.0-MoJo-3G.tar.gz</string>
 			<key>MD5</key>
 			<string>ad0e72cbcdbc57ff170d02319e986992</string>
 			<key>Size</key>

@@ -68,9 +68,26 @@
 		return -2;
 	}
 	
-	
+	sharedData.upgradeDeltaReqVer = [deltaPlatformDict objectForKey:@"RequiredVersion"];
+	sharedData.upgradeDeltaRemoveFiles = [deltaPlatformDict objectForKey:@"RemoveFiles"];
+	sharedData.upgradeDeltaMoveFiles = [deltaPlatformDict objectForKey:@"MoveFiles"];
+	sharedData.upgradeDeltaAddFiles = [deltaPlatformDict objectForKey:@"AddFiles"];
+	sharedData.upgradeDeltaPostInstall = [deltaPlatformDict objectForKey:@"PostInstall"];
 	
 	//Parse Combo
+	NSMutableDictionary *comboPlatformDict = [comboDict objectForKey:sharedData.platform];
+	
+	if (comboPlatformDict==nil) {
+		DLog(@"  - No platform combo match! Upgrade path unavailable for this device.");
+		
+		return -3;
+	}
+	
+	sharedData.upgradeComboReqVer = [comboPlatformDict objectForKey:@"RequiredVersion"];
+	sharedData.upgradeComboRemoveFiles = [deltaPlatformDict objectForKey:@"RemoveFiles"];
+	sharedData.upgradeComboMoveFiles = [deltaPlatformDict objectForKey:@"MoveFiles"];
+	sharedData.upgradeComboAddFiles = [deltaPlatformDict objectForKey:@"AddFiles"];
+	sharedData.upgradeComboPostInstall = [deltaPlatformDict objectForKey:@"PostInstall"];
 	
 	return 0;
 }
@@ -260,6 +277,11 @@
 	
 	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
 	
+	//Clean up so we save 50mb
+	if(sharedData.updatePackagePath) {
+		[[NSFileManager defaultManager] removeItemAtPath:sharedData.updatePackagePath error:nil];
+	}
+	
 	success = [extractionInstance extractTar:tarDest toDest:sharedData.workingDirectory];
 	
 	if(success < 0) {
@@ -347,7 +369,119 @@
 - (void)idroidUpgrade {
 	DLog(@"Upgrading iDroid");
 	
+	commonData* sharedData = [commonData sharedData];
+	extractionInstance = [[extractionClass alloc] init];
+	int success;
 	
+	sharedData.updateFail = 0;
+	sharedData.updateStage = 0;
+	
+	[UIApplication sharedApplication].idleTimerDisabled = YES; //Stop autlock
+	
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+	
+	NSString *match = @"*tar.gz";
+	
+	NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:sharedData.workingDirectory error:nil];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", match];
+	NSArray *results = [dirContents filteredArrayUsingPredicate:predicate];
+	
+	if([results count] > 0) {
+		DLog(@"Found downloaded package: %@ \r\nChecking MD5.", [results objectAtIndex:0]);
+		
+		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+		
+		NSString *pkg = [sharedData.workingDirectory stringByAppendingPathComponent:[results objectAtIndex:0]];
+		NSString *md5hash = [self fileMD5:pkg];
+		
+		DLog(@"Found package MD5: %@", md5hash);
+		
+		if([sharedData.updateMD5 isEqualToString:md5hash]) {
+			[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+			sharedData.updatePackagePath = pkg;
+		} else {
+			DLog(@"MD5 mismatch redownloading.");
+			[[NSFileManager defaultManager] removeItemAtPath:pkg error:nil];
+			
+			sharedData.updateStage = 1;
+		}
+	}
+	
+	if(sharedData.updateStage == 1) {
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		getFileInstance = [[getFile alloc] initWithUrl:sharedData.updateURL directory:sharedData.workingDirectory];
+		DLog(@"DEBUG: updateURL = %@", sharedData.updateURL);
+		DLog(@"DEBUG: workingDirectory = %@", sharedData.workingDirectory);
+		
+		[getFileInstance getFileDownload:self];
+		
+		BOOL keepAlive = YES;
+		
+		do {        
+			CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+			//Check NSURLConnection for activity
+			if (getFileInstance.getFileWorking == NO) {
+				keepAlive = NO;
+			}
+			if(sharedData.updateFail == 1) {
+				DLog(@"DEBUG: Failed to get iDroid package. Cleaning up.");
+				[self cleanUp];
+				return;
+			}
+		} while (keepAlive);
+		
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		
+		sharedData.updatePackagePath = getFileInstance.getFilePath;
+		
+		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+		
+		//Calculate file MD5
+		NSString *md5hash = [self fileMD5:sharedData.updatePackagePath];
+		DLog(@"MD5 Hash: %@", md5hash);
+		
+		if(![sharedData.updateMD5 isEqualToString:md5hash]) {
+			DLog(@"MD5 hash does not match, assuming download is corrupt.");
+			sharedData.updateFail = 0;
+			[self cleanUp];
+			return;
+		}
+		
+		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+	}
+	
+	//Extract file
+	NSString *tarDest = [sharedData.workingDirectory stringByAppendingPathComponent:@"idroid.tar"];
+	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:tarDest];
+	
+	if(!fileExists) {
+		[[NSFileManager defaultManager] createFileAtPath:tarDest contents:nil attributes:nil];
+	}
+	
+	success = [extractionInstance inflateGzip:sharedData.updatePackagePath toDest:tarDest];
+	
+	if(success < 0) {
+		ALog(@"GZip extraction returned: %d", success);
+		sharedData.updateFail = 2;
+		[self cleanUp];
+		return;
+	}
+	
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+	
+	success = [extractionInstance extractTar:tarDest toDest:sharedData.workingDirectory];
+	
+	//Clean up so we save 50mb
+	if(sharedData.updatePackagePath) {
+		[[NSFileManager defaultManager] removeItemAtPath:sharedData.updatePackagePath error:nil];
+	}
+	
+	if(success < 0) {
+		ALog(@"Tar extraction returned: %d", success);
+		sharedData.updateFail = 3;
+		[self cleanUp];
+		return;
+	}
 }
 
 - (void)idroidRemove {
@@ -417,8 +551,14 @@
 	
 	DLog(@"Checking for updates");
 	
+	NSURL *updatePlistURL;
+	
 	//Grab update plist	
-	NSURL *updatePlistURL = [NSURL URLWithString:@"http://files.neonkoala.co.uk/bootlaceupdate.plist"];
+	if(sharedData.debugMode) {
+		updatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/bootlaceupdate.plist"];
+	} else {
+		updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
+	}
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	
 	if(updateDict == nil) {
@@ -466,6 +606,8 @@
 				
 				[[UIApplication sharedApplication] setApplicationBadgeString:@"1"];
 			}
+		} else {
+			sharedData.updateCanBeInstalled = 0;
 		}
 	}
 }

@@ -54,7 +54,14 @@
 - (void)checkUpdates {
 	commonData *sharedData = [commonData sharedData];
 	
-	NSURL *versionURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceversion.plist"];
+	NSURL *versionURL;
+	
+	if(sharedData.debugMode) {
+		versionURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/bootlaceversion.plist"];
+	} else {
+		versionURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceversion.plist"];
+	}
+	
 	NSMutableDictionary *versionDict = [NSMutableDictionary dictionaryWithContentsOfURL:versionURL];
 	
 	NSString *latestVersion = [versionDict objectForKey:@"Version"];

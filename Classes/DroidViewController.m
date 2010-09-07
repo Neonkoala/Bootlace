@@ -215,6 +215,11 @@
 	[cfuSpinner release];
 	
 	switch (sharedData.updateCanBeInstalled) {
+		case 0:
+			[latestVersionButton setTitle:@"Latest Version Installed" forState:UIControlStateNormal];
+			[installIdroidButton setEnabled:NO];
+			[installIdroidImage setEnabled:NO];
+			break;
 		case 1:
 			updateButtonLabel = @"Version available to install: ";
 			updateButtonLabel = [updateButtonLabel stringByAppendingString:sharedData.updateVer];
@@ -473,7 +478,7 @@
     [upgradeOverallProgress setProgressViewStyle: UIProgressViewStyleBar];
 	
 	upgradeStageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 280, 40)];
-	upgradeStageLabel.text = @"Downloading iDroid";
+	upgradeStageLabel.text = @"Downloading update";
 	upgradeStageLabel.textColor = [UIColor whiteColor];
 	upgradeStageLabel.textAlignment = UITextAlignmentCenter;
 	upgradeStageLabel.backgroundColor = [UIColor clearColor];

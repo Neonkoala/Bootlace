@@ -18,6 +18,7 @@
 	NSString *workingDirectory;
 	NSString *bootlaceVersion;
 	
+	
 	int opibInitStatus;
 	NSMutableDictionary *opibDict;
 	NSString *opibBackupPath;
@@ -25,6 +26,7 @@
 	NSString *opibTimeout;
 	NSString *opibDefaultOS;
 	NSString *opibTempOS;
+	
 	
 	BOOL installed;
 	NSString *installedVer;
@@ -34,8 +36,10 @@
 	NSArray *installedFiles;
 	NSArray *installedDependencies;
 	
+	
 	NSMutableDictionary *latestVerDict;
 	NSMutableDictionary *upgradeDict;
+	
 	
 	int updateCanBeInstalled;
 	int updateStage;
@@ -55,9 +59,20 @@
 	NSMutableDictionary *updateFiles;
 	NSMutableDictionary *updateDependencies;
 	
+	
 	BOOL upgradeUseDelta;
+	
 	NSString *upgradeDeltaReqVer;
+	NSArray *upgradeDeltaRemoveFiles;
+	NSDictionary *upgradeDeltaMoveFiles;
+	NSArray *upgradeDeltaAddFiles;
+	NSString *upgradeDeltaPostInstall;
+	
 	NSString *upgradeComboReqVer;
+	NSArray *upgradeComboRemoveFiles;
+	NSDictionary *upgradeComboMoveFiles;
+	NSArray *upgradeComboAddFiles;
+	NSString *upgradeComboPostInstall;
 }
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
@@ -67,6 +82,7 @@
 @property (nonatomic, retain) NSString *workingDirectory;
 @property (nonatomic, retain) NSString *bootlaceVersion;
 
+
 @property (nonatomic, assign) int opibInitStatus;
 @property (nonatomic, retain) NSMutableDictionary *opibDict;
 @property (nonatomic, retain) NSString *opibBackupPath;
@@ -74,6 +90,7 @@
 @property (nonatomic, retain) NSString *opibTimeout;
 @property (nonatomic, retain) NSString *opibDefaultOS;
 @property (nonatomic, retain) NSString *opibTempOS;
+
 
 @property (nonatomic, assign) BOOL installed;
 @property (nonatomic, retain) NSString *installedVer;
@@ -83,8 +100,10 @@
 @property (nonatomic, retain) NSArray *installedFiles;
 @property (nonatomic, retain) NSArray *installedDependencies;
 
+
 @property (nonatomic, retain) NSMutableDictionary *latestVerDict;
 @property (nonatomic, retain) NSMutableDictionary *upgradeDict;
+
 
 @property (nonatomic, assign) int updateCanBeInstalled;
 @property (nonatomic, assign) int updateStage;
@@ -104,9 +123,20 @@
 @property (nonatomic, retain) NSMutableDictionary *updateFiles;
 @property (nonatomic, retain) NSMutableDictionary *updateDependencies;
 
+
 @property (nonatomic, assign) BOOL upgradeUseDelta;
+
 @property (nonatomic, retain) NSString *upgradeDeltaReqVer;
+@property (nonatomic, retain) NSArray *upgradeDeltaRemoveFiles;
+@property (nonatomic, retain) NSDictionary *upgradeDeltaMoveFiles;
+@property (nonatomic, retain) NSArray *upgradeDeltaAddFiles;
+@property (nonatomic, retain) NSString *upgradeDeltaPostInstall;
+
 @property (nonatomic, retain) NSString *upgradeComboReqVer;
+@property (nonatomic, retain) NSArray *upgradeComboRemoveFiles;
+@property (nonatomic, retain) NSDictionary *upgradeComboMoveFiles;
+@property (nonatomic, retain) NSArray *upgradeComboAddFiles;
+@property (nonatomic, retain) NSString *upgradeComboPostInstall;
 
 + (commonData *) sharedData;
 
