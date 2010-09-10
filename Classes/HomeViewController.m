@@ -154,7 +154,12 @@
 }
 
 - (void)loadingWebView {
-	self.navigationItem.rightBarButtonItem = stopButton;
+	UIActivityIndicatorView *pageLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[pageLoading startAnimating];
+	
+	UIBarButtonItem *loadingButton = [[UIBarButtonItem alloc] initWithCustomView:pageLoading];
+	
+	self.navigationItem.rightBarButtonItem = loadingButton;
 }
 
 - (void)showWebView {
