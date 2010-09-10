@@ -171,6 +171,16 @@
 	return mains;
 }
 
+- (int)getFreeSpace {
+	struct statfs stats;
+	
+	statfs("/private", &stats);
+	
+	DLog(@"Free space: %u", stats.f_bavail * stats.f_bsize);
+	
+	return(stats.f_bsize * stats.f_bavail);
+}
+
 - (void)getPlatform {
 	commonData* sharedData = [commonData sharedData];
 	

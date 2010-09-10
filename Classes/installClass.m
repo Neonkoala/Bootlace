@@ -670,8 +670,6 @@
 	
 	sharedData.updateOverallProgress = ([progress floatValue]/5)+((sharedData.updateStage-1)*0.2);
 	sharedData.updateCurrentProgress = [progress floatValue];
-	
-	NSLog(@"Current Progress: %f Overall Progress: %f", sharedData.updateCurrentProgress, sharedData.updateOverallProgress);
 }
 
 - (void)cleanUp {

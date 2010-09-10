@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#import <sys/mount.h>
+#import <sys/param.h>
 #import <sys/types.h>
 #import <sys/reboot.h>
 #import <sys/sysctl.h>
@@ -45,6 +47,7 @@
 - (int)resetNVRAM;
 - (int)applyNVRAM;
 - (BOOL)checkMains;
+- (int)getFreeSpace;
 - (void)getPlatform;
 - (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;
