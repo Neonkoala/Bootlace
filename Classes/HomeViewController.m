@@ -11,7 +11,7 @@
 
 @implementation HomeViewController
 
-@synthesize commonInstance, homePage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton;
+@synthesize commonInstance, homePage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton, initialLoad;
 
 - (IBAction)refreshHome:(id)sender {
 	[homePage reload];
@@ -109,6 +109,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	initialLoad = YES;
+	
 	commonData *sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	
@@ -130,15 +132,9 @@
 	}
 	
 	if(![sharedData.platform isEqualToString:@"iPhone1,1"] && ![sharedData.platform isEqualToString:@"iPhone1,2"] && ![sharedData.platform isEqualToString:@"iPod1,1"]) {
+		DLog(@"Failed platform check: %@", sharedData.platform);
 		[commonInstance sendTerminalError:@"Bootlace is not compatible with this device.\r\nAborting..."];
 	}
-	
-	NSOperationQueue *viewInitQueue = [NSOperationQueue new];
-	
-	NSInvocationOperation *checkNew = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(checkUpdates) object:nil];
-	
-	[viewInitQueue addOperation:checkNew];
-    [checkNew release];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -146,7 +142,15 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self performSelectorOnMainThread:@selector(showWebView) withObject:nil waitUntilDone:NO]; 
+    [self performSelectorOnMainThread:@selector(showWebView) withObject:nil waitUntilDone:NO];
+	
+	if(initialLoad) {
+		DLog(@"Initial load, checking for updates");
+		
+		[self checkUpdates];
+		
+		initialLoad = NO;
+	}
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

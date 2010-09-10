@@ -22,6 +22,8 @@
 	UIBarButtonItem *refreshButton;
 	UIBarButtonItem *stopButton;
 	UIBarButtonItem *backButton;
+	
+	BOOL initialLoad;
 }
 
 @property (nonatomic, retain) commonFunctions *commonInstance;
@@ -33,6 +35,8 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backButton;
+
+@property (nonatomic, assign) BOOL initialLoad;
 
 - (void)checkUpdates;
 - (void)flipAction:(id)sender;
