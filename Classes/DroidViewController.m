@@ -135,6 +135,8 @@
 	installInstance = [[installClass alloc] init];
 	
 	[installInstance idroidInstall];
+	
+	[installInstance checkForUpdates];
 
 	[self performSelectorOnMainThread:@selector(refreshStatus) withObject:nil waitUntilDone:YES];
 	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:YES];
@@ -145,6 +147,8 @@
 	
 	[installInstance idroidUpgrade];
 	
+	[installInstance checkForUpdates];
+	
 	[self performSelectorOnMainThread:@selector(refreshStatus) withObject:nil waitUntilDone:YES];
 	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:YES];
 }
@@ -153,6 +157,8 @@
 	installInstance = [[installClass alloc] init];
 	
 	[installInstance idroidRemove];
+	
+	[installInstance checkForUpdates];
 	
 	[self performSelectorOnMainThread:@selector(refreshStatus) withObject:nil waitUntilDone:YES];
 	[self performSelectorOnMainThread:@selector(refreshUpdate) withObject:nil waitUntilDone:NO];
@@ -370,7 +376,7 @@
 	BOOL keepAlive = YES;
 	
 	do {        
-        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, YES);
         installOverallProgress.progress = sharedData.updateOverallProgress;
 		installCurrentProgress.progress = sharedData.updateCurrentProgress;
 		if (sharedData.updateOverallProgress == 1) {
@@ -494,7 +500,7 @@
 	BOOL keepAlive = YES;
 	
 	do {        
-        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, YES);
         upgradeOverallProgress.progress = sharedData.updateOverallProgress;
 		upgradeCurrentProgress.progress = sharedData.updateCurrentProgress;
 		if (sharedData.updateOverallProgress == 1) {
@@ -523,6 +529,7 @@
 			case 0:
 				break;
 			default:
+				keepAlive = NO;
 				break;
 		}
     } while (keepAlive);

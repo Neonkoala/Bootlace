@@ -33,6 +33,7 @@
 - (int)parseInstalledPlist;
 - (int)parseUpgradePlist;
 - (int)generateInstalledPlist;
+- (int)updateInstalledPlist;
 - (void)idroidInstall;
 - (void)idroidUpgrade;
 - (void)idroidRemove;
@@ -45,6 +46,7 @@
 - (int)moveFiles:(NSDictionary *)fileList;
 - (int)removeFiles:(NSArray *)fileList;
 - (int)cherryPickFiles:(NSArray *)fileList;
+- (int)runPostInstall:(NSString *)URL;
 - (int)dumpMultitouch;
 - (int)dumpWiFi;
 - (NSString *)fileMD5:(NSString *)path;

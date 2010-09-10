@@ -42,6 +42,8 @@
 	
 	DLog(@"Latest version plist parsed");
 	
+	NSLog(@"OpibRequired: %@", sharedData.updateOpibRequired);
+	
 	return 0;
 }
 
@@ -127,7 +129,7 @@
 	int i, count;
 	commonData* sharedData = [commonData sharedData];
 	NSMutableArray *installedDependencies;
-	NSMutableDictionary *installedPlist = [NSMutableDictionary dictionaryWithCapacity:5];
+	NSMutableDictionary *installedPlist = [NSMutableDictionary dictionaryWithCapacity:6];
 	
 	count = [sharedData.updateFiles count];
 	NSMutableArray *installedFiles = [NSMutableArray arrayWithCapacity:count];
@@ -168,6 +170,7 @@
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
 	[installedPlist setObject:sharedData.updateAndroidVer forKey:@"AndroidVersion"];
+	[installedPlist setObject:sharedData.updateOpibRequired forKey:@"OpeniBootRequired"];
 	[installedPlist setObject:[NSDate date] forKey:@"InstalledDate"];
 	[installedPlist setObject:installedFiles forKey:@"Files"];
 	[installedPlist setObject:installedDependencies forKey:@"Dependencies"];
@@ -179,6 +182,55 @@
 	
 	DLog(@"Installed Plist generated successfully.");
 
+	return 0;
+}
+
+- (int)updateInstalledPlist {
+	DLog(@"Updating Installed Plist");
+	
+	commonData* sharedData = [commonData sharedData];
+	int i, count;
+	NSString *key;
+	
+	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:installedPlistPath]) {
+		DLog(@"Installed.plist not present, wtf?");
+		return -1;
+	}
+
+	NSMutableDictionary *installedPlist = [NSDictionary dictionaryWithContentsOfFile:installedPlistPath];
+	
+	count = [sharedData.upgradeDeltaAddFiles count];
+	NSMutableArray *installedFiles = [NSMutableArray arrayWithCapacity:count];
+	
+	for (i=0; i<count; i++) {
+		if(sharedData.upgradeUseDelta) {
+			key = [sharedData.upgradeDeltaAddFiles objectAtIndex:i];
+		} else {
+			key = [sharedData.upgradeComboAddFiles objectAtIndex:i];
+		}		
+		
+		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
+		
+		[installedFiles addObject:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
+	}
+	
+	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
+	[installedPlist setObject:sharedData.updateAndroidVer forKey:@"AndroidVersion"];
+	[installedPlist setObject:sharedData.updateOpibRequired forKey:@"OpeniBootRequired"];
+	[installedPlist setObject:[NSDate date] forKey:@"InstalledDate"];
+	[installedPlist setObject:installedFiles forKey:@"Files"];
+	
+	[[NSFileManager defaultManager] removeItemAtPath:installedPlistPath error:nil];
+	
+	if(![installedPlist writeToFile:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] atomically:YES]) {
+		DLog(@"Failed to write Installed Plist");
+		return -1;
+	}
+	
+	DLog(@"Installed Plist updated successfully.");
+	
 	return 0;
 }
 
@@ -369,7 +421,7 @@
 	
 	[self checkInstalled];
 	
-	[self updateProgress:[NSNumber numberWithFloat:1] nextStage:YES];
+	[self updateProgress:[NSNumber numberWithFloat:1] nextStage:NO];
 }
 
 - (void)idroidUpgrade {
@@ -489,8 +541,12 @@
 		return;
 	}
 	
+	[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+	
 	//Check if we're gonna do this delta style
 	if(sharedData.upgradeUseDelta) {
+		DLog(@"Delta style baby...");
+		
 		success = [self createDirectories:sharedData.upgradeDeltaCreateDirectories];
 		
 		if(success < 0) {
@@ -500,6 +556,7 @@
 			return;
 		}
 		
+		[self updateProgress:[NSNumber numberWithFloat:0.15] nextStage:NO];
 		
 		success = [self removeFiles:sharedData.upgradeDeltaRemoveFiles];
 		
@@ -510,6 +567,8 @@
 			return;
 		}
 		
+		[self updateProgress:[NSNumber numberWithFloat:0.3] nextStage:NO];
+		
 		success = [self moveFiles:sharedData.upgradeDeltaMoveFiles];
 		
 		if(success < 0) {
@@ -518,7 +577,56 @@
 			[self cleanUp];
 			return;
 		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.5] nextStage:NO];
+		
+		success = [self cherryPickFiles:sharedData.upgradeDeltaAddFiles];
+		
+		if(success < 0) {
+			ALog(@"Cherry picking files returned: %d", success);
+			sharedData.updateFail = 7;
+			[self cleanUp];
+			return;
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.7] nextStage:NO];
+		
+		if([sharedData.upgradeDeltaPostInstall length] != 0) {
+			DLog(@"Post Install script needs running...");
+			
+			success = [self runPostInstall:sharedData.upgradeDeltaPostInstall];
+			
+			if(success < 0) {
+				ALog(@"Post install script returned: %d", success);
+				sharedData.updateFail = 8;
+				[self cleanUp];
+				return;
+			}
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.9] nextStage:NO];
+	} else {
+		DLog(@"Combo update for this bad boy...");
 	}
+	
+	//Clean up
+	[self cleanUp];
+	
+	//Set installed plist
+	success = [self updateInstalledPlist];
+	
+	if(success < 0) {
+		ALog(@"Installed plist generation returned: %d", success);
+		sharedData.updateFail = 9;
+		[self cleanUp];
+		return;
+	}
+	
+	[UIApplication sharedApplication].idleTimerDisabled = NO; //Re-enable autolock
+	
+	[self checkInstalled];
+	
+	[self updateProgress:[NSNumber numberWithFloat:1] nextStage:NO];
 }
 
 - (void)idroidRemove {
@@ -541,12 +649,14 @@
 	
 	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] error:nil];
 	
-	sharedData.installedDate = nil;
+	sharedData.installed = NO;
 	sharedData.installedVer = nil;
 	sharedData.installedAndroidVer = nil;
-	sharedData.installedFiles = nil;
+	sharedData.installedOpibRequired = nil;
+	sharedData.installedDate = nil;
 	sharedData.installedDependencies = nil;
-	sharedData.installed = NO;
+	
+	[self checkInstalled];
 }
 
 - (void)updateProgress:(NSNumber *)progress nextStage:(BOOL)next {
@@ -560,6 +670,8 @@
 	
 	sharedData.updateOverallProgress = ([progress floatValue]/5)+((sharedData.updateStage-1)*0.2);
 	sharedData.updateCurrentProgress = [progress floatValue];
+	
+	NSLog(@"Current Progress: %f Overall Progress: %f", sharedData.updateCurrentProgress, sharedData.updateOverallProgress);
 }
 
 - (void)cleanUp {
@@ -572,10 +684,6 @@
 	if(sharedData.updatePackagePath) {
 		[[NSFileManager defaultManager] removeItemAtPath:sharedData.updatePackagePath error:nil];
 	}
-	
-	sharedData.updateOverallProgress = 0;
-	sharedData.updateCurrentProgress = 0;
-	sharedData.updateStage = 0;
 	
 	DLog(@"Cleanup complete.");
 }
@@ -688,10 +796,12 @@
 	for (i=0; i<count; i++) {
 		DLog(@"Creating directory at path: %@", [directoryList objectAtIndex:i]);
 		
-		if(![[NSFileManager defaultManager] createDirectoryAtPath:[directoryList objectAtIndex:i] withIntermediateDirectories:YES attributes:nil error:&error]) {
-			DLog(@"%@", [error localizedDescription]);
+		if(![[NSFileManager defaultManager] fileExistsAtPath:[directoryList objectAtIndex:i]]) {
+			if(![[NSFileManager defaultManager] createDirectoryAtPath:[directoryList objectAtIndex:i] withIntermediateDirectories:YES attributes:nil error:&error]) {
+				DLog(@"%@", [error localizedDescription]);
 			
-			return -1;
+				return -1;
+			}
 		}
 	}
 	
@@ -775,6 +885,36 @@
 }
 
 - (int)cherryPickFiles:(NSArray *)fileList {
+	int i, count;
+	NSError *error;
+	commonData* sharedData = [commonData sharedData];
+	
+	count = [fileList count];
+	
+	for (i=0; i<count; i++) {
+		NSString *key = [fileList objectAtIndex:i];
+		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
+		
+		NSString *sourcePath = [[sharedData.workingDirectory stringByAppendingPathComponent:[fileDetails objectAtIndex:0]] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
+		NSString *destPath = [[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
+		
+		if([[NSFileManager defaultManager] fileExistsAtPath:destPath]) {
+			if(![[NSFileManager defaultManager] removeItemAtPath:destPath error:&error]) {
+				NSLog(@"%@", [error localizedDescription]);
+			}
+		}
+		
+		if(![[NSFileManager defaultManager] moveItemAtPath:sourcePath toPath:destPath error:&error]) {
+			NSLog(@"%@", [error localizedDescription]);
+			return -1;
+		}
+	}
+	
+	return 0;
+}
+
+- (int)runPostInstall:(NSString *)URL {
+	
 	
 	return 0;
 }
