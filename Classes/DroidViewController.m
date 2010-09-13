@@ -275,7 +275,7 @@
 }
 
 - (IBAction)installPress:(id)sender {
-	int freeSpace, neededSpace;
+	float freeSpace, neededSpace;
 	commonInstance = [[commonFunctions alloc] init];
 	commonData* sharedData = [commonData sharedData];
 	
@@ -289,6 +289,32 @@
 		} while (sharedData.warningLive);
 	}
 	
+	//Check space requirements	
+	freeSpace = [commonInstance getFreeSpace];
+	
+	if(freeSpace < (sharedData.updateSize * 2)) {
+		DLog(@"Not enough free space. %1.0f available.", freeSpace);
+		
+		neededSpace = (float)(((sharedData.updateSize * 2) - freeSpace) / 1048576);
+		
+		NSString *noSpace = [NSString stringWithFormat:@"There is not enough free space to complete the installation process.\r\n\r\nPlease free an additional %1.0fMB of space.", neededSpace];
+		
+		[commonInstance sendError:noSpace];
+		
+		return;
+	}
+	
+	//Check Bootlace requirements
+	if([sharedData.updateBootlaceRequired compare:sharedData.bootlaceVersion options:NSNumericSearch] == NSOrderedDescending) {
+		DLog(@"Newer version of Bootlace required than the one installed.");
+		
+		NSString *tooOld = [NSString stringWithFormat:@"Installing iDroid requires a newer version of Bootlace.\r\n\r\nPlease upgrade to version %@ using Cydia.", sharedData.updateBootlaceRequired];
+		
+		[commonInstance sendError:tooOld];
+		
+		return;
+	}
+	
 	if([[NSFileManager defaultManager] fileExistsAtPath:@"/var/android.img.gz"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/zImage"] || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/idroid/android.img.gz"]) {
 		UIActionSheet *confirmInstall = [[UIActionSheet alloc] initWithTitle:@"Warning: this will destroy and overwrite any existing iDroid install." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Continue" otherButtonTitles:nil];
 		confirmInstall.actionSheetStyle = UIActionSheetStyleBlackOpaque;
@@ -296,25 +322,39 @@
 		[confirmInstall showInView:self.tabBarController.view];
 		[confirmInstall release];
 	} else {
-		freeSpace = [commonInstance getFreeSpace];
-		NSLog(@"Not enough free space. %d available.", freeSpace);
-		
-		if(freeSpace < (sharedData.updateSize * 2)) {
-			NSLog(@"Not enough free space. %d available.", freeSpace);
-			
-			neededSpace = (int)(((sharedData.updateSize * 2) - freeSpace) / 1048576);
-			
-			NSString *noSpace = [NSString stringWithFormat:@"There is not enough free space to complete the installation process.\r\n\r\nPlease free an additional %dMB of space.", neededSpace];
-			
-			[commonInstance sendError:noSpace];
-		} else {	
-			[self installIdroid];
-		}
+		[self installIdroid];
 	}
 }
 
 - (IBAction)upgradePress:(id)sender {
+	float freeSpace, neededSpace;
 	commonData* sharedData = [commonData sharedData];
+	
+	//Check space requirements	
+	freeSpace = [commonInstance getFreeSpace];
+	
+	if(freeSpace < (sharedData.updateSize * 2)) {
+		DLog(@"Not enough free space. %1.0f available.", freeSpace);
+		
+		neededSpace = (float)(((sharedData.updateSize * 2) - freeSpace) / 1048576);
+		
+		NSString *noSpace = [NSString stringWithFormat:@"There is not enough free space to complete the installation process.\r\n\r\nPlease free an additional %1.0f.MB of space.", neededSpace];
+		
+		[commonInstance sendError:noSpace];
+		
+		return;
+	}
+	
+	//Check Bootlace requirements
+	if([sharedData.updateBootlaceRequired compare:sharedData.bootlaceVersion options:NSNumericSearch] == NSOrderedDescending) {
+		DLog(@"Newer version of Bootlace required than the one installed.");
+		
+		NSString *tooOld = [NSString stringWithFormat:@"Installing iDroid requires a newer version of Bootlace.\r\n\r\nPlease upgrade to version %@ using Cydia.", sharedData.updateBootlaceRequired];
+		
+		[commonInstance sendError:tooOld];
+		
+		return;
+	}
 	
 	//Check if a newer openiboot is needed
 	if([sharedData.updateOpibRequired compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {		
@@ -419,38 +459,48 @@
 			case 0:
 				break;
 			case 1:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\niDroid could not be downloaded."];
 				keepAlive = NO;
 				break;
 			case 2:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\nFile decompression failed."];
 				keepAlive = NO;
 				break;
 			case 3:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\nArchive extraction failed."];
 				keepAlive = NO;
 				break;
 			case 4:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\nFiles could not be moved."];
 				keepAlive = NO;
 				break;
 			case 5:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\nMultitouch firmware could not be acquired."];
 				keepAlive = NO;
 				break;
 			case 6:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\nWiFi firmware could not be retrieved."];
 				keepAlive = NO;
 				break;
 			case 7:
-				NSLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
 				[commonInstance sendError:@"Install failed.\nInstallation manifest could not be generated."];
+				keepAlive = NO;
+				break;
+			case 8:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\nDirectories could no be created."];
+				keepAlive = NO;
+				break;
+			case 9:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Install failed.\niDroid package MD5 checksum does not match."];
 				keepAlive = NO;
 				break;
 			default:
@@ -541,6 +591,56 @@
 		}
 		switch (sharedData.updateFail) {
 			case 0:
+				break;
+			case 1:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nUpdate could not be downloaded."];
+				keepAlive = NO;
+				break;
+			case 2:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nFile decompression failed."];
+				keepAlive = NO;
+				break;
+			case 3:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nArchive extraction failed."];
+				keepAlive = NO;
+				break;
+			case 4:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nDirectories could not be created."];
+				keepAlive = NO;
+				break;
+			case 5:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nFiles could not be removed."];
+				keepAlive = NO;
+				break;
+			case 6:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nFiles could not be moved."];
+				keepAlive = NO;
+				break;
+			case 7:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nCherry picking files failed."];
+				keepAlive = NO;
+				break;
+			case 8:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nPost install script failed."];
+				keepAlive = NO;
+				break;
+			case 9:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nUpdating the installed plist failed."];
+				keepAlive = NO;
+				break;
+			case 10:
+				DLog(@"Error triggered. Fail code: %d", sharedData.updateFail);
+				[commonInstance sendError:@"Upgrade failed.\nUpdate package does not match MD5 checksum."];
+				keepAlive = NO;
 				break;
 			default:
 				keepAlive = NO;

@@ -10,27 +10,38 @@
 #import "commonData.h"
 #import "commonFunctions.h"
 #import "installClass.h"
+#import "getFile.h"
+#import "extractionClass.h"
 
 @class commonFunctions;
 @class installClass;
+@class extractionClass;
+@class getFile;
 
 @interface DroidAdvancedViewController : UIViewController <UIActionSheetDelegate> {
 	installClass *installInstance;
 	commonFunctions *commonInstance;
+	extractionClass *extractionInstance;
+	getFile *getFileInstance;
 	
 	UIGlassButton *multitouchInstall;
 	UIGlassButton *wifiInstall;
+	UIGlassButton *resetUserDataButton;
 }
 
 @property (nonatomic, retain) installClass *installInstance;
 @property (nonatomic, retain) commonFunctions *commonInstance;
+@property (nonatomic, retain) extractionClass *extractionInstance;
 
 @property (nonatomic, retain) IBOutlet UIGlassButton *multitouchInstall;
 @property (nonatomic, retain) IBOutlet UIGlassButton *wifiInstall;
+@property (nonatomic, retain) IBOutlet UIGlassButton *resetUserDataButton;
 
 - (IBAction)extractMultitouch:(id)sender;
 - (IBAction)downloadWifi:(id)sender;
+- (IBAction)resetUserData:(id)sender;
 - (void)dumpZephyr;
 - (void)getWifi;
+- (void)doReset;
 
 @end

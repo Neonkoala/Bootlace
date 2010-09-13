@@ -47,7 +47,7 @@
 - (int)resetNVRAM;
 - (int)applyNVRAM;
 - (BOOL)checkMains;
-- (int)getFreeSpace;
+- (float)getFreeSpace;
 - (void)getPlatform;
 - (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;

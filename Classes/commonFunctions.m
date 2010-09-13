@@ -171,14 +171,14 @@
 	return mains;
 }
 
-- (int)getFreeSpace {
+- (float)getFreeSpace {
 	struct statfs stats;
 	
-	statfs("/private", &stats);
+	statfs("/private/var", &stats);
 	
-	DLog(@"Free space: %u", stats.f_bavail * stats.f_bsize);
+	DLog(@"Free space: %1.0f", (float) stats.f_bsize * stats.f_bavail);
 	
-	return(stats.f_bsize * stats.f_bavail);
+	return((float) stats.f_bsize * stats.f_bavail);
 }
 
 - (void)getPlatform {

@@ -11,6 +11,8 @@
 
 @interface commonData : NSObject {
 	//Initialisation variables
+	BOOL setBadge;
+	
 	BOOL firstLaunchVal;
 	BOOL debugMode;
 	BOOL bootlaceUpgradeAvailable;
@@ -52,6 +54,7 @@
 	NSString *updateAndroidVer;
 	NSDate *updateDate;
 	NSString *updateOpibRequired;
+	NSString *updateBootlaceRequired;
 	NSString *updateURL;
 	NSString *updateMD5;
 	NSString *updateFirmwarePath;
@@ -59,6 +62,7 @@
 	NSString *updateClean;
 	NSMutableDictionary *updateFiles;
 	NSMutableDictionary *updateDependencies;
+	NSArray *updateDirectories;
 	
 	
 	BOOL upgradeUseDelta;
@@ -78,7 +82,13 @@
 	NSDictionary *upgradeComboMoveFiles;
 	NSArray *upgradeComboAddFiles;
 	NSString *upgradeComboPostInstall;
+	
+	
+	NSString *restoreUserDataURL;
+	NSString *restoreUserDataPath;
 }
+
+@property (nonatomic, assign) BOOL setBadge;
 
 @property (nonatomic, assign) BOOL firstLaunchVal;
 @property (nonatomic, assign) BOOL debugMode;
@@ -121,6 +131,7 @@
 @property (nonatomic, retain) NSString *updateAndroidVer;
 @property (nonatomic, retain) NSDate *updateDate;
 @property (nonatomic, retain) NSString *updateOpibRequired;
+@property (nonatomic, retain) NSString *updateBootlaceRequired;
 @property (nonatomic, retain) NSString *updateURL;
 @property (nonatomic, retain) NSString *updateMD5;
 @property (nonatomic, retain) NSString *updateFirmwarePath;
@@ -128,6 +139,7 @@
 @property (nonatomic, retain) NSString *updateClean;
 @property (nonatomic, retain) NSMutableDictionary *updateFiles;
 @property (nonatomic, retain) NSMutableDictionary *updateDependencies;
+@property (nonatomic, retain) NSArray *updateDirectories;
 
 
 @property (nonatomic, assign) BOOL upgradeUseDelta;
@@ -147,6 +159,10 @@
 @property (nonatomic, retain) NSDictionary *upgradeComboMoveFiles;
 @property (nonatomic, retain) NSArray *upgradeComboAddFiles;
 @property (nonatomic, retain) NSString *upgradeComboPostInstall;
+
+
+@property (nonatomic, retain) NSString *restoreUserDataURL;
+@property (nonatomic, retain) NSString *restoreUserDataPath;
 
 + (commonData *) sharedData;
 

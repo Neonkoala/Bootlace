@@ -31,11 +31,13 @@
 	sharedData.updateAndroidVer = [platformDict objectForKey:@"AndroidVersion"];
 	sharedData.updateDate = [platformDict objectForKey:@"ReleaseDate"];
 	sharedData.updateOpibRequired = [platformDict objectForKey:@"OpeniBootRequired"];
+	sharedData.updateBootlaceRequired = [platformDict objectForKey:@"BootlaceRequired"];
 	sharedData.updateURL = [platformDict objectForKey:@"URL"];
 	sharedData.updateMD5 = [platformDict objectForKey:@"MD5"];
 	sharedData.updateSize = [[platformDict objectForKey:@"Size"] intValue];
 	sharedData.updateFiles = [platformDict objectForKey:@"Files"];
 	sharedData.updateDependencies = [platformDict objectForKey:@"Dependencies"];
+	sharedData.updateDirectories = [platformDict objectForKey:@"Directories"];
 	sharedData.updateClean = [platformDict objectForKey:@"Clean"];
 	
 	sharedData.updateFirmwarePath = [sharedData.updateDependencies objectForKey:@"Directory"];
@@ -189,7 +191,7 @@
 	DLog(@"Updating Installed Plist");
 	
 	commonData* sharedData = [commonData sharedData];
-	int i, count;
+	int i, count1, count2;
 	NSString *key;
 	
 	NSString *installedPlistPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"];
@@ -201,10 +203,17 @@
 
 	NSMutableDictionary *installedPlist = [NSDictionary dictionaryWithContentsOfFile:installedPlistPath];
 	
-	count = [sharedData.upgradeDeltaAddFiles count];
-	NSMutableArray *installedFiles = [NSMutableArray arrayWithCapacity:count];
+	if(sharedData.upgradeUseDelta) {
+		count1 = [sharedData.upgradeDeltaAddFiles count];
+		count2 = [sharedData.upgradeDeltaMoveFiles count];
+	} else {
+		count1 = [sharedData.upgradeComboAddFiles count];
+		count2 = [sharedData.upgradeComboMoveFiles count];
+	}
+		
+	NSMutableArray *installedFiles = [NSMutableArray arrayWithCapacity:(count1 + count2)];
 	
-	for (i=0; i<count; i++) {
+	for (i=0; i<count1; i++) {
 		if(sharedData.upgradeUseDelta) {
 			key = [sharedData.upgradeDeltaAddFiles objectAtIndex:i];
 		} else {
@@ -214,6 +223,19 @@
 		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
 		
 		[installedFiles addObject:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
+	}
+	
+	for (i=0; i<count2; i++) {
+		NSString *key = [NSString stringWithFormat:@"%d", i];
+		NSArray *fileDetails;
+		
+		if(sharedData.upgradeUseDelta) {
+			fileDetails = [sharedData.upgradeDeltaMoveFiles objectForKey:key];
+		} else {
+			fileDetails = [sharedData.upgradeComboMoveFiles objectForKey:key];
+		}
+		
+		[installedFiles addObject:[fileDetails objectAtIndex:2]];
 	}
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
@@ -308,12 +330,22 @@
 		
 		if(![sharedData.updateMD5 isEqualToString:md5hash]) {
 			DLog(@"MD5 hash does not match, assuming download is corrupt.");
-			sharedData.updateFail = 0;
+			sharedData.updateFail = 9;
 			[self cleanUp];
 			return;
 		}
 		
 		[self updateProgress:[NSNumber numberWithInt:0] nextStage:YES];
+	}
+	
+	//Create directories
+	success = [self createDirectories:sharedData.updateDirectories];
+	
+	if(success < 0) {
+		ALog(@"Directory creation returned: %d", success);
+		sharedData.updateFail = 8;
+		[self cleanUp];
+		return;
 	}
 	
 	//Extract file
@@ -397,12 +429,6 @@
 	}
 	
 	[self updateProgress:[NSNumber numberWithFloat:0.75] nextStage:NO];
-	
-	//Check if SD card folder exists
-	
-	if(![[NSFileManager defaultManager] fileExistsAtPath:@"/private/var/sdcard"]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:@"/private/var/sdcard" withIntermediateDirectories:NO attributes:nil error:nil];
-	}
 	
 	//Clean up
 	[self cleanUp];
@@ -500,7 +526,7 @@
 		
 		if(![sharedData.updateMD5 isEqualToString:md5hash]) {
 			DLog(@"MD5 hash does not match, assuming download is corrupt.");
-			sharedData.updateFail = 0;
+			sharedData.updateFail = 10;
 			[self cleanUp];
 			return;
 		}
@@ -712,6 +738,11 @@
 	
 	sharedData.latestVerDict = [updateDict objectForKey:@"LatestVersion"];
 	sharedData.upgradeDict = [updateDict objectForKey:@"Upgrade"];
+	
+	NSDictionary *restoreDict = [updateDict objectForKey:@"Restore"];
+	
+	sharedData.restoreUserDataURL = [restoreDict objectForKey:@"UserDataURL"];
+	sharedData.restoreUserDataPath = [restoreDict objectForKey:@"UserDataPath"];
 	
 	//Call func to parse plist
 	success = [self parseLatestVersionPlist];
