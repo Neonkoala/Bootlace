@@ -198,6 +198,8 @@
 		return;
 	}
 	
+	[[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
+	
 	[progressView dismissWithClickedButtonIndex:0 animated:YES];
 }
 

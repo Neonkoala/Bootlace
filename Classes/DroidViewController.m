@@ -328,6 +328,7 @@
 
 - (IBAction)upgradePress:(id)sender {
 	float freeSpace, neededSpace;
+	commonInstance = [[commonFunctions alloc] init];
 	commonData* sharedData = [commonData sharedData];
 	
 	//Check space requirements	
@@ -338,7 +339,7 @@
 		
 		neededSpace = (float)(((sharedData.updateSize * 2) - freeSpace) / 1048576);
 		
-		NSString *noSpace = [NSString stringWithFormat:@"There is not enough free space to complete the installation process.\r\n\r\nPlease free an additional %1.0f.MB of space.", neededSpace];
+		NSString *noSpace = [NSString stringWithFormat:@"There is not enough free space to complete the upgrade process.\r\n\r\nPlease free an additional %1.0fMB of space.", neededSpace];
 		
 		[commonInstance sendError:noSpace];
 		

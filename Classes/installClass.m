@@ -147,7 +147,7 @@
 		NSDictionary *wifiDict = [sharedData.updateDependencies objectForKey:@"WiFi"];
 		count = [wifiDict count];
 		
-		installedDependencies = [NSMutableArray arrayWithCapacity:(count+3)];
+		installedDependencies = [NSMutableArray arrayWithCapacity:(count+2)];
 	
 		for (i=0; i<count; i++) {
 			NSString *key = [NSString stringWithFormat:@"%d", i];
@@ -156,7 +156,7 @@
 			[installedDependencies addObject:[sharedData.updateFirmwarePath stringByAppendingPathComponent:[fileDetails objectAtIndex:0]]];
 		}
 	} else {
-		installedDependencies = [NSMutableArray arrayWithCapacity:3];
+		installedDependencies = [NSMutableArray arrayWithCapacity:2];
 	}
 	
 	if([[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F52,1"] || [[sharedData.updateDependencies objectForKey:@"Multitouch"] isEqual:@"Z2F51,1"]) {
@@ -221,7 +221,6 @@
 		}		
 		
 		NSArray *fileDetails = [sharedData.updateFiles objectForKey:key];
-		
 		[installedFiles addObject:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
 	}
 	
@@ -235,7 +234,7 @@
 			fileDetails = [sharedData.upgradeComboMoveFiles objectForKey:key];
 		}
 		
-		[installedFiles addObject:[fileDetails objectAtIndex:2]];
+		[installedFiles addObject:[fileDetails objectAtIndex:1]];
 	}
 	
 	[installedPlist setObject:sharedData.updateVer forKey:@"iDroidVersion"];
@@ -851,14 +850,16 @@
 		NSString *sourcePath = [[sharedData.workingDirectory stringByAppendingPathComponent:[fileDetails objectAtIndex:0]] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
 		NSString *destPath = [[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
 		
+		DLog(@"Adding file from %@ to %@", sourcePath, destPath);
+		
 		if([[NSFileManager defaultManager] fileExistsAtPath:destPath]) {
 			if(![[NSFileManager defaultManager] removeItemAtPath:destPath error:&error]) {
-				NSLog(@"%@", [error localizedDescription]);
+				DLog(@"%@", [error localizedDescription]);
 			}
 		}
 		
 		if(![[NSFileManager defaultManager] moveItemAtPath:sourcePath toPath:destPath error:&error]) {
-			NSLog(@"%@", [error localizedDescription]);
+			DLog(@"%@", [error localizedDescription]);
 			return -1;
 		}
 	}
@@ -879,14 +880,16 @@
 		NSString *sourcePath = [fileDetails objectAtIndex:0];		
 		NSString *destPath = [fileDetails objectAtIndex:1];
 		
+		DLog(@"Moving file from %@ to %@", sourcePath, destPath);
+		
 		if([[NSFileManager defaultManager] fileExistsAtPath:destPath]) {
 			if(![[NSFileManager defaultManager] removeItemAtPath:destPath error:&error]) {
-				NSLog(@"%@", [error localizedDescription]);
+				DLog(@"%@", [error localizedDescription]);
 			}
 		}
 		
 		if(![[NSFileManager defaultManager] moveItemAtPath:sourcePath toPath:destPath error:&error]) {
-			NSLog(@"%@", [error localizedDescription]);
+			DLog(@"%@", [error localizedDescription]);
 			return -1;
 		}
 	}
@@ -927,14 +930,16 @@
 		NSString *sourcePath = [[sharedData.workingDirectory stringByAppendingPathComponent:[fileDetails objectAtIndex:0]] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
 		NSString *destPath = [[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]];
 		
+		DLog(@"Cherry picking file at %@ and moving to %@ - pretty neat huh?", sourcePath, destPath);
+		
 		if([[NSFileManager defaultManager] fileExistsAtPath:destPath]) {
 			if(![[NSFileManager defaultManager] removeItemAtPath:destPath error:&error]) {
-				NSLog(@"%@", [error localizedDescription]);
+				DLog(@"%@", [error localizedDescription]);
 			}
 		}
 		
 		if(![[NSFileManager defaultManager] moveItemAtPath:sourcePath toPath:destPath error:&error]) {
-			NSLog(@"%@", [error localizedDescription]);
+			DLog(@"%@", [error localizedDescription]);
 			return -1;
 		}
 	}
@@ -943,7 +948,7 @@
 }
 
 - (int)runPostInstall:(NSString *)URL {
-	
+	DLog(@"Post install triggered.");
 	
 	return 0;
 }
