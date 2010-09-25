@@ -2,7 +2,7 @@
 //  OpeniBootViewController.m
 //  BootlaceV2
 //
-//  Created by Neonkoala on 23/09/2010.
+//  Created by Neonkoala on 25/09/2010.
 //  Copyright 2010 Neonkoala.co.uk. All rights reserved.
 //
 
@@ -11,59 +11,35 @@
 
 @implementation OpeniBootViewController
 
-@synthesize tableRows;
+@synthesize opibInstall, opibConfigure;
 
+- (IBAction)opibConfigureTap:(id)sender {
+	OpeniBootConfigureViewController *configureView = [[OpeniBootConfigureViewController alloc] initWithNibName:@"OpeniBootConfigureViewController" bundle:nil];
+	[self.navigationController pushViewController:configureView animated:YES];
+	[configureView release];
+}
+
+- (IBAction)opibInstallTap:(id)sender {
+	
+}
 
 /*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        // Custom initialization
     }
     return self;
 }
 */
 
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	tableRows = [[NSMutableArray alloc] init];
-	
-	NSMutableArray *installSection = [[NSMutableArray alloc] init];
-	NSMutableArray *configureSection = [[NSMutableArray alloc] init];
-	
-	OpeniBootInstallViewController *installViewController = [[OpeniBootInstallViewController alloc] initWithNibName:@"OpeniBootInstallViewController" bundle:nil];
-	OpeniBootConfigureViewController *configureViewController = [[OpeniBootConfigureViewController alloc] initWithNibName:@"OpeniBootConfigureViewController" bundle:nil];
-	
-	[installSection addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Install", @"title", installViewController, @"viewController", nil]];
-	[configureSection addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Configure", @"title", configureViewController, @"viewController", nil]];
-	
-	[tableRows addObject:installSection];
-	[tableRows addObject:configureSection];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
+	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
 }
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -86,92 +62,9 @@
 }
 
 
-#pragma mark Table view methods
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 100;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [tableRows count];
-}
-
-
-// Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[tableRows objectAtIndex:section] count];
-}
-
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSArray *currentSection = [tableRows objectAtIndex:indexPath.section];
-	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"defaultIdentifier"];
-	if (cell == nil)
-	{
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"defaultIdentifier"] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	}
-	
-	cell.textLabel.text = [[currentSection objectAtIndex:indexPath.row] objectForKey:@"title"];
-	
-	return cell;
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	NSArray *currentSection = [tableRows objectAtIndex:indexPath.section];
-	UIViewController *targetViewController = [[currentSection objectAtIndex: indexPath.row] objectForKey:@"viewController"];
-	[[self navigationController] pushViewController:targetViewController animated:YES];
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 - (void)dealloc {
     [super dealloc];
 }
 
 
 @end
-

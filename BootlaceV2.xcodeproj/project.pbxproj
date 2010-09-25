@@ -13,7 +13,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		D73B1E68120DEEBA00B3D9FF /* libarchive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D73B1E67120DEEBA00B3D9FF /* libarchive.a */; };
-		D786909B11BD1E8E00642943 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D786909911BD1E8E00642943 /* SettingsViewController.m */; };
 		D78690B211BD234A00642943 /* DroidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78690AF11BD234A00642943 /* DroidViewController.m */; };
 		D78690B311BD234A00642943 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78690B111BD234A00642943 /* HomeViewController.m */; };
 		D78690D211BD282200642943 /* BootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78690D011BD282200642943 /* BootViewController.m */; };
@@ -37,24 +36,23 @@
 		D7BFB8491222E5C900409E65 /* DroidAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */; };
 		D7BFB9B21222FC8500409E65 /* DroidAdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */; };
 		D7C6234811C65F790049C24B /* getFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C6234711C65F790049C24B /* getFile.m */; };
+		D7C764E9124E0D25001ADE11 /* oiblogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C764E8124E0D25001ADE11 /* oiblogo.png */; };
+		D7C764EF124E0ECC001ADE11 /* OpeniBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C764ED124E0ECC001ADE11 /* OpeniBootViewController.m */; };
+		D7C764F2124E0EE4001ADE11 /* OpeniBootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C764F1124E0EE4001ADE11 /* OpeniBootViewController.xib */; };
 		D7C8059B11C6EFF7006620C6 /* BootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059611C6EFF7006620C6 /* BootView.xib */; };
 		D7C8059C11C6EFF7006620C6 /* DroidView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059711C6EFF7006620C6 /* DroidView.xib */; };
 		D7C8059D11C6EFF7006620C6 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059811C6EFF7006620C6 /* HomeView.xib */; };
 		D7C8059E11C6EFF7006620C6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059911C6EFF7006620C6 /* MainWindow.xib */; };
-		D7C8059F11C6EFF7006620C6 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7C8059A11C6EFF7006620C6 /* SettingsView.xib */; };
 		D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */ = {isa = PBXBuildFile; fileRef = D7CDFE38121FF4AC008B07A6 /* bootlace.png */; };
 		D7D0B37111C50561000FCBD4 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B36F11C50561000FCBD4 /* install.png */; };
 		D7D0B37211C50561000FCBD4 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B37011C50561000FCBD4 /* remove.png */; };
 		D7D91509124B4C84006F7D9E /* oibtab.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D91508124B4C84006F7D9E /* oibtab.png */; };
-		D7D9150D124B4E1C006F7D9E /* OpeniBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D9150B124B4E1C006F7D9E /* OpeniBootViewController.m */; };
-		D7D9150E124B4E1C006F7D9E /* OpeniBootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D9150C124B4E1C006F7D9E /* OpeniBootViewController.xib */; };
-		D7D915D7124B5F84006F7D9E /* OpeniBootInstallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D915D5124B5F84006F7D9E /* OpeniBootInstallViewController.m */; };
-		D7D915D8124B5F84006F7D9E /* OpeniBootInstallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D915D6124B5F84006F7D9E /* OpeniBootInstallViewController.xib */; };
-		D7D915DC124B5F9E006F7D9E /* OpeniBootConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D915DA124B5F9E006F7D9E /* OpeniBootConfigureViewController.m */; };
-		D7D915DD124B5F9E006F7D9E /* OpeniBootConfigureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D915DB124B5F9E006F7D9E /* OpeniBootConfigureViewController.xib */; };
 		D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */; };
 		D7E14E321206F9A300156F7E /* AdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */; };
 		D7E44B0811C7D7770000594A /* extractionClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E44B0711C7D7770000594A /* extractionClass.m */; };
+		D7EBE3C6124E14E300759F67 /* oibbg.png in Resources */ = {isa = PBXBuildFile; fileRef = D7EBE3C5124E14E300759F67 /* oibbg.png */; };
+		D7EBE4D4124E282E00759F67 /* OpeniBootConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EBE4D3124E282E00759F67 /* OpeniBootConfigureViewController.m */; };
+		D7EBE4D6124E283700759F67 /* OpeniBootConfigureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +66,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Bootlace-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bootlace-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D73B1E67120DEEBA00B3D9FF /* libarchive.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libarchive.a; path = ../../Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/lib/libarchive.a; sourceTree = SOURCE_ROOT; };
-		D786909811BD1E8E00642943 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		D786909911BD1E8E00642943 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		D78690AE11BD234A00642943 /* DroidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroidViewController.h; sourceTree = "<group>"; };
 		D78690AF11BD234A00642943 /* DroidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroidViewController.m; sourceTree = "<group>"; };
 		D78690B011BD234A00642943 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -103,29 +99,27 @@
 		D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DroidAdvancedViewController.xib; sourceTree = "<group>"; };
 		D7C6234611C65F790049C24B /* getFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getFile.h; sourceTree = "<group>"; };
 		D7C6234711C65F790049C24B /* getFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getFile.m; sourceTree = "<group>"; };
+		D7C764E8124E0D25001ADE11 /* oiblogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oiblogo.png; path = Resources/oiblogo.png; sourceTree = "<group>"; };
+		D7C764EC124E0ECC001ADE11 /* OpeniBootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootViewController.h; sourceTree = "<group>"; };
+		D7C764ED124E0ECC001ADE11 /* OpeniBootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootViewController.m; sourceTree = "<group>"; };
+		D7C764F1124E0EE4001ADE11 /* OpeniBootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpeniBootViewController.xib; sourceTree = "<group>"; };
 		D7C8059611C6EFF7006620C6 /* BootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BootView.xib; sourceTree = "<group>"; };
 		D7C8059711C6EFF7006620C6 /* DroidView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DroidView.xib; sourceTree = "<group>"; };
 		D7C8059811C6EFF7006620C6 /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
 		D7C8059911C6EFF7006620C6 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		D7C8059A11C6EFF7006620C6 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		D7CDFE38121FF4AC008B07A6 /* bootlace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bootlace.png; path = Resources/bootlace.png; sourceTree = "<group>"; };
 		D7D0B36F11C50561000FCBD4 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = install.png; path = Resources/install.png; sourceTree = "<group>"; };
 		D7D0B37011C50561000FCBD4 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove.png; path = Resources/remove.png; sourceTree = "<group>"; };
 		D7D91508124B4C84006F7D9E /* oibtab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oibtab.png; path = Resources/oibtab.png; sourceTree = "<group>"; };
-		D7D9150A124B4E1C006F7D9E /* OpeniBootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootViewController.h; sourceTree = "<group>"; };
-		D7D9150B124B4E1C006F7D9E /* OpeniBootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootViewController.m; sourceTree = "<group>"; };
-		D7D9150C124B4E1C006F7D9E /* OpeniBootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpeniBootViewController.xib; path = Classes/OpeniBootViewController.xib; sourceTree = "<group>"; };
-		D7D915D4124B5F84006F7D9E /* OpeniBootInstallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootInstallViewController.h; sourceTree = "<group>"; };
-		D7D915D5124B5F84006F7D9E /* OpeniBootInstallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootInstallViewController.m; sourceTree = "<group>"; };
-		D7D915D6124B5F84006F7D9E /* OpeniBootInstallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpeniBootInstallViewController.xib; path = Classes/OpeniBootInstallViewController.xib; sourceTree = "<group>"; };
-		D7D915D9124B5F9E006F7D9E /* OpeniBootConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootConfigureViewController.h; sourceTree = "<group>"; };
-		D7D915DA124B5F9E006F7D9E /* OpeniBootConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootConfigureViewController.m; sourceTree = "<group>"; };
-		D7D915DB124B5F9E006F7D9E /* OpeniBootConfigureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OpeniBootConfigureViewController.xib; path = Classes/OpeniBootConfigureViewController.xib; sourceTree = "<group>"; };
 		D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvancedViewController.xib; sourceTree = "<group>"; };
 		D7E14E301206F9A300156F7E /* AdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedViewController.h; sourceTree = "<group>"; };
 		D7E14E311206F9A300156F7E /* AdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedViewController.m; sourceTree = "<group>"; };
 		D7E44B0611C7D7770000594A /* extractionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = extractionClass.h; sourceTree = "<group>"; };
 		D7E44B0711C7D7770000594A /* extractionClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = extractionClass.m; sourceTree = "<group>"; };
+		D7EBE3C5124E14E300759F67 /* oibbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oibbg.png; path = Resources/oibbg.png; sourceTree = "<group>"; };
+		D7EBE4D2124E282E00759F67 /* OpeniBootConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootConfigureViewController.h; sourceTree = "<group>"; };
+		D7EBE4D3124E282E00759F67 /* OpeniBootConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootConfigureViewController.m; sourceTree = "<group>"; };
+		D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpeniBootConfigureViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +140,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D7EBE4D2124E282E00759F67 /* OpeniBootConfigureViewController.h */,
+				D7EBE4D3124E282E00759F67 /* OpeniBootConfigureViewController.m */,
 				D7B332AD11BE5FD2008978A1 /* commonData.h */,
 				D7B332AE11BE5FD2008978A1 /* commonData.m */,
 				D7B332AF11BE5FD2008978A1 /* commonFunctions.h */,
@@ -160,8 +156,6 @@
 				D78690AF11BD234A00642943 /* DroidViewController.m */,
 				D7BFB8461222E5C900409E65 /* DroidAdvancedViewController.h */,
 				D7BFB8471222E5C900409E65 /* DroidAdvancedViewController.m */,
-				D786909811BD1E8E00642943 /* SettingsViewController.h */,
-				D786909911BD1E8E00642943 /* SettingsViewController.m */,
 				D7E14E301206F9A300156F7E /* AdvancedViewController.h */,
 				D7E14E311206F9A300156F7E /* AdvancedViewController.m */,
 				D7A8358B11FD965F009C8D6D /* installClass.h */,
@@ -172,12 +166,8 @@
 				D7B332B211BE5FD2008978A1 /* nvramFunctions.m */,
 				D7C6234611C65F790049C24B /* getFile.h */,
 				D7C6234711C65F790049C24B /* getFile.m */,
-				D7D9150A124B4E1C006F7D9E /* OpeniBootViewController.h */,
-				D7D9150B124B4E1C006F7D9E /* OpeniBootViewController.m */,
-				D7D915D4124B5F84006F7D9E /* OpeniBootInstallViewController.h */,
-				D7D915D5124B5F84006F7D9E /* OpeniBootInstallViewController.m */,
-				D7D915D9124B5F9E006F7D9E /* OpeniBootConfigureViewController.h */,
-				D7D915DA124B5F9E006F7D9E /* OpeniBootConfigureViewController.m */,
+				D7C764EC124E0ECC001ADE11 /* OpeniBootViewController.h */,
+				D7C764ED124E0ECC001ADE11 /* OpeniBootViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -216,16 +206,16 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D7D915DB124B5F9E006F7D9E /* OpeniBootConfigureViewController.xib */,
-				D7D915D6124B5F84006F7D9E /* OpeniBootInstallViewController.xib */,
-				D7D9150C124B4E1C006F7D9E /* OpeniBootViewController.xib */,
+				D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */,
+				D7EBE3C5124E14E300759F67 /* oibbg.png */,
+				D7C764F1124E0EE4001ADE11 /* OpeniBootViewController.xib */,
+				D7C764E8124E0D25001ADE11 /* oiblogo.png */,
 				D7D91508124B4C84006F7D9E /* oibtab.png */,
 				D7C8059911C6EFF7006620C6 /* MainWindow.xib */,
 				D7C8059811C6EFF7006620C6 /* HomeView.xib */,
 				D7C8059611C6EFF7006620C6 /* BootView.xib */,
 				D7C8059711C6EFF7006620C6 /* DroidView.xib */,
 				D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */,
-				D7C8059A11C6EFF7006620C6 /* SettingsView.xib */,
 				D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */,
 				D7CDFE38121FF4AC008B07A6 /* bootlace.png */,
 				D7936B961211F7C900D3CE6A /* index.html */,
@@ -321,15 +311,15 @@
 				D7C8059C11C6EFF7006620C6 /* DroidView.xib in Resources */,
 				D7C8059D11C6EFF7006620C6 /* HomeView.xib in Resources */,
 				D7C8059E11C6EFF7006620C6 /* MainWindow.xib in Resources */,
-				D7C8059F11C6EFF7006620C6 /* SettingsView.xib in Resources */,
 				D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */,
 				D7936B971211F7C900D3CE6A /* index.html in Resources */,
 				D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */,
 				D7BFB9B21222FC8500409E65 /* DroidAdvancedViewController.xib in Resources */,
 				D7D91509124B4C84006F7D9E /* oibtab.png in Resources */,
-				D7D9150E124B4E1C006F7D9E /* OpeniBootViewController.xib in Resources */,
-				D7D915D8124B5F84006F7D9E /* OpeniBootInstallViewController.xib in Resources */,
-				D7D915DD124B5F9E006F7D9E /* OpeniBootConfigureViewController.xib in Resources */,
+				D7C764E9124E0D25001ADE11 /* oiblogo.png in Resources */,
+				D7C764F2124E0EE4001ADE11 /* OpeniBootViewController.xib in Resources */,
+				D7EBE3C6124E14E300759F67 /* oibbg.png in Resources */,
+				D7EBE4D6124E283700759F67 /* OpeniBootConfigureViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +332,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* BootlaceAppDelegate.m in Sources */,
-				D786909B11BD1E8E00642943 /* SettingsViewController.m in Sources */,
 				D78690B211BD234A00642943 /* DroidViewController.m in Sources */,
 				D78690B311BD234A00642943 /* HomeViewController.m in Sources */,
 				D78690D211BD282200642943 /* BootViewController.m in Sources */,
@@ -354,9 +343,8 @@
 				D7A8358D11FD965F009C8D6D /* installClass.m in Sources */,
 				D7E14E321206F9A300156F7E /* AdvancedViewController.m in Sources */,
 				D7BFB8491222E5C900409E65 /* DroidAdvancedViewController.m in Sources */,
-				D7D9150D124B4E1C006F7D9E /* OpeniBootViewController.m in Sources */,
-				D7D915D7124B5F84006F7D9E /* OpeniBootInstallViewController.m in Sources */,
-				D7D915DC124B5F9E006F7D9E /* OpeniBootConfigureViewController.m in Sources */,
+				D7C764EF124E0ECC001ADE11 /* OpeniBootViewController.m in Sources */,
+				D7EBE4D4124E282E00759F67 /* OpeniBootConfigureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
