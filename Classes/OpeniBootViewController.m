@@ -20,7 +20,7 @@
 }
 
 - (IBAction)opibInstallTap:(id)sender {
-	
+	[self performSelectorInBackground:@selector(opibDoInstall) withObject:nil];
 }
 
 /*
@@ -37,8 +37,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	opibInstance = [[OpeniBootClass alloc] init];
+	
 	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
 	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
+	
+	//Check installed version and whack it in the UI - if not installed then download plist
+	if(sharedData.opibInstalled) {
+		[self performSelectorInBackground:@selector(opibUpdateCheck) withObject:nil];
+	} else {
+		[opibInstance opibCheckForUpdates];
+	}
+}
+
+- (void)opibUpdateCheck {
+	
+}
+
+- (void)opibDoInstall {
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	
+	//Check pre-requisites
+		//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
+		//Now let's check iOS version
+		//Ok that's good, now lets see if kernel matches our whitelist of MD5 hashes from various jailbreaks
+		//W00t! we got this far... Now lets check the server has a patch for us too as you know, Neonkoala is a lazy bastard and might have not bothered
+	
+	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening
+		//Hand over to OpeniBootClass
+	
+	//Reload version
+		
 }
 
 /*

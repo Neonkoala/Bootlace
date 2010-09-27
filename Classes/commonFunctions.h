@@ -49,6 +49,7 @@
 - (BOOL)checkMains;
 - (float)getFreeSpace;
 - (void)getPlatform;
+- (void)getSystemVersion;
 - (void)firstLaunch;
 - (void)sendError:(NSString *)alertMsg;
 - (void)sendWarning:(NSString *)alertMsg;

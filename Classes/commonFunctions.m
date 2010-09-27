@@ -192,11 +192,21 @@
 	sharedData.platform = platform;
     free(machine);
 	
+	DLog(@"Platform: %@", sharedData.platform);
+	
 	/**********   iPhone Simulator debug code, remove me!    *****************************/
-	if ([sharedData.platform isEqualToString:@"x86_64"]) {
+	if ([sharedData.platform isEqualToString:@"x86_64"] || [sharedData.platform isEqualToString:@"i386"]) {
 		sharedData.platform = @"iPhone1,2";
 	}
 	/*************************************************************************************/
+}
+
+- (void)getSystemVersion {
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.systemVersion = [[UIDevice currentDevice] systemVersion];
+	
+	DLog(@"iOS Version: %@", sharedData.systemVersion);
 }
 
 - (void)firstLaunch {

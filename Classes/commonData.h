@@ -18,6 +18,7 @@
 	BOOL bootlaceUpgradeAvailable;
 	BOOL warningLive;
 	NSString *platform;
+	NSString *systemVersion;
 	NSString *workingDirectory;
 	NSString *bootlaceVersion;
 	
@@ -29,6 +30,18 @@
 	NSString *opibTimeout;
 	NSString *opibDefaultOS;
 	NSString *opibTempOS;
+	
+	
+	BOOL opibInstalled;
+	int opibCanBeInstalled;
+	NSString *opibUpdateVersion;
+	NSString *opibUpdateURL;
+	NSString *opibUpdateBootlaceRequired;
+	NSDate *opibUpdateReleaseDate;
+	NSDictionary *opibUpdateCompatibleFirmware;
+	NSDictionary *opibUpdateIPSWURLs;
+	NSDictionary *opibUpdateKernelMD5;
+	NSArray *opibUpdateManifest;
 	
 	
 	BOOL installed;
@@ -95,6 +108,7 @@
 @property (nonatomic, assign) BOOL bootlaceUpgradeAvailable;
 @property (nonatomic, assign) BOOL warningLive;
 @property (nonatomic, retain) NSString *platform;
+@property (nonatomic, retain) NSString *systemVersion;
 @property (nonatomic, retain) NSString *workingDirectory;
 @property (nonatomic, retain) NSString *bootlaceVersion;
 
@@ -106,6 +120,18 @@
 @property (nonatomic, retain) NSString *opibTimeout;
 @property (nonatomic, retain) NSString *opibDefaultOS;
 @property (nonatomic, retain) NSString *opibTempOS;
+
+
+@property (nonatomic, assign) BOOL opibInstalled;
+@property (nonatomic, assign) int opibCanBeInstalled;
+@property (nonatomic, retain) NSString *opibUpdateVersion;
+@property (nonatomic, retain) NSString *opibUpdateURL;
+@property (nonatomic, retain) NSString *opibUpdateBootlaceRequired;
+@property (nonatomic, retain) NSDate *opibUpdateReleaseDate;
+@property (nonatomic, retain) NSDictionary *opibUpdateCompatibleFirmware;
+@property (nonatomic, retain) NSDictionary *opibUpdateIPSWURLs;
+@property (nonatomic, retain) NSDictionary *opibUpdateKernelMD5;
+@property (nonatomic, retain) NSArray *opibUpdateManifest;
 
 
 @property (nonatomic, assign) BOOL installed;

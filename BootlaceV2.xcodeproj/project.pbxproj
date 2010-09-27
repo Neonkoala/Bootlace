@@ -53,6 +53,7 @@
 		D7EBE3C6124E14E300759F67 /* oibbg.png in Resources */ = {isa = PBXBuildFile; fileRef = D7EBE3C5124E14E300759F67 /* oibbg.png */; };
 		D7EBE4D4124E282E00759F67 /* OpeniBootConfigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EBE4D3124E282E00759F67 /* OpeniBootConfigureViewController.m */; };
 		D7EBE4D6124E283700759F67 /* OpeniBootConfigureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */; };
+		D7EBE50E124E3F0900759F67 /* OpeniBootClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D7EBE50D124E3F0900759F67 /* OpeniBootClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,8 @@
 		D7EBE4D2124E282E00759F67 /* OpeniBootConfigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootConfigureViewController.h; sourceTree = "<group>"; };
 		D7EBE4D3124E282E00759F67 /* OpeniBootConfigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootConfigureViewController.m; sourceTree = "<group>"; };
 		D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpeniBootConfigureViewController.xib; sourceTree = "<group>"; };
+		D7EBE50C124E3F0900759F67 /* OpeniBootClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeniBootClass.h; sourceTree = "<group>"; };
+		D7EBE50D124E3F0900759F67 /* OpeniBootClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeniBootClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 				D7C6234711C65F790049C24B /* getFile.m */,
 				D7C764EC124E0ECC001ADE11 /* OpeniBootViewController.h */,
 				D7C764ED124E0ECC001ADE11 /* OpeniBootViewController.m */,
+				D7EBE50C124E3F0900759F67 /* OpeniBootClass.h */,
+				D7EBE50D124E3F0900759F67 /* OpeniBootClass.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				D7BFB8491222E5C900409E65 /* DroidAdvancedViewController.m in Sources */,
 				D7C764EF124E0ECC001ADE11 /* OpeniBootViewController.m in Sources */,
 				D7EBE4D4124E282E00759F67 /* OpeniBootConfigureViewController.m in Sources */,
+				D7EBE50E124E3F0900759F67 /* OpeniBootClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

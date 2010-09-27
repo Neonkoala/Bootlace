@@ -44,8 +44,9 @@
 	sharedData.warningLive = NO;
 	sharedData.bootlaceVersion = @"2.0.3";
 	
-	//Check the platform
+	//Check the platform and iOS version
 	[commonInstance getPlatform];
+	[commonInstance getSystemVersion];
 	
 	//Dump nvram stuffs
 	sharedData.opibBackupPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist.backup"];

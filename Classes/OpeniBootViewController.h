@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "commonData.h"
 #import "commonFunctions.h"
+#import "OpeniBootClass.h"
 #import "OpeniBootConfigureViewController.h"
 
 
 @interface OpeniBootViewController : UIViewController {
+	commonFunctions *commonInstance;
+	OpeniBootClass *opibInstance;
+	
 	UIGlassButton *opibInstall;
 	UIGlassButton *opibConfigure;
-
 }
 
 @property (nonatomic, retain) IBOutlet UIGlassButton *opibInstall;
@@ -22,5 +26,8 @@
 
 - (IBAction)opibInstallTap:(id)sender;
 - (IBAction)opibConfigureTap:(id)sender;
+
+- (void)opibUpdateCheck;
+- (void)opibDoInstall;
 
 @end
