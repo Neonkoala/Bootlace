@@ -13,7 +13,10 @@
 
 @synthesize deviceDict;
 
+char endianness = 1;
+
 - (int)opibParseUpdatePlist {
+	commonData* sharedData = [commonData sharedData];
 	DLog(@"Parsing OpeniBoot update plist");
 	
 	if(deviceDict == nil) {
@@ -29,6 +32,39 @@
 	sharedData.opibUpdateIPSWURLs = [deviceDict objectForKey:@"IPSWURLs"];
 	sharedData.opibUpdateKernelMD5 = [deviceDict objectForKey:@"KernelMD5"];
 	sharedData.opibUpdateManifest = [deviceDict objectForKey:@"Manifest"];
+	
+	return 0;
+}
+
+- (int)opibGetNORFromManifest {
+	commonData* sharedData = [commonData sharedData];
+	
+	ZipInfo* info = PartialZipInit([[sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion] cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(!info)
+	{
+		DLog(@"Cannot retrieve IPSW from: %@", [sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion]);
+		return -1;
+	}
+	
+	CDFile* file = PartialZipFindFile(info, "Firmware/all_flash/all_flash.n82ap.production/LLB.n82ap.RELEASE.img3");
+	if(!file)
+	{
+		DLog(@"Cannot find LLB");
+		return -2;
+	}
+	
+	unsigned char* data = PartialZipGetFile(info, file);
+	int dataLen = file->size; 
+	
+	PartialZipRelease(info);
+	
+	data = realloc(data, dataLen + 1);
+	data[dataLen] = '\0';
+	
+	NSLog(@"%s", data);
+	
+	free(data);
+	
 	
 	return 0;
 }

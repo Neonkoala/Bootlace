@@ -44,21 +44,43 @@
 	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
 	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
 	
-	//Check installed version and whack it in the UI - if not installed then download plist
-	if(sharedData.opibInstalled) {
-		[self performSelectorInBackground:@selector(opibUpdateCheck) withObject:nil];
-	} else {
-		[opibInstance opibCheckForUpdates];
-	}
+	//Check installed version and whack it in the UI - if not installed then download plist	
+	[self performSelectorInBackground:@selector(opibUpdateCheck) withObject:nil];
+	
+	[opibInstall setTitle:@"Install" forState:UIControlStateNormal];
+	opibInstall.enabled = YES;
 }
 
 - (void)opibUpdateCheck {
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
 	
+	[opibInstance opibCheckForUpdates];
+	
+	if(sharedData.opibCanBeInstalled < 0) {
+		switch (sharedData.opibCanBeInstalled) {
+			case -1:
+				DLog(@"");
+				[commonInstance sendError:@""];
+				break;
+			default:
+				break;
+		}
+	}
+	
+	if(sharedData.opibInstalled) {
+		
+	} else {
+		
+	}
 }
 
 - (void)opibDoInstall {
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
+	opibInstance = [[OpeniBootClass alloc] init];
+	
+	[opibInstance opibGetNORFromManifest];
 	
 	//Check pre-requisites
 		//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo

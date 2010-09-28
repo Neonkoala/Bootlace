@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "commonData.h"
 #import "commonFunctions.h"
+#import "partial/partial.h"
 
 
 @interface OpeniBootClass : NSObject {
@@ -19,6 +20,8 @@
 @property (nonatomic, retain) NSMutableDictionary *deviceDict;
 
 - (int)opibParseUpdatePlist;
+- (int)opibGetNORFromManifest;
+
 - (void)opibCheckForUpdates;
 
 
