@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <IOKit/IOKitLib.h>
+#import <sys/mman.h>
 #import "commonData.h"
 #import "commonFunctions.h"
 #import "partial/partial.h"
@@ -21,6 +23,9 @@
 
 - (int)opibParseUpdatePlist;
 - (int)opibGetNORFromManifest;
+- (int)opibFlashIMG3:(NSString *)path usingService:(io_connect_t)norServiceConnection type:(BOOL)isLLB;
+
+- (io_service_t)opibGetIOService:(NSString *)name;
 
 - (void)opibCheckForUpdates;
 

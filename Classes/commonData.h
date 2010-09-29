@@ -37,6 +37,7 @@
 	NSString *opibUpdateVersion;
 	NSString *opibUpdateURL;
 	NSString *opibUpdateBootlaceRequired;
+	NSString *opibUpdateFirmwarePath;
 	NSDate *opibUpdateReleaseDate;
 	NSDictionary *opibUpdateCompatibleFirmware;
 	NSDictionary *opibUpdateIPSWURLs;
@@ -127,6 +128,7 @@
 @property (nonatomic, retain) NSString *opibUpdateVersion;
 @property (nonatomic, retain) NSString *opibUpdateURL;
 @property (nonatomic, retain) NSString *opibUpdateBootlaceRequired;
+@property (nonatomic, retain) NSString *opibUpdateFirmwarePath;
 @property (nonatomic, retain) NSDate *opibUpdateReleaseDate;
 @property (nonatomic, retain) NSDictionary *opibUpdateCompatibleFirmware;
 @property (nonatomic, retain) NSDictionary *opibUpdateIPSWURLs;

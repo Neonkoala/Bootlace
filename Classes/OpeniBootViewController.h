@@ -17,9 +17,13 @@
 	commonFunctions *commonInstance;
 	OpeniBootClass *opibInstance;
 	
+	NSOperationQueue *viewInitQueue;
+	
 	UIGlassButton *opibInstall;
 	UIGlassButton *opibConfigure;
 }
+
+@property (nonatomic, retain) NSOperationQueue *viewInitQueue;
 
 @property (nonatomic, retain) IBOutlet UIGlassButton *opibInstall;
 @property (nonatomic, retain) IBOutlet UIGlassButton *opibConfigure;

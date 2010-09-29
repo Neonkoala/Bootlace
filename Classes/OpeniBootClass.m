@@ -28,6 +28,7 @@ char endianness = 1;
 	sharedData.opibUpdateReleaseDate = [deviceDict objectForKey:@"ReleaseDate"];
 	sharedData.opibUpdateURL = [deviceDict objectForKey:@"URL"];
 	sharedData.opibUpdateVersion = [deviceDict objectForKey:@"Version"];
+	sharedData.opibUpdateFirmwarePath = [deviceDict objectForKey:@"FirmwarePath"];
 	sharedData.opibUpdateCompatibleFirmware = [deviceDict objectForKey:@"CompatibleFirmware"];
 	sharedData.opibUpdateIPSWURLs = [deviceDict objectForKey:@"IPSWURLs"];
 	sharedData.opibUpdateKernelMD5 = [deviceDict objectForKey:@"KernelMD5"];
@@ -37,6 +38,8 @@ char endianness = 1;
 }
 
 - (int)opibGetNORFromManifest {
+	int i, items;
+	unsigned char* data;
 	commonData* sharedData = [commonData sharedData];
 	
 	ZipInfo* info = PartialZipInit([[sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion] cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -46,28 +49,101 @@ char endianness = 1;
 		return -1;
 	}
 	
-	CDFile* file = PartialZipFindFile(info, "Firmware/all_flash/all_flash.n82ap.production/LLB.n82ap.RELEASE.img3");
-	if(!file)
-	{
-		DLog(@"Cannot find LLB");
-		return -2;
-	}
+	items = [sharedData.opibUpdateManifest count];
 	
-	unsigned char* data = PartialZipGetFile(info, file);
-	int dataLen = file->size; 
+	for(i=0; i<items; i++) {
+		//Skip openiboot from manifest as Apple doesn't include it - gits
+		if(i!=1) {
+			NSString *itemPath = [sharedData.opibUpdateFirmwarePath stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
+		
+			DLog(@"Grabbing firmware at path: %@", itemPath);
+	
+			CDFile* file = PartialZipFindFile(info, [itemPath cStringUsingEncoding:NSUTF8StringEncoding]);
+			if(!file)
+			{
+				DLog(@"Cannot find firmware.");
+				return -2;
+			}
+		
+			data = PartialZipGetFile(info, file);
+			int dataLen = file->size; 
+		
+			NSData *itemBin = [NSData dataWithBytes:data length:dataLen];
+	
+			if([itemBin length]>0) {
+				NSLog(@"Got NOR file %d", i);
+			}
+	
+			free(data);
+		}
+	}
 	
 	PartialZipRelease(info);
 	
-	data = realloc(data, dataLen + 1);
-	data[dataLen] = '\0';
-	
-	NSLog(@"%s", data);
-	
-	free(data);
-	
-	
 	return 0;
 }
+
+- (io_service_t)opibGetIOService:(NSString *)name {
+	CFMutableDictionaryRef matching;
+	io_service_t service;
+	
+	matching = IOServiceMatching([name cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(matching == NULL) {
+		DLog(@"Unable to create matching dictionary for class '%@'", name);
+		return 0;
+	}
+	
+	while(!service) {
+		CFRetain(matching);
+		service = IOServiceGetMatchingService(kIOMasterPortDefault, matching);
+		if(service) {
+			break;
+		}
+		
+		DLog(@"Waiting for matching IOKit service: %@", name);
+		sleep(1);
+		CFRelease(matching);
+	}
+	
+	CFRelease(matching);
+
+	return service;
+}
+
+- (int)opibFlashIMG3:(NSString *)path usingService:(io_connect_t)norServiceConnection type:(BOOL)isLLB {
+	NSFileHandle *norHandle = [NSFileHandle fileHandleForReadingAtPath:path];
+	
+	NSLog(@"Flashing %@ %@ image", path, (isLLB ? @"LLB" : @"NOR"));
+	
+	int fd = [norHandle fileDescriptor];
+	size_t imgLen = lseek(fd, 0, SEEK_END);
+	NSLog(@"Image length = %lu", imgLen);
+	lseek(fd, 0, SEEK_SET);
+	
+	void *mappedImage = mmap(NULL, imgLen, PROT_READ | PROT_WRITE, MAP_ANON | VM_FLAGS_PURGABLE, -1, 0);
+	if(mappedImage == MAP_FAILED) {
+		int err = errno;
+		NSLog(@"mmap (size = %ld) failed: %s", imgLen, strerror(err));
+		return err;
+	}
+	
+	int cbRead = read(fd, mappedImage, imgLen);
+	if (cbRead != imgLen) {
+		int err = errno;
+		NSLog(@"cbRead(%u) != imgLen(%lu); err 0x%x", cbRead, imgLen, err);
+		return err;
+	}
+	
+	kern_return_t result;
+	if((result = IOConnectCallStructMethod(norServiceConnection, isLLB ? 0 : 1, mappedImage, imgLen, NULL, 0)) != KERN_SUCCESS) {
+		NSLog(@"IOConnectCallStructMethod failed: 0x%x\n", result);
+	}
+	
+	munmap(mappedImage, imgLen);
+	
+	return result;
+}
+	
 
 - (void)opibCheckForUpdates {
 	int success;

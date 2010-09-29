@@ -1087,14 +1087,14 @@
 	BOOL done = NO;
 	while(!done)
 	{
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; //Create our own autorelease pool as the system is too slow to drain otherwise
+		NSAutoreleasePool *tempPool = [[NSAutoreleasePool alloc] init]; //Create our own autorelease pool as the system is too slow to drain otherwise
 		NSData *fileData = [handle readDataOfLength: 1048576];
 		CC_MD5_Update(&md5, [fileData bytes], [fileData length]);
 		if( [fileData length] == 0 ) done = YES;
 		read += [fileData length];
 		float progress = (float) read/fileSize;
 		[self updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
-		[pool drain]; //Drain it or we'll run out of memory
+		[tempPool drain]; //Drain it or we'll run out of memory
 	}
 	unsigned char digest[CC_MD5_DIGEST_LENGTH];
 	CC_MD5_Final(digest, &md5);

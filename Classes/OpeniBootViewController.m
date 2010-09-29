@@ -11,7 +11,7 @@
 
 @implementation OpeniBootViewController
 
-@synthesize opibInstall, opibConfigure;
+@synthesize viewInitQueue, opibInstall, opibConfigure;
 
 - (IBAction)opibConfigureTap:(id)sender {
 	OpeniBootConfigureViewController *configureView = [[OpeniBootConfigureViewController alloc] initWithNibName:@"OpeniBootConfigureViewController" bundle:nil];
@@ -20,7 +20,10 @@
 }
 
 - (IBAction)opibInstallTap:(id)sender {
-	[self performSelectorInBackground:@selector(opibDoInstall) withObject:nil];
+	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibDoInstall) object:nil];
+	
+	[viewInitQueue addOperation:getInstall];
+    [getInstall release];
 }
 
 /*
@@ -41,11 +44,17 @@
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
 	
+	//Set up a queue for threading later
+	viewInitQueue = [NSOperationQueue new];
+	
 	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
 	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
 	
 	//Check installed version and whack it in the UI - if not installed then download plist	
-	[self performSelectorInBackground:@selector(opibUpdateCheck) withObject:nil];
+	NSInvocationOperation *bgUpdate = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibUpdateCheck) object:nil];
+	
+	[viewInitQueue addOperation:bgUpdate];
+    [bgUpdate release];
 	
 	[opibInstall setTitle:@"Install" forState:UIControlStateNormal];
 	opibInstall.enabled = YES;
@@ -76,6 +85,8 @@
 }
 
 - (void)opibDoInstall {
+	NSAutoreleasePool *bgPool = [[NSAutoreleasePool alloc] init];
+	
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
@@ -92,7 +103,9 @@
 		//Hand over to OpeniBootClass
 	
 	//Reload version
-		
+	
+	
+	[bgPool release];	
 }
 
 /*
