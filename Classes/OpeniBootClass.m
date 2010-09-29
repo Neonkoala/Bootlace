@@ -83,31 +83,44 @@ char endianness = 1;
 	return 0;
 }
 
-- (io_service_t)opibGetIOService:(NSString *)name {
-	CFMutableDictionaryRef matching;
-	io_service_t service;
+- (int)opibFlashManifest {
+	int i, items;
+	mach_port_t masterPort;
+	kern_return_t k_result;
+	io_service_t norService;
+	io_connect_t norServiceConnection;
 	
-	matching = IOServiceMatching([name cStringUsingEncoding:NSUTF8StringEncoding]);
-	if(matching == NULL) {
-		DLog(@"Unable to create matching dictionary for class '%@'", name);
-		return 0;
+	commonData* sharedData = [commonData sharedData];
+	
+	items = [sharedData.opibUpdateManifest count];
+	
+	if(items < 1) {
+		DLog(@"Haha, thought you could trick me with an empty Manifest? Not this time bitch.");
+		return -1;
 	}
 	
-	while(!service) {
-		CFRetain(matching);
-		service = IOServiceGetMatchingService(kIOMasterPortDefault, matching);
-		if(service) {
-			break;
-		}
-		
-		DLog(@"Waiting for matching IOKit service: %@", name);
-		sleep(1);
-		CFRelease(matching);
+	k_result = IOMasterPort(MACH_PORT_NULL, &masterPort);
+	if (k_result) {
+		DLog(@"IOMasterPort failed: 0x%X\n", k_result);
+		return -2;
+	}
+	NSLog(@"[OK] IOMasterPort opened");
+	
+	norService = [self opibGetIOService:@"AppleImage3NORAccess"];
+	
+	if (norService == 0) {
+		DLog(@"opibGetIOService failed!");
+		return -3;
+	}
+	NSLog(@"[OK] AppleImage3NORAccess found: 0x%x\n", norService);
+	
+	k_result = IOServiceOpen(norService, mach_task_self_, 0, &norServiceConnection);
+	if (k_result != KERN_SUCCESS) {
+		DLog(@"IOServiceOpen failed: 0x%X\n", k_result);
+		return -4;		
 	}
 	
-	CFRelease(matching);
-
-	return service;
+	return 0;
 }
 
 - (int)opibFlashIMG3:(NSString *)path usingService:(io_connect_t)norServiceConnection type:(BOOL)isLLB {
@@ -143,7 +156,33 @@ char endianness = 1;
 	
 	return result;
 }
+
+- (io_service_t)opibGetIOService:(NSString *)name {
+	CFMutableDictionaryRef matching;
+	io_service_t service;
 	
+	matching = IOServiceMatching([name cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(matching == NULL) {
+		DLog(@"Unable to create matching dictionary for class '%@'", name);
+		return 0;
+	}
+	
+	while(!service) {
+		CFRetain(matching);
+		service = IOServiceGetMatchingService(kIOMasterPortDefault, matching);
+		if(service) {
+			break;
+		}
+		
+		DLog(@"Waiting for matching IOKit service: %@", name);
+		sleep(1);
+		CFRelease(matching);
+	}
+	
+	CFRelease(matching);
+
+	return service;
+}	
 
 - (void)opibCheckForUpdates {
 	int success;
