@@ -11,8 +11,8 @@
 #import <sys/mman.h>
 #import "commonData.h"
 #import "commonFunctions.h"
+#import "BSPatch.h"
 #import "partial/partial.h"
-#import "bspatch.c"
 
 
 @interface OpeniBootClass : NSObject {

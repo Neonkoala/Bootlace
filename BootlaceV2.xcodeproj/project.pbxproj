@@ -214,6 +214,10 @@
 		D7F07A79125290D200A4031B /* writeout.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F079DD125290D200A4031B /* writeout.h */; };
 		D7F07A911252919B00A4031B /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7F077FC1252909700A4031B /* libcurl.a */; };
 		D7FCE16C1254B96A0049EA30 /* BSPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FCE16B1254B96A0049EA30 /* BSPatch.m */; };
+		D7FCE2CF1254D0000049EA30 /* bzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = D7FCE2CE1254D0000049EA30 /* bzlib.c */; };
+		D7FCE2D31254D0100049EA30 /* bzlib_private.h in Headers */ = {isa = PBXBuildFile; fileRef = D7FCE2D11254D0100049EA30 /* bzlib_private.h */; };
+		D7FCE2D41254D0100049EA30 /* bzlib.h in Headers */ = {isa = PBXBuildFile; fileRef = D7FCE2D21254D0100049EA30 /* bzlib.h */; };
+		D7FCE2DB1254D02E0049EA30 /* libbz2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7FCE2CA1254CFEB0049EA30 /* libbz2.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -447,6 +451,10 @@
 		D7F079DD125290D200A4031B /* writeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writeout.h; sourceTree = "<group>"; };
 		D7FCE16A1254B96A0049EA30 /* BSPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPatch.h; sourceTree = "<group>"; };
 		D7FCE16B1254B96A0049EA30 /* BSPatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPatch.m; sourceTree = "<group>"; };
+		D7FCE2CA1254CFEB0049EA30 /* libbz2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbz2.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7FCE2CE1254D0000049EA30 /* bzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bzlib.c; sourceTree = "<group>"; };
+		D7FCE2D11254D0100049EA30 /* bzlib_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib_private.h; path = Headers/bzlib_private.h; sourceTree = "<group>"; };
+		D7FCE2D21254D0100049EA30 /* bzlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bzlib.h; path = Headers/bzlib.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,6 +468,7 @@
 				D73B1E68120DEEBA00B3D9FF /* libarchive.a in Frameworks */,
 				D7F06F5B125273F100A4031B /* libpartialzip.a in Frameworks */,
 				D7F07A911252919B00A4031B /* libcurl.a in Frameworks */,
+				D7FCE2DB1254D02E0049EA30 /* libbz2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +480,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D7F077FA1252909700A4031B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FCE2C81254CFEB0049EA30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -527,6 +543,7 @@
 				1D6058910D05DD3D006BFB54 /* BootlaceV2.app */,
 				D7F06F431252735800A4031B /* libpartialzip.a */,
 				D7F077FC1252909700A4031B /* libcurl.a */,
+				D7FCE2CA1254CFEB0049EA30 /* libbz2.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -534,6 +551,9 @@
 		29B97314FDCFA39411CA2CEA /* BootlaceV2 */ = {
 			isa = PBXGroup;
 			children = (
+				D7FCE2D11254D0100049EA30 /* bzlib_private.h */,
+				D7FCE2D21254D0100049EA30 /* bzlib.h */,
+				D7FCE2CD1254D0000049EA30 /* bzlib */,
 				D7F0793D125290D200A4031B /* libcurl */,
 				D7F06F461252736B00A4031B /* PartialZip */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -813,6 +833,14 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		D7FCE2CD1254D0000049EA30 /* bzlib */ = {
+			isa = PBXGroup;
+			children = (
+				D7FCE2CE1254D0000049EA30 /* bzlib.c */,
+			);
+			path = bzlib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -915,6 +943,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7FCE2C61254CFEB0049EA30 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FCE2D31254D0100049EA30 /* bzlib_private.h in Headers */,
+				D7FCE2D41254D0100049EA30 /* bzlib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -969,6 +1006,23 @@
 			productReference = D7F077FC1252909700A4031B /* libcurl.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		D7FCE2C91254CFEB0049EA30 /* bz2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7FCE2D01254D0000049EA30 /* Build configuration list for PBXNativeTarget "bz2" */;
+			buildPhases = (
+				D7FCE2C61254CFEB0049EA30 /* Headers */,
+				D7FCE2C71254CFEB0049EA30 /* Sources */,
+				D7FCE2C81254CFEB0049EA30 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bz2;
+			productName = bz2;
+			productReference = D7FCE2CA1254CFEB0049EA30 /* libbz2.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -987,6 +1041,7 @@
 				1D6058900D05DD3D006BFB54 /* BootlaceV2 */,
 				D7F06F421252735800A4031B /* partialzip */,
 				D7F077FB1252909700A4031B /* curl */,
+				D7FCE2C91254CFEB0049EA30 /* bz2 */,
 			);
 		};
 /* End PBXProject section */
@@ -1136,6 +1191,14 @@
 				D7F07A73125290D200A4031B /* urlglob.c in Sources */,
 				D7F07A76125290D200A4031B /* writeenv.c in Sources */,
 				D7F07A78125290D200A4031B /* writeout.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FCE2C71254CFEB0049EA30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FCE2CF1254D0000049EA30 /* bzlib.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1400,33 @@
 			};
 			name = Release;
 		};
+		D7FCE2CB1254CFEC0049EA30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = bz2;
+			};
+			name = Debug;
+		};
+		D7FCE2CC1254CFEC0049EA30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = bz2;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1372,6 +1462,15 @@
 			buildConfigurations = (
 				D7F077FD1252909800A4031B /* Debug */,
 				D7F077FE1252909800A4031B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7FCE2D01254D0000049EA30 /* Build configuration list for PBXNativeTarget "bz2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7FCE2CB1254CFEC0049EA30 /* Debug */,
+				D7FCE2CC1254CFEC0049EA30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
