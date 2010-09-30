@@ -12,6 +12,7 @@
 #import "commonData.h"
 #import "commonFunctions.h"
 #import "partial/partial.h"
+#import "bspatch.c"
 
 
 @interface OpeniBootClass : NSObject {
