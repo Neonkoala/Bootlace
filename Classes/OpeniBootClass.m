@@ -217,6 +217,14 @@ char endianness = 1;
 		DLog(@"Update plist could not be parsed");
 		sharedData.opibCanBeInstalled = -2;
 	}
+	
+	if(sharedData.opibInstalled) {
+		if([sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
+			sharedData.opibCanBeInstalled = 1;
+		} else if([sharedData.opibUpdateVersion isEqualToString:sharedData.opibVersion]) {
+			sharedData.opibCanBeInstalled = 2;
+		}
+	}
 }
 
 @end

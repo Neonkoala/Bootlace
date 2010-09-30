@@ -11,7 +11,25 @@
 
 @implementation OpeniBootViewController
 
-@synthesize viewInitQueue, opibInstall, opibConfigure;
+@synthesize viewInitQueue, opibLoadingButton, opibRefreshButton, opibVersionLabel, opibReleaseDateLabel, opibInstall, opibConfigure, cfuSpinner;
+
+- (IBAction)opibRefreshTap:(id)sender {
+	[self switchButtons];
+	
+	opibInstall.enabled = NO;
+	opibVersionLabel.hidden = YES;
+	opibReleaseDateLabel.hidden = YES;
+	
+	cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	[cfuSpinner setCenter:CGPointMake(160, 140)];
+	[cfuSpinner startAnimating];
+	[self.view addSubview:cfuSpinner];
+	
+	NSInvocationOperation *bgUpdate = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibUpdateCheck) object:nil];
+	
+	[viewInitQueue addOperation:bgUpdate];
+    [bgUpdate release];
+}
 
 - (IBAction)opibConfigureTap:(id)sender {
 	OpeniBootConfigureViewController *configureView = [[OpeniBootConfigureViewController alloc] initWithNibName:@"OpeniBootConfigureViewController" bundle:nil];
@@ -50,14 +68,32 @@
 	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
 	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
 	
+	UIActivityIndicatorView *pageLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[pageLoading startAnimating];
+	
+	opibLoadingButton = [[UIBarButtonItem alloc] initWithCustomView:pageLoading];
+	
+	[self switchButtons];
+	
+	if(sharedData.opibInstalled) {
+		[opibInstall setTitle:@"Installed" forState:UIControlStateNormal];
+		opibInstall.enabled = NO;
+		[opibVersionLabel setText:[NSString stringWithFormat:@"Version %@ for %@", sharedData.opibVersion, sharedData.deviceName]];
+		opibVersionLabel.hidden = NO;
+		opibConfigure.enabled = YES;
+		opibConfigure.hidden = NO;
+	} else {
+		cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+		[cfuSpinner setCenter:CGPointMake(160, 140)];
+		[cfuSpinner startAnimating];
+		[self.view addSubview:cfuSpinner];
+	}
+	
 	//Check installed version and whack it in the UI - if not installed then download plist	
 	NSInvocationOperation *bgUpdate = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibUpdateCheck) object:nil];
 	
 	[viewInitQueue addOperation:bgUpdate];
     [bgUpdate release];
-	
-	[opibInstall setTitle:@"Install" forState:UIControlStateNormal];
-	opibInstall.enabled = YES;
 }
 
 - (void)opibUpdateCheck {
@@ -66,22 +102,44 @@
 	
 	[opibInstance opibCheckForUpdates];
 	
-	if(sharedData.opibCanBeInstalled < 0) {
-		switch (sharedData.opibCanBeInstalled) {
-			case -1:
-				DLog(@"");
-				[commonInstance sendError:@""];
-				break;
-			default:
-				break;
-		}
+	DLog(@"opibCheckForUpdates returned: %d", sharedData.opibCanBeInstalled);
+		
+	switch (sharedData.opibCanBeInstalled) {
+		case 2:
+			//OpeniBoot is at latest version
+			opibReleaseDateLabel.hidden = NO;
+			NSDateFormatter *dateFormat2 = [[[NSDateFormatter alloc] init] autorelease];
+			[dateFormat2 setDateFormat:@"dd-MM-yyyy"];
+			NSString *dateString2 = [dateFormat2 stringFromDate:sharedData.opibUpdateReleaseDate];
+			[opibReleaseDateLabel setText:[NSString stringWithFormat:@"Released %@",dateString2]];
+			break;
+		case 1:
+			//UIAlertView Update available! Lalalala!
+			break;
+		case 0:
+			//OpeniBoot not installed but available
+			[opibInstall setTitle:@"Install" forState:UIControlStateNormal];
+			opibInstall.enabled = YES;
+			[opibVersionLabel setText:[NSString stringWithFormat:@"Version %@ for %@", sharedData.opibUpdateVersion, sharedData.deviceName]];
+			opibVersionLabel.hidden = NO;
+			NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+			[dateFormat setDateFormat:@"dd-MM-yyyy"];
+			NSString *dateString = [dateFormat stringFromDate:sharedData.opibUpdateReleaseDate];
+			[opibReleaseDateLabel setText:[NSString stringWithFormat:@"Released %@",dateString]];
+			opibReleaseDateLabel.hidden = NO;
+			[cfuSpinner stopAnimating];
+			break;
+		case -1:
+			[commonInstance sendError:@"Unable to contact update server.\r\n\r\nCheck your network connection."];
+			break;
+		case -2:
+			[commonInstance sendError:@"Update plist could not be parsed or is invalid."];
+			break;
+		default:
+			break;
 	}
 	
-	if(sharedData.opibInstalled) {
-		
-	} else {
-		
-	}
+	[self switchButtons];
 }
 
 - (void)opibDoInstall {
@@ -106,6 +164,14 @@
 	
 	
 	[bgPool release];	
+}
+
+- (void)switchButtons {
+	if(self.navigationItem.rightBarButtonItem == opibLoadingButton) {
+		self.navigationItem.rightBarButtonItem = opibRefreshButton;
+	} else {
+		self.navigationItem.rightBarButtonItem = opibLoadingButton;
+	}
 }
 
 /*

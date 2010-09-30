@@ -199,6 +199,16 @@
 		sharedData.platform = @"iPhone1,2";
 	}
 	/*************************************************************************************/
+	
+	if([sharedData.platform isEqualToString:@"iPhone1,1"]) {
+		sharedData.deviceName = @"iPhone 2G";
+	} else if([sharedData.platform isEqualToString:@"iPhone1,2"]) {
+		sharedData.deviceName = @"iPhone 3G";
+	} else if([sharedData.platform isEqualToString:@"iPod1,1"]) {
+		sharedData.deviceName = @"iPod 1G";
+	} else {
+		sharedData.deviceName = @"Unknown";
+	}
 }
 
 - (void)getSystemVersion {

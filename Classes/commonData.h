@@ -18,6 +18,7 @@
 	BOOL bootlaceUpgradeAvailable;
 	BOOL warningLive;
 	NSString *platform;
+	NSString *deviceName;
 	NSString *systemVersion;
 	NSString *workingDirectory;
 	NSString *bootlaceVersion;
@@ -109,6 +110,7 @@
 @property (nonatomic, assign) BOOL bootlaceUpgradeAvailable;
 @property (nonatomic, assign) BOOL warningLive;
 @property (nonatomic, retain) NSString *platform;
+@property (nonatomic, retain) NSString *deviceName;
 @property (nonatomic, retain) NSString *systemVersion;
 @property (nonatomic, retain) NSString *workingDirectory;
 @property (nonatomic, retain) NSString *bootlaceVersion;
