@@ -55,6 +55,7 @@ char endianness = 1;
 		//Skip openiboot from manifest as Apple doesn't include it - gits
 		if(i!=1) {
 			NSString *itemPath = [sharedData.opibUpdateFirmwarePath stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
+			NSString *destPath = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
 		
 			DLog(@"Grabbing firmware at path: %@", itemPath);
 	
@@ -67,12 +68,19 @@ char endianness = 1;
 		
 			data = PartialZipGetFile(info, file);
 			int dataLen = file->size; 
+			
+			NSLog(@"dataLen: %d", dataLen);
 		
 			NSData *itemBin = [NSData dataWithBytes:data length:dataLen];
 	
 			if([itemBin length]>0) {
 				NSLog(@"Got NOR file %d", i);
 			}
+			
+			if(![itemBin writeToFile:destPath atomically:YES]) {
+				DLog(@"Could not write IMG3 to file.");
+				return -3;
+			}				
 	
 			free(data);
 		}
@@ -84,7 +92,7 @@ char endianness = 1;
 }
 
 - (int)opibFlashManifest {
-	int i, items;
+	int i, items, success;
 	mach_port_t masterPort;
 	kern_return_t k_result;
 	io_service_t norService;
@@ -118,6 +126,27 @@ char endianness = 1;
 	if (k_result != KERN_SUCCESS) {
 		DLog(@"IOServiceOpen failed: 0x%X\n", k_result);
 		return -4;		
+	}
+	
+	//Check all files exist first
+	for(i=0; i<items; i++) {
+		NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
+		
+		if(![[NSFileManager defaultManager] fileExistsAtPath:img3Path]) {
+			DLog(@"IMG3 doesn't exist at path %@! Aborting before flash!");
+			return -5;
+		}
+	}
+	
+	//Lets flash them before that damn cat of mine eats them
+	for(i=0; i<items; i++) {
+		NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
+		
+		if(i==0) {
+			success = [self opibFlashIMG3:img3Path usingService:norService type:YES];
+		} else {
+			success = [self opibFlashIMG3:img3Path usingService:norService type:NO];
+		}
 	}
 	
 	return 0;
