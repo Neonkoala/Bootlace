@@ -91,6 +91,15 @@ char endianness = 1;
 	return 0;
 }
 
+- (int)opibPatchManifest {
+	commonData* sharedData = [commonData sharedData];
+	bsPatchInstance = [[BSPatch alloc] init];
+	
+	[bsPatchInstance bsPatch:[sharedData.workingDirectory stringByAppendingPathComponent:@"kernelcache"] withPatch:[sharedData.workingDirectory stringByAppendingPathComponent:@"kernelcache.patch"]];
+	 
+	return 0;
+}
+
 - (int)opibFlashManifest {
 	int i, items, success;
 	mach_port_t masterPort;

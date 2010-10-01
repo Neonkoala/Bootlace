@@ -149,7 +149,7 @@
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
 	
-	[opibInstance opibGetNORFromManifest];
+	[opibInstance opibPatchManifest];
 	
 	//Check pre-requisites
 		//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo

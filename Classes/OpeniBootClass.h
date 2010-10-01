@@ -13,9 +13,12 @@
 #import "commonFunctions.h"
 #import "BSPatch.h"
 #import "partial/partial.h"
+#import "libxpwn.h"
 
 
 @interface OpeniBootClass : NSObject {
+	BSPatch *bsPatchInstance;
+	
 	NSMutableDictionary *deviceDict;
 	
 }
@@ -24,6 +27,8 @@
 
 - (int)opibParseUpdatePlist;
 - (int)opibGetNORFromManifest;
+- (int)opibPatchManifest;
+- (int)opibFlashManifest;
 - (int)opibFlashIMG3:(NSString *)path usingService:(io_connect_t)norServiceConnection type:(BOOL)isLLB;
 
 - (io_service_t)opibGetIOService:(NSString *)name;

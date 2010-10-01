@@ -213,6 +213,20 @@
 		D7F07A78125290D200A4031B /* writeout.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F079DC125290D200A4031B /* writeout.c */; };
 		D7F07A79125290D200A4031B /* writeout.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F079DD125290D200A4031B /* writeout.h */; };
 		D7F07A911252919B00A4031B /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7F077FC1252909700A4031B /* libcurl.a */; };
+		D7F89B51125636A10070231F /* 8900.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B4A125636A10070231F /* 8900.c */; };
+		D7F89B52125636A10070231F /* ibootim.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B4B125636A10070231F /* ibootim.c */; };
+		D7F89B53125636A10070231F /* img2.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B4C125636A10070231F /* img2.c */; };
+		D7F89B54125636A10070231F /* img3.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B4D125636A10070231F /* img3.c */; };
+		D7F89B55125636A10070231F /* libxpwn.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B4E125636A10070231F /* libxpwn.c */; };
+		D7F89B56125636A10070231F /* lzssfile.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B4F125636A10070231F /* lzssfile.c */; };
+		D7F89B57125636A10070231F /* nor_files.c in Sources */ = {isa = PBXBuildFile; fileRef = D7F89B50125636A10070231F /* nor_files.c */; };
+		D7F89B61125636C30070231F /* 8900.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B5A125636C30070231F /* 8900.h */; };
+		D7F89B62125636C30070231F /* ibootim.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B5B125636C30070231F /* ibootim.h */; };
+		D7F89B63125636C30070231F /* img2.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B5C125636C30070231F /* img2.h */; };
+		D7F89B64125636C30070231F /* img3.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B5D125636C30070231F /* img3.h */; };
+		D7F89B65125636C30070231F /* libxpwn.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B5E125636C30070231F /* libxpwn.h */; };
+		D7F89B66125636C30070231F /* lzssfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B5F125636C30070231F /* lzssfile.h */; };
+		D7F89B67125636C30070231F /* nor_files.h in Headers */ = {isa = PBXBuildFile; fileRef = D7F89B60125636C30070231F /* nor_files.h */; };
 		D7FCE16C1254B96A0049EA30 /* BSPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FCE16B1254B96A0049EA30 /* BSPatch.m */; };
 		D7FCE2CF1254D0000049EA30 /* bzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = D7FCE2CE1254D0000049EA30 /* bzlib.c */; };
 		D7FCE2D31254D0100049EA30 /* bzlib_private.h in Headers */ = {isa = PBXBuildFile; fileRef = D7FCE2D11254D0100049EA30 /* bzlib_private.h */; };
@@ -449,6 +463,21 @@
 		D7F079DB125290D200A4031B /* writeenv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writeenv.h; sourceTree = "<group>"; };
 		D7F079DC125290D200A4031B /* writeout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = writeout.c; sourceTree = "<group>"; };
 		D7F079DD125290D200A4031B /* writeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writeout.h; sourceTree = "<group>"; };
+		D7F89B461256368C0070231F /* libxpwn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libxpwn.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7F89B4A125636A10070231F /* 8900.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = 8900.c; sourceTree = "<group>"; };
+		D7F89B4B125636A10070231F /* ibootim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ibootim.c; sourceTree = "<group>"; };
+		D7F89B4C125636A10070231F /* img2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = img2.c; sourceTree = "<group>"; };
+		D7F89B4D125636A10070231F /* img3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = img3.c; sourceTree = "<group>"; };
+		D7F89B4E125636A10070231F /* libxpwn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libxpwn.c; sourceTree = "<group>"; };
+		D7F89B4F125636A10070231F /* lzssfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lzssfile.c; sourceTree = "<group>"; };
+		D7F89B50125636A10070231F /* nor_files.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nor_files.c; sourceTree = "<group>"; };
+		D7F89B5A125636C30070231F /* 8900.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 8900.h; sourceTree = "<group>"; };
+		D7F89B5B125636C30070231F /* ibootim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ibootim.h; sourceTree = "<group>"; };
+		D7F89B5C125636C30070231F /* img2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = img2.h; sourceTree = "<group>"; };
+		D7F89B5D125636C30070231F /* img3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = img3.h; sourceTree = "<group>"; };
+		D7F89B5E125636C30070231F /* libxpwn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libxpwn.h; sourceTree = "<group>"; };
+		D7F89B5F125636C30070231F /* lzssfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lzssfile.h; sourceTree = "<group>"; };
+		D7F89B60125636C30070231F /* nor_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nor_files.h; sourceTree = "<group>"; };
 		D7FCE16A1254B96A0049EA30 /* BSPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPatch.h; sourceTree = "<group>"; };
 		D7FCE16B1254B96A0049EA30 /* BSPatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPatch.m; sourceTree = "<group>"; };
 		D7FCE2CA1254CFEB0049EA30 /* libbz2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbz2.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,6 +509,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D7F077FA1252909700A4031B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7F89B441256368C0070231F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -544,6 +580,7 @@
 				D7F06F431252735800A4031B /* libpartialzip.a */,
 				D7F077FC1252909700A4031B /* libcurl.a */,
 				D7FCE2CA1254CFEB0049EA30 /* libbz2.a */,
+				D7F89B461256368C0070231F /* libxpwn.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -551,6 +588,8 @@
 		29B97314FDCFA39411CA2CEA /* BootlaceV2 */ = {
 			isa = PBXGroup;
 			children = (
+				D7F89B59125636C30070231F /* xpwn */,
+				D7F89B49125636A10070231F /* xpwn */,
 				D7FCE2D11254D0100049EA30 /* bzlib_private.h */,
 				D7FCE2D21254D0100049EA30 /* bzlib.h */,
 				D7FCE2CD1254D0000049EA30 /* bzlib */,
@@ -833,6 +872,35 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		D7F89B49125636A10070231F /* xpwn */ = {
+			isa = PBXGroup;
+			children = (
+				D7F89B4A125636A10070231F /* 8900.c */,
+				D7F89B4B125636A10070231F /* ibootim.c */,
+				D7F89B4C125636A10070231F /* img2.c */,
+				D7F89B4D125636A10070231F /* img3.c */,
+				D7F89B4E125636A10070231F /* libxpwn.c */,
+				D7F89B4F125636A10070231F /* lzssfile.c */,
+				D7F89B50125636A10070231F /* nor_files.c */,
+			);
+			path = xpwn;
+			sourceTree = "<group>";
+		};
+		D7F89B59125636C30070231F /* xpwn */ = {
+			isa = PBXGroup;
+			children = (
+				D7F89B5A125636C30070231F /* 8900.h */,
+				D7F89B5B125636C30070231F /* ibootim.h */,
+				D7F89B5C125636C30070231F /* img2.h */,
+				D7F89B5D125636C30070231F /* img3.h */,
+				D7F89B5E125636C30070231F /* libxpwn.h */,
+				D7F89B5F125636C30070231F /* lzssfile.h */,
+				D7F89B60125636C30070231F /* nor_files.h */,
+			);
+			name = xpwn;
+			path = Headers/xpwn;
+			sourceTree = "<group>";
+		};
 		D7FCE2CD1254D0000049EA30 /* bzlib */ = {
 			isa = PBXGroup;
 			children = (
@@ -943,6 +1011,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D7F89B421256368C0070231F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7F89B61125636C30070231F /* 8900.h in Headers */,
+				D7F89B62125636C30070231F /* ibootim.h in Headers */,
+				D7F89B63125636C30070231F /* img2.h in Headers */,
+				D7F89B64125636C30070231F /* img3.h in Headers */,
+				D7F89B65125636C30070231F /* libxpwn.h in Headers */,
+				D7F89B66125636C30070231F /* lzssfile.h in Headers */,
+				D7F89B67125636C30070231F /* nor_files.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7FCE2C61254CFEB0049EA30 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1006,6 +1088,23 @@
 			productReference = D7F077FC1252909700A4031B /* libcurl.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		D7F89B451256368C0070231F /* xpwn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7F89B58125636A10070231F /* Build configuration list for PBXNativeTarget "xpwn" */;
+			buildPhases = (
+				D7F89B421256368C0070231F /* Headers */,
+				D7F89B431256368C0070231F /* Sources */,
+				D7F89B441256368C0070231F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = xpwn;
+			productName = xpwn;
+			productReference = D7F89B461256368C0070231F /* libxpwn.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		D7FCE2C91254CFEB0049EA30 /* bz2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7FCE2D01254D0000049EA30 /* Build configuration list for PBXNativeTarget "bz2" */;
@@ -1042,6 +1141,7 @@
 				D7F06F421252735800A4031B /* partialzip */,
 				D7F077FB1252909700A4031B /* curl */,
 				D7FCE2C91254CFEB0049EA30 /* bz2 */,
+				D7F89B451256368C0070231F /* xpwn */,
 			);
 		};
 /* End PBXProject section */
@@ -1191,6 +1291,20 @@
 				D7F07A73125290D200A4031B /* urlglob.c in Sources */,
 				D7F07A76125290D200A4031B /* writeenv.c in Sources */,
 				D7F07A78125290D200A4031B /* writeout.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7F89B431256368C0070231F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7F89B51125636A10070231F /* 8900.c in Sources */,
+				D7F89B52125636A10070231F /* ibootim.c in Sources */,
+				D7F89B53125636A10070231F /* img2.c in Sources */,
+				D7F89B54125636A10070231F /* img3.c in Sources */,
+				D7F89B55125636A10070231F /* libxpwn.c in Sources */,
+				D7F89B56125636A10070231F /* lzssfile.c in Sources */,
+				D7F89B57125636A10070231F /* nor_files.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1400,6 +1514,55 @@
 			};
 			name = Release;
 		};
+		D7F89B471256368D0070231F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OBJC_CALL_CXX_CDTORS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.2;
+				HEADER_SEARCH_PATHS = (
+					"/usr/include/**",
+					"/usr/local/include/**",
+					"Headers/**",
+					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
+					"$(HOME)/$(SDK_DIR)/include/**",
+				);
+				KEEP_PRIVATE_EXTERNS = NO;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = xpwn;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+			};
+			name = Debug;
+		};
+		D7F89B481256368D0070231F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OBJC_CALL_CXX_CDTORS = NO;
+				GCC_VERSION = 4.2;
+				HEADER_SEARCH_PATHS = (
+					"/usr/include/**",
+					"/usr/local/include/**",
+					"Headers/**",
+					"/Users/neonkoala/Downloads/kennytm-iphone-private-frameworks-6ce3362/IOKit/**",
+					"$(HOME)/$(SDK_DIR)/include/**",
+				);
+				KEEP_PRIVATE_EXTERNS = NO;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = xpwn;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		D7FCE2CB1254CFEC0049EA30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1462,6 +1625,15 @@
 			buildConfigurations = (
 				D7F077FD1252909800A4031B /* Debug */,
 				D7F077FE1252909800A4031B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7F89B58125636A10070231F /* Build configuration list for PBXNativeTarget "xpwn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7F89B471256368D0070231F /* Debug */,
+				D7F89B481256368D0070231F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
