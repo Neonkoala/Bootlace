@@ -195,6 +195,41 @@ char endianness = 1;
 	return result;
 }
 
+- (int)opibDecryptIMG3:(NSString *)srcPath to:(NSString *)dstPath key:(NSString *)key iv:(NSString *)iv {
+	//This is a very hacky workaround for Apple breaking NSTask waitUntilDone in 4.x - NSTask leaves zombies so never returns when done leaving us in limbo. Solution: back to basics, fork & exec
+	
+	pid_t pid;
+	int rv;
+	int	commpipe[2];
+	
+	NSString *cmdline = [NSString stringWithFormat:@"/usr/bin/xpwntool %@ %@ -k %@ -iv %@", srcPath, dstPath, key, iv];
+	
+	NSLog(@"cmdline: %@", cmdline);
+	
+	//int status = system([cmdline cStringUsingEncoding:NSUTF8StringEncoding]);
+	
+	pipe(commpipe);
+	pid = fork();
+	
+	if(pid) {
+		dup2(commpipe[1],1);
+		close(commpipe[0]);
+		
+		setvbuf(stdout,(char*)NULL,_IONBF,0);
+		
+		wait(&rv);
+	} else {
+		dup2(commpipe[0],0);
+		close(commpipe[1]);
+		
+		rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+	}
+	
+	NSLog(@"Term: %d", rv);
+	
+	return 0;
+}
+
 - (io_service_t)opibGetIOService:(NSString *)name {
 	CFMutableDictionaryRef matching;
 	io_service_t service;

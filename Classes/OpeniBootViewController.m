@@ -149,7 +149,7 @@
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
 	
-	[opibInstance opibPatchManifest];
+	[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
 	
 	//Check pre-requisites
 		//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
