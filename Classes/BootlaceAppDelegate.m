@@ -42,7 +42,7 @@
 	
 	//Setup variables
 	sharedData.warningLive = NO;
-	sharedData.bootlaceVersion = @"2.0.3";
+	sharedData.bootlaceVersion = @"2.0.4";
 	
 	//Check the platform
 	[commonInstance getPlatform];

@@ -92,10 +92,10 @@
 	sharedData.upgradeComboDestructive = [comboPlatformDict objectForKey:@"Destructive"];
 	sharedData.upgradeComboReqVer = [comboPlatformDict objectForKey:@"RequiredVersion"];
 	sharedData.upgradeComboCreateDirectories = [comboPlatformDict objectForKey:@"CreateDirectories"];
-	sharedData.upgradeComboRemoveFiles = [deltaPlatformDict objectForKey:@"RemoveFiles"];
-	sharedData.upgradeComboMoveFiles = [deltaPlatformDict objectForKey:@"MoveFiles"];
-	sharedData.upgradeComboAddFiles = [deltaPlatformDict objectForKey:@"AddFiles"];
-	sharedData.upgradeComboPostInstall = [deltaPlatformDict objectForKey:@"PostInstall"];
+	sharedData.upgradeComboRemoveFiles = [comboPlatformDict objectForKey:@"RemoveFiles"];
+	sharedData.upgradeComboMoveFiles = [comboPlatformDict objectForKey:@"MoveFiles"];
+	sharedData.upgradeComboAddFiles = [comboPlatformDict objectForKey:@"AddFiles"];
+	sharedData.upgradeComboPostInstall = [comboPlatformDict objectForKey:@"PostInstall"];
 	
 	NSLog(@"Destructive? 1: %@ 2: %@", sharedData.upgradeDeltaDestructive, sharedData.upgradeComboDestructive);
 	
@@ -632,6 +632,65 @@
 		[self updateProgress:[NSNumber numberWithFloat:0.9] nextStage:NO];
 	} else {
 		DLog(@"Combo update for this bad boy...");
+		
+		success = [self createDirectories:sharedData.upgradeComboCreateDirectories];
+		
+		if(success < 0) {
+			ALog(@"Directory Creation returned: %d", success);
+			sharedData.updateFail = 4;
+			[self cleanUp];
+			return;
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.15] nextStage:NO];
+		
+		success = [self removeFiles:sharedData.upgradeComboRemoveFiles];
+		
+		if(success < 0) {
+			ALog(@"File removal returned: %d", success);
+			sharedData.updateFail = 5;
+			[self cleanUp];
+			return;
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.3] nextStage:NO];
+		
+		success = [self moveFiles:sharedData.upgradeComboMoveFiles];
+		
+		if(success < 0) {
+			ALog(@"Moving files returned: %d", success);
+			sharedData.updateFail = 6;
+			[self cleanUp];
+			return;
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.5] nextStage:NO];
+		
+		success = [self cherryPickFiles:sharedData.upgradeComboAddFiles];
+		
+		if(success < 0) {
+			ALog(@"Cherry picking files returned: %d", success);
+			sharedData.updateFail = 7;
+			[self cleanUp];
+			return;
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.7] nextStage:NO];
+		
+		if([sharedData.upgradeComboPostInstall length] != 0) {
+			DLog(@"Post Install script needs running...");
+			
+			success = [self runPostInstall:sharedData.upgradeComboPostInstall];
+			
+			if(success < 0) {
+				ALog(@"Post install script returned: %d", success);
+				sharedData.updateFail = 8;
+				[self cleanUp];
+				return;
+			}
+		}
+		
+		[self updateProgress:[NSNumber numberWithFloat:0.9] nextStage:NO];
 	}
 	
 	//Clean up
@@ -949,6 +1008,46 @@
 
 - (int)runPostInstall:(NSString *)URL {
 	DLog(@"Post install triggered.");
+	
+	commonData* sharedData = [commonData sharedData];
+	
+	//Download from URL
+	getFileInstance = [[getFile alloc] initWithUrl:URL directory:sharedData.workingDirectory];
+	
+	// Start downloading the image with self as delegate receiver
+	[getFileInstance getFileDownload:self];
+	
+	BOOL keepAlive = YES;
+	
+	do {        
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+		//Check NSURLConnection for activity
+		if (getFileInstance.getFileWorking == NO) {
+			keepAlive = NO;
+		}
+	} while (keepAlive);
+	
+	NSString *script = getFileInstance.getFilePath;
+	
+	if(![[NSFileManager defaultManager] isExecutableFileAtPath:script]) {
+		DLog(@"Script is not executable");
+		NSDictionary *perms = [[NSFileManager defaultManager] attributesOfItemAtPath:script error:nil];
+		
+		NSMutableDictionary *newperms = [NSMutableDictionary dictionaryWithDictionary:perms];
+		
+		[newperms setValue:[NSNumber numberWithInt:511] forKey:NSFilePosixPermissions];
+		if(![[NSFileManager defaultManager] setAttributes:newperms ofItemAtPath:script error:nil]) {
+			DLog(@"Could not make script executable");
+			return -1;
+		}
+	}	
+	
+	int status = system([script cStringUsingEncoding:NSUTF8StringEncoding]);
+	
+	if(status < 0) {
+		DLog(@"Executing post install script failed!");
+		return -2;
+	}	
 	
 	return 0;
 }
