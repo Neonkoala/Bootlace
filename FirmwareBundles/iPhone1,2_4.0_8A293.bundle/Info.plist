@@ -35,15 +35,6 @@
 			<key>Patch</key>
 			<string>LLB.n82ap.RELEASE.patch</string>
 		</dict>
-		<key>RecoveryMode</key>
-		<dict>
-			<key>File</key>
-			<string>recoverymode.s5l8900x.img3</string>
-			<key>IV</key>
-			<string>6b372ecbbcd1fc01f94c719c82cef173</string>
-			<key>Key</key>
-			<string>93f647f7ef2680c677a25149260fb88c</string>
-		</dict>
 	</dict>
 	<key>Name</key>
 	<string>iPhone1,2_4.0_8A293</string>

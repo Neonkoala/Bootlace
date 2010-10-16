@@ -12,25 +12,37 @@
 #import <sys/mman.h>
 #import "commonData.h"
 #import "commonFunctions.h"
+#import "getFile.h"
 #import "BSPatch.h"
 #import "partial/partial.h"
 
 
 @interface OpeniBootClass : NSObject {
 	BSPatch *bsPatchInstance;
+	getFile *getFileInstance;
 	
 	NSMutableDictionary *deviceDict;
 	
+	NSDictionary *iBootPatches;
+	NSDictionary *LLBPatches;
+	NSDictionary *kernelPatches;	
 }
 
 @property (nonatomic, retain) NSMutableDictionary *deviceDict;
 
+@property (nonatomic, retain) NSDictionary *iBootPatches;
+@property (nonatomic, retain) NSDictionary *LLBPatches;
+@property (nonatomic, retain) NSDictionary *kernelPatches;
+
 - (int)opibParseUpdatePlist;
 - (int)opibGetNORFromManifest;
-- (int)opibPatchManifest;
 - (int)opibFlashManifest;
 - (int)opibFlashIMG3:(NSString *)path usingService:(io_connect_t)norServiceConnection type:(BOOL)isLLB;
-- (int)opibDecryptIMG3:(NSString *)srcPath to:(NSString *)dstPath key:(NSString *)key iv:(NSString *)iv;
+- (int)opibEncryptIMG3:(NSString *)srcPath to:(NSString *)dstPath with:(NSString *)templateIMG3 key:(NSString *)key iv:(NSString *)iv type:(BOOL)isLLB;
+- (int)opibDecryptIMG3:(NSString *)srcPath to:(NSString *)dstPath key:(NSString *)key iv:(NSString *)iv type:(BOOL)isLLB;
+- (int)opibPatchNORFiles;
+- (int)opibPatchKernelCache;
+- (int)opibGetFirmwareBundle;
 
 - (io_service_t)opibGetIOService:(NSString *)name;
 

@@ -11,7 +11,7 @@
 
 @implementation OpeniBootClass
 
-@synthesize deviceDict;
+@synthesize deviceDict, iBootPatches, LLBPatches, kernelPatches;
 
 char endianness = 1;
 
@@ -41,6 +41,10 @@ char endianness = 1;
 	int i, items;
 	unsigned char* data;
 	commonData* sharedData = [commonData sharedData];
+	
+	NSLog(@"IPSWURLS: %@ Sys version: %@", sharedData.opibUpdateIPSWURLs, sharedData.systemVersion);
+	
+	DLog(@"Getting NOR files from Apple servers. IPSW: %@", [sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion]);
 	
 	ZipInfo* info = PartialZipInit([[sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion] cStringUsingEncoding:NSUTF8StringEncoding]);
 	if(!info)
@@ -88,15 +92,6 @@ char endianness = 1;
 	
 	PartialZipRelease(info);
 	
-	return 0;
-}
-
-- (int)opibPatchManifest {
-	commonData* sharedData = [commonData sharedData];
-	bsPatchInstance = [[BSPatch alloc] init];
-	
-	[bsPatchInstance bsPatch:[sharedData.workingDirectory stringByAppendingPathComponent:@"kernelcache"] withPatch:[sharedData.workingDirectory stringByAppendingPathComponent:@"kernelcache.patch"]];
-	 
 	return 0;
 }
 
@@ -195,18 +190,24 @@ char endianness = 1;
 	return result;
 }
 
-- (int)opibDecryptIMG3:(NSString *)srcPath to:(NSString *)dstPath key:(NSString *)key iv:(NSString *)iv {
+- (int)opibEncryptIMG3:(NSString *)srcPath to:(NSString *)dstPath with:(NSString *)templateIMG3 key:(NSString *)key iv:(NSString *)iv type:(BOOL)isLLB {
+	//Sanity checks
+	if(![[NSFileManager defaultManager] fileExistsAtPath:srcPath] || [[NSFileManager defaultManager] fileExistsAtPath:dstPath] || ![[NSFileManager defaultManager] fileExistsAtPath:templateIMG3]) {
+		DLog(@"File missing and/or exists at destination/source. Aborting rather like your mother should have done before birth.");
+		return -1;
+	}
+	if(!isLLB) {
+		if([key length] == 0 || [iv length] == 0) {
+			DLog(@"Seriously? That's gotta be an invalid key/iv. I didn't get off the last banana boat y'know...");
+			return -2;
+		}
+	}
+	
 	//This is a very hacky workaround for Apple breaking NSTask waitUntilDone in 4.x - NSTask leaves zombies so never returns when done leaving us in limbo. Solution: back to basics, fork & exec
 	
 	pid_t pid;
 	int rv;
 	int	commpipe[2];
-	
-	NSString *cmdline = [NSString stringWithFormat:@"/usr/bin/xpwntool %@ %@ -k %@ -iv %@", srcPath, dstPath, key, iv];
-	
-	NSLog(@"cmdline: %@", cmdline);
-	
-	//int status = system([cmdline cStringUsingEncoding:NSUTF8StringEncoding]);
 	
 	pipe(commpipe);
 	pid = fork();
@@ -222,10 +223,188 @@ char endianness = 1;
 		dup2(commpipe[0],0);
 		close(commpipe[1]);
 		
-		rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+		if(isLLB) {
+			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-t", [templateIMG3 cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+		} else {
+			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-t", [templateIMG3 cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+		}
 	}
 	
-	NSLog(@"Term: %d", rv);
+	if(rv!=0) {
+		DLog(@"xpwntool returned: %d", rv);
+		return -3;
+	}
+	
+	return 0;
+}
+
+- (int)opibDecryptIMG3:(NSString *)srcPath to:(NSString *)dstPath key:(NSString *)key iv:(NSString *)iv type:(BOOL)isLLB {
+	//Sanity checks	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:srcPath] || [[NSFileManager defaultManager] fileExistsAtPath:dstPath]) {
+		DLog(@"File missing and/or exists at destination/source. Aborting rather like your mother should have done before birth.");
+		return -1;
+	}
+	if(!isLLB) {
+		if([key length] == 0 || [iv length] == 0) {
+			DLog(@"Seriously? That's gotta be an invalid key/iv. I didn't get off the last banana boat y'know...");
+			return -2;
+		}
+	}
+	
+	NSString *xpwnPath = [[NSBundle mainBundle] resourcePath];
+	DLog(@"App path: %@", xpwnPath);
+	
+	xpwnPath = [xpwnPath stringByAppendingPathComponent:@"xpwntool"];
+	//This is a very hacky workaround for Apple breaking NSTask waitUntilDone in 4.x - NSTask leaves zombies so never returns when done leaving us in limbo. Solution: back to basics, fork & exec
+	
+	pid_t pid;
+	int rv;
+	int	commpipe[2];
+	
+	pipe(commpipe);
+	pid = fork();
+	
+	if(pid) {
+		dup2(commpipe[1],1);
+		close(commpipe[0]);
+		
+		setvbuf(stdout,(char*)NULL,_IONBF,0);
+		
+		wait(&rv);
+	} else {
+		dup2(commpipe[0],0);
+		close(commpipe[1]);
+		
+		if(isLLB) {
+			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+		} else {
+			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+		}
+	}
+	
+	if(rv!=0) {
+		DLog(@"xpwntool returned: %d", rv);
+		return -3;
+	}
+	
+	return 0;
+}
+
+- (int)opibPatchNORFiles {
+	int status;
+	bsPatchInstance = [[BSPatch alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	//Let's do LLB first
+	NSString *llbPath = [sharedData.workingDirectory stringByAppendingPathComponent:[LLBPatches objectForKey:@"File"]];
+	NSString *llbPatchPath = [sharedData.workingDirectory stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]];
+	status = [self opibDecryptIMG3:llbPath to:[llbPath stringByAppendingPathExtension:@"decrypted"] key:nil iv:nil type:YES];
+	
+	if(status < 0) {
+		DLog(@"opibDecryptIMG3 returned %d", status);
+		return -1;
+	}
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"]]) {
+		status = [bsPatchInstance bsPatch:[llbPath stringByAppendingPathExtension:@"decrypted"] withPatch:llbPatchPath];
+	} else {
+		DLog(@"Decrypted LLB does not exist! Time to crap ourselves complaining..");
+		return -2;
+	}
+	
+	[self opibEncryptIMG3:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] to:[llbPath stringByAppendingPathExtension:@"encrypted"] with:llbPath key:nil iv:nil type:YES];
+		
+	return 0;
+}
+
+- (int)opibPatchKernelCache {
+	
+	return 0;
+}
+
+- (int)opibGetFirmwareBundle {
+	commonData* sharedData = [commonData sharedData];
+	
+	NSString *bundleURL = @"http://beta.neonkoala.co.uk/iPhone1,2_4.0_8A293.bundle";
+	
+	DLog(@"Grabbing firmware bundle %@", bundleURL);
+	
+	NSDictionary *bundleInfo = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:[bundleURL stringByAppendingPathComponent:@"Info.plist"]]];
+	if([bundleInfo count] < 1) {
+		return -1;
+	}
+	
+	NSDictionary *firmwarePatches = [bundleInfo objectForKey:@"FirmwarePatches"];
+	
+	LLBPatches = [firmwarePatches objectForKey:@"LLB"];
+	iBootPatches = [firmwarePatches objectForKey:@"iBoot"];
+	kernelPatches = [firmwarePatches objectForKey:@"KernelCache"];
+	
+	//Get files
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
+	
+	[getFileInstance getFileDownload:self];
+	
+	BOOL keepAlive = YES;
+	
+	do {        
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+		//Check NSURLConnection for activity
+		if (getFileInstance.getFileWorking == NO) {
+			keepAlive = NO;
+		}
+		if(sharedData.updateFail == 1) {
+			DLog(@"DEBUG: Failed to get LLB patch. Cleaning up.");
+			return -2;
+		}
+	} while (keepAlive);
+	
+	[getFileInstance release];
+	
+	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
+	
+	[getFileInstance getFileDownload:self];
+	
+	keepAlive = YES;
+	
+	do {        
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+		//Check NSURLConnection for activity
+		if (getFileInstance.getFileWorking == NO) {
+			keepAlive = NO;
+		}
+		if(sharedData.updateFail == 1) {
+			DLog(@"DEBUG: Failed to get iBoot patch. Cleaning up.");
+			return -3;
+		}
+	} while (keepAlive);
+	
+	[getFileInstance release];
+	
+	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[kernelPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
+	
+	[getFileInstance getFileDownload:self];
+	
+	keepAlive = YES;
+	
+	do {        
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
+		//Check NSURLConnection for activity
+		if (getFileInstance.getFileWorking == NO) {
+			keepAlive = NO;
+		}
+		if(sharedData.updateFail == 1) {
+			DLog(@"DEBUG: Failed to get KernelCache patch. Cleaning up.");
+			return -4;
+		}
+	} while (keepAlive);
+	
+	[getFileInstance release];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	
+	NSLog(@"fwbundle info.plist: %@", bundleInfo);
 	
 	return 0;
 }

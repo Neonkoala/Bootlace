@@ -1379,6 +1379,7 @@
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = curl;
+				SDKROOT = iphoneos3.1.2;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1397,6 +1398,7 @@
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = curl;
+				SDKROOT = iphoneos3.1.2;
 				USER_HEADER_SEARCH_PATHS = "";
 				ZERO_LINK = NO;
 			};

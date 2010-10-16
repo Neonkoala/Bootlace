@@ -149,7 +149,13 @@
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
 	
-	[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
+	//[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
+	
+	sharedData.systemVersion = @"4.0";
+	
+	[opibInstance opibGetNORFromManifest];
+	[opibInstance opibGetFirmwareBundle];
+	[opibInstance opibPatchNORFiles];
 	
 	//Check pre-requisites
 		//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
