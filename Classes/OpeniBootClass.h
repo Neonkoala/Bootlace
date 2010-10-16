@@ -20,6 +20,7 @@
 @interface OpeniBootClass : NSObject {
 	BSPatch *bsPatchInstance;
 	getFile *getFileInstance;
+	commonFunctions *commonInstance;
 	
 	NSMutableDictionary *deviceDict;
 	

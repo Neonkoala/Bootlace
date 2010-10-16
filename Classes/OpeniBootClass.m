@@ -32,6 +32,7 @@ char endianness = 1;
 	sharedData.opibUpdateCompatibleFirmware = [deviceDict objectForKey:@"CompatibleFirmware"];
 	sharedData.opibUpdateIPSWURLs = [deviceDict objectForKey:@"IPSWURLs"];
 	sharedData.opibUpdateKernelMD5 = [deviceDict objectForKey:@"KernelMD5"];
+	sharedData.opibUpdateVerifyMD5 = [deviceDict objectForKey:@"VerifyMD5"];
 	sharedData.opibUpdateManifest = [deviceDict objectForKey:@"Manifest"];
 	
 	return 0;
@@ -251,10 +252,6 @@ char endianness = 1;
 		}
 	}
 	
-	NSString *xpwnPath = [[NSBundle mainBundle] resourcePath];
-	DLog(@"App path: %@", xpwnPath);
-	
-	xpwnPath = [xpwnPath stringByAppendingPathComponent:@"xpwntool"];
 	//This is a very hacky workaround for Apple breaking NSTask waitUntilDone in 4.x - NSTask leaves zombies so never returns when done leaving us in limbo. Solution: back to basics, fork & exec
 	
 	pid_t pid;
@@ -276,9 +273,9 @@ char endianness = 1;
 		close(commpipe[1]);
 		
 		if(isLLB) {
-			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl("/usr/sbin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		} else {
-			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl("/usr/sbin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		}
 	}
 	
@@ -301,7 +298,7 @@ char endianness = 1;
 	status = [self opibDecryptIMG3:llbPath to:[llbPath stringByAppendingPathExtension:@"decrypted"] key:nil iv:nil type:YES];
 	
 	if(status < 0) {
-		DLog(@"opibDecryptIMG3 returned %d", status);
+		DLog(@"opibDecryptIMG3 returned %d on LLB", status);
 		return -1;
 	}
 	
@@ -312,12 +309,55 @@ char endianness = 1;
 		return -2;
 	}
 	
-	[self opibEncryptIMG3:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] to:[llbPath stringByAppendingPathExtension:@"encrypted"] with:llbPath key:nil iv:nil type:YES];
+	status = [self opibEncryptIMG3:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] to:[llbPath stringByAppendingPathExtension:@"encrypted"] with:llbPath key:nil iv:nil type:YES];
 		
+	if(status < 0) {
+		DLog("opibEncryptIMG3 returned %d on LLB", status);
+		return -3;
+	}
+	
+	NSString *iBootPath = [sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"File"]];
+	NSString *iBootPatchPath = [sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]];
+	status = [self opibDecryptIMG3:iBootPath to:[iBootPath stringByAppendingPathExtension:@"decrypted"] key:[iBootPatches objectForKey:@"Key"] iv:[iBootPatches objectForKey:@"IV"] type:NO];
+	
+	if(status < 0) {
+		DLog(@"opibDecryptIMG3 returned %d on iBoot", status);
+		return -4;
+	}
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"]]) {
+		status = [bsPatchInstance bsPatch:[iBootPath stringByAppendingPathExtension:@"decrypted"] withPatch:iBootPatchPath];
+	} else {
+		DLog(@"Decrypted iBoot does not exist! Time to crap ourselves complaining..");
+		return -5;
+	}
+	
+	status = [self opibEncryptIMG3:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] to:[iBootPath stringByAppendingPathExtension:@"encrypted"] with:iBootPath key:nil iv:nil type:YES];
+	
+	if(status < 0) {
+		DLog("opibEncryptIMG3 returned %d on iBoot", status);
+		return -6;
+	}
+	
 	return 0;
 }
 
 - (int)opibPatchKernelCache {
+	int i;
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	
+	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
+	
+	int MD5s = [[sharedData.opibUpdateKernelMD5 objectForKey:sharedData.systemVersion] count];
+	for(i=0; i<MD5s; i++) {
+		if([kernelMD5 isEqualToString:[[sharedData.opibUpdateKernelMD5 objectForKey:sharedData.systemVersion] objectAtIndex:i]]) {
+			break;
+		} else if(i==(MD5s-1)) {
+			DLog(@"No MD5 matches found, aborting...");
+			return -1;
+		}
+	}
 	
 	return 0;
 }
@@ -452,15 +492,15 @@ char endianness = 1;
 	} else {
 		opibUpdatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/openiboot.plist"];
 	}
-	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:opibUpdatePlistURL];
+	sharedData.opibDict = [NSMutableDictionary dictionaryWithContentsOfURL:opibUpdatePlistURL];
 	
-	if(updateDict == nil) {
+	if(sharedData.opibDict == nil) {
 		sharedData.updateCanBeInstalled = -1;
 		DLog(@"Could not retrieve openiboot update plist - server problem?");
 		return;
 	}
 	
-	deviceDict = [updateDict objectForKey:sharedData.platform];
+	deviceDict = [sharedData.opibDict objectForKey:sharedData.platform];
 	
 	//Call func to parse plist
 	success = [self opibParseUpdatePlist];

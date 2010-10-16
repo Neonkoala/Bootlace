@@ -143,33 +143,66 @@
 }
 
 - (void)opibDoInstall {
-	NSAutoreleasePool *bgPool = [[NSAutoreleasePool alloc] init];
-	
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
 	
-	//[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
-	
-	sharedData.systemVersion = @"4.0";
-	
-	[opibInstance opibGetNORFromManifest];
-	[opibInstance opibGetFirmwareBundle];
-	[opibInstance opibPatchNORFiles];
+	sharedData.opibUpdateStage = 0;
+	sharedData.opibUpdateFail = 0;
 	
 	//Check pre-requisites
-		//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
-		//Now let's check iOS version
-		//Ok that's good, now lets see if kernel matches our whitelist of MD5 hashes from various jailbreaks
-		//W00t! we got this far... Now lets check the server has a patch for us too as you know, Neonkoala is a lazy bastard and might have not bothered
+	//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
+	
+	NSArray *supportedDevices = [sharedData.opibDict allKeys];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", sharedData.platform];
+	NSArray *results = [supportedDevices filteredArrayUsingPredicate:predicate];
+	
+	if([results count] < 1) {
+		DLog(@"Device %@ not supported by OpeniBoot! Aborting.", sharedData.platform);
+		[commonInstance sendError:@"This device is not compatible with OpeniBoot."];
+		return;
+	}
+	
+	//Now let's check iOS version
+	NSArray *supportedFirmwares = [sharedData.opibUpdateCompatibleFirmware allKeys];
+	predicate = [NSPredicate predicateWithFormat:@"SELF like %@", sharedData.systemVersion];
+	results = [supportedFirmwares filteredArrayUsingPredicate:predicate];
+	
+	if([results count] < 1) {
+		DLog(@"iOS %@ not supported by OpeniBoot! Aborting.", sharedData.systemVersion);
+		[commonInstance sendError:[NSString stringWithFormat:@"OpeniBoot is not currently compatible with iOS %@", sharedData.systemVersion]];
+		return;
+	}
+	
+	//Ok that's good, now lets see if kernel matches our whitelist of MD5 hashes from various jailbreaks
+	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
+	
+	if(![kernelMD5 isEqualToString:[sharedData.opibUpdateVerifyMD5 objectForKey:sharedData.systemVersion]]) {
+		DLog(@"No MD5 matches found, aborting...");
+		[commonInstance sendError:@"Kernelcache appears to be incorrectly patched.\r\nReinstall Bootlace."];
+		return;
+	}
+	
+	
+	//[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
+	
+	//[opibInstance opibGetNORFromManifest];
+	//[opibInstance opibGetFirmwareBundle];
+	//[opibInstance opibPatchNORFiles];
+	
+	
 	
 	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening
+	UIAlertView *installView;
+	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\r\n\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	[installView show];
+	
 		//Hand over to OpeniBootClass
 	
 	//Reload version
 	
 	
-	[bgPool release];	
+	//[bgPool release];	
 }
 
 - (void)switchButtons {

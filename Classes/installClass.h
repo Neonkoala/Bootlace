@@ -49,6 +49,5 @@
 - (int)runPostInstall:(NSString *)URL;
 - (int)dumpMultitouch;
 - (int)dumpWiFi;
-- (NSString *)fileMD5:(NSString *)path;
 
 @end

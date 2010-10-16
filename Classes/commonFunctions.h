@@ -48,6 +48,7 @@
 - (int)applyNVRAM;
 - (BOOL)checkMains;
 - (float)getFreeSpace;
+- (NSString *)fileMD5:(NSString *)path;
 - (void)getPlatform;
 - (void)getSystemVersion;
 - (void)firstLaunch;

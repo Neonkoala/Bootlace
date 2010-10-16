@@ -35,6 +35,8 @@
 	
 	BOOL opibInstalled;
 	int opibCanBeInstalled;
+	int opibUpdateStage;
+	int opibUpdateFail;
 	NSString *opibUpdateVersion;
 	NSString *opibUpdateURL;
 	NSString *opibUpdateBootlaceRequired;
@@ -43,6 +45,7 @@
 	NSDictionary *opibUpdateCompatibleFirmware;
 	NSDictionary *opibUpdateIPSWURLs;
 	NSDictionary *opibUpdateKernelMD5;
+	NSDictionary *opibUpdateVerifyMD5;
 	NSArray *opibUpdateManifest;
 	
 	
@@ -127,6 +130,8 @@
 
 @property (nonatomic, assign) BOOL opibInstalled;
 @property (nonatomic, assign) int opibCanBeInstalled;
+@property (nonatomic, assign) int opibUpdateStage;
+@property (nonatomic, assign) int opibUpdateFail;
 @property (nonatomic, retain) NSString *opibUpdateVersion;
 @property (nonatomic, retain) NSString *opibUpdateURL;
 @property (nonatomic, retain) NSString *opibUpdateBootlaceRequired;
@@ -135,6 +140,7 @@
 @property (nonatomic, retain) NSDictionary *opibUpdateCompatibleFirmware;
 @property (nonatomic, retain) NSDictionary *opibUpdateIPSWURLs;
 @property (nonatomic, retain) NSDictionary *opibUpdateKernelMD5;
+@property (nonatomic, retain) NSDictionary *opibUpdateVerifyMD5;
 @property (nonatomic, retain) NSArray *opibUpdateManifest;
 
 
