@@ -35,6 +35,7 @@
 
 @interface commonFunctions : NSObject {
 	nvramFunctions *nvramInstance;
+	installClass *installInstance;
 }
 
 @property (nonatomic, retain) nvramFunctions *nvramInstance;

@@ -182,6 +182,8 @@
 }
 
 - (NSString *)fileMD5:(NSString *)path {
+	installInstance = [[installClass alloc] init];
+	
 	int read = 0;	
 	NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
 	int fileSize = [attr fileSize];
@@ -203,7 +205,7 @@
 		if( [fileData length] == 0 ) done = YES;
 		read += [fileData length];
 		float progress = (float) read/fileSize;
-		[self updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
+		[installInstance updateProgress:[NSNumber numberWithFloat:progress] nextStage:NO];
 		[tempPool drain]; //Drain it or we'll run out of memory
 	}
 	unsigned char digest[CC_MD5_DIGEST_LENGTH];

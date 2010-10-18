@@ -132,6 +132,7 @@ char endianness = 1;
 		DLog(@"IOServiceOpen failed: 0x%X\n", k_result);
 		return -4;		
 	}
+	NSLog(@"[OK] Connection opened at: 0x%x\n", norServiceConnection);
 	
 	//Check all files exist first
 	for(i=0; i<items; i++) {
@@ -148,9 +149,9 @@ char endianness = 1;
 		NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
 		
 		if(i==0) {
-			success = [self opibFlashIMG3:img3Path usingService:norService type:YES];
+			success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:YES];
 		} else {
-			success = [self opibFlashIMG3:img3Path usingService:norService type:NO];
+			success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:NO];
 		}
 	}
 	
@@ -181,8 +182,8 @@ char endianness = 1;
 		return err;
 	}
 	
-	kern_return_t result;
-	if((result = IOConnectCallStructMethod(norServiceConnection, isLLB ? 0 : 1, mappedImage, imgLen, NULL, 0)) != KERN_SUCCESS) {
+	kern_return_t result = IOConnectCallStructMethod(norServiceConnection, isLLB ? 0 : 1, mappedImage, imgLen, NULL, 0);
+	if(result != KERN_SUCCESS) {
 		NSLog(@"IOConnectCallStructMethod failed: 0x%x\n", result);
 	}
 	
@@ -459,7 +460,7 @@ char endianness = 1;
 		return 0;
 	}
 	
-	while(!service) {
+	do {
 		CFRetain(matching);
 		service = IOServiceGetMatchingService(kIOMasterPortDefault, matching);
 		if(service) {
@@ -469,7 +470,7 @@ char endianness = 1;
 		DLog(@"Waiting for matching IOKit service: %@", name);
 		sleep(1);
 		CFRelease(matching);
-	}
+	} while(!service);
 	
 	CFRelease(matching);
 
@@ -488,7 +489,8 @@ char endianness = 1;
 	
 	//Grab update plist	
 	if(sharedData.debugMode) {
-		opibUpdatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/openiboot.plist"];
+		//opibUpdatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/openiboot.plist"];
+		opibUpdatePlistURL = [NSURL URLWithString:@"http://192.168.0.16/~neonkoala/openiboot.plist"];
 	} else {
 		opibUpdatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/openiboot.plist"];
 	}

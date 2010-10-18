@@ -149,7 +149,7 @@
 	
 	sharedData.opibUpdateStage = 0;
 	sharedData.opibUpdateFail = 0;
-	
+	/*
 	//Check pre-requisites
 	//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
 	
@@ -181,7 +181,7 @@
 		DLog(@"No MD5 matches found, aborting...");
 		[commonInstance sendError:@"Kernelcache appears to be incorrectly patched.\r\nReinstall Bootlace."];
 		return;
-	}
+	}*/
 	
 	
 	//[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
@@ -189,7 +189,7 @@
 	//[opibInstance opibGetNORFromManifest];
 	//[opibInstance opibGetFirmwareBundle];
 	//[opibInstance opibPatchNORFiles];
-	
+	[opibInstance opibFlashManifest];
 	
 	
 	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening
