@@ -186,10 +186,10 @@
 	
 	//[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
 	
-	//[opibInstance opibGetNORFromManifest];
-	//[opibInstance opibGetFirmwareBundle];
-	//[opibInstance opibPatchNORFiles];
-	[opibInstance opibFlashManifest];
+	[opibInstance opibGetNORFromManifest];
+	[opibInstance opibGetFirmwareBundle];
+	[opibInstance opibPatchNORFiles];
+	//[opibInstance opibFlashManifest];
 	
 	
 	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening

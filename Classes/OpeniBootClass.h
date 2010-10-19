@@ -42,8 +42,10 @@
 - (int)opibEncryptIMG3:(NSString *)srcPath to:(NSString *)dstPath with:(NSString *)templateIMG3 key:(NSString *)key iv:(NSString *)iv type:(BOOL)isLLB;
 - (int)opibDecryptIMG3:(NSString *)srcPath to:(NSString *)dstPath key:(NSString *)key iv:(NSString *)iv type:(BOOL)isLLB;
 - (int)opibPatchNORFiles;
+- (int)opibPatchIbox:(NSString *)path;
 - (int)opibPatchKernelCache;
 - (int)opibGetFirmwareBundle;
+- (int)opibCleanPatchBundle;
 
 - (io_service_t)opibGetIOService:(NSString *)name;
 

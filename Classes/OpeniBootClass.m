@@ -117,7 +117,6 @@ char endianness = 1;
 		DLog(@"IOMasterPort failed: 0x%X\n", k_result);
 		return -2;
 	}
-	NSLog(@"[OK] IOMasterPort opened");
 	
 	norService = [self opibGetIOService:@"AppleImage3NORAccess"];
 	
@@ -125,14 +124,12 @@ char endianness = 1;
 		DLog(@"opibGetIOService failed!");
 		return -3;
 	}
-	NSLog(@"[OK] AppleImage3NORAccess found: 0x%x\n", norService);
 	
 	k_result = IOServiceOpen(norService, mach_task_self_, 0, &norServiceConnection);
 	if (k_result != KERN_SUCCESS) {
 		DLog(@"IOServiceOpen failed: 0x%X\n", k_result);
 		return -4;		
 	}
-	NSLog(@"[OK] Connection opened at: 0x%x\n", norServiceConnection);
 	
 	//Check all files exist first
 	for(i=0; i<items; i++) {
@@ -272,11 +269,11 @@ char endianness = 1;
 	} else {
 		dup2(commpipe[0],0);
 		close(commpipe[1]);
-		
+						
 		if(isLLB) {
-			rv = execl("/usr/sbin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		} else {
-			rv = execl("/usr/sbin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		}
 	}
 	
@@ -336,9 +333,47 @@ char endianness = 1;
 	status = [self opibEncryptIMG3:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] to:[iBootPath stringByAppendingPathExtension:@"encrypted"] with:iBootPath key:nil iv:nil type:YES];
 	
 	if(status < 0) {
-		DLog("opibEncryptIMG3 returned %d on iBoot", status);
+		DLog(@"opibEncryptIMG3 returned %d on iBoot", status);
 		return -6;
 	}
+	
+	//Clean up
+	if(![[NSFileManager defaultManager] removeItemAtPath:iBootPath error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"] error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil]) {
+		DLog(@"Could not clean up iBoot files.");
+		return -7;
+	}
+	if(![[NSFileManager defaultManager] removeItemAtPath:llbPath error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"] error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil]) {
+		DLog(@"Could not clean up LLB files.");
+		return -7;
+	}
+	if(![[NSFileManager defaultManager] moveItemAtPath:[iBootPath stringByAppendingPathExtension:@"encrypted"] toPath:iBootPath error:nil] || ![[NSFileManager defaultManager] moveItemAtPath:[llbPath stringByAppendingPathExtension:@"encrypted"] toPath:llbPath error:nil]) {
+		DLog(@"Could not move files to original filename");
+		return -8;
+	}
+	
+	//Patch iBoot to ibox or we haz conflicts
+	status = [self opibPatchIbox:iBootPath];
+	
+	if(status < 0) {
+		DLog(@"Failed to patch iBoot to ibox");
+		return -9;
+	}
+	
+	return 0;
+}
+
+- (int)opibPatchIbox:(NSString *)path {
+	NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:path];
+	
+	if(!handle) {
+		DLog(@"Could not open file at %@ for writing.");
+		return -1;
+	}
+	
+	[handle seekToFileOffset:16];
+	[handle writeData:[NSData dataWithBytes:"xobi" length:4]];
+	
+	[handle closeFile]; 
 	
 	return 0;
 }
@@ -519,6 +554,11 @@ char endianness = 1;
 			sharedData.opibCanBeInstalled = 2;
 		}
 	}
+}
+
+- (int)opibCleanPatchBundle {
+	
+	return 0;
 }
 
 @end
