@@ -23,9 +23,11 @@
 	UIBarButtonItem *opibRefreshButton;
 	UILabel *opibVersionLabel;
 	UILabel *opibReleaseDateLabel;
+	UILabel *installStageLabel;
 	UIGlassButton *opibInstall;
 	UIGlassButton *opibConfigure;
 	UIActivityIndicatorView *cfuSpinner;
+	UIProgressView *installProgress;
 }
 
 @property (nonatomic, retain) NSOperationQueue *viewInitQueue;
@@ -34,16 +36,17 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *opibRefreshButton;
 @property (nonatomic, retain) IBOutlet UILabel *opibVersionLabel;
 @property (nonatomic, retain) IBOutlet UILabel *opibReleaseDateLabel;
+@property (nonatomic, retain) UILabel *installStageLabel;
 @property (nonatomic, retain) IBOutlet UIGlassButton *opibInstall;
 @property (nonatomic, retain) IBOutlet UIGlassButton *opibConfigure;
 @property (nonatomic, retain) UIActivityIndicatorView *cfuSpinner;
+@property (nonatomic, retain) UIProgressView *installProgress;
 
 - (IBAction)opibRefreshTap:(id)sender;
 - (IBAction)opibInstallTap:(id)sender;
 - (IBAction)opibConfigureTap:(id)sender;
 
 - (void)opibUpdateCheck;
-- (void)opibDoInstall;
 - (void)switchButtons;
 
 @end

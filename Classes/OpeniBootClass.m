@@ -19,11 +19,19 @@ char endianness = 1;
 	int status;
 	commonData* sharedData = [commonData sharedData];
 	
+	//Reset vars
+	sharedData.opibUpdateFail = 0;
+	sharedData.opibUpdateStage = 0;
+	sharedData.updateOverallProgress = 0;
+	
+	//Stage 1
+	sharedData.opibUpdateStage = 1;
+	
 	status = [self opibGetNORFromManifest];
 	
 	if(status < 0) {
 		DLog(@"opibGetNORFromManifest returned: %d", status);
-		sharedData.opibUpdateFail = -1;
+		sharedData.opibUpdateFail = 1;
 		return;
 	}
 	
@@ -31,61 +39,71 @@ char endianness = 1;
 	
 	if(status < 0) {
 		DLog(@"opibGetFirmwareBundle returned: %d", status);
-		sharedData.opibUpdateFail = -2;
+		sharedData.opibUpdateFail = 2;
 		return;
 	}
+	
+	//Stage 2
+	sharedData.opibUpdateStage = 2;
 	
 	status = [self opibPatchNORFiles:YES];
 	
 	if(status < 0) {
 		DLog(@"opibPatchNORFiles returned: %d", status);
-		sharedData.opibUpdateFail = -3;
+		sharedData.opibUpdateFail = 3;
 		return;
 	}
+	
+	//Stage 3
+	sharedData.opibUpdateStage = 3;
 	
 	status = [self opibGetOpeniBoot];
 	
 	if(status < 0) {
 		DLog(@"opibGetOpeniBoot returned: %d", status);
-		sharedData.opibUpdateFail = -4;
+		sharedData.opibUpdateFail = 4;
 		return;
 	}
+	
+	[self opibUpdateProgress:0.33];
 	
 	status = [self opibEncryptIMG3:openibootPath to:[sharedData.workingDirectory stringByAppendingPathComponent:@"openiboot.img3"] with:iBootPath key:[iBootPatches objectForKey:@"Key"] iv:[iBootPatches objectForKey:@"IV"] type:NO];
 	
 	if(status < 0) {
 		DLog(@"opibEncryptIMG3 returned: %d", status);
-		sharedData.opibUpdateFail = -5;
+		sharedData.opibUpdateFail = 5;
 		return;
 	}
+	
+	[self opibUpdateProgress:0.66];
 	
 	//Remove orig iBoot
 	if(![[NSFileManager defaultManager] removeItemAtPath:iBootPath error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:llbPath error:nil]) {
 		DLog(@"Could not remove vanilla iBoot/LLB ready for replacement");
-		sharedData.opibUpdateFail = -6;
+		sharedData.opibUpdateFail = 6;
 		return;
 	}
 	
 	if(![[NSFileManager defaultManager] moveItemAtPath:[iBootPath stringByAppendingPathExtension:@"encrypted"] toPath:iBootPath error:nil] || ![[NSFileManager defaultManager] moveItemAtPath:[llbPath stringByAppendingPathExtension:@"encrypted"] toPath:llbPath error:nil]) {
 		DLog(@"Could not move files to original filename");
+		sharedData.opibUpdateFail = 7;
 		return;
 	}
 	
+	[self opibUpdateProgress:1];
+	
+	//Stage 4
+	sharedData.opibUpdateStage = 4;
+	/*
 	status = [self opibFlashManifest];
 	 
 	if(status < 0) {
 		DLog(@"opibFlashManifest returned: %d", status);
-		sharedData.opibUpdateFail = -6;
+		sharedData.opibUpdateFail = 8;
 		return;
-	}
+	}*/
 	
-	status = [self opibCleanUp];
-	
-	if(status < 0) {
-		DLog(@"opibCleanUp returned: %d", status);
-		sharedData.opibUpdateFail = -7;
-		return;
-	}
+	[self opibCleanUp];
 }
 
 - (void)opibUninstall {
@@ -117,6 +135,7 @@ char endianness = 1;
 
 - (int)opibGetNORFromManifest {
 	int i, items;
+	float progress;
 	unsigned char* data;
 	commonData* sharedData = [commonData sharedData];
 	
@@ -162,7 +181,10 @@ char endianness = 1;
 			if(![itemBin writeToFile:destPath atomically:YES]) {
 				DLog(@"Could not write IMG3 to file.");
 				return -3;
-			}				
+			}
+			
+			progress = (float)(i+1)/items;
+			[self opibUpdateProgress:progress];
 	
 			free(data);
 		}
@@ -175,6 +197,7 @@ char endianness = 1;
 
 - (int)opibFlashManifest {
 	int i, items, success;
+	float progress;
 	mach_port_t masterPort;
 	kern_return_t k_result;
 	io_service_t norService;
@@ -227,6 +250,14 @@ char endianness = 1;
 		} else {
 			success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:NO];
 		}
+		
+		if(success < 0) {
+			DLog(@"Flashing IMG3 failed with: %d", success);
+			return -6;
+		}
+		
+		progress = (float)(i+1)/items;
+		[self opibUpdateProgress:progress];
 	}
 	
 	return 0;
@@ -377,19 +408,29 @@ char endianness = 1;
 		return -1;
 	}
 	
+	[self opibUpdateProgress:0.14];
+	
 	if([[NSFileManager defaultManager] fileExistsAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"]]) {
 		status = [bsPatchInstance bsPatch:[llbPath stringByAppendingPathExtension:@"decrypted"] withPatch:llbPatchPath];
+		if(status < 0) {
+			DLog(@"Patching LLB failed with: %d", status);
+			return -2;
+		}
 	} else {
 		DLog(@"Decrypted LLB does not exist! Time to crap ourselves complaining..");
-		return -2;
+		return -3;
 	}
+	
+	[self opibUpdateProgress:0.28];
 	
 	status = [self opibEncryptIMG3:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] to:[llbPath stringByAppendingPathExtension:@"encrypted"] with:llbPath key:nil iv:nil type:YES];
 		
 	if(status < 0) {
 		DLog("opibEncryptIMG3 returned %d on LLB", status);
-		return -3;
+		return -4;
 	}
+	
+	[self opibUpdateProgress:0.42];
 	
 	iBootPath = [sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"File"]];
 	NSString *iBootPatchPath = [sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]];
@@ -397,22 +438,32 @@ char endianness = 1;
 	
 	if(status < 0) {
 		DLog(@"opibDecryptIMG3 returned %d on iBoot", status);
-		return -4;
+		return -5;
 	}
+	
+	[self opibUpdateProgress:0.56];
 	
 	if([[NSFileManager defaultManager] fileExistsAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"]]) {
 		status = [bsPatchInstance bsPatch:[iBootPath stringByAppendingPathExtension:@"decrypted"] withPatch:iBootPatchPath];
+		if(status < 0) {
+			DLog(@"Patching iBoot failed with: %d", status);
+			return -6;
+		}
 	} else {
 		DLog(@"Decrypted iBoot does not exist! Time to crap ourselves complaining..");
-		return -5;
+		return -7;
 	}
+	
+	[self opibUpdateProgress:0.7];
 	
 	status = [self opibEncryptIMG3:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] to:[iBootPath stringByAppendingPathExtension:@"encrypted"] with:iBootPath key:nil iv:nil type:YES];
 	
 	if(status < 0) {
 		DLog(@"opibEncryptIMG3 returned %d on iBoot", status);
-		return -6;
+		return -8;
 	}
+	
+	[self opibUpdateProgress:0.84];
 	
 	//Patch iBoot to ibox or we haz conflicts
 	if(withIbox) {
@@ -421,9 +472,11 @@ char endianness = 1;
 		if(status < 0) {
 			DLog(@"Failed to patch iBoot to ibox");
 			sharedData.opibUpdateFail = -4;
-			return -7;
+			return -9;
 		}
 	}
+	
+	[self opibUpdateProgress:1];
 	
 	return 0;
 }
@@ -650,19 +703,38 @@ char endianness = 1;
 	}
 }
 
-- (int)opibCleanUp {
+- (void)opibUpdateProgress:(float)subProgress {
 	commonData* sharedData = [commonData sharedData];
 	
-	if(![[NSFileManager defaultManager] removeItemAtPath:iBootPath error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"] error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil]) {
-		DLog(@"Could not clean up iBoot files.");
-		return -1;
-	}
-	if(![[NSFileManager defaultManager] removeItemAtPath:llbPath error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"] error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil]) {
-		DLog(@"Could not clean up LLB files.");
-		return -2;
+	sharedData.updateOverallProgress = (subProgress/4) + ((sharedData.opibUpdateStage-1) * 0.25);
+}
+
+- (void)opibCleanUp {
+	int i, items;
+	commonData* sharedData = [commonData sharedData];
+	
+	//Remove patched/decrypted LLB & iBoot
+	[[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+	
+	[[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+	
+	//Remove raw openiboot
+	[[NSFileManager defaultManager] removeItemAtPath:openibootPath error:nil];
+	
+	//Remove nor files
+	items = [sharedData.opibUpdateManifest count];
+	
+	for(i=0; i<items; i++) {
+		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]] error:nil];
 	}
 	
-	return 0;
+	//Remove patches
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]] error:nil];
+	
+	return;
 }
 
 @end

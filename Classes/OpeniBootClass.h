@@ -57,11 +57,12 @@
 - (int)opibPatchKernelCache;
 - (int)opibGetFirmwareBundle;
 - (int)opibGetOpeniBoot;
-- (int)opibCleanUp;
 
 - (io_service_t)opibGetIOService:(NSString *)name;
 
+- (void)opibCleanUp;
 - (void)opibCheckForUpdates;
+- (void)opibUpdateProgress:(float)subProgress;
 
 
 @end

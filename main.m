@@ -9,9 +9,20 @@
 #import <UIKit/UIKit.h>
 
 int main(int argc, char *argv[]) {
-
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];	
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	
+	int retVal;
+	
+	if(argc==1) {
+		retVal = UIApplicationMain(argc, argv, nil, nil);
+	} else if(strcmp(argv[1], "--patchKernel")==0) {
+		printf("Patching kernel...\n");
+		retVal = 0;
+	} else {
+		printf("Invalid argument. Terminating.\n");
+		retVal = -7;
+	}
+		
     [pool release];
     return retVal;
 }

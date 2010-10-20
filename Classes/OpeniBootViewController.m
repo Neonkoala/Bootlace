@@ -11,7 +11,7 @@
 
 @implementation OpeniBootViewController
 
-@synthesize viewInitQueue, opibLoadingButton, opibRefreshButton, opibVersionLabel, opibReleaseDateLabel, opibInstall, opibConfigure, cfuSpinner;
+@synthesize viewInitQueue, opibLoadingButton, opibRefreshButton, opibVersionLabel, opibReleaseDateLabel, installStageLabel, opibInstall, opibConfigure, cfuSpinner, installProgress;
 
 - (IBAction)opibRefreshTap:(id)sender {
 	[self switchButtons];
@@ -38,10 +38,151 @@
 }
 
 - (IBAction)opibInstallTap:(id)sender {
-	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibDoInstall) object:nil];
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	opibInstance = [[OpeniBootClass alloc] init];
+	
+	sharedData.opibUpdateStage = 0;
+	sharedData.opibUpdateFail = 0;
+	
+	//Check pre-requisites
+	//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
+	
+	NSArray *supportedDevices = [sharedData.opibDict allKeys];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", sharedData.platform];
+	NSArray *results = [supportedDevices filteredArrayUsingPredicate:predicate];
+	
+	if([results count] < 1) {
+		DLog(@"Device %@ not supported by OpeniBoot! Aborting.", sharedData.platform);
+		[commonInstance sendError:@"This device is not compatible with OpeniBoot."];
+		return;
+	}
+	
+	//Now let's check iOS version
+	NSArray *supportedFirmwares = [sharedData.opibUpdateCompatibleFirmware allKeys];
+	predicate = [NSPredicate predicateWithFormat:@"SELF like %@", sharedData.systemVersion];
+	results = [supportedFirmwares filteredArrayUsingPredicate:predicate];
+	
+	if([results count] < 1) {
+		DLog(@"iOS %@ not supported by OpeniBoot! Aborting.", sharedData.systemVersion);
+		[commonInstance sendError:[NSString stringWithFormat:@"OpeniBoot is not currently compatible with iOS %@", sharedData.systemVersion]];
+		return;
+	}
+	
+	//Ok that's good, now lets see if kernel matches our whitelist of MD5 hashes from various jailbreaks
+	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
+	
+	if(![kernelMD5 isEqualToString:[sharedData.opibUpdateVerifyMD5 objectForKey:sharedData.systemVersion]]) {
+		DLog(@"No MD5 matches found, aborting...");
+		//[commonInstance sendError:@"Kernelcache appears to be incorrectly patched.\r\nReinstall Bootlace."];
+		//
+		return;
+	}
+	
+	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening
+	UIAlertView *installView;
+	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	[installView show];
+	
+	UIActivityIndicatorView *installSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[installSpinner setCenter:CGPointMake(140, 64)];
+	[installSpinner startAnimating];
+	[installView addSubview:installSpinner];
+	[installSpinner release];
+	
+	installProgress = [[UIProgressView alloc] initWithFrame:CGRectMake(22, 122, 240, 20)];
+    [installView addSubview:installProgress];
+    [installProgress setProgressViewStyle: UIProgressViewStyleBar];
+	
+	installStageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 77, 280, 40)];
+	installStageLabel.text = @"Downloading Firmware";
+	installStageLabel.textColor = [UIColor whiteColor];
+	installStageLabel.textAlignment = UITextAlignmentCenter;
+	installStageLabel.backgroundColor = [UIColor clearColor];
+	[installView addSubview:installStageLabel];
+	
+	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:opibInstance selector:@selector(opibInstall) object:nil];
 	
 	[viewInitQueue addOperation:getInstall];
     [getInstall release];
+	
+	BOOL keepAlive = YES;
+	
+	do {        
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, YES);
+		NSLog(@"Stage: %d", sharedData.opibUpdateStage);
+		NSLog(@"Progress: %f", sharedData.updateOverallProgress);
+        installProgress.progress = sharedData.updateOverallProgress;
+		if (sharedData.updateOverallProgress == 1) {
+			keepAlive = NO;
+		}
+		switch (sharedData.opibUpdateStage) {
+			case 1:
+				installStageLabel.text = @"Downloading Firmware";
+				break;
+			case 2:
+				installStageLabel.text = @"Patching Firmware";
+				break;
+			case 3:
+				installStageLabel.text = @"Downloading OpeniBoot";
+				break;
+			case 4:
+				installStageLabel.text = @"Flashing Firmware";
+				break;
+			default:
+				break;
+		}
+		switch (sharedData.opibUpdateFail) {
+			case 0:
+				break;
+			case 1:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nFirmware could not be retrieved from Apple."];
+				keepAlive = NO;
+				break;
+			case 2:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nFirmware patches could not be retrieved."];
+				keepAlive = NO;
+				break;
+			case 3:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nFirmware could not be patched."];
+				keepAlive = NO;
+				break;
+			case 4:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nCould not download OpeniBoot."];
+				keepAlive = NO;
+				break;
+			case 5:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nOpeniBoot container could not be generated."];
+				keepAlive = NO;
+				break;
+			case 6:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nStock firmware could not be removed."];
+				keepAlive = NO;
+				break;
+			case 7:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nSome firmware files could not be moved for flashing."];
+				keepAlive = NO;
+				break;
+			case 8:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:@"Install failed.\nFlashing of firmware files failed.\nDO NOT REBOOT!\nBackup files as restore may be needed."];
+				keepAlive = NO;
+				break;
+			default:
+				break;
+		}
+    } while (keepAlive);
+	
+	[installView dismissWithClickedButtonIndex:0 animated:YES];
+	
+	[self opibRefreshTap:nil];
 }
 
 /*
@@ -140,66 +281,6 @@
 	}
 	
 	[self switchButtons];
-}
-
-- (void)opibDoInstall {
-	commonData* sharedData = [commonData sharedData];
-	commonInstance = [[commonFunctions alloc] init];
-	opibInstance = [[OpeniBootClass alloc] init];
-	
-	sharedData.opibUpdateStage = 0;
-	sharedData.opibUpdateFail = 0;
-	/*
-	//Check pre-requisites
-	//Most importantly, let's double check the device here or we're in a whole heap of dinosaur doodoo
-	
-	NSArray *supportedDevices = [sharedData.opibDict allKeys];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF like %@", sharedData.platform];
-	NSArray *results = [supportedDevices filteredArrayUsingPredicate:predicate];
-	
-	if([results count] < 1) {
-		DLog(@"Device %@ not supported by OpeniBoot! Aborting.", sharedData.platform);
-		[commonInstance sendError:@"This device is not compatible with OpeniBoot."];
-		return;
-	}
-	
-	//Now let's check iOS version
-	NSArray *supportedFirmwares = [sharedData.opibUpdateCompatibleFirmware allKeys];
-	predicate = [NSPredicate predicateWithFormat:@"SELF like %@", sharedData.systemVersion];
-	results = [supportedFirmwares filteredArrayUsingPredicate:predicate];
-	
-	if([results count] < 1) {
-		DLog(@"iOS %@ not supported by OpeniBoot! Aborting.", sharedData.systemVersion);
-		[commonInstance sendError:[NSString stringWithFormat:@"OpeniBoot is not currently compatible with iOS %@", sharedData.systemVersion]];
-		return;
-	}
-	
-	//Ok that's good, now lets see if kernel matches our whitelist of MD5 hashes from various jailbreaks
-	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
-	
-	if(![kernelMD5 isEqualToString:[sharedData.opibUpdateVerifyMD5 objectForKey:sharedData.systemVersion]]) {
-		DLog(@"No MD5 matches found, aborting...");
-		[commonInstance sendError:@"Kernelcache appears to be incorrectly patched.\r\nReinstall Bootlace."];
-		return;
-	}*/
-	
-	
-	//[opibInstance opibDecryptIMG3:@"/var/root/iboot.img3" to:@"/var/root/iboot.decrypted" key:@"3470f3841b87b161517588c21534b03b" iv:@"3470f3841b87b161517588c21534b03b"];
-	
-	[opibInstance opibInstall];
-	
-	
-	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening
-	UIAlertView *installView;
-	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\r\n\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
-	[installView show];
-	
-		//Hand over to OpeniBootClass
-	
-	//Reload version
-	
-	
-	//[bgPool release];	
 }
 
 - (void)switchButtons {
