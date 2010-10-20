@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Classes/OpeniBootClass.h"
 
 int main(int argc, char *argv[]) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -18,6 +19,9 @@ int main(int argc, char *argv[]) {
 	} else if(strcmp(argv[1], "--patchKernel")==0) {
 		printf("Patching kernel...\n");
 		retVal = 0;
+		
+		OpeniBootClass *opibInstance = [[OpeniBootClass alloc] init];
+		retVal = [opibInstance opibPatchKernelCache];
 	} else {
 		printf("Invalid argument. Terminating.\n");
 		retVal = -7;

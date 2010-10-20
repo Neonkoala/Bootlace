@@ -8,23 +8,13 @@
 		<array>
 			<dict>
 				<key>Action</key>
-				<string>Add</string>
+				<string>ReplaceKernel</string>
 				<key>File</key>
-				<string>libgmalloc.dylib</string>
+				<string>kernelcache.release.s5l8900x</string>
 				<key>Name</key>
-				<string>libgmalloc.dylib</string>
+				<string>KernelCache</string>
 				<key>Path</key>
-				<string>usr/lib/libgmalloc.dylib</string>
-			</dict>
-			<dict>
-				<key>Action</key>
-				<string>Add</string>
-				<key>File</key>
-				<string>pf2</string>
-				<key>Name</key>
-				<string>pf2</string>
-				<key>Path</key>
-				<string>usr/lib/pf2</string>
+				<string>System/Library/Caches/com.apple.kernelcaches/kernelcache.s5l8900x</string>
 			</dict>
 		</array>
 		<key>Filesystem Jailbreak</key>
@@ -71,9 +61,9 @@
 			<key>File</key>
 			<string>Firmware/all_flash/all_flash.n82ap.production/applelogo.s5l8900x.img3</string>
 			<key>IV</key>
-			<string>9cdcfbdf36175c103d4f3d4993bc8423</string>
+			<string>677b4c711e3cacb72505feae8e1eae5d</string>
 			<key>Key</key>
-			<string>91f2b4c9a8a69f502a294200472059f3</string>
+			<string>1fb738d6c091113d7dfdd89864a718d9</string>
 			<key>TypeFlag</key>
 			<integer>2</integer>
 		</dict>
@@ -82,11 +72,24 @@
 			<key>File</key>
 			<string>Firmware/all_flash/all_flash.n82ap.production/recoverymode.s5l8900x.img3</string>
 			<key>IV</key>
-			<string>8926b78e0a2b9e4ec9dd34b0f99148fb</string>
+			<string>dbf44c3cc2944b87bdecdbdcd8e42b82</string>
 			<key>Key</key>
-			<string>536e5c0303edd8f11ca90535c0770963</string>
+			<string>6d7d035c04c60ab2776a5e7c729daf0a</string>
 			<key>TypeFlag</key>
 			<integer>2</integer>
+		</dict>
+		<key>KernelCache</key>
+		<dict>
+			<key>File</key>
+			<string>kernelcache.release.s5l8900x</string>
+			<key>IV</key>
+			<string>25b7f586d184c329d3d05953a6516a36</string>
+			<key>Key</key>
+			<string>dd03b5b52a53d3582b18a0052ef84038</string>
+			<key>Patch</key>
+			<string>kernelcache.release.patch</string>
+			<key>TypeFlag</key>
+			<integer>4</integer>
 		</dict>
 		<key>LLB</key>
 		<dict>
@@ -100,18 +103,22 @@
 		<key>Restore Ramdisk</key>
 		<dict>
 			<key>File</key>
-			<string>018-7079-079.dmg</string>
+			<string>018-6136-014.dmg</string>
 			<key>IV</key>
-			<string>a0fc6ca4ef7ef305d975e7f881ddcc7f</string>
+			<string>0e128e1f69806afc476b73250908d641</string>
 			<key>Key</key>
-			<string>18eab1ba646ae018b013bc959001fbde</string>
+			<string>6a4db11073eb748bad1fabafb066fe13</string>
 			<key>TypeFlag</key>
 			<integer>8</integer>
 		</dict>
 		<key>Update Ramdisk</key>
 		<dict>
 			<key>File</key>
-			<string>018-7072-079.dmg</string>
+			<string>018-6134-014.dmg</string>
+			<key>IV</key>
+			<string>dc2c487fd5ce7d89c2fcfbec5846f40f</string>
+			<key>Key</key>
+			<string>998aa71f7816e979697b2d4b25e6a8a0</string>
 			<key>TypeFlag</key>
 			<integer>8</integer>
 		</dict>
@@ -156,9 +163,9 @@
 			<key>File</key>
 			<string>Firmware/all_flash/all_flash.n82ap.production/iBoot.n82ap.RELEASE.img3</string>
 			<key>IV</key>
-			<string>4c8dd5528dcf283bec1ecd8d741aa540</string>
+			<string>13e320617bc655211e2b68042d4508f8</string>
 			<key>Key</key>
-			<string>9b5a1fc8c62912cc1404a6bd5cc45685</string>
+			<string>a4039d79cd6d41ce2b755ed566902103</string>
 			<key>Patch</key>
 			<string>iBoot.n82ap.RELEASE.patch</string>
 			<key>TypeFlag</key>
@@ -174,51 +181,31 @@
 			<key>Patch</key>
 			<string>asr.patch</string>
 		</dict>
-		<key>restored_external</key>
-		<dict>
-			<key>File</key>
-			<string>usr/local/bin/restored_external</string>
-			<key>Patch</key>
-			<string>restored.patch</string>
-		</dict>
 	</dict>
 	<key>PreInstalledPackages</key>
 	<array>
 		<string>org.saurik.cydia</string>
+		<string>com.ripdev.icy</string>
 	</array>
-	<key>DeleteBuildManifest</key>
-	<true/>
-	<key>SupportCustomLogos</key>
-	<true/>
-	<key>SupportMultitasking</key>
-	<true/>
-	<key>SupportWallpaper</key>
-	<true/>
-	<key>SupportBatteryPercentage</key>
-	<true/>
-	<key>FunctionalityPlist</key>
-	<string>System/Library/CoreServices/SpringBoard.app/N82AP.plist</string>
 	<key>RamdiskMountVolume</key>
 	<string>ramdisk</string>
 	<key>RootFilesystem</key>
-	<string>018-7060-114.dmg</string>
+	<string>018-6028-014.dmg</string>
 	<key>RootFilesystemSize</key>
-	<integer>655</integer>
+	<integer>490</integer>
 	<key>RootFilesystemKey</key>
-	<string>4c3c83d3899ea9bef415b1c9c656aaef966b2362494d2c9093a9283d388257562a228c86</string>
+	<string>A8A886D56011D2D98B190D0A498F6FCAC719467047639CD601FD53A4A1D93C24E1B2DDC6</string>
 	<key>RootFilesystemMountVolume</key>
-	<string>Baker8B117.iPhoneOS</string>
+	<string>Northstar7D11.iPhoneOS</string>
 	<key>SHA1</key>
-	<string>d87bab469dd1146ab83ddcc23f03b3164d7e09d4</string>
+	<string>b1a6ab2771bb5da372ba75a8fa3e1d72b71359d0</string>
 	<key>Filename</key>
-	<string>iPhone1,2_4.1_8B117_Restore.ipsw</string>
+	<string>iPhone1,2_3.1.2_7D11_Restore.ipsw</string>
 	<key>Name</key>
-	<string>iPhone1,2_4.1_8B117</string>
+	<string>iPhone1,2_3.1.2_7D11</string>
 	<key>DownloadUrl</key>
-	<string></string>
+	<string>http://appldnld.apple.com.edgesuite.net/content.info.apple.com/iPhone/061-7265.20091008.Xsd32/iPhone1,2_3.1.2_7D11_Restore.ipsw</string>
 	<key>Platform</key>
-	<integer>1</integer>
-	<key>SubPlatform</key>
-	<integer>4</integer>
+	<integer>3</integer>
 </dict>
 </plist>

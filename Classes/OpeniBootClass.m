@@ -499,8 +499,9 @@ char endianness = 1;
 
 - (int)opibPatchKernelCache {
 	int i;
-	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
+	
+	//Grab KernelCache patch bundle
 	
 	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
 	
@@ -509,7 +510,7 @@ char endianness = 1;
 		if([kernelMD5 isEqualToString:[[sharedData.opibUpdateKernelMD5 objectForKey:sharedData.systemVersion] objectAtIndex:i]]) {
 			break;
 		} else if(i==(MD5s-1)) {
-			DLog(@"No MD5 matches found, aborting...");
+			NSLog(@"No MD5 matches found, aborting...");
 			return -1;
 		}
 	}
