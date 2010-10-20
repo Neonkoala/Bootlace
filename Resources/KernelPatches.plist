@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>iPhone1,2</key>
+	<dict>
+		<key>KernelMD5</key>
+		<dict>
+			<key>3.1.2</key>
+			<array/>
+			<key>3.1.3</key>
+			<array>
+				<string>justarandommd5string</string>
+			</array>
+			<key>4.0</key>
+			<array>
+				<string>notCorrect</string>
+			</array>
+			<key>4.0.1</key>
+			<array/>
+			<key>4.0.2</key>
+			<array/>
+			<key>4.1</key>
+			<array/>
+		</dict>
+		<key>KernelPatches</key>
+		<dict>
+			<key>3.1.2</key>
+			<string>iPhone1,2_3.1_2_7D11.bundle</string>
+			<key>3.1.3</key>
+			<string>iPhone1,2_3.1.3_7E18.bundle</string>
+			<key>4.0</key>
+			<string>iPhone1,2_4.0_8A293.bundle</string>
+			<key>4.0.1</key>
+			<string>iPhone1,2_4.0_8A293.bundle</string>
+			<key>4.0.2</key>
+			<string>iPhone1,2_4.0_8A293.bundle</string>
+			<key>4.1</key>
+			<string>iPhone1,2_4.1_8B117.bundle</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

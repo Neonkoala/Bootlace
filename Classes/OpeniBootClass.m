@@ -499,19 +499,49 @@ char endianness = 1;
 
 - (int)opibPatchKernelCache {
 	int i;
+	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	
-	//Grab KernelCache patch bundle
+	//Let's learn about the environment kiddies
+	[commonInstance getPlatform];
+	[commonInstance getSystemVersion];
 	
-	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
+	//Pre-flight checks
+	NSDictionary *kernelPatchesDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KernelPatches" ofType:@"plist"]];
 	
-	int MD5s = [[sharedData.opibUpdateKernelMD5 objectForKey:sharedData.systemVersion] count];
+	NSLog(@"KernelPatches: %@", kernelPatchesDict);
+	
+	NSDictionary *platformDict = [kernelPatchesDict objectForKey:sharedData.platform];
+	
+	if([platformDict count] < 1) {
+		NSLog(@"Device unsupported.");
+		return -1;
+	}
+	
+	NSDictionary *kernelPatchBundles = [platformDict objectForKey:@"KernelPatches"];
+	NSDictionary *kernelCompatibleMD5s = [platformDict objectForKey:@"KernelMD5"];
+	
+	NSString *bundleName = [kernelPatchBundles objectForKey:sharedData.systemVersion];
+	
+	if([bundleName length] == 0) {
+		NSLog(@"Firmware version %@ unsupported.", sharedData.systemVersion);
+		return -2;
+	}
+	
+	NSString *bundlePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"KernelPatches"];
+	bundlePath = [bundlePath stringByAppendingPathComponent:bundleName];
+	
+	NSDictionary *kernelPatchBundleDict = [NSDictionary dictionaryWithContentsOfFile:[bundlePath stringByAppendingPathComponent:@"Info.plist"]];
+	
+	NSString *kernelMD5 = [commonInstance fileMD5:[kernelPatchBundleDict objectForKey:@"Path"]];
+	
+	int MD5s = [[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] count];
 	for(i=0; i<MD5s; i++) {
-		if([kernelMD5 isEqualToString:[[sharedData.opibUpdateKernelMD5 objectForKey:sharedData.systemVersion] objectAtIndex:i]]) {
+		if([kernelMD5 isEqualToString:[[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] objectAtIndex:i]]) {
 			break;
 		} else if(i==(MD5s-1)) {
 			NSLog(@"No MD5 matches found, aborting...");
-			return -1;
+			return -3;
 		}
 	}
 	
