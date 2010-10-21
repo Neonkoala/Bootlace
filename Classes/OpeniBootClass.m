@@ -496,7 +496,7 @@ char endianness = 1;
 }
 
 - (int)opibPatchKernelCache {
-	int i, status, jbType;
+	int status, jbType;
 	unsigned char* data;
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
@@ -507,8 +507,7 @@ char endianness = 1;
 	[commonInstance getSystemVersion];
 	
 	//Check and setup working directory
-	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
-	sharedData.workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
+	sharedData.workingDirectory = @"/private/var/mobile/Documents/Bootlace";
 	
 	BOOL isDir;
 	
@@ -564,7 +563,7 @@ char endianness = 1;
 	
 	ZipInfo* info = PartialZipInit([ipsw cStringUsingEncoding:NSUTF8StringEncoding]);
 	if(!info) {
-		NSLog(@"Cannot retrieve IPSW from: %@", [sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion]);
+		NSLog(@"Cannot retrieve IPSW from: %@", ipsw);
 		return -4;
 	}
 	
@@ -584,7 +583,7 @@ char endianness = 1;
 		return -6;
 	}
 	
-	kernelCache = [sharedData.workingDirectory stringByAppendingPathComponent:kernelCacheName];
+	kernelCache = [sharedData.workingDirectory stringByAppendingPathComponent:kernelCache];
 	
 	if(![itemBin writeToFile:kernelCache atomically:YES]) {
 		NSLog(@"Could not write kernelcache to file.");
@@ -594,7 +593,7 @@ char endianness = 1;
 	free(data);
 	
 	//Decrypt stock kernelcache
-	status = [self opibDecryptIMG3:kernelCache to:[kernelCache stringByAppendingPathExtension:@"decrypted"] key:[kernelPatchBundle objectForKey:@"Key"] iv:[kernelPatchBundle objectForKey:@"IV"] type:NO];
+	status = [self opibDecryptIMG3:kernelCache to:[kernelCache stringByAppendingPathExtension:@"decrypted"] key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
 		
 	if(status < 0) {
 		NSLog(@"Decrypting kernelcache returned: %d", status);
@@ -602,7 +601,7 @@ char endianness = 1;
 	}
 	
 	//Patch stock kernelcache with pwnage patches
-	status = [bsPatchInstance bsPatch:[kernelCache stringByAppendingPathComponent:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.patch"]];
+	status = [bsPatchInstance bsPatch:[kernelCache stringByAppendingPathExtension:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.patch"]];
 	
 	if(status < 0) {
 		NSLog(@"Patching kernelcache with pwnage patchset returned: %d", status);
@@ -631,7 +630,7 @@ char endianness = 1;
 	//Re-encrypt kernelcache into container
 	if(jbType==1) {
 		//PwnageTool, use stock kernelcache as template
-		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:kernelCache key:[kernelPatchBundle objectForKey:@"Key"] iv:[kernelPatchBundle objectForKey:@"IV"] type:NO];
+		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:kernelCache key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
 	} else {
 		//Redsn0w, use un-keyed kernelcache from disk as template
 		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:[kernelPatchBundleDict objectForKey:@"Path"] key:nil iv:nil type:YES];
@@ -641,6 +640,8 @@ char endianness = 1;
 		NSLog(@"Encrypting kernelcache returned: %d", status);
 		return -12;
 	}
+	
+	//Original kernelcache should be backed up by postinstall script so I'm just gonna go right ahead and overwrite that shit
 	
 	return 0;
 }

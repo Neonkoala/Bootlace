@@ -28,12 +28,10 @@
 				<string>justarandommd5string</string>
 			</array>
 			<key>4.0</key>
-			<dict>
-				<key>PwnageTool</key>
+			<array>
 				<string>cd25ede4a1c93444dbc525ee78e2d135</string>
-				<key>Redsn0w</key>
 				<string>notPwnageToolMD5</string>
-			</dict>
+			</array>
 			<key>4.0.1</key>
 			<array/>
 			<key>4.0.2</key>
