@@ -139,8 +139,6 @@ char endianness = 1;
 	unsigned char* data;
 	commonData* sharedData = [commonData sharedData];
 	
-	NSLog(@"IPSWURLS: %@ Sys version: %@", sharedData.opibUpdateIPSWURLs, sharedData.systemVersion);
-	
 	DLog(@"Getting NOR files from Apple servers. IPSW: %@", [sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion]);
 	
 	ZipInfo* info = PartialZipInit([[sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion] cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -498,13 +496,27 @@ char endianness = 1;
 }
 
 - (int)opibPatchKernelCache {
-	int i;
+	int i, status, jbType;
+	unsigned char* data;
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
+	bsPatchInstance = [[BSPatch alloc] init];
 	
 	//Let's learn about the environment kiddies
 	[commonInstance getPlatform];
 	[commonInstance getSystemVersion];
+	
+	//Check and setup working directory
+	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+	sharedData.workingDirectory = [[homeDirectory objectAtIndex:0] stringByAppendingPathComponent:@"Bootlace"];
+	
+	BOOL isDir;
+	
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.workingDirectory isDirectory:&isDir]) {
+		if(![[NSFileManager defaultManager] createDirectoryAtPath:sharedData.workingDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
+			NSLog(@"Error: Create Bootlace working folder failed");
+		}
+	}
 	
 	//Pre-flight checks
 	NSDictionary *kernelPatchesDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KernelPatches" ofType:@"plist"]];
@@ -535,14 +547,99 @@ char endianness = 1;
 	
 	NSString *kernelMD5 = [commonInstance fileMD5:[kernelPatchBundleDict objectForKey:@"Path"]];
 	
-	int MD5s = [[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] count];
-	for(i=0; i<MD5s; i++) {
-		if([kernelMD5 isEqualToString:[[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] objectAtIndex:i]]) {
-			break;
-		} else if(i==(MD5s-1)) {
-			NSLog(@"No MD5 matches found, aborting...");
-			return -3;
+	if([kernelMD5 isEqualToString:[[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] objectAtIndex:0]]) {
+		//PwnageTool
+		jbType = 1;
+	} else if([kernelMD5 isEqualToString:[[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] objectAtIndex:1]]) {
+		//Redsn0w
+		jbType = 2;
+	} else {
+		NSLog(@"No MD5 matches found, aborting...");
+		return -3;
+	}
+	
+	NSDictionary *ipswURLS = [platformDict objectForKey:@"IPSWURLs"];
+	NSString *ipsw = [ipswURLS objectForKey:sharedData.systemVersion];
+	NSString *kernelCache = [platformDict objectForKey:@"Path"];
+	
+	ZipInfo* info = PartialZipInit([ipsw cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(!info) {
+		NSLog(@"Cannot retrieve IPSW from: %@", [sharedData.opibUpdateIPSWURLs objectForKey:sharedData.systemVersion]);
+		return -4;
+	}
+	
+	CDFile* file = PartialZipFindFile(info, [kernelCache cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(!file) {
+		NSLog(@"Cannot find kernelcache.");
+		return -5;
+	}
+	
+	data = PartialZipGetFile(info, file);
+	int dataLen = file->size; 
+	
+	NSData *itemBin = [NSData dataWithBytes:data length:dataLen];
+	
+	if([itemBin length]==0) {
+		NSLog(@"kernelcache invalid");
+		return -6;
+	}
+	
+	kernelCache = [sharedData.workingDirectory stringByAppendingPathComponent:kernelCacheName];
+	
+	if(![itemBin writeToFile:kernelCache atomically:YES]) {
+		NSLog(@"Could not write kernelcache to file.");
+		return -7;
+	}
+	
+	free(data);
+	
+	//Decrypt stock kernelcache
+	status = [self opibDecryptIMG3:kernelCache to:[kernelCache stringByAppendingPathExtension:@"decrypted"] key:[kernelPatchBundle objectForKey:@"Key"] iv:[kernelPatchBundle objectForKey:@"IV"] type:NO];
+		
+	if(status < 0) {
+		NSLog(@"Decrypting kernelcache returned: %d", status);
+		return -8;
+	}
+	
+	//Patch stock kernelcache with pwnage patches
+	status = [bsPatchInstance bsPatch:[kernelCache stringByAppendingPathComponent:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.patch"]];
+	
+	if(status < 0) {
+		NSLog(@"Patching kernelcache with pwnage patchset returned: %d", status);
+		return -9;
+	}
+	
+	//Rename or it gets messy
+	if([[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted"] error:nil]) {
+		if(![[NSFileManager defaultManager] moveItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] toPath:[kernelCache stringByAppendingPathExtension:@"decrypted"] error:nil]) {
+			NSLog(@"Could not move kernelcache");
+			return -10;
 		}
+	} else {
+		NSLog(@"Could not remove stock decrypted kernelcache");
+		return -10;
+	}
+	
+	//Patch pwned kernelcache with NOR writing patches
+	status = [bsPatchInstance bsPatch:[kernelCache stringByAppendingPathExtension:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.nor.patch"]];
+	
+	if(status < 0) {
+		NSLog(@"Patching kernelcache with NOR patchset returned: %d", status);
+		return -11;
+	}
+	
+	//Re-encrypt kernelcache into container
+	if(jbType==1) {
+		//PwnageTool, use stock kernelcache as template
+		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:kernelCache key:[kernelPatchBundle objectForKey:@"Key"] iv:[kernelPatchBundle objectForKey:@"IV"] type:NO];
+	} else {
+		//Redsn0w, use un-keyed kernelcache from disk as template
+		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:[kernelPatchBundleDict objectForKey:@"Path"] key:nil iv:nil type:YES];
+	}
+	
+	if(status < 0) {
+		NSLog(@"Encrypting kernelcache returned: %d", status);
+		return -12;
 	}
 	
 	return 0;
