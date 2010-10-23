@@ -317,6 +317,8 @@ char endianness = 1;
 	pipe(commpipe);
 	pid = fork();
 	
+	NSString *xpwnPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"xpwntool"];
+	
 	if(pid) {
 		dup2(commpipe[1],1);
 		close(commpipe[0]);
@@ -329,9 +331,9 @@ char endianness = 1;
 		close(commpipe[1]);
 		
 		if(isLLB) {
-			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-t", [templateIMG3 cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-t", [templateIMG3 cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		} else {
-			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-t", [templateIMG3 cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-t", [templateIMG3 cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		}
 	}
 	
@@ -365,6 +367,8 @@ char endianness = 1;
 	pipe(commpipe);
 	pid = fork();
 	
+	NSString *xpwnPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"xpwntool"];
+	
 	if(pid) {
 		dup2(commpipe[1],1);
 		close(commpipe[0]);
@@ -377,9 +381,9 @@ char endianness = 1;
 		close(commpipe[1]);
 						
 		if(isLLB) {
-			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		} else {
-			rv = execl("/usr/bin/xpwntool", "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
+			rv = execl([xpwnPath cStringUsingEncoding:NSUTF8StringEncoding], "xpwntool", [srcPath cStringUsingEncoding:NSUTF8StringEncoding], [dstPath cStringUsingEncoding:NSUTF8StringEncoding], "-k", [key cStringUsingEncoding:NSUTF8StringEncoding], "-iv", [iv cStringUsingEncoding:NSUTF8StringEncoding], NULL);
 		}
 	}
 	
