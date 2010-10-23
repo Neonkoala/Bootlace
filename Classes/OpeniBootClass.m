@@ -503,6 +503,8 @@ char endianness = 1;
 	bsPatchInstance = [[BSPatch alloc] init];
 	
 	//Let's learn about the environment kiddies
+	NSLog(@"Getting system info...");
+	
 	[commonInstance getPlatform];
 	[commonInstance getSystemVersion];
 	
@@ -518,10 +520,9 @@ char endianness = 1;
 	}
 	
 	//Pre-flight checks
+	NSLog(@"Checking device compatibility...");
+	
 	NSDictionary *kernelPatchesDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"KernelPatches" ofType:@"plist"]];
-	
-	NSLog(@"KernelPatches: %@", kernelPatchesDict);
-	
 	NSDictionary *platformDict = [kernelPatchesDict objectForKey:sharedData.platform];
 	
 	if([platformDict count] < 1) {
@@ -549,17 +550,21 @@ char endianness = 1;
 	if([kernelMD5 isEqualToString:[[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] objectAtIndex:0]]) {
 		//PwnageTool
 		jbType = 1;
+		NSLog(@"Device compatible: %@ on %@ jailbroken using pwnagetool.", sharedData.platform, sharedData.systemVersion);
 	} else if([kernelMD5 isEqualToString:[[kernelCompatibleMD5s objectForKey:sharedData.systemVersion] objectAtIndex:1]]) {
 		//Redsn0w
 		jbType = 2;
+		NSLog(@"Device compatible: %@ on %@ jailbroken using redsn0w.", sharedData.platform, sharedData.systemVersion);
 	} else {
 		NSLog(@"No MD5 matches found, aborting...");
 		return -3;
 	}
 	
+	NSLog(@"Downloading stock kernelcache from Apple servers...");
+	
 	NSDictionary *ipswURLS = [platformDict objectForKey:@"IPSWURLs"];
 	NSString *ipsw = [ipswURLS objectForKey:sharedData.systemVersion];
-	NSString *kernelCache = [platformDict objectForKey:@"Path"];
+	NSString *kernelCache = [kernelPatchBundleDict objectForKey:@"File"];
 	
 	ZipInfo* info = PartialZipInit([ipsw cStringUsingEncoding:NSUTF8StringEncoding]);
 	if(!info) {
@@ -591,6 +596,8 @@ char endianness = 1;
 	}
 	
 	free(data);
+	
+	NSLog(@"Patching kernelcache...");
 	
 	//Decrypt stock kernelcache
 	status = [self opibDecryptIMG3:kernelCache to:[kernelCache stringByAppendingPathExtension:@"decrypted"] key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
@@ -641,7 +648,27 @@ char endianness = 1;
 		return -12;
 	}
 	
-	//Original kernelcache should be backed up by postinstall script so I'm just gonna go right ahead and overwrite that shit
+	NSLog(@"Patching complete.\r\nOverwriting system kernelcache...");
+	
+	//Remove old kernelcache
+	if(![[NSFileManager defaultManager] removeItemAtPath:[kernelPatchBundleDict objectForKey:@"Path"] error:nil]) {
+		NSLog(@"Failed to remove old kernelcache");
+		return -13;
+	}
+	
+	//Move new kernelcache into place
+	if(![[NSFileManager defaultManager] moveItemAtPath:[kernelCache stringByAppendingPathExtension:@"encrypted"] toPath:[kernelPatchBundleDict objectForKey:@"Path"] error:nil]) {
+		NSLog(@"Failed to move new kernelcache into place");
+		return -14;
+	}
+	
+	//Cleanup
+	[[NSFileManager defaultManager] removeItemAtPath:kernelCache error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"encrypted"] error:nil];
+	
+	NSLog(@"Kernel patching process is complete.");
 	
 	return 0;
 }

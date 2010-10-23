@@ -30,7 +30,7 @@
 			<key>4.0</key>
 			<array>
 				<string>cd25ede4a1c93444dbc525ee78e2d135</string>
-				<string>notPwnageToolMD5</string>
+				<string>3926d243e86dada21a874740763d1bf3</string>
 			</array>
 			<key>4.0.1</key>
 			<array/>
@@ -54,8 +54,6 @@
 			<key>4.1</key>
 			<string>iPhone1,2_4.1_8B117.bundle</string>
 		</dict>
-		<key>Path</key>
-		<string>kernelcache.release.n82</string>
 	</dict>
 </dict>
 </plist>
