@@ -20,6 +20,7 @@
 @interface OpeniBootClass : NSObject {
 	BSPatch *bsPatchInstance;
 	getFile *getFileInstance;
+	nvramFunctions *nvramInstance;
 	commonFunctions *commonInstance;
 	
 	NSString *llbPath;
@@ -43,8 +44,7 @@
 @property (nonatomic, retain) NSDictionary *LLBPatches;
 @property (nonatomic, retain) NSDictionary *kernelPatches;
 
-- (void)opibInstall;
-- (void)opibUninstall;
+- (void)opibOperation:(NSNumber *)operation;
 
 - (int)opibParseUpdatePlist;
 - (int)opibGetNORFromManifest;
@@ -57,11 +57,14 @@
 - (int)opibPatchKernelCache;
 - (int)opibGetFirmwareBundle;
 - (int)opibGetOpeniBoot;
+- (int)opibSetVersion:(NSString *)version;
+- (int)opibResetConfig;
 
 - (io_service_t)opibGetIOService:(NSString *)name;
 
 - (void)opibCleanUp;
 - (void)opibCheckForUpdates;
+- (void)opibCheckInstalled;
 - (void)opibUpdateProgress:(float)subProgress;
 
 

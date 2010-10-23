@@ -14,8 +14,6 @@
 - (int)dumpNVRAM {
 	commonData* sharedData = [commonData sharedData];
 	
-	NSString *opibCompatibleVersion = @"0.1.1";
-	
 	kern_return_t   kr;
 	io_iterator_t   io_objects;
 	io_service_t    io_service;
@@ -39,26 +37,16 @@
 				NSLog(@"Failed to get UUID.");
 				return -2;
 			}
-			if (![nvramDict objectForKey:@"opib-version"]) {													//Check openiboot is installed before we go any further
-				NSLog(@"Failed to get opib-version.");
+			if (![nvramDict objectForKey:@"opib-menu-timeout"] || ![nvramDict objectForKey:@"opib-default-os"] || ![nvramDict objectForKey:@"opib-temp-os"]) {
 				return -3;
 			}
-			if (![nvramDict objectForKey:@"opib-menu-timeout"] || ![nvramDict objectForKey:@"opib-default-os"]) {
-				return -4;
-			}
 			
-			NSData *rawVersion = [nvramDict objectForKey:@"opib-version"];
-			sharedData.opibVersion = [NSString stringWithCString:[rawVersion bytes] encoding:NSUTF8StringEncoding];
 			NSData *rawTimeout = [nvramDict objectForKey:@"opib-menu-timeout"];
 			sharedData.opibTimeout = [NSString stringWithCString:[rawTimeout bytes] encoding:NSUTF8StringEncoding];
 			NSData *rawDefaultOS = [nvramDict objectForKey:@"opib-default-os"];
 			sharedData.opibDefaultOS = [NSString stringWithCString:[rawDefaultOS bytes] encoding:NSUTF8StringEncoding];
 			NSData *rawTempOS = [nvramDict objectForKey:@"opib-temp-os"];
 			sharedData.opibTempOS = [NSString stringWithCString:[rawTempOS bytes] encoding:NSUTF8StringEncoding];
-			
-			if([opibCompatibleVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
-				return -3;
-			}			
 			
 			CFRelease(service_properties);
 		}

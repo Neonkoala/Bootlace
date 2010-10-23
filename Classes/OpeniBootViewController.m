@@ -38,6 +38,66 @@
 }
 
 - (IBAction)opibInstallTap:(id)sender {
+	[self opibOperation:[NSNumber numberWithInt:1]];
+}
+
+/*
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        // Custom initialization
+    }
+    return self;
+}
+*/
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	opibInstance = [[OpeniBootClass alloc] init];
+	
+	//Set up a queue for threading later
+	viewInitQueue = [NSOperationQueue new];
+	
+	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
+	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
+	
+	UIActivityIndicatorView *pageLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[pageLoading startAnimating];
+	
+	opibLoadingButton = [[UIBarButtonItem alloc] initWithCustomView:pageLoading];
+	
+	[self switchButtons];
+	
+	NSLog(@"Right, we have version %@ and it is installed? %d", sharedData.opibVersion, sharedData.opibInstalled);
+		
+	
+	if(sharedData.opibInstalled) {
+		[opibInstall setTitle:@"Installed" forState:UIControlStateNormal];
+		opibInstall.enabled = NO;
+		[opibVersionLabel setText:[NSString stringWithFormat:@"Version %@ for %@", sharedData.opibVersion, sharedData.deviceName]];
+		opibVersionLabel.hidden = NO;
+		opibConfigure.enabled = YES;
+		opibConfigure.hidden = NO;
+	} else {
+		cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+		[cfuSpinner setCenter:CGPointMake(160, 140)];
+		[cfuSpinner startAnimating];
+		[self.view addSubview:cfuSpinner];
+	}
+	
+	//Check installed version and whack it in the UI - if not installed then download plist	
+	NSInvocationOperation *bgUpdate = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibUpdateCheck) object:nil];
+	
+	[viewInitQueue addOperation:bgUpdate];
+    [bgUpdate release];
+}
+
+- (void)opibOperation:(NSNumber *)operation {
+	int i, items;
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	opibInstance = [[OpeniBootClass alloc] init];
@@ -72,16 +132,36 @@
 	//Ok that's good, now lets see if kernel matches our whitelist of MD5 hashes from various jailbreaks
 	NSString *kernelMD5 = [commonInstance fileMD5:@"/System/Library/Caches/com.apple.kernelcaches/kernelcache"];
 	
-	if(![kernelMD5 isEqualToString:[sharedData.opibUpdateVerifyMD5 objectForKey:sharedData.systemVersion]]) {
-		DLog(@"No MD5 matches found, aborting...");
-		//[commonInstance sendError:@"Kernelcache appears to be incorrectly patched.\r\nReinstall Bootlace."];
-		//
-		return;
+	items = [[sharedData.opibUpdateVerifyMD5 objectForKey:sharedData.systemVersion] count];
+	for(i=0; i<items; i++) {
+		if([kernelMD5 isEqualToString:[[sharedData.opibUpdateVerifyMD5 objectForKey:sharedData.systemVersion] objectAtIndex:i]]) {
+			break;
+		} else if(i==(items-1)) {
+			DLog(@"No MD5 matches found, aborting...");
+			[commonInstance sendError:@"Kernelcache appears to be incorrectly patched.\r\nReinstall Bootlace."];
+			return;
+		}
 	}
 	
 	//Right now we got that out the way, start a loop and UIProgressBar otherwise some dick will complain nothings happening
+	NSString *progressTitle;
+	
+	switch ([operation intValue]) {
+		case 1:
+			progressTitle = @"Installing...";
+			break;
+		case 2:
+			progressTitle = @"Upgrading...";
+			break;
+		case 3:
+			progressTitle = @"Removing...";
+			break;
+		default:
+			break;
+	}
+	
 	UIAlertView *installView;
-	installView = [[[UIAlertView alloc] initWithTitle:@"Installing..." message:@"\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	installView = [[[UIAlertView alloc] initWithTitle:progressTitle	message:@"\r\n\r\n" delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
 	[installView show];
 	
 	UIActivityIndicatorView *installSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -101,17 +181,31 @@
 	installStageLabel.backgroundColor = [UIColor clearColor];
 	[installView addSubview:installStageLabel];
 	
-	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:opibInstance selector:@selector(opibInstall) object:nil];
+	NSInvocationOperation *getInstall = [[NSInvocationOperation alloc] initWithTarget:opibInstance selector:@selector(opibOperation:) object:operation];
 	
 	[viewInitQueue addOperation:getInstall];
     [getInstall release];
+	
+	NSString *failType;
+	
+	switch ([operation intValue]) {
+		case 1:
+			failType = @"Install";
+			break;
+		case 2:
+			failType = @"Upgrade";
+			break;
+		case 3:
+			failType = @"Removal";
+			break;
+		default:
+			break;
+	}
 	
 	BOOL keepAlive = YES;
 	
 	do {        
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, YES);
-		NSLog(@"Stage: %d", sharedData.opibUpdateStage);
-		NSLog(@"Progress: %f", sharedData.updateOverallProgress);
         installProgress.progress = sharedData.updateOverallProgress;
 		if (sharedData.updateOverallProgress == 1) {
 			keepAlive = NO;
@@ -124,10 +218,10 @@
 				installStageLabel.text = @"Patching Firmware";
 				break;
 			case 3:
-				installStageLabel.text = @"Downloading OpeniBoot";
+				installStageLabel.text = @"Flashing Firmware";
 				break;
 			case 4:
-				installStageLabel.text = @"Flashing Firmware";
+				installStageLabel.text = @"Configuring OpeniBoot";
 				break;
 			default:
 				break;
@@ -137,42 +231,52 @@
 				break;
 			case 1:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nFirmware could not be retrieved from Apple."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nFirmware could not be retrieved from Apple.", failType]];
 				keepAlive = NO;
 				break;
 			case 2:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nFirmware patches could not be retrieved."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nFirmware patches could not be retrieved.", failType]];
 				keepAlive = NO;
 				break;
 			case 3:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nFirmware could not be patched."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nFirmware could not be patched.", failType]];
 				keepAlive = NO;
 				break;
 			case 4:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nCould not download OpeniBoot."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nCould not download OpeniBoot.", failType]];
 				keepAlive = NO;
 				break;
 			case 5:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nOpeniBoot container could not be generated."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nOpeniBoot container could not be generated.", failType]];
 				keepAlive = NO;
 				break;
 			case 6:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nStock firmware could not be removed."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nStock firmware could not be removed.", failType]];
 				keepAlive = NO;
 				break;
 			case 7:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nSome firmware files could not be moved for flashing."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nSome firmware files could not be moved for flashing.", failType]];
 				keepAlive = NO;
 				break;
 			case 8:
 				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
-				[commonInstance sendError:@"Install failed.\nFlashing of firmware files failed.\nDO NOT REBOOT!\nBackup files as restore may be needed."];
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ failed.\nFlashing of firmware files failed.\nDO NOT REBOOT!\nBackup files as restore may be needed.", failType]];
+				keepAlive = NO;
+				break;
+			case 9:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ completed but OpeniBoot version could not be set.", failType]];
+				keepAlive = NO;
+				break;
+			case 10:
+				DLog(@"Error triggered. Fail code: %d", sharedData.opibUpdateFail);
+				[commonInstance sendError:[NSString stringWithFormat:@"%@ completed but OpeniBoot settings could not be reset.", failType]];
 				keepAlive = NO;
 				break;
 			default:
@@ -185,58 +289,6 @@
 	[self opibRefreshTap:nil];
 }
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	commonData* sharedData = [commonData sharedData];
-	commonInstance = [[commonFunctions alloc] init];
-	opibInstance = [[OpeniBootClass alloc] init];
-	
-	//Set up a queue for threading later
-	viewInitQueue = [NSOperationQueue new];
-	
-	opibConfigure.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.000];
-	opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
-	
-	UIActivityIndicatorView *pageLoading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	[pageLoading startAnimating];
-	
-	opibLoadingButton = [[UIBarButtonItem alloc] initWithCustomView:pageLoading];
-	
-	[self switchButtons];
-	
-	if(sharedData.opibInstalled) {
-		[opibInstall setTitle:@"Installed" forState:UIControlStateNormal];
-		opibInstall.enabled = NO;
-		[opibVersionLabel setText:[NSString stringWithFormat:@"Version %@ for %@", sharedData.opibVersion, sharedData.deviceName]];
-		opibVersionLabel.hidden = NO;
-		opibConfigure.enabled = YES;
-		opibConfigure.hidden = NO;
-	} else {
-		cfuSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-		[cfuSpinner setCenter:CGPointMake(160, 140)];
-		[cfuSpinner startAnimating];
-		[self.view addSubview:cfuSpinner];
-	}
-	
-	//Check installed version and whack it in the UI - if not installed then download plist	
-	NSInvocationOperation *bgUpdate = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(opibUpdateCheck) object:nil];
-	
-	[viewInitQueue addOperation:bgUpdate];
-    [bgUpdate release];
-}
-
 - (void)opibUpdateCheck {
 	commonData* sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
@@ -244,20 +296,39 @@
 	[opibInstance opibCheckForUpdates];
 	
 	DLog(@"opibCheckForUpdates returned: %d", sharedData.opibCanBeInstalled);
-		
+	
+	[self performSelectorOnMainThread:@selector(refreshView) withObject:nil waitUntilDone:NO];
+}
+
+- (void)refreshView {
+	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
+	
+	[cfuSpinner stopAnimating];
+	
 	switch (sharedData.opibCanBeInstalled) {
 		case 2:
+		{
 			//OpeniBoot is at latest version
+			opibVersionLabel.hidden = NO;
 			opibReleaseDateLabel.hidden = NO;
 			NSDateFormatter *dateFormat2 = [[[NSDateFormatter alloc] init] autorelease];
 			[dateFormat2 setDateFormat:@"dd-MM-yyyy"];
 			NSString *dateString2 = [dateFormat2 stringFromDate:sharedData.opibUpdateReleaseDate];
 			[opibReleaseDateLabel setText:[NSString stringWithFormat:@"Released %@",dateString2]];
 			break;
+		}
 		case 1:
-			//UIAlertView Update available! Lalalala!
+		{
+			UIAlertView *upgradePrompt;
+			NSString *message = [NSString stringWithFormat:@"OpeniBoot %@ is available.\r\nWould you like to upgrade?", sharedData.opibUpdateVersion];
+			upgradePrompt = [[[UIAlertView alloc] initWithTitle:@"Update Available" message:message delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Upgrade", nil] autorelease];
+			[upgradePrompt setTag:1];
+			[upgradePrompt show];
 			break;
+		}
 		case 0:
+		{
 			//OpeniBoot not installed but available
 			[opibInstall setTitle:@"Install" forState:UIControlStateNormal];
 			opibInstall.enabled = YES;
@@ -268,19 +339,25 @@
 			NSString *dateString = [dateFormat stringFromDate:sharedData.opibUpdateReleaseDate];
 			[opibReleaseDateLabel setText:[NSString stringWithFormat:@"Released %@",dateString]];
 			opibReleaseDateLabel.hidden = NO;
-			[cfuSpinner stopAnimating];
 			break;
+		}
 		case -1:
+		{
 			[commonInstance sendError:@"Unable to contact update server.\r\n\r\nCheck your network connection."];
 			break;
+		}
 		case -2:
+		{
 			[commonInstance sendError:@"Update plist could not be parsed or is invalid."];
 			break;
+		}
 		default:
+		{
 			break;
+		}
 	}
 	
-	[self switchButtons];
+	[self switchButtons];	
 }
 
 - (void)switchButtons {
@@ -290,6 +367,15 @@
 		self.navigationItem.rightBarButtonItem = opibLoadingButton;
 	}
 }
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if([alertView tag] == 1) {
+		if(buttonIndex == 0) {
+			[self performSelectorOnMainThread:@selector(opibOperation:) withObject:[NSNumber numberWithInt:2] waitUntilDone:NO]; 
+		}
+	}
+}
+		
 
 /*
 // Override to allow orientations other than the default portrait orientation.

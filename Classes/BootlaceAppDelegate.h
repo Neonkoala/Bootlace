@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "commonData.h"
 #import "commonFunctions.h"
+#import "OpeniBootClass.h"
 
 @interface BootlaceAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;

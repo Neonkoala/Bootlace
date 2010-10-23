@@ -13,7 +13,7 @@
 #import "OpeniBootConfigureViewController.h"
 
 
-@interface OpeniBootViewController : UIViewController {
+@interface OpeniBootViewController : UIViewController <UIAlertViewDelegate> {
 	commonFunctions *commonInstance;
 	OpeniBootClass *opibInstance;
 	
@@ -46,6 +46,8 @@
 - (IBAction)opibInstallTap:(id)sender;
 - (IBAction)opibConfigureTap:(id)sender;
 
+- (void)opibOperation:(NSNumber *)operation;
+- (void)refreshView;
 - (void)opibUpdateCheck;
 - (void)switchButtons;
 

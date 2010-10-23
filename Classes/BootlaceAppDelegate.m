@@ -17,7 +17,8 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	commonData* sharedData = [commonData sharedData];
-	id commonInstance = [[commonFunctions new] autorelease];
+	commonFunctions *commonInstance = [[commonFunctions alloc] init];
+	OpeniBootClass *opibInstance = [[OpeniBootClass alloc] init];
 	
 	//Check and setup working directory
 	NSArray *homeDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
@@ -42,7 +43,7 @@
 	
 	//Setup variables
 	sharedData.warningLive = NO;
-	sharedData.bootlaceVersion = @"2.0.3";
+	sharedData.bootlaceVersion = @"2.1";
 	
 	//Check the platform and iOS version
 	[commonInstance getPlatform];
@@ -51,7 +52,7 @@
 	//Dump nvram stuffs
 	sharedData.opibBackupPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"NVRAM.plist.backup"];
 
-	[commonInstance initNVRAM];
+	[opibInstance opibCheckInstalled];
 	
 	// Output current configuration
 	DLog(@"Configuration");

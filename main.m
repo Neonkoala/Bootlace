@@ -18,8 +18,7 @@ int main(int argc, char *argv[]) {
 		retVal = UIApplicationMain(argc, argv, nil, nil);
 	} else if(strcmp(argv[1], "--patchKernel")==0) {
 		printf("Patching kernel...\n");
-		retVal = 0;
-		
+				
 		OpeniBootClass *opibInstance = [[OpeniBootClass alloc] init];
 		retVal = [opibInstance opibPatchKernelCache];
 	} else {

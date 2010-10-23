@@ -15,7 +15,7 @@
 
 char endianness = 1;
 
-- (void)opibInstall {
+- (void)opibOperation:(NSNumber *)operation {
 	int status;
 	commonData* sharedData = [commonData sharedData];
 	
@@ -43,6 +43,14 @@ char endianness = 1;
 		return;
 	}
 	
+	status = [self opibGetOpeniBoot];
+	
+	if(status < 0) {
+		DLog(@"opibGetOpeniBoot returned: %d", status);
+		sharedData.opibUpdateFail = 4;
+		return;
+	}
+	
 	//Stage 2
 	sharedData.opibUpdateStage = 2;
 	
@@ -54,19 +62,6 @@ char endianness = 1;
 		return;
 	}
 	
-	//Stage 3
-	sharedData.opibUpdateStage = 3;
-	
-	status = [self opibGetOpeniBoot];
-	
-	if(status < 0) {
-		DLog(@"opibGetOpeniBoot returned: %d", status);
-		sharedData.opibUpdateFail = 4;
-		return;
-	}
-	
-	[self opibUpdateProgress:0.33];
-	
 	status = [self opibEncryptIMG3:openibootPath to:[sharedData.workingDirectory stringByAppendingPathComponent:@"openiboot.img3"] with:iBootPath key:[iBootPatches objectForKey:@"Key"] iv:[iBootPatches objectForKey:@"IV"] type:NO];
 	
 	if(status < 0) {
@@ -74,8 +69,6 @@ char endianness = 1;
 		sharedData.opibUpdateFail = 5;
 		return;
 	}
-	
-	[self opibUpdateProgress:0.66];
 	
 	//Remove orig iBoot
 	if(![[NSFileManager defaultManager] removeItemAtPath:iBootPath error:nil] || ![[NSFileManager defaultManager] removeItemAtPath:llbPath error:nil]) {
@@ -90,10 +83,8 @@ char endianness = 1;
 		return;
 	}
 	
-	[self opibUpdateProgress:1];
-	
-	//Stage 4
-	sharedData.opibUpdateStage = 4;
+	//Stage 3
+	sharedData.opibUpdateStage = 3;
 	/*
 	status = [self opibFlashManifest];
 	 
@@ -103,11 +94,31 @@ char endianness = 1;
 		return;
 	}*/
 	
-	[self opibCleanUp];
-}
-
-- (void)opibUninstall {
+	//Stage 4 - Config
+	sharedData.opibUpdateStage = 4;
 	
+	status = [self opibSetVersion:sharedData.opibUpdateVersion];
+	
+	if(status < 0) {
+		DLog(@"opibSetVersion returned: %d", status);
+		sharedData.opibUpdateFail = 9;
+	}
+	
+	[self opibUpdateProgress:0.33];
+	
+	status = [self opibResetConfig];
+	
+	if(status < 0) {
+		DLog(@"opibResetConfig returned: %d", status);
+		sharedData.opibUpdateFail = 10;
+		return;
+	}
+	
+	[self opibUpdateProgress:0.66];
+	
+	[self opibCleanUp];
+	
+	[self opibUpdateProgress:1];
 }
 
 - (int)opibParseUpdatePlist {
@@ -693,8 +704,7 @@ char endianness = 1;
 	
 	LLBPatches = [firmwarePatches objectForKey:@"LLB"];
 	iBootPatches = [firmwarePatches objectForKey:@"iBoot"];
-	kernelPatches = [firmwarePatches objectForKey:@"KernelCache"];
-	
+		
 	//Get files
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
@@ -737,26 +747,6 @@ char endianness = 1;
 	
 	[getFileInstance release];
 	
-	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[kernelPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
-	
-	[getFileInstance getFileDownload:self];
-	
-	keepAlive = YES;
-	
-	do {        
-		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-		//Check NSURLConnection for activity
-		if (getFileInstance.getFileWorking == NO) {
-			keepAlive = NO;
-		}
-		if(sharedData.updateFail == 1) {
-			DLog(@"DEBUG: Failed to get KernelCache patch. Cleaning up.");
-			return -4;
-		}
-	} while (keepAlive);
-	
-	[getFileInstance release];
-	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
 	NSLog(@"fwbundle info.plist: %@", bundleInfo);
@@ -789,6 +779,54 @@ char endianness = 1;
 	openibootPath = getFileInstance.getFilePath;
 	
 	[getFileInstance release];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	
+	return 0;
+}
+
+- (int)opibSetVersion:(NSString *)version {
+	if([[NSFileManager defaultManager] fileExistsAtPath:@"/openiboot"]) {
+		if(![[NSFileManager defaultManager] removeItemAtPath:@"/openiboot" error:nil]) {
+			DLog(@"Could not remove old OpeniBoot versioning file");
+			return -1;
+		}
+	}
+	
+	if(![version writeToFile:@"/openiboot" atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
+		DLog(@"Could not write OpeniBoot versioning information");
+		return -2;
+	}
+	
+	return 0;
+}
+
+- (int)opibResetConfig {
+	int status;
+	nvramInstance = [[nvramFunctions alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.opibDefaultOS = @"1";
+	sharedData.opibTempOS = @"1";
+	sharedData.opibTimeout = @"10000";
+	
+	status = [nvramInstance updateNVRAM:0];
+	
+	if(status<0) {
+		return status;
+	}
+	
+	if([[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
+		if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.opibBackupPath error:nil]) {
+			return -3;
+		}
+	}
+	
+	[self opibCheckInstalled];
+	
+	if(sharedData.opibInitStatus<0){
+		return (sharedData.opibInitStatus - 3);
+	}
 	
 	return 0;
 }
@@ -857,10 +895,78 @@ char endianness = 1;
 	if(sharedData.opibInstalled) {
 		if([sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
 			sharedData.opibCanBeInstalled = 1;
-		} else if([sharedData.opibUpdateVersion isEqualToString:sharedData.opibVersion]) {
+		} else if([sharedData.opibUpdateVersion isEqualToString:sharedData.opibVersion] || [sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedAscending) {
 			sharedData.opibCanBeInstalled = 2;
 		}
 	}
+}
+
+- (void)opibCheckInstalled {
+	int status;
+	commonData* sharedData = [commonData sharedData];
+	nvramInstance = [[nvramFunctions alloc] init];
+	
+	//Check for version file
+	if(![[NSFileManager defaultManager] fileExistsAtPath:@"/openiboot"]) {
+		sharedData.opibInstalled = NO;
+		return;
+	}
+	
+	//Check opib version
+	NSString *opibVersion = [NSString stringWithContentsOfFile:@"/openiboot" encoding:NSUTF8StringEncoding error:nil];
+	
+	if([opibVersion length]==0) {
+		DLog(@"Could not read OpeniBoot version.");
+		sharedData.opibInstalled = NO;
+		return;
+	}
+	
+	sharedData.opibInstalled = YES;
+	sharedData.opibVersion = opibVersion;
+	
+	//Check for NVRAM backup before we do anything
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
+		status = [nvramInstance backupNVRAM];
+		
+		switch (status) {
+			case 0:
+				break;
+			case -1:
+				sharedData.opibInitStatus = -1;
+				return;
+			case -2:
+				sharedData.opibInitStatus = -6;
+				return;
+			case -3:
+				sharedData.opibInitStatus = -2;
+				return;
+			default:
+				sharedData.opibInitStatus = -5;
+				return;
+		}
+	}
+	
+	//Dump NVRAM config
+	status = [nvramInstance dumpNVRAM];
+	
+	switch (status) {
+		case 0:
+			break;
+		case -1:
+			sharedData.opibInitStatus = -3;
+			return;
+		case -2:
+			sharedData.opibInitStatus = -4;
+			return;
+		case -3:
+			sharedData.opibInitStatus = 1;
+			return;
+		default:
+			sharedData.opibInitStatus = -5;
+			return;
+	}
+	
+	sharedData.opibInitStatus = 0;
 }
 
 - (void)opibUpdateProgress:(float)subProgress {

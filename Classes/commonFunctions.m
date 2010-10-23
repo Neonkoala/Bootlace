@@ -12,57 +12,6 @@
 
 @synthesize nvramInstance;
 
-- (void)initNVRAM {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	commonData* sharedData = [commonData sharedData];
-	
-	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
-		success = [nvramInstance backupNVRAM];
-		
-		switch (success) {
-			case 0:
-				break;
-			case -1:
-				sharedData.opibInitStatus = -1;
-				break;
-			case -2:
-				sharedData.opibInitStatus = -6;
-				break;
-			case -3:
-				sharedData.opibInitStatus = -2;
-				break;
-			default:
-				sharedData.opibInitStatus = -6;
-				break;
-		}
-	}
-	
-	success = [nvramInstance dumpNVRAM];
-	
-	switch (success) {
-		case 0:
-			break;
-		case -1:
-			sharedData.opibInitStatus = -3;
-			return;
-		case -2:
-			sharedData.opibInitStatus = -4;
-			return;
-		case -3:
-			sharedData.opibInitStatus = -5;
-			return;
-		case -4:
-			sharedData.opibInitStatus = 1;
-			break;
-		default:
-			sharedData.opibInitStatus = -6;
-			return;
-	}
-	
-	sharedData.opibInitStatus = 0;
-}
-
 - (int)rebootAndroid {
 	int success;
 	nvramInstance = [[nvramFunctions alloc] init];

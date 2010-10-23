@@ -40,7 +40,6 @@
 
 @property (nonatomic, retain) nvramFunctions *nvramInstance;
 
-- (void)initNVRAM;
 - (int)rebootAndroid;
 - (int)rebootConsole;
 - (int)callBackupNVRAM;
