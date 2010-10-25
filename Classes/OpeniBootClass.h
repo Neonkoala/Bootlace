@@ -14,6 +14,7 @@
 #import "commonFunctions.h"
 #import "getFile.h"
 #import "BSPatch.h"
+#import "ASIHTTPRequest.h"
 #import "partial/partial.h"
 
 
