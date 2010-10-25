@@ -41,6 +41,10 @@
 	[self opibOperation:[NSNumber numberWithInt:1]];
 }
 
+- (IBAction)opibRemoveTap:(id)sender {
+	[self opibOperation:[NSNumber numberWithInt:3]];
+}
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -76,7 +80,8 @@
 		
 	
 	if(sharedData.opibInstalled) {
-		[opibInstall setTitle:@"Installed" forState:UIControlStateNormal];
+		[opibInstall setTitle:@"Remove" forState:UIControlStateNormal];
+		opibInstall.tintColor = [UIColor colorWithRed:0.556 green:0.000 blue:0.000 alpha:1.000];
 		opibInstall.enabled = NO;
 		[opibVersionLabel setText:[NSString stringWithFormat:@"Version %@ for %@", sharedData.opibVersion, sharedData.deviceName]];
 		opibVersionLabel.hidden = NO;
@@ -309,7 +314,8 @@
 	if(sharedData.opibInstalled) {
 		opibConfigure.enabled = YES;
 		opibConfigure.hidden = NO;
-		[opibInstall setTitle:@"Installed" forState:UIControlStateNormal];
+		[opibInstall setTitle:@"Remove" forState:UIControlStateNormal];
+		opibInstall.tintColor = [UIColor colorWithRed:0.556 green:0.000 blue:0.000 alpha:1.000];
 	}
 	
 	switch (sharedData.opibCanBeInstalled) {
@@ -322,10 +328,16 @@
 			[dateFormat2 setDateFormat:@"dd-MM-yyyy"];
 			NSString *dateString2 = [dateFormat2 stringFromDate:sharedData.opibUpdateReleaseDate];
 			[opibReleaseDateLabel setText:[NSString stringWithFormat:@"Released %@",dateString2]];
+			opibInstall.enabled = YES;
+			[opibInstall removeTarget:self action:@selector(opibInstallTap:) forControlEvents:UIControlEventTouchUpInside];
+			[opibInstall addTarget:self action:@selector(opibRemoveTap:) forControlEvents:UIControlEventTouchUpInside];
 			break;
 		}
 		case 1:
 		{
+			opibInstall.enabled = YES;
+			[opibInstall removeTarget:self action:@selector(opibInstallTap:) forControlEvents:UIControlEventTouchUpInside];
+			[opibInstall addTarget:self action:@selector(opibRemoveTap:) forControlEvents:UIControlEventTouchUpInside];
 			UIAlertView *upgradePrompt;
 			NSString *message = [NSString stringWithFormat:@"OpeniBoot %@ is available.\r\nWould you like to upgrade?", sharedData.opibUpdateVersion];
 			upgradePrompt = [[[UIAlertView alloc] initWithTitle:@"Update Available" message:message delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Upgrade", nil] autorelease];
@@ -345,6 +357,8 @@
 			NSString *dateString = [dateFormat stringFromDate:sharedData.opibUpdateReleaseDate];
 			[opibReleaseDateLabel setText:[NSString stringWithFormat:@"Released %@",dateString]];
 			opibReleaseDateLabel.hidden = NO;
+			[opibInstall removeTarget:self action:@selector(opibRemoveTap:) forControlEvents:UIControlEventTouchUpInside];
+			[opibInstall addTarget:self action:@selector(opibInstallTap:) forControlEvents:UIControlEventTouchUpInside];
 			break;
 		}
 		case -1:

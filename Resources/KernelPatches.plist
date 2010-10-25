@@ -33,11 +33,20 @@
 				<string>3926d243e86dada21a874740763d1bf3</string>
 			</array>
 			<key>4.0.1</key>
-			<array/>
+			<array>
+				<string>NO-PWNAGETOOL-JB</string>
+				<string>3926d243e86dada21a874740763d1bf3</string>
+			</array>
 			<key>4.0.2</key>
-			<array/>
+			<array>
+				<string>NO-PWNAGETOOL-JB</string>
+				<string>3926d243e86dada21a874740763d1bf3</string>
+			</array>
 			<key>4.1</key>
-			<array/>
+			<array>
+				<string></string>
+				<string>9c52c4f575a4b50fb482db057cff3ca6</string>
+			</array>
 		</dict>
 		<key>KernelPatches</key>
 		<dict>

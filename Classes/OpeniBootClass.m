@@ -105,25 +105,36 @@ char endianness = 1;
 	
 	//Stage 3
 	sharedData.opibUpdateStage = 3;
-	/*
-	status = [self opibFlashManifest];
+	
+	if([operation intValue] == 3) {
+		status = [self opibFlashManifest:YES];
+	} else {
+		status = [self opibFlashManifest:NO];
+	}
 	 
 	if(status < 0) {
 		DLog(@"opibFlashManifest returned: %d", status);
 		sharedData.opibUpdateFail = 8;
 		return;
-	}*/
+	}
 	
 	//Stage 4 - Config
 	sharedData.opibUpdateStage = 4;
 	
 	[self opibUpdateProgress:0];
 	
-	status = [self opibSetVersion:sharedData.opibUpdateVersion];
+	if([operation intValue] != 3) {
+		status = [self opibSetVersion:sharedData.opibUpdateVersion];
 	
-	if(status < 0) {
-		DLog(@"opibSetVersion returned: %d", status);
-		sharedData.opibUpdateFail = 9;
+		if(status < 0) {
+			DLog(@"opibSetVersion returned: %d", status);
+			sharedData.opibUpdateFail = 9;
+		}
+	} else {
+		if(![[NSFileManager defaultManager] removeItemAtPath:@"/openiboot" error:nil]) {
+			DLog(@"Could not remove installed flag.");
+			sharedData.opibUpdateFail = 9;
+		}
 	}
 	
 	[self opibUpdateProgress:0.333];

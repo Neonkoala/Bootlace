@@ -44,6 +44,7 @@
 
 - (IBAction)opibRefreshTap:(id)sender;
 - (IBAction)opibInstallTap:(id)sender;
+- (IBAction)opibRemoveTap:(id)sender;
 - (IBAction)opibConfigureTap:(id)sender;
 
 - (void)opibOperation:(NSNumber *)operation;
