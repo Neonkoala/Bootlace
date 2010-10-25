@@ -10,103 +10,6 @@
 
 @implementation commonFunctions
 
-@synthesize nvramInstance;
-
-- (int)rebootAndroid {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.opibTempOS = @"1";
-		
-	success = [nvramInstance updateNVRAM:1];
-	
-	return success;
-}
-
-- (int)rebootConsole {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.opibTempOS = @"2";
-	
-	success = [nvramInstance updateNVRAM:1];
-	
-	return success;
-}
-
-- (int)callBackupNVRAM {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	
-	success = [nvramInstance backupNVRAM];
-	
-	return success;
-}
-
-- (int)callRestoreNVRAM {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	commonData* sharedData = [commonData sharedData];
-	
-	success = [nvramInstance restoreNVRAM];
-	
-	if(success<0) {
-		return success;
-	}
-	
-	[self initNVRAM];
-	
-	if(sharedData.opibInitStatus<0){
-		return (sharedData.opibInitStatus - 2);
-	}
-	
-	return 0;
-}
-
-- (int)resetNVRAM {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.opibDefaultOS = @"0";
-	sharedData.opibTempOS = @"0";
-	sharedData.opibTimeout = @"10000";
-	
-	success = [nvramInstance updateNVRAM:0];
-	
-	if(success<0) {
-		return success;
-	}
-	
-	if([[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
-		if (![[NSFileManager defaultManager] removeItemAtPath:sharedData.opibBackupPath error:nil]) {
-			return -3;
-		}
-	}
-	
-	[self initNVRAM];
-	
-	if(sharedData.opibInitStatus<0){
-		return (sharedData.opibInitStatus - 3);
-	}
-	
-	return 0;
-}
-
-- (int)applyNVRAM {
-	int success;
-	nvramInstance = [[nvramFunctions alloc] init];
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.opibTempOS = sharedData.opibDefaultOS;
-	
-	success = [nvramInstance updateNVRAM:0];
-	
-	return success;
-}
-
 - (BOOL)checkMains {
 	BOOL mains = NO;
 	
@@ -255,6 +158,8 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	opibInstance = [[OpeniBootClass alloc] init];
+	
 	switch (alertView.tag) {
 		//Fatal error terminate app
 		case 1:
@@ -264,7 +169,7 @@
 		//Confirm reboot, call android setter
 		case 2:
 			if(buttonIndex==1) {
-				int success = [self rebootAndroid];
+				int success = [opibInstance opibRebootAndroid];
 				
 				switch (success) {
 					case 0:
@@ -285,7 +190,7 @@
 		//Confirm reboot, call console setter
 		case 3:
 			if(buttonIndex==1){
-				int success = [self rebootConsole];
+				int success = [opibInstance opibRebootConsole];
 				
 				switch (success) {
 					case 0:
@@ -306,7 +211,7 @@
 		//Confirm backup, create it
 		case 4:
 			if(buttonIndex==1){
-				int success = [self callBackupNVRAM];
+				int success = [opibInstance opibBackupConfig];
 				
 				switch (success) {
 					case 0:
@@ -330,7 +235,7 @@
 		//Confirm restore, restore it
 		case 5:
 			if(buttonIndex==1){
-				int success = [self callRestoreNVRAM];
+				int success = [opibInstance opibRestoreConfig];
 				
 				switch (success) {
 					case 0:
@@ -369,7 +274,7 @@
 		//Confirm reset, apply
 		case 6:
 			if(buttonIndex==1){
-				int success = [self resetNVRAM];
+				int success = [opibInstance opibResetConfig];
 				
 				switch (success) {
 					case 0:
@@ -413,7 +318,7 @@
 			if(buttonIndex==0) {
 				exit(0);
 			} else if(buttonIndex==1) {
-				int success = [self resetNVRAM];
+				int success = [opibInstance opibResetConfig];
 				
 				switch (success) {
 					case 0:

@@ -11,7 +11,7 @@
 
 @implementation HomeViewController
 
-@synthesize commonInstance, homePage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton, initialLoad;
+@synthesize commonInstance, homePage, aboutPage, homeAboutView, doneButton, aboutButton, refreshButton, stopButton, backButton, initialLoad;
 
 - (IBAction)refreshHome:(id)sender {
 	[homePage reload];
@@ -45,9 +45,11 @@
 	if ([homeAboutView superview] == self.view) {
 		self.navigationItem.leftBarButtonItem = doneButton;
 		self.navigationItem.rightBarButtonItem = nil;
+		self.title = @"About";
 	} else {
 		self.navigationItem.leftBarButtonItem = aboutButton;
 		self.navigationItem.rightBarButtonItem = refreshButton;
+		self.title = @"Home";
 	}
 }
 
@@ -135,6 +137,10 @@
 		DLog(@"Failed platform check: %@", sharedData.platform);
 		[commonInstance sendTerminalError:@"Bootlace is not compatible with this device.\r\nAborting..."];
 	}
+	
+	//Load about page
+	[aboutPage setBackgroundColor:[UIColor clearColor]];
+	[aboutPage loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"]isDirectory:NO]]];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -169,7 +175,9 @@
 - (void)showWebView {
 	[homePage setHidden:NO];
 	
-	self.navigationItem.rightBarButtonItem = refreshButton;
+	if([homeAboutView superview] != self.view) {
+		self.navigationItem.rightBarButtonItem = refreshButton;
+	}
 	
 	if(homePage.canGoBack) {
 		self.navigationItem.leftBarButtonItem = backButton;

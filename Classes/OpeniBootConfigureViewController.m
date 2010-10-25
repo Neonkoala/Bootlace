@@ -111,8 +111,8 @@
 
 //Apply Action
 - (void)applyAction:(id)sender {
-	commonInstance = [[commonFunctions alloc] init];
-	int success = [commonInstance applyNVRAM];
+	opibInstance = [[OpeniBootClass alloc] init];
+	int success = [opibInstance opibApplyConfig];
 	
 	switch (success) {
 		case 0:
@@ -149,7 +149,7 @@
 	consoleLabel.alpha = 0.4;
 	
 	commonData *sharedData = [commonData sharedData];
-	sharedData.opibDefaultOS = @"0";
+	sharedData.opibDefaultOS = @"1";
 }
 
 - (IBAction) tapAndroid:(id)sender {
@@ -161,7 +161,7 @@
 	consoleLabel.alpha = 0.4;
 	
 	commonData *sharedData = [commonData sharedData];
-	sharedData.opibDefaultOS = @"1";
+	sharedData.opibDefaultOS = @"2";
 }
 
 - (IBAction) tapConsole:(id)sender {
@@ -173,7 +173,7 @@
 	consoleLabel.alpha = 1.0;
 	
 	commonData *sharedData = [commonData sharedData];
-	sharedData.opibDefaultOS = @"2";
+	sharedData.opibDefaultOS = @"3";
 }
 
 
@@ -209,15 +209,15 @@
 	labelWithVar.text = [labelWithVar.text stringByAppendingString:@" Seconds"];
 	
 	switch ([sharedData.opibDefaultOS intValue]) {
-		case 0:
+		case 1:
 			iphoneosImage.alpha = 1.0;
 			iphoneosLabel.alpha = 1.0;
 			break;
-		case 1:
+		case 2:
 			androidImage.alpha = 1.0;
 			androidLabel.alpha = 1.0;
 			break;
-		case 2:
+		case 3:
 			consoleImage.alpha = 1.0;
 			consoleLabel.alpha = 1.0;
 			break;

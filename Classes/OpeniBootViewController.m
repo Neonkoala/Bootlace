@@ -306,6 +306,12 @@
 	
 	[cfuSpinner stopAnimating];
 	
+	if(sharedData.opibInstalled) {
+		opibConfigure.enabled = YES;
+		opibConfigure.hidden = NO;
+		[opibInstall setTitle:@"Installed" forState:UIControlStateNormal];
+	}
+	
 	switch (sharedData.opibCanBeInstalled) {
 		case 2:
 		{

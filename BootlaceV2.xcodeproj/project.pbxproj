@@ -25,7 +25,6 @@
 		D78692DA11BD785B00642943 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = D78692D911BD785B00642943 /* home.png */; };
 		D78692DF11BD791600642943 /* quickboot.png in Resources */ = {isa = PBXBuildFile; fileRef = D78692DD11BD791600642943 /* quickboot.png */; };
 		D78692E011BD791600642943 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = D78692DE11BD791600642943 /* settings.png */; };
-		D7936B971211F7C900D3CE6A /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = D7936B961211F7C900D3CE6A /* index.html */; };
 		D7A8358D11FD965F009C8D6D /* installClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D7A8358C11FD965F009C8D6D /* installClass.m */; };
 		D7B332B311BE5FD2008978A1 /* commonData.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B332AE11BE5FD2008978A1 /* commonData.m */; };
 		D7B332B411BE5FD2008978A1 /* commonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B332B011BE5FD2008978A1 /* commonFunctions.m */; };
@@ -53,6 +52,8 @@
 		D7C8BA0A1275869B00920608 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C8BA091275869B00920608 /* SystemConfiguration.framework */; };
 		D7C8BA0C127586B700920608 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C8BA0B127586B700920608 /* MobileCoreServices.framework */; };
 		D7C8BA1B1275876C00920608 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C8BA1A1275876C00920608 /* Reachability.m */; };
+		D7C8BBC31275B1F800920608 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = D7C8BBC11275B1F800920608 /* about.html */; };
+		D7C8BBC41275B1F800920608 /* qbhelp.html in Resources */ = {isa = PBXBuildFile; fileRef = D7C8BBC21275B1F800920608 /* qbhelp.html */; };
 		D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */ = {isa = PBXBuildFile; fileRef = D7CDFE38121FF4AC008B07A6 /* bootlace.png */; };
 		D7D0B37111C50561000FCBD4 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B36F11C50561000FCBD4 /* install.png */; };
 		D7D0B37211C50561000FCBD4 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B37011C50561000FCBD4 /* remove.png */; };
@@ -256,7 +257,6 @@
 		D78692D911BD785B00642943 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = Resources/home.png; sourceTree = "<group>"; };
 		D78692DD11BD791600642943 /* quickboot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = quickboot.png; path = Resources/quickboot.png; sourceTree = "<group>"; };
 		D78692DE11BD791600642943 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Resources/settings.png; sourceTree = "<group>"; };
-		D7936B961211F7C900D3CE6A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = Resources/index.html; sourceTree = "<group>"; };
 		D798EA3711F7807400F8EA1D /* libarchive.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libarchive.a; path = ../../Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/lib/libarchive.a; sourceTree = SOURCE_ROOT; };
 		D7A8358B11FD965F009C8D6D /* installClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = installClass.h; sourceTree = "<group>"; };
 		D7A8358C11FD965F009C8D6D /* installClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = installClass.m; sourceTree = "<group>"; };
@@ -303,6 +303,8 @@
 		D7C8BA0B127586B700920608 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D7C8BA191275876C00920608 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		D7C8BA1A1275876C00920608 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D7C8BBC11275B1F800920608 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = about.html; path = Resources/about.html; sourceTree = "<group>"; };
+		D7C8BBC21275B1F800920608 /* qbhelp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = qbhelp.html; path = Resources/qbhelp.html; sourceTree = "<group>"; };
 		D7CDFE38121FF4AC008B07A6 /* bootlace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bootlace.png; path = Resources/bootlace.png; sourceTree = "<group>"; };
 		D7D0B36F11C50561000FCBD4 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = install.png; path = Resources/install.png; sourceTree = "<group>"; };
 		D7D0B37011C50561000FCBD4 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove.png; path = Resources/remove.png; sourceTree = "<group>"; };
@@ -632,6 +634,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7C8BBC11275B1F800920608 /* about.html */,
+				D7C8BBC21275B1F800920608 /* qbhelp.html */,
 				D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */,
 				D7EBE3C5124E14E300759F67 /* oibbg.png */,
 				D7C764F1124E0EE4001ADE11 /* OpeniBootViewController.xib */,
@@ -644,7 +648,6 @@
 				D7BFB9B11222FC8500409E65 /* DroidAdvancedViewController.xib */,
 				D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */,
 				D7CDFE38121FF4AC008B07A6 /* bootlace.png */,
-				D7936B961211F7C900D3CE6A /* index.html */,
 				D7D0B36F11C50561000FCBD4 /* install.png */,
 				D7D0B37011C50561000FCBD4 /* remove.png */,
 				D7B3354311BE85E5008978A1 /* idroidbutton.png */,
@@ -1125,7 +1128,6 @@
 				D7C8059D11C6EFF7006620C6 /* HomeView.xib in Resources */,
 				D7C8059E11C6EFF7006620C6 /* MainWindow.xib in Resources */,
 				D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */,
-				D7936B971211F7C900D3CE6A /* index.html in Resources */,
 				D7CDFE39121FF4AC008B07A6 /* bootlace.png in Resources */,
 				D7BFB9B21222FC8500409E65 /* DroidAdvancedViewController.xib in Resources */,
 				D7D91509124B4C84006F7D9E /* oibtab.png in Resources */,
@@ -1133,6 +1135,8 @@
 				D7C764F2124E0EE4001ADE11 /* OpeniBootViewController.xib in Resources */,
 				D7EBE3C6124E14E300759F67 /* oibbg.png in Resources */,
 				D7EBE4D6124E283700759F67 /* OpeniBootConfigureViewController.xib in Resources */,
+				D7C8BBC31275B1F800920608 /* about.html in Resources */,
+				D7C8BBC41275B1F800920608 /* qbhelp.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

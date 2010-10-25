@@ -16,6 +16,7 @@
 	commonFunctions *commonInstance;
 	
 	UIWebView *homePage;
+	UIWebView *aboutPage;
 	UIView *homeAboutView;
 	UIBarButtonItem *doneButton;
 	UIBarButtonItem *aboutButton;
@@ -29,6 +30,7 @@
 @property (nonatomic, retain) commonFunctions *commonInstance;
 
 @property (nonatomic, retain) IBOutlet UIWebView *homePage;
+@property (nonatomic, retain) IBOutlet UIWebView *aboutPage;
 @property (nonatomic, retain) IBOutlet UIView *homeAboutView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *aboutButton;

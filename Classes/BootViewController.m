@@ -121,7 +121,7 @@
 	 }
 	 
 	 [quickBootWebView setBackgroundColor:[UIColor clearColor]];
-	 [quickBootWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"]isDirectory:NO]]];
+	 [quickBootWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"qbhelp" ofType:@"html"]isDirectory:NO]]];
  }
 
 

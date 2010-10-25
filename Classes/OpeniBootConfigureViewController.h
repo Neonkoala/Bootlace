@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "commonData.h"
 #import "commonFunctions.h"
+#import "OpeniBootClass.h"
 #import "AdvancedViewController.h"
 
 
 @interface OpeniBootConfigureViewController : UITableViewController {
 	commonFunctions *commonInstance;
+	OpeniBootClass *opibInstance;
 	
 	NSMutableArray *tableRows;
 	

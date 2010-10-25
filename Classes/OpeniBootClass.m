@@ -15,6 +15,8 @@
 
 char endianness = 1;
 
+//Opib Install stuffs
+
 - (void)opibOperation:(NSNumber *)operation {
 	int status;
 	commonData* sharedData = [commonData sharedData];
@@ -26,6 +28,10 @@ char endianness = 1;
 	
 	//Stage 1
 	sharedData.opibUpdateStage = 1;
+	
+	[self opibUpdateProgress:0];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
 	status = [self opibGetNORFromManifest];
 	
@@ -43,18 +49,28 @@ char endianness = 1;
 		return;
 	}
 	
-	status = [self opibGetOpeniBoot];
+	if([operation intValue] != 3) {
+		status = [self opibGetOpeniBoot];
 	
-	if(status < 0) {
-		DLog(@"opibGetOpeniBoot returned: %d", status);
-		sharedData.opibUpdateFail = 4;
-		return;
+		if(status < 0) {
+			DLog(@"opibGetOpeniBoot returned: %d", status);
+			sharedData.opibUpdateFail = 4;
+			return;
+		}
 	}
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	
+	[self opibUpdateProgress:1];
 	
 	//Stage 2
 	sharedData.opibUpdateStage = 2;
 	
-	status = [self opibPatchNORFiles:YES];
+	if([operation intValue] == 3) {
+		status = [self opibPatchNORFiles:NO];
+	} else {
+		status = [self opibPatchNORFiles:YES];
+	}
 	
 	if(status < 0) {
 		DLog(@"opibPatchNORFiles returned: %d", status);
@@ -62,12 +78,14 @@ char endianness = 1;
 		return;
 	}
 	
-	status = [self opibEncryptIMG3:openibootPath to:[sharedData.workingDirectory stringByAppendingPathComponent:@"openiboot.img3"] with:iBootPath key:[iBootPatches objectForKey:@"Key"] iv:[iBootPatches objectForKey:@"IV"] type:NO];
+	if([operation intValue] != 3) {
+		status = [self opibEncryptIMG3:openibootPath to:[sharedData.workingDirectory stringByAppendingPathComponent:@"openiboot.img3"] with:iBootPath key:[iBootPatches objectForKey:@"Key"] iv:[iBootPatches objectForKey:@"IV"] type:NO];
 	
-	if(status < 0) {
-		DLog(@"opibEncryptIMG3 returned: %d", status);
-		sharedData.opibUpdateFail = 5;
-		return;
+		if(status < 0) {
+			DLog(@"opibEncryptIMG3 returned: %d", status);
+			sharedData.opibUpdateFail = 5;
+			return;
+		}
 	}
 	
 	//Remove orig iBoot
@@ -83,6 +101,8 @@ char endianness = 1;
 		return;
 	}
 	
+	[self opibUpdateProgress:1];
+	
 	//Stage 3
 	sharedData.opibUpdateStage = 3;
 	/*
@@ -97,6 +117,8 @@ char endianness = 1;
 	//Stage 4 - Config
 	sharedData.opibUpdateStage = 4;
 	
+	[self opibUpdateProgress:0];
+	
 	status = [self opibSetVersion:sharedData.opibUpdateVersion];
 	
 	if(status < 0) {
@@ -104,7 +126,7 @@ char endianness = 1;
 		sharedData.opibUpdateFail = 9;
 	}
 	
-	[self opibUpdateProgress:0.33];
+	[self opibUpdateProgress:0.333];
 	
 	status = [self opibResetConfig];
 	
@@ -114,7 +136,7 @@ char endianness = 1;
 		return;
 	}
 	
-	[self opibUpdateProgress:0.66];
+	[self opibUpdateProgress:0.666];
 	
 	[self opibCleanUp];
 	
@@ -192,7 +214,7 @@ char endianness = 1;
 				return -3;
 			}
 			
-			progress = (float)(i+1)/items;
+			progress = (float)(i+1)/(items+3);
 			[self opibUpdateProgress:progress];
 	
 			free(data);
@@ -204,7 +226,47 @@ char endianness = 1;
 	return 0;
 }
 
-- (int)opibFlashManifest {
+- (int)opibGetOpeniBoot {
+	commonData* sharedData = [commonData sharedData];
+	
+	NSURL *URL = [NSURL URLWithString:sharedData.opibUpdateURL];
+	openibootPath = [sharedData.workingDirectory stringByAppendingPathComponent:@"openiboot.bin"];
+	
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+	[request setDownloadDestinationPath:openibootPath];
+	[request startSynchronous];
+	
+	NSError *error = [request error];
+	int statusCode = [request responseStatusCode];
+	
+	if(statusCode >= 400) {
+		DLog(@"HTTP bad response: %d", statusCode);
+		return -2;
+	} else if(error) {
+		DLog(@"Grabbing LLB Patch failed. NSError: %@", [error localizedDescription]);
+		return -2;
+	}
+	
+	return 0;
+}
+
+- (int)opibSetVersion:(NSString *)version {
+	if([[NSFileManager defaultManager] fileExistsAtPath:@"/openiboot"]) {
+		if(![[NSFileManager defaultManager] removeItemAtPath:@"/openiboot" error:nil]) {
+			DLog(@"Could not remove old OpeniBoot versioning file");
+			return -1;
+		}
+	}
+	
+	if(![version writeToFile:@"/openiboot" atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
+		DLog(@"Could not write OpeniBoot versioning information");
+		return -2;
+	}
+	
+	return 0;
+}
+
+- (int)opibFlashManifest:(BOOL)remove {
 	int i, items, success;
 	float progress;
 	mach_port_t masterPort;
@@ -242,31 +304,39 @@ char endianness = 1;
 	
 	//Check all files exist first
 	for(i=0; i<items; i++) {
-		NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
+		if(remove && i==1) {
+			DLog(@"Skipping over OpeniBoot");
+		} else {
+			NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
 		
-		if(![[NSFileManager defaultManager] fileExistsAtPath:img3Path]) {
-			DLog(@"IMG3 doesn't exist at path %@! Aborting before flash!");
-			return -5;
+			if(![[NSFileManager defaultManager] fileExistsAtPath:img3Path]) {
+				DLog(@"IMG3 doesn't exist at path %@! Aborting before flash!");
+				return -5;
+			}
 		}
 	}
 	
 	//Lets flash them before that damn cat of mine eats them
 	for(i=0; i<items; i++) {
-		NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
-		
-		if(i==0) {
-			success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:YES];
+		if(remove && i==1) {
+			DLog(@"Skipping over OpeniBoot");
 		} else {
-			success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:NO];
-		}
+			NSString *img3Path = [sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]];
 		
-		if(success < 0) {
-			DLog(@"Flashing IMG3 failed with: %d", success);
-			return -6;
-		}
+			if(i==0) {
+				success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:YES];
+			} else {
+				success = [self opibFlashIMG3:img3Path usingService:norServiceConnection type:NO];
+			}
 		
-		progress = (float)(i+1)/items;
-		[self opibUpdateProgress:progress];
+			if(success < 0) {
+				DLog(@"Flashing IMG3 failed with: %d", success);
+				return -6;
+			}
+		
+			progress = (float)(i+1)/items;
+			[self opibUpdateProgress:progress];
+		}
 	}
 	
 	return 0;
@@ -421,7 +491,7 @@ char endianness = 1;
 		return -1;
 	}
 	
-	[self opibUpdateProgress:0.14];
+	[self opibUpdateProgress:0.125];
 	
 	if([[NSFileManager defaultManager] fileExistsAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"]]) {
 		status = [bsPatchInstance bsPatch:[llbPath stringByAppendingPathExtension:@"decrypted"] withPatch:llbPatchPath];
@@ -434,7 +504,7 @@ char endianness = 1;
 		return -3;
 	}
 	
-	[self opibUpdateProgress:0.28];
+	[self opibUpdateProgress:0.25];
 	
 	status = [self opibEncryptIMG3:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] to:[llbPath stringByAppendingPathExtension:@"encrypted"] with:llbPath key:nil iv:nil type:YES];
 		
@@ -443,7 +513,7 @@ char endianness = 1;
 		return -4;
 	}
 	
-	[self opibUpdateProgress:0.42];
+	[self opibUpdateProgress:0.375];
 	
 	iBootPath = [sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"File"]];
 	NSString *iBootPatchPath = [sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]];
@@ -454,7 +524,7 @@ char endianness = 1;
 		return -5;
 	}
 	
-	[self opibUpdateProgress:0.56];
+	[self opibUpdateProgress:0.5];
 	
 	if([[NSFileManager defaultManager] fileExistsAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"]]) {
 		status = [bsPatchInstance bsPatch:[iBootPath stringByAppendingPathExtension:@"decrypted"] withPatch:iBootPatchPath];
@@ -467,7 +537,7 @@ char endianness = 1;
 		return -7;
 	}
 	
-	[self opibUpdateProgress:0.7];
+	[self opibUpdateProgress:0.625];
 	
 	status = [self opibEncryptIMG3:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] to:[iBootPath stringByAppendingPathExtension:@"encrypted"] with:iBootPath key:nil iv:nil type:YES];
 	
@@ -476,7 +546,7 @@ char endianness = 1;
 		return -8;
 	}
 	
-	[self opibUpdateProgress:0.84];
+	[self opibUpdateProgress:0.75];
 	
 	//Patch iBoot to ibox or we haz conflicts
 	if(withIbox) {
@@ -489,7 +559,7 @@ char endianness = 1;
 		}
 	}
 	
-	[self opibUpdateProgress:1];
+	[self opibUpdateProgress:0.875];
 	
 	return 0;
 }
@@ -509,6 +579,180 @@ char endianness = 1;
 	
 	return 0;
 }
+
+- (void)opibCheckForUpdates {
+	int success;
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.opibCanBeInstalled = 0;
+	
+	DLog(@"Checking for OpeniBoot updates");
+	
+	NSURL *opibUpdatePlistURL;
+	
+	//Grab update plist	
+	if(sharedData.debugMode) {
+		opibUpdatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/openiboot.plist"];
+	} else {
+		opibUpdatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/openiboot.plist"];
+	}
+	sharedData.opibDict = [NSMutableDictionary dictionaryWithContentsOfURL:opibUpdatePlistURL];
+	
+	if(sharedData.opibDict == nil) {
+		sharedData.updateCanBeInstalled = -1;
+		DLog(@"Could not retrieve openiboot update plist - server problem?");
+		return;
+	}
+	
+	deviceDict = [sharedData.opibDict objectForKey:sharedData.platform];
+	
+	//Call func to parse plist
+	success = [self opibParseUpdatePlist];
+	
+	if(success < 0) {
+		DLog(@"Update plist could not be parsed");
+		sharedData.opibCanBeInstalled = -2;
+	}
+	
+	if(sharedData.opibInstalled) {
+		if([sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
+			sharedData.opibCanBeInstalled = 1;
+		} else if([sharedData.opibUpdateVersion isEqualToString:sharedData.opibVersion] || [sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedAscending) {
+			sharedData.opibCanBeInstalled = 2;
+		}
+	}
+}
+
+- (void)opibCheckInstalled {
+	int status;
+	commonData* sharedData = [commonData sharedData];
+	nvramInstance = [[nvramFunctions alloc] init];
+	
+	//Check for version file
+	if(![[NSFileManager defaultManager] fileExistsAtPath:@"/openiboot"]) {
+		sharedData.opibInstalled = NO;
+		return;
+	}
+	
+	//Check opib version
+	NSString *opibVersion = [NSString stringWithContentsOfFile:@"/openiboot" encoding:NSUTF8StringEncoding error:nil];
+	
+	if([opibVersion length]==0) {
+		DLog(@"Could not read OpeniBoot version.");
+		sharedData.opibInstalled = NO;
+		return;
+	}
+	
+	sharedData.opibInstalled = YES;
+	sharedData.opibVersion = opibVersion;
+	
+	//Check for NVRAM backup before we do anything
+	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
+		status = [nvramInstance backupNVRAM];
+		
+		switch (status) {
+			case 0:
+				break;
+			case -1:
+				sharedData.opibInitStatus = -1;
+				return;
+			case -2:
+				sharedData.opibInitStatus = -6;
+				return;
+			case -3:
+				sharedData.opibInitStatus = -2;
+				return;
+			default:
+				sharedData.opibInitStatus = -5;
+				return;
+		}
+	}
+	
+	//Dump NVRAM config
+	status = [nvramInstance dumpNVRAM];
+	
+	switch (status) {
+		case 0:
+			break;
+		case -1:
+			sharedData.opibInitStatus = -3;
+			return;
+		case -2:
+			sharedData.opibInitStatus = -4;
+			return;
+		case -3:
+			sharedData.opibInitStatus = 1;
+			return;
+		default:
+			sharedData.opibInitStatus = -5;
+			return;
+	}
+	
+	sharedData.opibInitStatus = 0;
+}
+
+- (void)opibUpdateProgress:(float)subProgress {
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.updateOverallProgress = (subProgress/4) + ((sharedData.opibUpdateStage-1) * 0.25);
+}
+
+- (void)opibCleanUp {
+	int i, items;
+	commonData* sharedData = [commonData sharedData];
+	
+	//Remove patched/decrypted LLB & iBoot
+	[[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+	
+	[[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+	
+	//Remove raw openiboot
+	[[NSFileManager defaultManager] removeItemAtPath:openibootPath error:nil];
+	
+	//Remove nor files
+	items = [sharedData.opibUpdateManifest count];
+	
+	for(i=0; i<items; i++) {
+		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]] error:nil];
+	}
+	
+	//Remove patches
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]] error:nil];
+	
+	return;
+}
+
+- (io_service_t)opibGetIOService:(NSString *)name {
+	CFMutableDictionaryRef matching;
+	io_service_t service;
+	
+	matching = IOServiceMatching([name cStringUsingEncoding:NSUTF8StringEncoding]);
+	if(matching == NULL) {
+		DLog(@"Unable to create matching dictionary for class '%@'", name);
+		return 0;
+	}
+	
+	do {
+		CFRetain(matching);
+		service = IOServiceGetMatchingService(kIOMasterPortDefault, matching);
+		if(service) {
+			break;
+		}
+		
+		DLog(@"Waiting for matching IOKit service: %@", name);
+		sleep(1);
+		CFRelease(matching);
+	} while(!service);
+	
+	CFRelease(matching);
+	
+	return service;
+}
+
+//Kernelcache Patching stuffs
 
 - (int)opibPatchKernelCache {
 	int status, jbType;
@@ -690,6 +934,8 @@ char endianness = 1;
 
 - (int)opibGetFirmwareBundle {
 	commonData* sharedData = [commonData sharedData];
+	NSError *error;
+	int statusCode;
 	
 	NSString *bundleURL = [sharedData.opibUpdateCompatibleFirmware objectForKey:sharedData.systemVersion];
 	
@@ -706,96 +952,113 @@ char endianness = 1;
 	iBootPatches = [firmwarePatches objectForKey:@"iBoot"];
 		
 	//Get files
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@", bundleURL, [LLBPatches objectForKey:@"Patch"]];
+	NSURL *URL = [NSURL URLWithString:urlString];
 	
-	[getFileInstance getFileDownload:self];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+	[request setDownloadDestinationPath:[sharedData.workingDirectory stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]]];
+	[request startSynchronous];
 	
-	BOOL keepAlive = YES;
+	error = [request error];
+	statusCode = [request responseStatusCode];
 	
-	do {        
-		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-		//Check NSURLConnection for activity
-		if (getFileInstance.getFileWorking == NO) {
-			keepAlive = NO;
-		}
-		if(sharedData.updateFail == 1) {
-			DLog(@"DEBUG: Failed to get LLB patch. Cleaning up.");
-			return -2;
-		}
-	} while (keepAlive);
-	
-	[getFileInstance release];
-	
-	getFileInstance = [[getFile alloc] initWithUrl:[bundleURL stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]] directory:sharedData.workingDirectory];
-	
-	[getFileInstance getFileDownload:self];
-	
-	keepAlive = YES;
-	
-	do {        
-		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-		//Check NSURLConnection for activity
-		if (getFileInstance.getFileWorking == NO) {
-			keepAlive = NO;
-		}
-		if(sharedData.updateFail == 1) {
-			DLog(@"DEBUG: Failed to get iBoot patch. Cleaning up.");
-			return -3;
-		}
-	} while (keepAlive);
-	
-	[getFileInstance release];
-	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	
-	NSLog(@"fwbundle info.plist: %@", bundleInfo);
-	
-	return 0;
-}
-
-- (int)opibGetOpeniBoot {
-	commonData* sharedData = [commonData sharedData];
-	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	getFileInstance = [[getFile alloc] initWithUrl:sharedData.opibUpdateURL directory:sharedData.workingDirectory];
-	
-	[getFileInstance getFileDownload:self];
-	
-	BOOL keepAlive = YES;
-	
-	do {        
-		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 1.0, YES);
-		//Check NSURLConnection for activity
-		if (getFileInstance.getFileWorking == NO) {
-			keepAlive = NO;
-		}
-		if(sharedData.updateFail == 1) {
-			DLog(@"DEBUG: Failed to get OpeniBoot. Cleaning up.");
-			return -1;
-		}
-	} while (keepAlive);
-	
-	openibootPath = getFileInstance.getFilePath;
-	
-	[getFileInstance release];
-	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	
-	return 0;
-}
-
-- (int)opibSetVersion:(NSString *)version {
-	if([[NSFileManager defaultManager] fileExistsAtPath:@"/openiboot"]) {
-		if(![[NSFileManager defaultManager] removeItemAtPath:@"/openiboot" error:nil]) {
-			DLog(@"Could not remove old OpeniBoot versioning file");
-			return -1;
-		}
+	if(statusCode >= 400) {
+		DLog(@"HTTP bad response: %d", statusCode);
+		return -2;
+	} else if(error) {
+		DLog(@"Grabbing LLB Patch failed. NSError: %@", [error localizedDescription]);
+		return -2;
 	}
 	
-	if(![version writeToFile:@"/openiboot" atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
-		DLog(@"Could not write OpeniBoot versioning information");
-		return -2;
+	[self opibUpdateProgress:0.875];
+	
+	urlString = [NSString stringWithFormat:@"%@/%@", bundleURL, [iBootPatches objectForKey:@"Patch"]];
+	URL = [NSURL URLWithString:urlString];
+	
+	request = [ASIHTTPRequest requestWithURL:URL];
+	[request setDownloadDestinationPath:[sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]]];
+	[request startSynchronous];
+	
+	error = [request error];
+	statusCode = [request responseStatusCode];
+	
+	if(statusCode >= 400) {
+		DLog(@"HTTP bad response: %d", statusCode);
+		return -3;
+	} else if(error) {
+		DLog(@"Grabbing LLB Patch failed. NSError: %@", [error localizedDescription]);
+		return -3;
+	}
+	
+	[self opibUpdateProgress:0.9375];
+	
+	return 0;
+}
+
+//QuickBoot stuffs
+
+- (int)opibRebootAndroid {
+	int status;
+	nvramInstance = [[nvramFunctions alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.opibTempOS = @"2";
+	
+	status = [nvramInstance updateNVRAM:1];
+	
+	return status;
+}
+
+- (int)opibRebootConsole {
+	int status;
+	nvramInstance = [[nvramFunctions alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.opibTempOS = @"3";
+	
+	status = [nvramInstance updateNVRAM:1];
+	
+	return status;
+}
+
+//OpeniBoot config stuff
+
+- (int)opibApplyConfig {
+	int status;
+	nvramInstance = [[nvramFunctions alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	sharedData.opibTempOS = @"0";
+	
+	status = [nvramInstance updateNVRAM:0];
+	
+	return status;
+}
+
+- (int)opibBackupConfig {
+	int status;
+	nvramInstance = [[nvramFunctions alloc] init];
+	
+	status = [nvramInstance backupNVRAM];
+	
+	return status;
+}
+
+- (int)opibRestoreConfig {
+	int status;
+	nvramInstance = [[nvramFunctions alloc] init];
+	commonData* sharedData = [commonData sharedData];
+	
+	status = [nvramInstance restoreNVRAM];
+	
+	if(status<0) {
+		return status;
+	}
+	
+	[self opibCheckInstalled];
+	
+	if(sharedData.opibInitStatus<0){
+		return (sharedData.opibInitStatus - 2);
 	}
 	
 	return 0;
@@ -829,178 +1092,6 @@ char endianness = 1;
 	}
 	
 	return 0;
-}
-
-- (io_service_t)opibGetIOService:(NSString *)name {
-	CFMutableDictionaryRef matching;
-	io_service_t service;
-	
-	matching = IOServiceMatching([name cStringUsingEncoding:NSUTF8StringEncoding]);
-	if(matching == NULL) {
-		DLog(@"Unable to create matching dictionary for class '%@'", name);
-		return 0;
-	}
-	
-	do {
-		CFRetain(matching);
-		service = IOServiceGetMatchingService(kIOMasterPortDefault, matching);
-		if(service) {
-			break;
-		}
-		
-		DLog(@"Waiting for matching IOKit service: %@", name);
-		sleep(1);
-		CFRelease(matching);
-	} while(!service);
-	
-	CFRelease(matching);
-
-	return service;
-}	
-
-- (void)opibCheckForUpdates {
-	int success;
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.opibCanBeInstalled = 0;
-	
-	DLog(@"Checking for OpeniBoot updates");
-	
-	NSURL *opibUpdatePlistURL;
-	
-	//Grab update plist	
-	if(sharedData.debugMode) {
-		opibUpdatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/openiboot.plist"];
-	} else {
-		opibUpdatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/openiboot.plist"];
-	}
-	sharedData.opibDict = [NSMutableDictionary dictionaryWithContentsOfURL:opibUpdatePlistURL];
-	
-	if(sharedData.opibDict == nil) {
-		sharedData.updateCanBeInstalled = -1;
-		DLog(@"Could not retrieve openiboot update plist - server problem?");
-		return;
-	}
-	
-	deviceDict = [sharedData.opibDict objectForKey:sharedData.platform];
-	
-	//Call func to parse plist
-	success = [self opibParseUpdatePlist];
-	
-	if(success < 0) {
-		DLog(@"Update plist could not be parsed");
-		sharedData.opibCanBeInstalled = -2;
-	}
-	
-	if(sharedData.opibInstalled) {
-		if([sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedDescending) {
-			sharedData.opibCanBeInstalled = 1;
-		} else if([sharedData.opibUpdateVersion isEqualToString:sharedData.opibVersion] || [sharedData.opibUpdateVersion compare:sharedData.opibVersion options:NSNumericSearch] == NSOrderedAscending) {
-			sharedData.opibCanBeInstalled = 2;
-		}
-	}
-}
-
-- (void)opibCheckInstalled {
-	int status;
-	commonData* sharedData = [commonData sharedData];
-	nvramInstance = [[nvramFunctions alloc] init];
-	
-	//Check for version file
-	if(![[NSFileManager defaultManager] fileExistsAtPath:@"/openiboot"]) {
-		sharedData.opibInstalled = NO;
-		return;
-	}
-	
-	//Check opib version
-	NSString *opibVersion = [NSString stringWithContentsOfFile:@"/openiboot" encoding:NSUTF8StringEncoding error:nil];
-	
-	if([opibVersion length]==0) {
-		DLog(@"Could not read OpeniBoot version.");
-		sharedData.opibInstalled = NO;
-		return;
-	}
-	
-	sharedData.opibInstalled = YES;
-	sharedData.opibVersion = opibVersion;
-	
-	//Check for NVRAM backup before we do anything
-	if(![[NSFileManager defaultManager] fileExistsAtPath:sharedData.opibBackupPath]) {
-		status = [nvramInstance backupNVRAM];
-		
-		switch (status) {
-			case 0:
-				break;
-			case -1:
-				sharedData.opibInitStatus = -1;
-				return;
-			case -2:
-				sharedData.opibInitStatus = -6;
-				return;
-			case -3:
-				sharedData.opibInitStatus = -2;
-				return;
-			default:
-				sharedData.opibInitStatus = -5;
-				return;
-		}
-	}
-	
-	//Dump NVRAM config
-	status = [nvramInstance dumpNVRAM];
-	
-	switch (status) {
-		case 0:
-			break;
-		case -1:
-			sharedData.opibInitStatus = -3;
-			return;
-		case -2:
-			sharedData.opibInitStatus = -4;
-			return;
-		case -3:
-			sharedData.opibInitStatus = 1;
-			return;
-		default:
-			sharedData.opibInitStatus = -5;
-			return;
-	}
-	
-	sharedData.opibInitStatus = 0;
-}
-
-- (void)opibUpdateProgress:(float)subProgress {
-	commonData* sharedData = [commonData sharedData];
-	
-	sharedData.updateOverallProgress = (subProgress/4) + ((sharedData.opibUpdateStage-1) * 0.25);
-}
-
-- (void)opibCleanUp {
-	int i, items;
-	commonData* sharedData = [commonData sharedData];
-	
-	//Remove patched/decrypted LLB & iBoot
-	[[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted"] error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:[iBootPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
-	
-	[[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted"] error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:[llbPath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
-	
-	//Remove raw openiboot
-	[[NSFileManager defaultManager] removeItemAtPath:openibootPath error:nil];
-	
-	//Remove nor files
-	items = [sharedData.opibUpdateManifest count];
-	
-	for(i=0; i<items; i++) {
-		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[sharedData.opibUpdateManifest objectAtIndex:i]] error:nil];
-	}
-	
-	//Remove patches
-	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[LLBPatches objectForKey:@"Patch"]] error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:[iBootPatches objectForKey:@"Patch"]] error:nil];
-	
-	return;
 }
 
 @end

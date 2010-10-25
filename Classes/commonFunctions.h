@@ -17,9 +17,9 @@
 #import <unistd.h>
 
 #import "commonData.h"
-#import "nvramFunctions.h"
 #import "extractionClass.h"
 #import "DroidViewController.h"
+#import "OpeniBootClass.h"
 
 
 // DLog is almost a drop-in replacement for NSLog
@@ -32,20 +32,13 @@
 // ALog always displays output regardless of the DEBUG setting
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
+@class OpeniBootClass;
 
 @interface commonFunctions : NSObject {
-	nvramFunctions *nvramInstance;
 	installClass *installInstance;
+	OpeniBootClass *opibInstance;
 }
 
-@property (nonatomic, retain) nvramFunctions *nvramInstance;
-
-- (int)rebootAndroid;
-- (int)rebootConsole;
-- (int)callBackupNVRAM;
-- (int)callRestoreNVRAM;
-- (int)resetNVRAM;
-- (int)applyNVRAM;
 - (BOOL)checkMains;
 - (float)getFreeSpace;
 - (NSString *)fileMD5:(NSString *)path;
