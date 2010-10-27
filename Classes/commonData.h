@@ -55,6 +55,7 @@
 	NSString *installedOpibRequired;
 	NSDate *installedDate;
 	NSArray *installedFiles;
+	NSArray *installedDirectories;
 	NSArray *installedDependencies;
 	
 	
@@ -150,6 +151,7 @@
 @property (nonatomic, retain) NSString *installedOpibRequired;
 @property (nonatomic, retain) NSDate *installedDate;
 @property (nonatomic, retain) NSArray *installedFiles;
+@property (nonatomic, retain) NSArray *installedDirectories;
 @property (nonatomic, retain) NSArray *installedDependencies;
 
 

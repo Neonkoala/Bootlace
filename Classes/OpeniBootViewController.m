@@ -195,14 +195,20 @@
 	
 	switch ([operation intValue]) {
 		case 1:
+		{
 			failType = @"Install";
 			break;
+		}
 		case 2:
+		{
 			failType = @"Upgrade";
 			break;
+		}
 		case 3:
+		{
 			failType = @"Removal";
 			break;
+		}
 		default:
 			break;
 	}

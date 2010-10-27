@@ -15,6 +15,7 @@
 #import <sys/reboot.h>
 #import <sys/sysctl.h>
 #import <unistd.h>
+#import <notify.h>
 
 #import "commonData.h"
 #import "extractionClass.h"
@@ -40,6 +41,7 @@
 }
 
 - (BOOL)checkMains;
+- (void)toggleAirplaneMode;
 - (float)getFreeSpace;
 - (NSString *)fileMD5:(NSString *)path;
 - (void)getPlatform;

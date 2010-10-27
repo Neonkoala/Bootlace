@@ -23,6 +23,22 @@
 	return mains;
 }
 
+- (void)toggleAirplaneMode {
+	NSMutableDictionary *plistDict = [NSMutableDictionary dictionaryWithContentsOfFile:@"/Library/Preferences/SystemConfiguration/com.apple.radios.plist"];
+	
+	NSLog(@"AirplaneMode: %@", [plistDict valueForKey:@"AirplaneMode"]);
+	
+	if([[plistDict valueForKey:@"AirplaneMode"] intValue]==1) {
+		[plistDict setValue:[NSNumber numberWithBool:NO] forKey:@"AirplaneMode"];
+	} else {
+		[plistDict setValue:[NSNumber numberWithBool:YES] forKey:@"AirplaneMode"];
+	}
+	
+	[plistDict writeToFile:@"/Library/Preferences/SystemConfiguration/com.apple.radios.plist" atomically:YES];
+	
+	notify_post("com.apple.CommCenter/Prefs");
+}
+
 - (float)getFreeSpace {
 	struct statfs stats;
 	

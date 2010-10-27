@@ -672,6 +672,12 @@
 		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.installedDependencies objectAtIndex:i] error:nil];
 	}
 	
+	count = [sharedData.installedDirectories count];
+	
+	for (i=0; i<count; i++) {
+		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.installedDependencies objectAtIndex:i] error:nil];
+	}
+	
 	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] error:nil];
 	
 	sharedData.installed = NO;

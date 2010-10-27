@@ -851,10 +851,11 @@ char endianness = 1;
 	data = PartialZipGetFile(info, file);
 	int dataLen = file->size; 
 	
-	NSData *itemBin = [NSData dataWithBytes:data length:dataLen];
+	NSData *itemBin = [[NSData alloc] initWithBytes:data length:dataLen];
 	
 	if([itemBin length]==0) {
 		NSLog(@"kernelcache invalid");
+		[itemBin release];
 		return -6;
 	}
 	
@@ -862,10 +863,12 @@ char endianness = 1;
 	
 	if(![itemBin writeToFile:kernelCache atomically:YES]) {
 		NSLog(@"Could not write kernelcache to file.");
+		[itemBin release];
 		return -7;
 	}
 	
 	free(data);
+	[itemBin release];
 	
 	NSLog(@"Patching kernelcache...");
 	

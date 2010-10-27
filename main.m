@@ -21,6 +21,13 @@ int main(int argc, char *argv[]) {
 				
 		OpeniBootClass *opibInstance = [[OpeniBootClass alloc] init];
 		retVal = [opibInstance opibPatchKernelCache];
+	} else if(strcmp(argv[1], "--testMode")==0) {
+		printf("Test mode...\n");
+		
+		commonFunctions *commonInstance = [[commonFunctions alloc] init];
+		[commonInstance toggleAirplaneMode];
+		
+		retVal = 0;
 	} else {
 		printf("Invalid argument. Terminating.\n");
 		retVal = -7;
