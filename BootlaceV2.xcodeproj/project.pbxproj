@@ -58,6 +58,8 @@
 		D7D0B37111C50561000FCBD4 /* install.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B36F11C50561000FCBD4 /* install.png */; };
 		D7D0B37211C50561000FCBD4 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0B37011C50561000FCBD4 /* remove.png */; };
 		D7D91509124B4C84006F7D9E /* oibtab.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D91508124B4C84006F7D9E /* oibtab.png */; };
+		D7E0EAA9127B6AA300939AF2 /* FirstLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E0EAA7127B6AA300939AF2 /* FirstLaunchViewController.m */; };
+		D7E0EB77127B734E00939AF2 /* FirstLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7E0EB76127B734E00939AF2 /* FirstLaunchViewController.xib */; };
 		D7E14E2F1206F98200156F7E /* AdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */; };
 		D7E14E321206F9A300156F7E /* AdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E14E311206F9A300156F7E /* AdvancedViewController.m */; };
 		D7E44B0811C7D7770000594A /* extractionClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E44B0711C7D7770000594A /* extractionClass.m */; };
@@ -309,6 +311,9 @@
 		D7D0B36F11C50561000FCBD4 /* install.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = install.png; path = Resources/install.png; sourceTree = "<group>"; };
 		D7D0B37011C50561000FCBD4 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove.png; path = Resources/remove.png; sourceTree = "<group>"; };
 		D7D91508124B4C84006F7D9E /* oibtab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oibtab.png; path = Resources/oibtab.png; sourceTree = "<group>"; };
+		D7E0EAA6127B6AA300939AF2 /* FirstLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLaunchViewController.h; sourceTree = "<group>"; };
+		D7E0EAA7127B6AA300939AF2 /* FirstLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstLaunchViewController.m; sourceTree = "<group>"; };
+		D7E0EB76127B734E00939AF2 /* FirstLaunchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstLaunchViewController.xib; sourceTree = "<group>"; };
 		D7E14E2E1206F98200156F7E /* AdvancedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvancedViewController.xib; sourceTree = "<group>"; };
 		D7E14E301206F9A300156F7E /* AdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedViewController.h; sourceTree = "<group>"; };
 		D7E14E311206F9A300156F7E /* AdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedViewController.m; sourceTree = "<group>"; };
@@ -585,6 +590,8 @@
 				D7EBE50D124E3F0900759F67 /* OpeniBootClass.m */,
 				D7FCE16A1254B96A0049EA30 /* BSPatch.h */,
 				D7FCE16B1254B96A0049EA30 /* BSPatch.m */,
+				D7E0EAA6127B6AA300939AF2 /* FirstLaunchViewController.h */,
+				D7E0EAA7127B6AA300939AF2 /* FirstLaunchViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -634,6 +641,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D7E0EB76127B734E00939AF2 /* FirstLaunchViewController.xib */,
 				D7C8BBC11275B1F800920608 /* about.html */,
 				D7C8BBC21275B1F800920608 /* qbhelp.html */,
 				D7EBE4D5124E283700759F67 /* OpeniBootConfigureViewController.xib */,
@@ -1137,6 +1145,7 @@
 				D7EBE4D6124E283700759F67 /* OpeniBootConfigureViewController.xib in Resources */,
 				D7C8BBC31275B1F800920608 /* about.html in Resources */,
 				D7C8BBC41275B1F800920608 /* qbhelp.html in Resources */,
+				D7E0EB77127B734E00939AF2 /* FirstLaunchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1180,7 @@
 				D7C8BA031275864400920608 /* ASIInputStream.m in Sources */,
 				D7C8BA041275864400920608 /* ASINetworkQueue.m in Sources */,
 				D7C8BA1B1275876C00920608 /* Reachability.m in Sources */,
+				D7E0EAA9127B6AA300939AF2 /* FirstLaunchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

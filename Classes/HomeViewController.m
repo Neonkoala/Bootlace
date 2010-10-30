@@ -128,14 +128,14 @@
 	[homePage setDelegate:self];
 	[homePage loadRequest:requestObj];
 	
-	if(sharedData.firstLaunchVal) {
-		[commonInstance firstLaunch];
-		sharedData.firstLaunchVal = NO;
-	}
-	
 	if(![sharedData.platform isEqualToString:@"iPhone1,1"] && ![sharedData.platform isEqualToString:@"iPhone1,2"] && ![sharedData.platform isEqualToString:@"iPod1,1"]) {
 		DLog(@"Failed platform check: %@", sharedData.platform);
 		[commonInstance sendTerminalError:@"Bootlace is not compatible with this device.\r\nAborting..."];
+	}
+	
+	if(sharedData.secondLaunch) {
+		[commonInstance firstLaunch];
+		sharedData.secondLaunch = NO;
 	}
 	
 	//Load about page

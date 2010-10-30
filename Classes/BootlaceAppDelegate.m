@@ -34,7 +34,9 @@
 	
 	//Read settings
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
-	sharedData.firstLaunchVal = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"secondLaunch",nil]];
+	sharedData.firstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+	sharedData.secondLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"secondLaunch"];
 	sharedData.debugMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"debugMode"];
 	
 	if(sharedData.debugMode) {
@@ -65,6 +67,11 @@
 	
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
+	
+	if(sharedData.firstLaunch) {
+		FirstLaunchViewController *fullscreenController = [[FirstLaunchViewController alloc] init];
+		[tabBarController presentModalViewController:fullscreenController animated:NO];
+	}
 }
 
 
@@ -79,6 +86,18 @@
 - (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed {
 }
 */
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+	commonData* sharedData = [commonData sharedData];
+	
+	//Perform rudimentary cleanup so user can try kernel patch again
+	if(sharedData.firstLaunch) {
+		[[NSFileManager defaultManager] removeItemAtPath:sharedData.kernelCachePath error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"encrypted"] error:nil];
+	}
+}
 
 - (void)dealloc {
     [tabBarController release];

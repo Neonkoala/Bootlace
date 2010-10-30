@@ -10,6 +10,7 @@
 #import "commonData.h"
 #import "commonFunctions.h"
 #import "OpeniBootClass.h"
+#import "FirstLaunchViewController.h"
 
 @interface BootlaceAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;

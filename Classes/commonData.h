@@ -13,7 +13,8 @@
 	//Initialisation variables
 	BOOL setBadge;
 	
-	BOOL firstLaunchVal;
+	BOOL firstLaunch;
+	BOOL secondLaunch;
 	BOOL debugMode;
 	BOOL bootlaceUpgradeAvailable;
 	BOOL warningLive;
@@ -47,6 +48,11 @@
 	NSDictionary *opibUpdateKernelMD5;
 	NSDictionary *opibUpdateVerifyMD5;
 	NSArray *opibUpdateManifest;
+	
+	
+	int kernelPatchStage;
+	int kernelPatchFail;
+	NSString *kernelCachePath;
 	
 	
 	BOOL installed;
@@ -109,7 +115,8 @@
 
 @property (nonatomic, assign) BOOL setBadge;
 
-@property (nonatomic, assign) BOOL firstLaunchVal;
+@property (nonatomic, assign) BOOL firstLaunch;
+@property (nonatomic, assign) BOOL secondLaunch;
 @property (nonatomic, assign) BOOL debugMode;
 @property (nonatomic, assign) BOOL bootlaceUpgradeAvailable;
 @property (nonatomic, assign) BOOL warningLive;
@@ -143,6 +150,11 @@
 @property (nonatomic, retain) NSDictionary *opibUpdateKernelMD5;
 @property (nonatomic, retain) NSDictionary *opibUpdateVerifyMD5;
 @property (nonatomic, retain) NSArray *opibUpdateManifest;
+
+
+@property (nonatomic, assign) int kernelPatchStage;
+@property (nonatomic, assign) int kernelPatchFail;
+@property (nonatomic, retain) NSString *kernelCachePath;
 
 
 @property (nonatomic, assign) BOOL installed;

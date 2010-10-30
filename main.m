@@ -16,13 +16,8 @@ int main(int argc, char *argv[]) {
 	
 	if(argc==1) {
 		retVal = UIApplicationMain(argc, argv, nil, nil);
-	} else if(strcmp(argv[1], "--patchKernel")==0) {
-		printf("Patching kernel...\n");
-				
-		OpeniBootClass *opibInstance = [[OpeniBootClass alloc] init];
-		retVal = [opibInstance opibPatchKernelCache];
-	} else if(strcmp(argv[1], "--testMode")==0) {
-		printf("Test mode...\n");
+	} else if(strcmp(argv[1], "--debug")==0) {
+		printf("Testing mode...\n");
 		
 		commonFunctions *commonInstance = [[commonFunctions alloc] init];
 		[commonInstance toggleAirplaneMode];

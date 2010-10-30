@@ -68,7 +68,7 @@
 - (void)opibUpdateProgress:(float)subProgress;
 
 //KernelPAtch functions
-- (int)opibPatchKernelCache;
+- (void)opibPatchKernelCache;
 
 //QuickBoot functions
 - (int)opibRebootAndroid;

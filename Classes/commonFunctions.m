@@ -130,10 +130,10 @@
 
 - (void)firstLaunch {
 	UIAlertView *launchAlert;
-	launchAlert = [[[UIAlertView alloc] initWithTitle:@"Welcome" message:@"Welcome to Bootlace.\r\n\r\nThe iDroid tab will allow you to install iDroid on your device.\r\n\r\nQuickBoot allows you to reboot your device into the selected OS.\r\n\r\nTap settings for altering openiBoot's permanent behaviour." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+	launchAlert = [[[UIAlertView alloc] initWithTitle:@"Welcome" message:@"Welcome to Bootlace.\r\n\r\nThe iDroid tab will allow you to install iDroid on your device.\r\n\r\nQuickBoot allows you to reboot your device into the selected OS.\r\n\r\nFinally the OpeniBoot tab allows install and configuration of OpeniBoot." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
 	[launchAlert show];
 	
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"secondLaunch"];
 }
 
 - (void)sendError:(NSString *)alertMsg {
