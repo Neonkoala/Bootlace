@@ -736,7 +736,7 @@
 	if(sharedData.debugMode) {
 		updatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/bootlaceupdate.plist"];
 	} else {
-		updatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceupdate.plist"];
+		updatePlistURL = [NSURL URLWithString:@"http://bootlace.idroidproject.org/bootlaceupdate.plist"];
 	}
 	NSMutableDictionary *updateDict = [NSMutableDictionary dictionaryWithContentsOfURL:updatePlistURL];
 	

@@ -38,7 +38,16 @@
 }
 
 - (IBAction)opibInstallTap:(id)sender {
-	[self opibOperation:[NSNumber numberWithInt:1]];
+	commonInstance = [[commonFunctions alloc] init];
+	
+	UIAlertView *installPrompt;
+	NSString *message = @"Bootlace is about to install OpeniBoot.\r\n\r\nThis involves flashing important parts your device and must not be interrupted or your device will require a restore.\r\n\r\nDo not close the app during any part of the install.";
+	if(![commonInstance checkMains]) {
+		message = [message stringByAppendingString:@"\r\nConnect your device to the mains before continuing."];
+	}
+	installPrompt = [[[UIAlertView alloc] initWithTitle:@"Warning" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil] autorelease];
+	[installPrompt setTag:2];
+	[installPrompt show];
 }
 
 - (IBAction)opibRemoveTap:(id)sender {
@@ -322,6 +331,8 @@
 		opibConfigure.hidden = NO;
 		[opibInstall setTitle:@"Remove" forState:UIControlStateNormal];
 		opibInstall.tintColor = [UIColor colorWithRed:0.556 green:0.000 blue:0.000 alpha:1.000];
+	} else {
+		opibInstall.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0.1 alpha:1.000];
 	}
 	
 	switch (sharedData.opibCanBeInstalled) {
@@ -344,11 +355,17 @@
 			opibInstall.enabled = YES;
 			[opibInstall removeTarget:self action:@selector(opibInstallTap:) forControlEvents:UIControlEventTouchUpInside];
 			[opibInstall addTarget:self action:@selector(opibRemoveTap:) forControlEvents:UIControlEventTouchUpInside];
-			UIAlertView *upgradePrompt;
-			NSString *message = [NSString stringWithFormat:@"OpeniBoot %@ is available.\r\nWould you like to upgrade?", sharedData.opibUpdateVersion];
-			upgradePrompt = [[[UIAlertView alloc] initWithTitle:@"Update Available" message:message delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Upgrade", nil] autorelease];
-			[upgradePrompt setTag:1];
-			[upgradePrompt show];
+			[opibVersionLabel setText:[NSString stringWithFormat:@"Version %@ for %@", sharedData.opibVersion, sharedData.deviceName]];
+			opibVersionLabel.hidden = NO;
+			if(sharedData.opibUpdateFail==nil) {
+				UIAlertView *upgradePrompt;
+				NSString *message = [NSString stringWithFormat:@"OpeniBoot %@ is available.\r\nWould you like to upgrade?", sharedData.opibUpdateVersion];
+				upgradePrompt = [[[UIAlertView alloc] initWithTitle:@"Update Available" message:message delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Upgrade", nil] autorelease];
+				[upgradePrompt setTag:1];
+				[upgradePrompt show];
+			} else {
+				sharedData.opibUpdateFail = nil;
+			}
 			break;
 		}
 		case 0:
@@ -396,8 +413,12 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if([alertView tag] == 1) {
-		if(buttonIndex == 0) {
+		if(buttonIndex == 1) {
 			[self performSelectorOnMainThread:@selector(opibOperation:) withObject:[NSNumber numberWithInt:2] waitUntilDone:NO]; 
+		}
+	} else if([alertView tag] == 2) {
+		if(buttonIndex == 1) {
+			[self performSelectorOnMainThread:@selector(opibOperation:) withObject:[NSNumber numberWithInt:1] waitUntilDone:NO];
 		}
 	}
 }

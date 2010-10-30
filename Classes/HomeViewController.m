@@ -61,7 +61,7 @@
 	if(sharedData.debugMode) {
 		versionURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/bootlaceversion.plist"];
 	} else {
-		versionURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/bootlaceversion.plist"];
+		versionURL = [NSURL URLWithString:@"http://bootlace.idroidproject.org/bootlaceversion.plist"];
 	}
 	
 	NSMutableDictionary *versionDict = [NSMutableDictionary dictionaryWithContentsOfURL:versionURL];
@@ -116,7 +116,7 @@
 	commonData *sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	
-	NSString *urlAddress = @"http://idroid.neonkoala.co.uk";
+	NSString *urlAddress = @"http://bootlace.idroidproject.org";
 	
 	//Create a URL object.
 	NSURL *url = [NSURL URLWithString:urlAddress];

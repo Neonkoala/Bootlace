@@ -39,6 +39,7 @@ char endianness = 1;
 	if(status < 0) {
 		DLog(@"opibGetNORFromManifest returned: %d", status);
 		sharedData.opibUpdateFail = 1;
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		return;
 	}
 	
@@ -47,6 +48,7 @@ char endianness = 1;
 	if(status < 0) {
 		DLog(@"opibGetFirmwareBundle returned: %d", status);
 		sharedData.opibUpdateFail = 2;
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		return;
 	}
 	
@@ -56,6 +58,7 @@ char endianness = 1;
 		if(status < 0) {
 			DLog(@"opibGetOpeniBoot returned: %d", status);
 			sharedData.opibUpdateFail = 4;
+			[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 			return;
 		}
 	}
@@ -610,7 +613,7 @@ char endianness = 1;
 	if(sharedData.debugMode) {
 		opibUpdatePlistURL = [NSURL URLWithString:@"http://beta.neonkoala.co.uk/openiboot.plist"];
 	} else {
-		opibUpdatePlistURL = [NSURL URLWithString:@"http://idroid.neonkoala.co.uk/openiboot.plist"];
+		opibUpdatePlistURL = [NSURL URLWithString:@"http://bootlace.idroidproject.org/openiboot.plist"];
 	}
 	sharedData.opibDict = [NSMutableDictionary dictionaryWithContentsOfURL:opibUpdatePlistURL];
 	
