@@ -74,6 +74,61 @@
 			[commonInstance sendTerminalError:@"Kernel does not match any compatible jailbreaks. Jailbreak with redsn0w or PwnageTool and try again."];
 			[guiLoop invalidate];
 			break;
+		case -4:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Could not retrieve IPSW information from Apple.\r\nEnsure you are connected to the internet."];
+			[guiLoop invalidate];
+			break;
+		case -5:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Could not find KernelCache in IPSW.\r\nInvalid IPSW URL?"];
+			[guiLoop invalidate];
+			break;
+		case -6:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Invalid KernelCache."];
+			[guiLoop invalidate];
+			break;
+		case -7:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Could not write KernelCache to file."];
+			[guiLoop invalidate];
+			break;
+		case -8:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Decrypting KernelCache failed."];
+			[guiLoop invalidate];
+			break;
+		case -9:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Patching KernelCache first stage failed."];
+			[guiLoop invalidate];
+			break;
+		case -10:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Could not remove stock KernelCache."];
+			[guiLoop invalidate];
+			break;
+		case -11:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Patching KernelCache second stage failed."];
+			[guiLoop invalidate];
+			break;
+		case -12:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Re-encrypting KernelCache failed."];
+			[guiLoop invalidate];
+			break;
+		case -13:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"Old KernelCache could not be backed up or removed."];
+			[guiLoop invalidate];
+			break;
+		case -14:
+			DLog(@"Error triggered. Fail code: %d", sharedData.kernelPatchFail);
+			[commonInstance sendTerminalError:@"New KernelCache could not be moved into place."];
+			[guiLoop invalidate];
+			break;
 		default:
 			break;
 	}

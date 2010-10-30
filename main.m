@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Classes/OpeniBootClass.h"
 
 int main(int argc, char *argv[]) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -18,11 +17,6 @@ int main(int argc, char *argv[]) {
 		retVal = UIApplicationMain(argc, argv, nil, nil);
 	} else if(strcmp(argv[1], "--debug")==0) {
 		printf("Testing mode...\n");
-		
-		commonFunctions *commonInstance = [[commonFunctions alloc] init];
-		[commonInstance toggleAirplaneMode];
-		
-		retVal = 0;
 	} else {
 		printf("Invalid argument. Terminating.\n");
 		retVal = -7;

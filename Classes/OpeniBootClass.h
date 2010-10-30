@@ -69,6 +69,7 @@
 
 //KernelPAtch functions
 - (void)opibPatchKernelCache;
+- (void)opibKernelPatchCleanup;
 
 //QuickBoot functions
 - (int)opibRebootAndroid;

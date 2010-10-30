@@ -16,6 +16,7 @@
 #import <sys/sysctl.h>
 #import <unistd.h>
 #import <notify.h>
+#import <dlfcn.h>
 
 #import "commonData.h"
 #import "extractionClass.h"

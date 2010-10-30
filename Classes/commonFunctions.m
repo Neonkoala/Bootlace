@@ -24,19 +24,17 @@
 }
 
 - (void)toggleAirplaneMode {
-	NSMutableDictionary *plistDict = [NSMutableDictionary dictionaryWithContentsOfFile:@"/Library/Preferences/SystemConfiguration/com.apple.radios.plist"];
+	void *libHandle = dlopen("/System/Library/Frameworks/CoreTelephony.framework/CoreTelephony", RTLD_LAZY);
+    int (*AirplaneMode)() = dlsym(libHandle, "CTPowerGetAirplaneMode");
+    int (*enable)(int mode) = dlsym(libHandle, "CTPowerSetAirplaneMode");
 	
-	NSLog(@"AirplaneMode: %@", [plistDict valueForKey:@"AirplaneMode"]);
+	int status = AirplaneMode();
 	
-	if([[plistDict valueForKey:@"AirplaneMode"] intValue]==1) {
-		[plistDict setValue:[NSNumber numberWithBool:NO] forKey:@"AirplaneMode"];
+	if(status) {
+		enable(0);
 	} else {
-		[plistDict setValue:[NSNumber numberWithBool:YES] forKey:@"AirplaneMode"];
+		enable(1);
 	}
-	
-	[plistDict writeToFile:@"/Library/Preferences/SystemConfiguration/com.apple.radios.plist" atomically:YES];
-	
-	notify_post("com.apple.CommCenter/Prefs");
 }
 
 - (float)getFreeSpace {

@@ -20,6 +20,7 @@ char endianness = 1;
 - (void)opibOperation:(NSNumber *)operation {
 	int status;
 	commonData* sharedData = [commonData sharedData];
+	commonInstance = [[commonFunctions alloc] init];
 	
 	//Reset vars
 	sharedData.opibUpdateFail = 0;
@@ -106,11 +107,15 @@ char endianness = 1;
 	//Stage 3
 	sharedData.opibUpdateStage = 3;
 	
+	[commonInstance toggleAirplaneMode];
+	
 	if([operation intValue] == 3) {
 		status = [self opibFlashManifest:YES];
 	} else {
 		status = [self opibFlashManifest:NO];
 	}
+	
+	[commonInstance toggleAirplaneMode];
 	 
 	if(status < 0) {
 		DLog(@"opibFlashManifest returned: %d", status);
@@ -830,9 +835,8 @@ char endianness = 1;
 	
 	NSDictionary *ipswURLS = [platformDict objectForKey:@"IPSWURLs"];
 	NSString *ipsw = [ipswURLS objectForKey:sharedData.systemVersion];
-	NSString *kernelCache = [kernelPatchBundleDict objectForKey:@"File"];
-	sharedData.kernelCachePath = kernelCache;
-	
+	sharedData.kernelCachePath = [kernelPatchBundleDict objectForKey:@"File"];
+		
 	ZipInfo* info = PartialZipInit([ipsw cStringUsingEncoding:NSUTF8StringEncoding]);
 	if(!info) {
 		DLog(@"Cannot retrieve IPSW from: %@", ipsw);
@@ -840,7 +844,7 @@ char endianness = 1;
 		return;
 	}
 	
-	CDFile* file = PartialZipFindFile(info, [kernelCache cStringUsingEncoding:NSUTF8StringEncoding]);
+	CDFile* file = PartialZipFindFile(info, [sharedData.kernelCachePath cStringUsingEncoding:NSUTF8StringEncoding]);
 	if(!file) {
 		DLog(@"Cannot find kernelcache.");
 		sharedData.kernelPatchFail = -5;
@@ -859,12 +863,13 @@ char endianness = 1;
 		return;
 	}
 	
-	kernelCache = [sharedData.workingDirectory stringByAppendingPathComponent:kernelCache];
+	sharedData.kernelCachePath = [sharedData.workingDirectory stringByAppendingPathComponent:sharedData.kernelCachePath];
 	
-	if(![itemBin writeToFile:kernelCache atomically:YES]) {
+	if(![itemBin writeToFile:sharedData.kernelCachePath atomically:YES]) {
 		DLog(@"Could not write kernelcache to file.");
 		[itemBin release];
 		sharedData.kernelPatchFail = -7;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
@@ -875,57 +880,63 @@ char endianness = 1;
 	sharedData.kernelPatchStage = 3;
 	
 	//Decrypt stock kernelcache
-	status = [self opibDecryptIMG3:kernelCache to:[kernelCache stringByAppendingPathExtension:@"decrypted"] key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
+	status = [self opibDecryptIMG3:sharedData.kernelCachePath to:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
 		
 	if(status < 0) {
 		DLog(@"Decrypting kernelcache returned: %d", status);
 		sharedData.kernelPatchFail = -8;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
 	//Patch stock kernelcache with pwnage patches
-	status = [bsPatchInstance bsPatch:[kernelCache stringByAppendingPathExtension:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.patch"]];
+	status = [bsPatchInstance bsPatch:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.patch"]];
 	
 	if(status < 0) {
 		DLog(@"Patching kernelcache with pwnage patchset returned: %d", status);
 		sharedData.kernelPatchFail = -9;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
 	//Rename or it gets messy
-	if([[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted"] error:nil]) {
-		if(![[NSFileManager defaultManager] moveItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] toPath:[kernelCache stringByAppendingPathExtension:@"decrypted"] error:nil]) {
+	if([[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] error:nil]) {
+		if(![[NSFileManager defaultManager] moveItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted.patched"] toPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] error:nil]) {
 			DLog(@"Could not move kernelcache");
 			sharedData.kernelPatchFail = -10;
+			[self opibKernelPatchCleanup];
 			return;
 		}
 	} else {
 		DLog(@"Could not remove stock decrypted kernelcache");
 		sharedData.kernelPatchFail = -10;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
 	//Patch pwned kernelcache with NOR writing patches
-	status = [bsPatchInstance bsPatch:[kernelCache stringByAppendingPathExtension:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.nor.patch"]];
+	status = [bsPatchInstance bsPatch:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] withPatch:[bundlePath stringByAppendingPathComponent:@"kernelcache.release.nor.patch"]];
 	
 	if(status < 0) {
 		DLog(@"Patching kernelcache with NOR patchset returned: %d", status);
 		sharedData.kernelPatchFail = -11;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
 	//Re-encrypt kernelcache into container
 	if(jbType==1) {
 		//PwnageTool, use stock kernelcache as template
-		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:kernelCache key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
+		status = [self opibEncryptIMG3:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted.patched"] to:[sharedData.kernelCachePath stringByAppendingPathExtension:@"encrypted"] with:sharedData.kernelCachePath key:[kernelPatchBundleDict objectForKey:@"Key"] iv:[kernelPatchBundleDict objectForKey:@"IV"] type:NO];
 	} else {
 		//Redsn0w, use un-keyed kernelcache from disk as template
-		status = [self opibEncryptIMG3:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] to:[kernelCache stringByAppendingPathExtension:@"encrypted"] with:[kernelPatchBundleDict objectForKey:@"Path"] key:nil iv:nil type:YES];
+		status = [self opibEncryptIMG3:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted.patched"] to:[sharedData.kernelCachePath stringByAppendingPathExtension:@"encrypted"] with:[kernelPatchBundleDict objectForKey:@"Path"] key:nil iv:nil type:YES];
 	}
 	
 	if(status < 0) {
 		DLog(@"Encrypting kernelcache returned: %d", status);
 		sharedData.kernelPatchFail = -12;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
@@ -943,26 +954,34 @@ char endianness = 1;
 		if(![[NSFileManager defaultManager] removeItemAtPath:[kernelPatchBundleDict objectForKey:@"Path"] error:nil]) {
 			DLog(@"Failed to remove old kernelcache");
 			sharedData.kernelPatchFail = -13;
+			[self opibKernelPatchCleanup];
 			return;
 		}
 	}
 	
 	//Move new kernelcache into place
-	if(![[NSFileManager defaultManager] moveItemAtPath:[kernelCache stringByAppendingPathExtension:@"encrypted"] toPath:[kernelPatchBundleDict objectForKey:@"Path"] error:nil]) {
+	if(![[NSFileManager defaultManager] moveItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"encrypted"] toPath:[kernelPatchBundleDict objectForKey:@"Path"] error:nil]) {
 		DLog(@"Failed to move new kernelcache into place");
 		sharedData.kernelPatchFail = -14;
+		[self opibKernelPatchCleanup];
 		return;
 	}
 	
-	//Cleanup
-	[[NSFileManager defaultManager] removeItemAtPath:kernelCache error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted"] error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
-	[[NSFileManager defaultManager] removeItemAtPath:[kernelCache stringByAppendingPathExtension:@"encrypted"] error:nil];
+	[self opibKernelPatchCleanup];
 	
 	DLog(@"Kernel patching process is complete.");
 	
 	sharedData.kernelPatchStage = 5;
+}
+
+- (void)opibKernelPatchCleanup {
+	commonData* sharedData = [commonData sharedData];
+	
+	//Cleanup
+	[[NSFileManager defaultManager] removeItemAtPath:sharedData.kernelCachePath error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"decrypted.patched"] error:nil];
+	[[NSFileManager defaultManager] removeItemAtPath:[sharedData.kernelCachePath stringByAppendingPathExtension:@"encrypted"] error:nil];
 }
 
 - (int)opibGetFirmwareBundle {
