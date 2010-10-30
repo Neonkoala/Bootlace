@@ -933,10 +933,18 @@ char endianness = 1;
 	sharedData.kernelPatchStage = 4;
 	
 	//Backup old kernelcache
-	if(![[NSFileManager defaultManager] moveItemAtPath:[kernelPatchBundleDict objectForKey:@"Path"] toPath:[[kernelPatchBundleDict objectForKey:@"Path"] stringByAppendingPathExtension:@"backup"] error:nil]) {
-		DLog(@"Failed to remove old kernelcache");
-		sharedData.kernelPatchFail = -13;
-		return;
+	if(![[NSFileManager defaultManager] fileExistsAtPath:[[kernelPatchBundleDict objectForKey:@"Path"] stringByAppendingPathExtension:@"backup"]]) {
+		if(![[NSFileManager defaultManager] moveItemAtPath:[kernelPatchBundleDict objectForKey:@"Path"] toPath:[[kernelPatchBundleDict objectForKey:@"Path"] stringByAppendingPathExtension:@"backup"] error:nil]) {
+			DLog(@"Failed to backup old kernelcache");
+			sharedData.kernelPatchFail = -13;
+			return;
+		}
+	} else {
+		if(![[NSFileManager defaultManager] removeItemAtPath:[kernelPatchBundleDict objectForKey:@"Path"] error:nil]) {
+			DLog(@"Failed to remove old kernelcache");
+			sharedData.kernelPatchFail = -13;
+			return;
+		}
 	}
 	
 	//Move new kernelcache into place
@@ -1095,7 +1103,7 @@ char endianness = 1;
 	commonData* sharedData = [commonData sharedData];
 	
 	sharedData.opibDefaultOS = @"1";
-	sharedData.opibTempOS = @"1";
+	sharedData.opibTempOS = @"0";
 	sharedData.opibTimeout = @"10000";
 	
 	status = [nvramInstance updateNVRAM:0];

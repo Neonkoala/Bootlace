@@ -44,7 +44,7 @@
 	
 	DLog(@"Latest version plist parsed");
 	
-	NSLog(@"OpibRequired: %@", sharedData.updateOpibRequired);
+	DLog(@"OpibRequired: %@", sharedData.updateOpibRequired);
 	
 	return 0;
 }
@@ -115,9 +115,10 @@
 	sharedData.installedDate = [installedDict objectForKey:@"InstalledDate"];
 	sharedData.installedOpibRequired = [installedDict objectForKey:@"OpeniBootRequired"];
 	sharedData.installedFiles = [installedDict objectForKey:@"Files"];
+	sharedData.installedDirectories = [installedDict objectForKey:@"Directories"];
 	sharedData.installedDependencies = [installedDict objectForKey:@"Dependencies"];
 	
-	if(sharedData.installedVer==nil || sharedData.installedAndroidVer==nil || sharedData.installedDate==nil || sharedData.installedFiles==nil || sharedData.installedDependencies==nil) {
+	if(sharedData.installedVer==nil || sharedData.installedAndroidVer==nil || sharedData.installedDate==nil || sharedData.installedFiles==nil || sharedData.installedDependencies==nil || sharedData.installedDirectories==nil) {
 		DLog(@"Plist is invalid, missing data values.");
 		return -1;
 	}
@@ -142,6 +143,9 @@
 		
 		[installedFiles addObject:[[fileDetails objectAtIndex:1] stringByAppendingPathComponent:[fileDetails objectAtIndex:2]]];
 	}
+	
+	count = [sharedData.updateDirectories count];
+	NSMutableArray *installedDirectories = [NSMutableArray arrayWithCapacity:count];
 	
 	if([sharedData.updateDependencies objectForKey:@"WiFi"]) {
 		NSDictionary *wifiDict = [sharedData.updateDependencies objectForKey:@"WiFi"];
@@ -175,6 +179,7 @@
 	[installedPlist setObject:sharedData.updateOpibRequired forKey:@"OpeniBootRequired"];
 	[installedPlist setObject:[NSDate date] forKey:@"InstalledDate"];
 	[installedPlist setObject:installedFiles forKey:@"Files"];
+	[installedPlist setObject:installedDirectories forKey:@"Directories"];
 	[installedPlist setObject:installedDependencies forKey:@"Dependencies"];
 	
 	if(![installedPlist writeToFile:[sharedData.workingDirectory stringByAppendingPathComponent:@"installed.plist"] atomically:YES]) {

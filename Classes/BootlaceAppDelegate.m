@@ -33,8 +33,7 @@
 	}
 	
 	//Read settings
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",nil]];
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],@"secondLaunch",nil]];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstLaunch",[NSNumber numberWithBool:NO],@"secondLaunch",nil]];
 	sharedData.firstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
 	sharedData.secondLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"secondLaunch"];
 	sharedData.debugMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"debugMode"];

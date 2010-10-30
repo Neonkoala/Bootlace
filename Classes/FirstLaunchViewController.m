@@ -27,8 +27,6 @@
 	commonData *sharedData = [commonData sharedData];
 	commonInstance = [[commonFunctions alloc] init];
 	
-	NSLog(@"Oh we got here!");
-	
 	if (sharedData.kernelPatchStage == 5) {
 		[patchingProgress hide];
 		
@@ -38,11 +36,9 @@
 			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
 			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"secondLaunch"];
 			
-			UIAlertView *rebootPrompt = [[UIAlertView alloc] initWithTitle:@"Reboot Required" message:@"Kernel successfully patched.\r\n\r\nYour device is about to reboot." delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+			UIAlertView *rebootPrompt = [[UIAlertView alloc] initWithTitle:@"Reboot Required" message:@"Kernel successfully patched.\r\nYour device must be rebooted." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Reboot",nil];
+			[rebootPrompt setTag:1];
 			[rebootPrompt show];
-			
-			sleep(3);
-			reboot(0);
 		}
 		
 		[guiLoop invalidate];
@@ -110,6 +106,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if([alertView tag] == 1) {
+		if(buttonIndex == 0) {
+			reboot(0); 
+		}
+	}
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

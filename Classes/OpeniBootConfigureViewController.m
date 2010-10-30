@@ -289,7 +289,7 @@
 		labelWithVar.text = [labelWithVar.text stringByAppendingString:@" Seconds"];
 	
 		switch ([sharedData.opibDefaultOS intValue]) {
-			case 0:
+			case 1:
 				iphoneosImage.alpha = 1.0;
 				iphoneosLabel.alpha = 1.0;
 				androidImage.alpha = 0.4;
@@ -297,7 +297,7 @@
 				consoleImage.alpha = 0.4;
 				consoleLabel.alpha = 0.4;
 				break;
-			case 1:
+			case 2:
 				iphoneosImage.alpha = 0.4;
 				iphoneosLabel.alpha = 0.4;
 				androidImage.alpha = 1.0;
@@ -305,7 +305,7 @@
 				consoleImage.alpha = 0.4;
 				consoleLabel.alpha = 0.4;
 				break;
-			case 2:
+			case 3:
 				iphoneosImage.alpha = 0.4;
 				iphoneosLabel.alpha = 0.4;
 				androidImage.alpha = 0.4;
